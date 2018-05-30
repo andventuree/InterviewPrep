@@ -4,7 +4,8 @@
   "description": "Interview Prep Solutions",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "nodemon index.js",
+    "ds": "nodemon dataStructures/LinkedList.js"
   },
   "author": "Andrew wong",
   "license": "ISC",
