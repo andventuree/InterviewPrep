@@ -1,4 +1,18 @@
 {
-  "name": "",
-  "version": ""
+  "name": "interviewprep",
+  "version": "1.0.0",
+  "description": "Interview Prep Solutions",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "author": "Andrew wong",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andventuree/InterviewPrep"
+  },
+
+  "homepage": "https://github.com/andventuree/InterviewPrep#readme",
+  "dependencies": {}
 }
