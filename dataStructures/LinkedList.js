@@ -77,14 +77,14 @@ class SinglyLinkedList {
   }
 }
 
-let singleList = new SinglyLinkedList();
-singleList.addToHead(1);
-singleList.addToHead(2);
-singleList.addToHead(3);
-singleList.addToHead(4);
-singleList.addToHead(5);
-singleList.addToTail(6);
-singleList.print();
+// let singleList = new SinglyLinkedList();
+// singleList.addToHead(1);
+// singleList.addToHead(2);
+// singleList.addToHead(3);
+// singleList.addToHead(4);
+// singleList.addToHead(5);
+// singleList.addToTail(6);
+// singleList.print();
 
 /*
   Bi-directional
@@ -171,16 +171,17 @@ class LinkedList {
   }
 }
 
-// let list = new LinkedList();
-// list.addToHead(1);
-// list.addToTail(4);
-// // list.addToHead(3);
-// // list.addToHead(4);
-// list.print();
+let list = new LinkedList();
+list.addToHead(1);
+list.addToTail(4);
+// list.addToHead(3);
+// list.addToHead(4);
+list.print();
 // list.removeHead();
 // list.removeHead();
 // list.print();
 
+//206
 /**
  * Definition for singly-linked list.
  * function ListNode(val) {
@@ -192,4 +193,19 @@ class LinkedList {
  * @param {ListNode} head
  * @return {ListNode}
  */
-// var reverseList = function(head) {};
+var reverseList = function(head) {
+  let newLL = new LinkedList(); //create a new LL to return
+  newLL.addToHead(head.value); //start off the LL with the head provided
+  while (head.next) {
+    //if there are any .nexts, then you:
+    const fakeHead = head.next;
+    newLL.addToHead(fakeHead.value); //add .nexts' val to the head
+    head = fakeHead;
+  }
+  return newLL;
+};
+
+let reversed = reverseList(list.head);
+console.log("reversed: ", reversed);
+
+//Linked list is all about holding onto references, even if its temporarily.
