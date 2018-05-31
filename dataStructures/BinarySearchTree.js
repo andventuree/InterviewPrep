@@ -1,3 +1,33 @@
+//Basic BST
+
+class BST {
+  constructor(val) {
+    this.value = val;
+    this.left = null;
+    this.right = null;
+  }
+
+  insert(val) {
+    const direction = this.value > val ? "left" : "right";
+    if (this[direction]) this[direction].insert(val);
+    else this[direction] = new BST(val);
+  }
+}
+
+let tree = new BST(5);
+tree.insert(6);
+tree.insert(9);
+tree.insert(20);
+tree.insert(5);
+tree.insert(1);
+tree.insert(100);
+tree.insert(12);
+tree.insert(4);
+
+console.log(tree);
+
+//Expanded example
+
 class BinarySearchTree {
   constructor(val) {
     this.value = val;
