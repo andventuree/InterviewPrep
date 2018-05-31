@@ -167,7 +167,7 @@ class LinkedList {
   }
 
   print() {
-    console.log(this);
+    console.log("Doubly linked list: ", this);
   }
 }
 
@@ -194,15 +194,14 @@ list.print();
  * @return {ListNode}
  */
 var reverseList = function(head) {
-  let newLL = new LinkedList(); //create a new LL to return
-  newLL.addToHead(head.value); //start off the LL with the head provided
+  let reversedVersion = new LinkedList(); //create a new LL to return
+  reversedVersion.addToHead(head.value); //start off the LL with the head provided
   while (head.next) {
     //if there are any .nexts, then you:
-    const fakeHead = head.next;
-    newLL.addToHead(fakeHead.value); //add .nexts' val to the head
-    head = fakeHead;
+    reversedVersion.addToHead(head.next.value); //add .nexts' val to the head
+    head = head.next;
   }
-  return newLL;
+  return reversedVersion;
 };
 
 let reversed = reverseList(list.head);
