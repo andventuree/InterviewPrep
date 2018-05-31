@@ -177,3 +177,19 @@ class LinkedList {
 // // list.addToHead(3);
 // // list.addToHead(4);
 // list.print();
+// list.removeHead();
+// list.removeHead();
+// list.print();
+
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+// var reverseList = function(head) {};
