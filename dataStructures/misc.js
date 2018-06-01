@@ -76,3 +76,21 @@ class LinkedList {
     return formerTail.value; //5) just return value
   }
 }
+
+//BST
+
+class BST {
+  constructor(val) {
+    this.value = val;
+    this.smaller = null;
+    this.larger = null;
+    this.size = 1;
+  }
+
+  insert(val) {
+    const direction = val < this.value ? "smaller" : "larger";
+    if (this[direction]) this[direction].insert(val);
+    else this[direction] = new BST(val);
+    this.size++;
+  }
+}
