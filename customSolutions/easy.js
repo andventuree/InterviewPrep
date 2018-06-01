@@ -160,12 +160,13 @@ let testBST = new BST(50)
 
 //Assumption is you're giving a balanced tree to begin with
 // findClosestValueInBst(testBST, 5); //5
-findClosestValueInBst(testBST, 92); //92
+// findClosestValueInBst(testBST, 92); //92
 // findClosestValueInBst(testBST, 95); //87 but really should be 92
 // findClosestValueInBst(testBST, 14); //11 but should really be 12
 
 /* --------------------------------------------------------------------- */
-//1. depth first search on a tree
+
+//3. depth first search on a tree
 
 //v vectex = each node
 //e edge = each level
@@ -192,3 +193,43 @@ class Node {
     return array;
   }
 }
+
+/* --------------------------------------------------------------------- */
+
+//3a. recursive
+//time:
+//space:
+// function getNthFib(n, memo = { 1: 0, 2: 1 }) {
+//   if (memo[n]) {
+//     console.log(`have in memo[${n}]: `, memo[n]);
+//     return memo[n];
+//   } else {
+//     memo[n] = getNthFib(n - 2, memo) + getNthFib(n - 1, memo);
+//     console.log(`memo[${n}]: `, memo[n]);
+//     return memo[n];
+//   }
+// }
+
+//3b. iterative
+//time: O(n) - will need to go through every num at least once to calculate
+//space: O(1) - only looking at 2 values with each iteration
+// function getNthFib(n) {
+//   let prevTwo = [0, 1];
+//   counter = 3;
+//   while (counter <= n) {
+//     console.log("prevTwo: ", prevTwo);
+
+//     //calculate the next value
+//     let nextFib = prevTwo[0] + prevTwo[1];
+//     //then move the second latest value over by 1
+//     prevTwo[0] = prevTwo[1];
+//     //then insert latest calculated value
+//     prevTwo[1] = nextFib;
+//     counter++;
+//   }
+//   console.log("final prevTwo: ", prevTwo);
+//   //ternary is necessary to handle base case of 0
+//   return n > 1 ? prevTwo[1] : prevTwo[0];
+// }
+
+getNthFib(6);
