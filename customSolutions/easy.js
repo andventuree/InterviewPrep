@@ -163,3 +163,32 @@ let testBST = new BST(50)
 findClosestValueInBst(testBST, 92); //92
 // findClosestValueInBst(testBST, 95); //87 but really should be 92
 // findClosestValueInBst(testBST, 14); //11 but should really be 12
+
+/* --------------------------------------------------------------------- */
+//1. depth first search on a tree
+
+//v vectex = each node
+//e edge = each level
+
+//time: O(v + e) b/c you definitely have to go thru all nodes (v) and then also you kinda go thru each level (e) at least temporarily
+//space: O(v) b/c if the whole tree was just 1 branch, you have to go through all the nodes
+class Node {
+  constructor(name) {
+    this.name = name;
+    this.children = [];
+  }
+
+  addChild(name) {
+    this.children.push(new Node(name));
+    return this;
+  }
+
+  depthFirstSearch(array) {
+    //start by adding current node to array
+    array.push(this.name);
+    //then for each child, recursively call search
+    this.children.forEach(child => child.depthFirstSearch(array));
+    //only return array at the end
+    return array;
+  }
+}
