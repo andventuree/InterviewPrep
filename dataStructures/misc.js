@@ -162,3 +162,19 @@ class LinkedList {
     return removedTail.value;
   }
 }
+
+class BST {
+  constructor(val) {
+    this.value = val;
+    this.left = null;
+    this.right = null;
+    this.size = 1;
+  }
+
+  insert(val) {
+    const direction = val > this.value ? "right" : "left";
+    if (this[direction]) this[direction].insert(val);
+    else this[direction] = new Node(val);
+    this.size++;
+  }
+}
