@@ -239,25 +239,77 @@ class Node {
 //4. iteratively
 //time: O(log n) - never have to go through all of n
 //space: O(1) - only thing we're storing is 3 pointers which takes up 3 space
-function binarySearch(array, target) {
-  console.log("new instance");
+function binarySearchIterative(array, target) {
   let left = 0;
   let right = array.length - 1;
   while (left <= right) {
     let midpoint = Math.floor((left + right) / 2);
-    console.log("midpoint", array[midpoint]);
-    if (array[midpoint] === target) return midpoint;
-
-    if (target < array[midpoint]) {
+    let potentialMatch = array[midpoint];
+    console.log("potentialMatch: ", potentialMatch);
+    if (potentialMatch === target) {
+      console.log("correct match: ", potentialMatch);
+      return midpoint;
+    }
+    if (target < potentialMatch) {
       right = midpoint - 1;
-    } else if (target > array[midpoint]) {
+    } else if (target > potentialMatch) {
       left = midpoint + 1;
     }
   }
   return -1;
 }
 
-// function binarySearch()
+//4b. recursive
+//time: O(log n) - never have to go through all of n
+//space: O(log n) - recursive takes more space b/c it add mores frame onto call stack
+function binarySearchRecursive(array, target) {
+  //Pro tip: if you need more parameters, make a helper function
+  return bsHelper(array, target, 0, array.length - 1);
+}
 
-binarySearch([1, 2, 3, 4, 5, 34, 63, 66, 79, 90, 495, 590, 678], 2);
-binarySearch([1, 5, 23, 111], 111);
+function bsHelper(array, target, left, right) {
+  if (left > right) return -1; //left pointer passing right means you've gone too far
+  let midpoint = Math.floor((left + right) / 2);
+  let potentialMatch = array[midpoint];
+  console.log("potentialMatch: ", potentialMatch);
+  if (target === potentialMatch) {
+    console.log("correct match: ", potentialMatch);
+    return midpoint;
+  } else if (target < potentialMatch) {
+    return bsHelper(array, target, left, midpoint - 1);
+  } else {
+    return bsHelper(array, target, midpoint + 1, right);
+  }
+}
+
+// binarySearchIterative([1, 2, 3, 4, 5, 34, 63, 66, 79, 90, 495, 590, 678], 2);
+// binarySearchRecursive([1, 5, 23, 111], 111);
+
+/* --------------------------------------------------------------------- */
+//Pro tip: If you have an unsorted array, sorting on average will be O(n^2) to sort
+
+function bubbleSort(array) {
+  let isSorted = false;
+  while (!isSorted) {
+    isSorted = true;
+    for (let i = 0; i < array.length - 1; i++) {
+      if (array[i] > array[i + 1]) {
+        swap(i, i + 1, array);
+        console.log("array: ", array);
+        isSorted = false;
+      }
+    }
+  }
+  console.log("final array: ", array);
+  return array;
+}
+
+function swap(i, j, array) {
+  let larger = array[i];
+  let smaller = array[j];
+  array[j] = larger;
+  array[i] = smaller;
+  return array;
+}
+
+bubbleSort([9, 8, 2, 4, 1, 4, 5, 2, 1]); //[ 1, 1, 2, 2, 4, 4, 5, 8, 9 ]
