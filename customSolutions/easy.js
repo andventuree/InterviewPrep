@@ -196,19 +196,19 @@ class Node {
 
 /* --------------------------------------------------------------------- */
 
-//3a. recursive
+//3a. recursive - STILL NEEDS WORK!
 //time:
 //space:
-function getNthFib(n, memo = { 1: 0, 2: 1 }) {
-  if (memo[n]) {
-    console.log(`have in memo[${n}]: `, memo[n]);
-    return memo[n];
-  } else {
-    memo[n] = getNthFib(n - 1, memo) + getNthFib(n, memo);
-    console.log(`memo[${n}]: `, memo[n]);
-    return memo[n];
-  }
-}
+// function getNthFib(n, memo = { 1: 0, 2: 1 }) {
+//   if (memo[n]) {
+//     console.log(`have in memo[${n}]: `, memo[n]);
+//     return memo[n];
+//   } else {
+//     memo[n] = getNthFib(n - 1, memo) + getNthFib(n, memo);
+//     console.log(`memo[${n}]: `, memo[n]);
+//     return memo[n];
+//   }
+// }
 
 //3b. iterative
 //time: O(n) - will need to go through every num at least once to calculate
@@ -232,4 +232,32 @@ function getNthFib(n, memo = { 1: 0, 2: 1 }) {
 //   return n > 1 ? prevTwo[1] : prevTwo[0];
 // }
 
-getNthFib(6);
+// getNthFib(6);
+
+/* --------------------------------------------------------------------- */
+
+//4. iteratively
+//time: O(log n) - never have to go through all of n
+//space: O(1) - only thing we're storing is 3 pointers which takes up 3 space
+function binarySearch(array, target) {
+  console.log("new instance");
+  let left = 0;
+  let right = array.length - 1;
+  while (left <= right) {
+    let midpoint = Math.floor((left + right) / 2);
+    console.log("midpoint", array[midpoint]);
+    if (array[midpoint] === target) return midpoint;
+
+    if (target < array[midpoint]) {
+      right = midpoint - 1;
+    } else if (target > array[midpoint]) {
+      left = midpoint + 1;
+    }
+  }
+  return -1;
+}
+
+// function binarySearch()
+
+binarySearch([1, 2, 3, 4, 5, 34, 63, 66, 79, 90, 495, 590, 678], 2);
+binarySearch([1, 5, 23, 111], 111);
