@@ -31,18 +31,18 @@ class SinglyLinkedList {
     if (!this.tail) this.tail = newNode; //5) if 1st node, tail is also the newNode
   }
 
-  addToTail(v) {
-    const newNode = new SingleNode(v); //1) create node w/ value
-    const formerTail = this.tail; //2) hold onto old tail reference so it doesn't disappear
+  // addToTail(v) {
+  //   const newNode = new SingleNode(v); //1) create node w/ value
+  //   const formerTail = this.tail; //2) hold onto old tail reference so it doesn't disappear
 
-    this.tail = newNode; //3) reassign new tail
+  //   this.tail = newNode; //3) reassign new tail
 
-    if (formerTail) {
-      //4) >1 node
-      formerTail.next = newNode; //4.1) extend LL by referring to the newNode
-    }
-    if (!this.head) this.head = this.tail; //5) if 1st node, head + tail is itself
-  }
+  //   if (formerTail) {
+  //     //4) >1 node
+  //     formerTail.next = newNode; //4.1) extend LL by referring to the newNode
+  //   }
+  //   if (!this.head) this.head = this.tail; //5) if 1st node, head + tail is itself
+  // }
 
   removeHead() {
     const removedHead = this.head; //1) hold onto reference
@@ -58,19 +58,19 @@ class SinglyLinkedList {
     return removedHead.value; //5) return value of removed
   }
 
-  removeTail() {
-    const removedTail = this.tail; //1) hold onto reference
-    if (!removedTail) return; //2) if !tail, do nothing
-    if (removedTail.previous) {
-      //3) if >1 node,
-      this.tail.next = null; //3.1) reset the next of newTail
-    } else {
-      //4) no more nodes left
-      this.head = null;
-      this.tail = null;
-    }
-    return removedTail.value; //5) return value of removed
-  }
+  // removeTail() {
+  //   const removedTail = this.tail; //1) hold onto reference
+  //   if (!removedTail) return; //2) if !tail, do nothing
+  //   if (removedTail.previous) {
+  //     //3) if >1 node,
+  //     this.tail.next = null; //3.1) reset the next of newTail
+  //   } else {
+  //     //4) no more nodes left
+  //     this.head = null;
+  //     this.tail = null;
+  //   }
+  //   return removedTail.value; //5) return value of removed
+  // }
 
   print() {
     console.log(this);
@@ -83,7 +83,6 @@ class SinglyLinkedList {
 // singleList.addToHead(3);
 // singleList.addToHead(4);
 // singleList.addToHead(5);
-// singleList.addToTail(6);
 // singleList.print();
 
 /*
