@@ -193,10 +193,17 @@ class BST {
   }
 }
 
-class Tree {
+class TreeNode {
   constructor(val) {
     this.value = val;
     this.children = [];
+  }
+
+  insertChildren(val) {
+    const newTreeNode = new TreeNode(val);
+    this.children.push(newTreeNode);
+    console.log(this);
+    return this; //to allow for chaining
   }
 
   DFS(arr) {
@@ -204,4 +211,24 @@ class Tree {
     this.children.forEach(child => child.DFS(arr));
     return arr;
   }
+
+  BFS(arr) {
+    // const queue = [this];
+    // while (queue.length){
+    // const current = queue.shift();
+    // if(current)
+    // }
+  }
 }
+
+let testTree = new TreeNode("A");
+testTree
+  .insertChildren("B")
+  .insertChildren("C")
+  .insertChildren("D");
+testTree.children[0].insertChildren("E").insertChildren("F");
+testTree.children[2].insertChildren("G").insertChildren("H");
+testTree.children[0].children[1].insertChildren("I").insertChildren("J");
+testTree.children[2].children[0].insertChildren("K");
+
+console.log("final tree", testTree);
