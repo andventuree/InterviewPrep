@@ -61,6 +61,8 @@ class BinarySearchTree {
   }
 
   //SEARCH METHODS
+  // const testArr = [];
+  // const fn = function(val){ testArr.push(val); };
 
   //need to know how to do w/o callback
   depthFirstForEach(fn, opt = "in-order") {
