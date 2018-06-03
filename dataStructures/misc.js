@@ -202,7 +202,6 @@ class TreeNode {
   insertChildren(val) {
     const newTreeNode = new TreeNode(val);
     this.children.push(newTreeNode);
-    console.log(this);
     return this; //to allow for chaining
   }
 
@@ -210,14 +209,6 @@ class TreeNode {
     arr.push(this.value);
     this.children.forEach(child => child.DFS(arr));
     return arr;
-  }
-
-  BFS(arr) {
-    // const queue = [this];
-    // while (queue.length){
-    // const current = queue.shift();
-    // if(current)
-    // }
   }
 }
 
@@ -231,4 +222,6 @@ testTree.children[2].insertChildren("G").insertChildren("H");
 testTree.children[0].children[1].insertChildren("I").insertChildren("J");
 testTree.children[2].children[0].insertChildren("K");
 
-console.log("final tree", testTree);
+// console.log("final tree", testTree);
+
+// console.log(testTree.DFS([]));
