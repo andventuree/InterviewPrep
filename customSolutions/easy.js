@@ -288,6 +288,8 @@ function bsHelper(array, target, left, right) {
 /* --------------------------------------------------------------------- */
 //Pro tip: If you have an unsorted array, sorting on average will be O(n^2) to sort
 
+//time: O(n^2)
+//space: O(1) - b/c you're not storing anymore than 2 things at a time
 function bubbleSort(array) {
   let isSorted = false;
   while (!isSorted) {
@@ -307,9 +309,42 @@ function bubbleSort(array) {
 function swap(i, j, array) {
   let larger = array[i];
   let smaller = array[j];
-  array[j] = larger;
   array[i] = smaller;
+  array[j] = larger;
   return array;
 }
 
-bubbleSort([9, 8, 2, 4, 1, 4, 5, 2, 1]); //[ 1, 1, 2, 2, 4, 4, 5, 8, 9 ]
+// bubbleSort([9, 8, 2, 4, 1, 4, 5, 2, 1]); //[ 1, 1, 2, 2, 4, 4, 5, 8, 9 ]
+
+/* --------------------------------------------------------------------- */
+//Not the most performant
+
+//time: O(n^2)
+//space: O(1) - b/c you're not storing anymore than 2 things at a time
+function insertionSort(array) {
+  //loop through array once
+  for (let i = 1; i < array.length; i++) {
+    // this will keep moving array up so you dont repeat operations
+    let j = i;
+    // currentNum = array[j];
+    // prevNum = array[j - 1];
+    // looking at each number and swapping them as necessary
+    while (j > 0 && array[j] < array[j - 1]) {
+      console.log("need to swap ", array[j], array[j - 1]);
+      insertSwap(j, j - 1, array);
+      j -= 1;
+    }
+  }
+  console.log("final array", array);
+  return array;
+}
+
+function insertSwap(i, j, array) {
+  let larger = array[i];
+  let smaller = array[j];
+  array[i] = smaller;
+  array[j] = larger;
+  return array;
+}
+
+insertionSort([9, 8, 2, 4, 1, 4, 5, 2, 1]); //[ 1, 1, 2, 2, 4, 4, 5, 8, 9 ]
