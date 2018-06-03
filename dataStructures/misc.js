@@ -192,3 +192,16 @@ class BST {
     else this[direction] = new BST(val);
   }
 }
+
+class Tree {
+  constructor(val) {
+    this.value = val;
+    this.children = [];
+  }
+
+  DFS(arr) {
+    arr.push(this.value);
+    this.children.forEach(child => child.DFS(arr));
+    return arr;
+  }
+}
