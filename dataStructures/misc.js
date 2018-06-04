@@ -179,49 +179,87 @@
 //   }
 // }
 
-class BST {
-  constructor(val) {
-    this.value = val;
-    this.left = null;
-    this.right = null;
+// class BST {
+//   constructor(val) {
+//     this.value = val;
+//     this.left = null;
+//     this.right = null;
+//   }
+
+//   insert(val) {
+//     const direction = val > this.value ? "right" : "left";
+//     if (this[direction]) this[direction].insert(val);
+//     else this[direction] = new BST(val);
+//   }
+// }
+
+// class TreeNode {
+//   constructor(val) {
+//     this.value = val;
+//     this.children = [];
+//   }
+
+//   insertChildren(val) {
+//     const newTreeNode = new TreeNode(val);
+//     this.children.push(newTreeNode);
+//     return this; //to allow for chaining
+//   }
+
+//   DFS(arr) {
+//     arr.push(this.value);
+//     this.children.forEach(child => child.DFS(arr));
+//     return arr;
+//   }
+// }
+
+// let testTree = new TreeNode("A");
+// testTree
+//   .insertChildren("B")
+//   .insertChildren("C")
+//   .insertChildren("D");
+// testTree.children[0].insertChildren("E").insertChildren("F");
+// testTree.children[2].insertChildren("G").insertChildren("H");
+// testTree.children[0].children[1].insertChildren("I").insertChildren("J");
+// testTree.children[2].children[0].insertChildren("K");
+
+// // console.log("final tree", testTree);
+
+// // console.log(testTree.DFS([]));
+
+const sumTwoNums2 = (arr, target) => {
+  let store = {};
+  for (let i = 0; i < arr.length; i++) {
+    let difference = target - arr[i];
+    //check if we've seen a number that makes up the difference
+    if (store[difference]) {
+      //current number + difference makes the target
+      return [arr[i], difference].sort((a, b) => {
+        return a - b;
+      });
+    } else {
+      //store current num if difference isnt found
+      store[arr[i]] = true;
+    }
   }
+  return [];
+};
 
-  insert(val) {
-    const direction = val > this.value ? "right" : "left";
-    if (this[direction]) this[direction].insert(val);
-    else this[direction] = new BST(val);
+const sumTwoNums3 = (arr, target) => {
+  arr.sort();
+  let left = 0;
+  let right = arr.length - 1;
+  while (left <= right) {
+    let currentSum = arr[left] + arr[right];
+    if (currentSum < target) {
+      left++;
+    } else if (currentSum > target) {
+      right--;
+    } else if (currentSum === target) {
+      return [arr[left], arr[right]];
+    }
   }
-}
+  return [];
+};
 
-class TreeNode {
-  constructor(val) {
-    this.value = val;
-    this.children = [];
-  }
-
-  insertChildren(val) {
-    const newTreeNode = new TreeNode(val);
-    this.children.push(newTreeNode);
-    return this; //to allow for chaining
-  }
-
-  DFS(arr) {
-    arr.push(this.value);
-    this.children.forEach(child => child.DFS(arr));
-    return arr;
-  }
-}
-
-let testTree = new TreeNode("A");
-testTree
-  .insertChildren("B")
-  .insertChildren("C")
-  .insertChildren("D");
-testTree.children[0].insertChildren("E").insertChildren("F");
-testTree.children[2].insertChildren("G").insertChildren("H");
-testTree.children[0].children[1].insertChildren("I").insertChildren("J");
-testTree.children[2].children[0].insertChildren("K");
-
-// console.log("final tree", testTree);
-
-// console.log(testTree.DFS([]));
+sumTwoNums2([1, 2, 3, 4, 5], 8); //[3,5]
+sumTwoNums3([1, 2, 3, 4, 5], 8); //[3,5]

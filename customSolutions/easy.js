@@ -329,7 +329,7 @@ function insertionSort(array) {
     // currentNum = array[j];
     // prevNum = array[j - 1];
     // looking at each number and swapping them as necessary
-    while (j > 0 && array[j] < array[j - 1]) {
+    while (j > 0 && array[j - 1] > array[j]) {
       console.log("need to swap ", array[j], array[j - 1]);
       insertSwap(j, j - 1, array);
       j -= 1;
