@@ -319,6 +319,7 @@ function swap(i, j, array) {
 
 /* --------------------------------------------------------------------- */
 //Not the most performant
+//Insertion sort - moving 1 number at a time, so its always sorted up til a point.
 
 //time: O(n^2)
 //space: O(1) - b/c you're not storing anymore than 2 things at a time
@@ -326,13 +327,15 @@ function insertionSort(array) {
   //loop through array once
   for (let i = 1; i < array.length; i++) {
     // this will keep moving array up so you dont repeat operations
+    // i also means it is sorted up until that point
     let j = i;
+    console.log(i, array);
     // currentNum = array[j];
     // prevNum = array[j - 1];
     // looking at each number and swapping them as necessary
     while (j > 0 && array[j - 1] > array[j]) {
-      console.log("need to swap ", array[j], array[j - 1]);
       insertSwap(j, j - 1, array);
+      console.log("need to swap ", array[j], array[j - 1], array);
       j -= 1;
     }
   }

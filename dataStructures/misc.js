@@ -305,79 +305,123 @@
 //   }
 // }
 
-function findClosest(tree, target) {
-  return findClosestHelperIterative(tree, target, Infinity);
-}
+// function findClosest(tree, target) {
+//   return findClosestHelperIterative(tree, target, Infinity);
+// }
 
-//time: O(V + E)
-//space: O(v)
+// //time: O(V + E)
+// //space: O(v)
 
-function findClosestHelper(currentNode, target, closest) {
-  if (!currentNode) return closest; //base case
+// function findClosestHelper(currentNode, target, closest) {
+//   if (!currentNode) return closest; //base case
 
-  if (Math.abs(target - currentNode.value) < Math.abs(target - closest)) {
-    closest = currentNode.value;
-  } //dynamic updates closest node
+//   if (Math.abs(target - currentNode.value) < Math.abs(target - closest)) {
+//     closest = currentNode.value;
+//   } //dynamic updates closest node
 
-  if (target > currentNode.value) {
-    return findClosestHelper(currentNode.right, target, closest);
-  } else if (target < currentNode.value) {
-    return findClosestHelper(currentNode.left, target, closest);
-  } else {
-    console.log("found", closest);
-    return closest;
-  }
-}
+//   if (target > currentNode.value) {
+//     return findClosestHelper(currentNode.right, target, closest);
+//   } else if (target < currentNode.value) {
+//     return findClosestHelper(currentNode.left, target, closest);
+//   } else {
+//     console.log("found", closest);
+//     return closest;
+//   }
+// }
 
-function findClosestHelperIterative(currentNode, target, closest) {
-  while (currentNode !== null) {
-    if (Math.abs(target - currentNode.value) < Math.abs(target - closest)) {
-      closest = currentNode.value;
-    }
+// function findClosestHelperIterative(currentNode, target, closest) {
+//   while (currentNode !== null) {
+//     if (Math.abs(target - currentNode.value) < Math.abs(target - closest)) {
+//       closest = currentNode.value;
+//     }
 
-    if (target > currentNode.value) currentNode = currentNode.right;
-    else if (target < currentNode.value) currentNode = currentNode.left;
-    else break;
-  }
-  console.log("closest: ", closest);
-  return closest;
-}
+//     if (target > currentNode.value) currentNode = currentNode.right;
+//     else if (target < currentNode.value) currentNode = currentNode.left;
+//     else break;
+//   }
+//   console.log("closest: ", closest);
+//   return closest;
+// }
 
-// For testing
-class BST {
-  constructor(val) {
-    this.value = val;
-    this.left = null;
-    this.right = null;
-  }
+// // For testing
+// class BST {
+//   constructor(val) {
+//     this.value = val;
+//     this.left = null;
+//     this.right = null;
+//   }
 
-  insert(val) {
-    const direction = val > this.value ? "right" : "left";
-    //if theres a node in specified direction, then createa a node in that direction
-    if (this[direction]) this[direction].insert(val);
-    else this[direction] = new BST(val);
-    return this; //need for chaining
-  }
-}
+//   insert(val) {
+//     const direction = val > this.value ? "right" : "left";
+//     //if theres a node in specified direction, then createa a node in that direction
+//     if (this[direction]) this[direction].insert(val);
+//     else this[direction] = new BST(val);
+//     return this; //need for chaining
+//   }
+// }
 
-let testBST = new BST(50)
-  .insert(57)
-  .insert(42)
-  .insert(26)
-  .insert(87)
-  .insert(48)
-  .insert(23)
-  .insert(20)
-  .insert(11) //test
-  .insert(12) //test
-  .insert(62)
-  .insert(34)
-  .insert(46)
-  .insert(92)
-  .insert(10)
-  .insert(8)
-  .insert(3)
-  .insert(5); //test
+// let testBST = new BST(50)
+//   .insert(57)
+//   .insert(42)
+//   .insert(26)
+//   .insert(87)
+//   .insert(48)
+//   .insert(23)
+//   .insert(20)
+//   .insert(11) //test
+//   .insert(12) //test
+//   .insert(62)
+//   .insert(34)
+//   .insert(46)
+//   .insert(92)
+//   .insert(10)
+//   .insert(8)
+//   .insert(3)
+//   .insert(5); //test
 
-//Assumption is you're giving a balanced tree to begin with
-findClosest(testBST, 5); //5
+// //Assumption is you're giving a balanced tree to begin with
+// findClosest(testBST, 5); //5
+
+//time: O(n^2) b/c you need multiple passes
+//space: O(1) b/c you dont store anything with each pass
+// function bubbleSort(arr) {
+//   let isSorted = false;
+//   while (!isSorted) {
+//     isSorted = true;
+//     for (let i = 0; i < arr.length - 1; i++) {
+//       if (arr[i] > arr[i + 1]) {
+//         swapHelper(i, i + 1, arr);
+//         isSorted = false;
+//       }
+//     }
+//   }
+//   console.log("arr: ", arr);
+//   return arr;
+// }
+
+// function swapHelper(i, j, array) {
+//   //pass by reference, so array will be changed when running through this function
+//   let largerNum = array[i];
+//   let smallerNum = array[j];
+//   array[i] = smallerNum;
+//   array[j] = largerNum;
+//   console.log(array);
+//   return array;
+// }
+
+// // bubbleSort([9, 8, 2, 4, 1, 4, 5, 2, 1]); //[ 1, 1, 2, 2, 4, 4, 5, 8, 9 ]
+
+// function insertionSort(arr) {
+//   //keep 1 number constant so have 1 initial for loop and then a while loop to keep track of multiple
+//   for (let i = 1; i < arr.length; i++) {
+//     let j = i;
+//     while (j > 0 && arr[j - 1] > arr[j]) {
+//       swapHelper(j, j - 1, arr);
+//       j--;
+//     }
+//   }
+//   console.log("arr: ", arr);
+//   return arr;
+// }
+
+// insertionSort([9, 8, 2, 4, 1, 4, 5, 2, 1]); //[ 1, 1, 2, 2, 4, 4, 5, 8, 9 ]
