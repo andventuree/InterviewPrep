@@ -192,3 +192,36 @@ class BST {
     else this[direction] = new BST(val);
   }
 }
+
+class TreeNode {
+  constructor(val) {
+    this.value = val;
+    this.children = [];
+  }
+
+  insertChildren(val) {
+    const newTreeNode = new TreeNode(val);
+    this.children.push(newTreeNode);
+    return this; //to allow for chaining
+  }
+
+  DFS(arr) {
+    arr.push(this.value);
+    this.children.forEach(child => child.DFS(arr));
+    return arr;
+  }
+}
+
+let testTree = new TreeNode("A");
+testTree
+  .insertChildren("B")
+  .insertChildren("C")
+  .insertChildren("D");
+testTree.children[0].insertChildren("E").insertChildren("F");
+testTree.children[2].insertChildren("G").insertChildren("H");
+testTree.children[0].children[1].insertChildren("I").insertChildren("J");
+testTree.children[2].children[0].insertChildren("K");
+
+// console.log("final tree", testTree);
+
+// console.log(testTree.DFS([]));
