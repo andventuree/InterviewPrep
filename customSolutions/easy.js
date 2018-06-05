@@ -321,7 +321,7 @@ function swap(i, j, array) {
 // bubbleSort([9, 8, 2, 4, 1, 4, 5, 2, 1]); //[ 1, 1, 2, 2, 4, 4, 5, 8, 9 ]
 
 /* --------------------------------------------------------------------- */
-//Not the most performant
+
 //Insertion sort - moving 1 number at a time, so its always sorted up til a point.
 
 //time: O(n^2)
@@ -355,4 +355,33 @@ function insertSwap(i, j, array) {
   return array;
 }
 
-insertionSort([9, 8, 2, 4, 1, 4, 5, 2, 1]); //[ 1, 1, 2, 2, 4, 4, 5, 8, 9 ]
+// insertionSort([9, 8, 2, 4, 1, 4, 5, 2, 1]); //[ 1, 1, 2, 2, 4, 4, 5, 8, 9 ]
+
+/* --------------------------------------------------------------------- */
+
+function selectionSort(array) {
+  let currentIdx = 0;
+  while (currentIdx < array.length - 1) {
+    //- 1 b/c you dont need to swap the last num
+    let smallestIdx = currentIdx;
+    for (let i = currentIdx + 1; i < array.length; i++) {
+      if (array[smallestIdx] > array[i]) {
+        smallestIdx = i;
+      }
+    }
+    //use currentIdx b/c its sorted up until that point
+    swapHelper(currentIdx, smallestIdx, array);
+    currentIdx++;
+  }
+  console.log("sorted", array);
+  return array;
+}
+
+function swapHelper(i, j, array) {
+  let largerNum = array[i];
+  let smallerNum = array[j];
+  array[i] = smallerNum;
+  array[j] = largerNum;
+}
+
+selectionSort([9, 8, 2, 4, 1, 4, 5, 2, 1]); //[ 1, 1, 2, 2, 4, 4, 5, 8, 9 ]
