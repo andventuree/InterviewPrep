@@ -420,10 +420,13 @@ function swapHelper(i, j, array) {
 //time: O(n)
 //space: O(n) or O(m) if your alphabet has more chars
 // function caesarCipherEncryptor(str, key) {
-//   let newLetters = []; //why not make this a string?
+//   let newLetters = [];
+//    //why not make this a string?
+//    ////because concatentation is actually an O(n) operation for each +=,
+//    //so that bloats the time complexity without you knowing it
 //   let newKey = key % 26;
 //   for (let letter in str) {
-//     newLetters.push(getNewLetter(str[letter], newKey)); //then add to string
+//     newLetters.push(getNewLetter(str[letter], newKey));
 //     console.log(newLetters);
 //   }
 //   return newLetters.join(","); //return final string
@@ -439,7 +442,10 @@ function swapHelper(i, j, array) {
 //time: same
 //space: same
 function caesarCipherEncryptor(str, key) {
-  let newLetters = []; //why not make this a string?
+  let newLetters = [];
+  //why not make this a string?
+  //because concatentation is actually an O(n) operation for each +=,
+  //so that bloats the time complexity without you knowing it
   let newKey = key % 26;
   let alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
   for (let letter in str) {
