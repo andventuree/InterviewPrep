@@ -425,3 +425,21 @@
 // }
 
 // insertionSort([9, 8, 2, 4, 1, 4, 5, 2, 1]); //[ 1, 1, 2, 2, 4, 4, 5, 8, 9 ]
+
+function insertionSort(array) {
+  for (let i = 1; i < array.length; i++) {
+    for (let j = i; j > 0 && array[j] < array[j - 1]; j -= 1) {
+      swap(j, j - 1, array);
+    }
+  }
+  console.log("sorted array:", array);
+  return array;
+}
+
+function swap(i, j, array) {
+  let smaller = array[i];
+  let larger = array[j];
+  array[j] = smaller;
+  array[i] = larger;
+}
+insertionSort([9, 8, 2, 4, 1, 4, 5, 2, 1]); //[ 1, 1, 2, 2, 4, 4, 5, 8, 9 ]
