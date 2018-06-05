@@ -412,4 +412,54 @@ function swapHelper(i, j, array) {
   array[j] = largerNum;
 }
 
-selectionSort([9, 8, 2, 4, 1, 4, 5, 2, 1]); //[ 1, 1, 2, 2, 4, 4, 5, 8, 9 ]
+// selectionSort([9, 8, 2, 4, 1, 4, 5, 2, 1]); //[ 1, 1, 2, 2, 4, 4, 5, 8, 9 ]
+
+/* --------------------------------------------------------------------- */
+
+//8a.
+//time: O(n)
+//space: O(n) or O(m) if your alphabet has more chars
+// function caesarCipherEncryptor(str, key) {
+//   let newLetters = []; //why not make this a string?
+//   let newKey = key % 26;
+//   for (let letter in str) {
+//     newLetters.push(getNewLetter(str[letter], newKey)); //then add to string
+//     console.log(newLetters);
+//   }
+//   return newLetters.join(","); //return final string
+// }
+
+// function getNewLetter(letter, key) {
+//   let newLetterCode = letter.charCodeAt(0) + key;
+//   if (newLetterCode <= 122) return String.fromCharCode(newLetterCode);
+//   else return String.fromCharCode(96 + (newLetterCode % 122));
+// }
+
+//8b. if given an alphabet, this solution works in terminal but doesn't work on algo expert atm.
+//time: same
+//space: same
+function caesarCipherEncryptor(str, key) {
+  let newLetters = []; //why not make this a string?
+  let newKey = key % 26;
+  let alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
+  for (let letter in str) {
+    newLetters.push(getNewLetter(str[letter], newKey, alphabet)); //then add to string
+    console.log(newLetters);
+  }
+  return newLetters.join(","); //return final string
+}
+
+function getNewLetter(letter, key, alphabet) {
+  let newLetterCode = alphabet.indexOf(letter) + key;
+  if (newLetterCode <= 25) return alphabet[newLetterCode];
+  else return alphabet[-1 + (newLetterCode % 25)];
+}
+
+// caesarCipherEncryptor("booger", 0);
+// caesarCipherEncryptor("abc", 3);
+// caesarCipherEncryptor("xyz", 2);
+// caesarCipherEncryptor("xyz", 5);
+
+/* --------------------------------------------------------------------- */
+
+//9.
