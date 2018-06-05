@@ -289,9 +289,9 @@ function bsHelper(array, target, left, right) {
 /* --------------------------------------------------------------------- */
 //Pro tip: If you have an unsorted array, sorting on average will be O(n^2) to sort
 
+//5.
 //time: O(n^2)
 //space: O(1) - b/c you're not storing anymore than 2 things at a time
-
 function bubbleSort(array) {
   let isSorted = false;
   while (!isSorted) {
@@ -322,11 +322,11 @@ function swap(i, j, array) {
 
 /* --------------------------------------------------------------------- */
 
+//6.
 //Insertion sort - moving 1 number at a time, so its always sorted up til a point.
 
 //time: O(n^2)
 //space: O(1) - b/c you're not storing anymore than 2 things at a time
-
 function insertionSort(array) {
   //loop through array once
   for (let i = 1; i < array.length; i++) {
@@ -359,21 +359,37 @@ function insertSwap(i, j, array) {
 
 /* --------------------------------------------------------------------- */
 
+// 7.
+//time: O(n^2) - b/c you must go thru arr 1 times, and multiple times for comparing
+//space: O(1) - not storing too much
+// function selectionSort(array) {
+//   let currentIdx = 0;
+//   while (currentIdx < array.length - 1) {
+//     //- 1 b/c you dont need to swap the last num
+//     let smallestIdx = currentIdx;
+//     for (let i = currentIdx + 1; i < array.length; i++) {
+//       if (array[smallestIdx] > array[i]) {
+//         smallestIdx = i;
+//       }
+//     }
+//     //use currentIdx b/c its sorted up until that point
+//     swapHelper(currentIdx, smallestIdx, array);
+//     currentIdx++;
+//   }
+//   console.log("sorted", array);
+//   return array;
+// }
+
+//shorter and more consistent with insertion sort
 function selectionSort(array) {
-  let currentIdx = 0;
-  while (currentIdx < array.length - 1) {
-    //- 1 b/c you dont need to swap the last num
+  for (let currentIdx = 0; currentIdx < array.length - 1; currentIdx++) {
     let smallestIdx = currentIdx;
     for (let i = currentIdx + 1; i < array.length; i++) {
-      if (array[smallestIdx] > array[i]) {
-        smallestIdx = i;
-      }
+      if (array[smallestIdx] > array[i]) smallestIdx = i;
     }
-    //use currentIdx b/c its sorted up until that point
     swapHelper(currentIdx, smallestIdx, array);
-    currentIdx++;
   }
-  console.log("sorted", array);
+  console.log("final sorted array", array);
   return array;
 }
 
