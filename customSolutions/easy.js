@@ -327,25 +327,37 @@ function swap(i, j, array) {
 
 //time: O(n^2)
 //space: O(1) - b/c you're not storing anymore than 2 things at a time
+// function insertionSort(array) {
+//   //loop through array once
+//   for (let i = 1; i < array.length; i++) {
+//     // this will keep moving array up so you dont repeat operations
+//     // i also means it is sorted up until that point
+//     // Unlike bubble sort, this algo focus on going backwards
+//     // hence accting for the let i = 1
+//     let j = i;
+//     console.log(i, array);
+//     // looking at each number and swapping them as necessary
+//     while (j > 0 && array[j - 1] > array[j]) {
+//       insertSwap(j, j - 1, array);
+//       console.log("need to swap ", array[j], array[j - 1], array);
+//       j -= 1;
+//     }
+//   }
+//   console.log("final array", array);
+//   return array;
+// }
+
 function insertionSort(array) {
-  //loop through array once
   for (let i = 1; i < array.length; i++) {
-    // this will keep moving array up so you dont repeat operations
-    // i also means it is sorted up until that point
-    // Unlike bubble sort, this algo focus on going backwards
-    // hence accting for the let i = 1
-    let j = i;
-    console.log(i, array);
-    // looking at each number and swapping them as necessary
-    while (j > 0 && array[j - 1] > array[j]) {
-      insertSwap(j, j - 1, array);
-      console.log("need to swap ", array[j], array[j - 1], array);
-      j -= 1;
+    for (let j = i; j > 0 && array[j] < array[j - 1]; j -= 1) {
+      insertSwap(j - 1, j, array);
     }
   }
-  console.log("final array", array);
+  console.log("sorted array:", array);
   return array;
 }
+
+// insertionSort([9, 8, 2, 4, 1, 4, 5, 2, 1]); //[ 1, 1, 2, 2, 4, 4, 5, 8, 9 ]
 
 function insertSwap(i, j, array) {
   let larger = array[i];
