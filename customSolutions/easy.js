@@ -291,11 +291,14 @@ function bsHelper(array, target, left, right) {
 
 //time: O(n^2)
 //space: O(1) - b/c you're not storing anymore than 2 things at a time
+
 function bubbleSort(array) {
   let isSorted = false;
   while (!isSorted) {
     isSorted = true;
     for (let i = 0; i < array.length - 1; i++) {
+      //unlike insertion sort, this algo focuses on going forward
+      //hence accting for the length - 1
       if (array[i] > array[i + 1]) {
         swap(i, i + 1, array);
         console.log("array: ", array);
@@ -323,15 +326,16 @@ function swap(i, j, array) {
 
 //time: O(n^2)
 //space: O(1) - b/c you're not storing anymore than 2 things at a time
+
 function insertionSort(array) {
   //loop through array once
   for (let i = 1; i < array.length; i++) {
     // this will keep moving array up so you dont repeat operations
     // i also means it is sorted up until that point
+    // Unlike bubble sort, this algo focus on going backwards
+    // hence accting for the let i = 1
     let j = i;
     console.log(i, array);
-    // currentNum = array[j];
-    // prevNum = array[j - 1];
     // looking at each number and swapping them as necessary
     while (j > 0 && array[j - 1] > array[j]) {
       insertSwap(j, j - 1, array);
