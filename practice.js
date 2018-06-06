@@ -426,20 +426,82 @@
 
 // insertionSort([9, 8, 2, 4, 1, 4, 5, 2, 1]); //[ 1, 1, 2, 2, 4, 4, 5, 8, 9 ]
 
-function insertionSort(array) {
-  for (let i = 1; i < array.length; i++) {
-    for (let j = i; j > 0 && array[j] < array[j - 1]; j -= 1) {
-      swap(j - 1, j, array);
+// function insertionSort(array) {
+//   for (let i = 1; i < array.length; i++) {
+//     for (let j = i; j > 0 && array[j] < array[j - 1]; j -= 1) {
+//       swap(j - 1, j, array);
+//     }
+//   }
+//   console.log("sorted array:", array);
+//   return array;
+// }
+
+// function swap(i, j, array) {
+//   let smaller = array[i];
+//   let larger = array[j];
+//   array[j] = smaller;
+//   array[i] = larger;
+// }
+// insertionSort([9, 8, 2, 4, 1, 4, 5, 2, 1]); //[ 1, 1, 2, 2, 4, 4, 5, 8, 9 ]
+
+//time: O(n^2)
+
+function bubbleSort(arr) {
+  let isSorted = false;
+  while (!isSorted) {
+    isSorted = true;
+    for (let i = 0; i < arr.length - 1; i++) {
+      //going forward, check if each pair is in order
+      if (arr[i] > arr[i + 1]) {
+        swap(i, i + 1, arr);
+        //if a pair is not in order, update the tracker to say not sorted
+        isSorted = false;
+      }
     }
   }
-  console.log("sorted array:", array);
-  return array;
+  return arr;
 }
 
-function swap(i, j, array) {
-  let smaller = array[i];
-  let larger = array[j];
-  array[j] = smaller;
-  array[i] = larger;
+//time: O(n^2) need to go through at least once then multiple passes to sort
+//space: O(1) not storing anyting, using same array
+function insertionSort(arr) {
+  for (let i = 1; i < arr.length; i++) {
+    for (let j = i; j > 0; j--) {
+      if (arr[j] < arr[j - 1]) swap(j - 1, j, arr);
+    }
+  }
+  return arr;
 }
-insertionSort([9, 8, 2, 4, 1, 4, 5, 2, 1]); //[ 1, 1, 2, 2, 4, 4, 5, 8, 9 ]
+
+//time: O(n^2) need to go through array at least once then multiple passes to sort
+//space: O(1) not storing anything
+//selection sort seems just like insertion sort in the other direction
+function selectionSort(arr) {
+  // let start = Date.now() / 1000;
+  for (let i = 0; i < arr.length; i++) {
+    let smallestIdx = i;
+    for (let j = i + 1; j < arr.length; j++) {
+      if (arr[smallestIdx] > arr[j]) {
+        smallestIdx = j;
+      }
+    }
+    swap(i, smallestIdx, arr);
+    //having this here and not inside that if, doesn't save time
+    //its more about how you go about sorting it,
+    //Curious? call this function with over 400 arguments to see time duration
+  }
+  // let end = Date.now() / 1000;
+  // console.log("duration", end - start);
+  return arr;
+}
+
+function swap(i, j, arr) {
+  let larger = arr[i];
+  let smaller = arr[j];
+  arr[i] = smaller;
+  arr[j] = larger;
+}
+
+// console.log("bubbleSort", bubbleSort([9, 8, 2, 4, 1, 4, 5, 2, 1])); //[ 1, 1, 2, 2, 4, 4, 5, 8, 9 ]
+// console.log("insertionSort", insertionSort([9, 8, 2, 4, 1, 4, 5, 2, 1])); //[ 1, 1, 2, 2, 4, 4, 5, 8, 9 ]
+// console.log("selectionSort", selectionSort([9, 8, 2, 4, 1, 4, 5, 2, 1])); //[ 1, 1, 2, 2, 4, 4, 5, 8, 9 ]

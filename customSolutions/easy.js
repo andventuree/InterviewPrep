@@ -349,8 +349,8 @@ function swap(i, j, array) {
 
 function insertionSort(array) {
   for (let i = 1; i < array.length; i++) {
-    for (let j = i; j > 0 && array[j] < array[j - 1]; j -= 1) {
-      insertSwap(j - 1, j, array);
+    for (let j = i; j > 0; j -= 1) {
+      if (array[j] < array[j - 1]) insertSwap(j - 1, j, array);
     }
   }
   console.log("sorted array:", array);
