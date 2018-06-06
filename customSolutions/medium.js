@@ -159,7 +159,7 @@ class BST {
           ////You may have noticed if you target the root node,
           ////parentNode will never be assigned
           ////so this step will keep going until entire tree gets redistributed again
-
+          else currentNode.value = null;
           //b) we found the node and its parent's left
         } else if (parentNode.left === currentNode) {
           //update parent's left to be one of currentNode's children
@@ -174,8 +174,18 @@ class BST {
             : currentNode.left;
         }
       }
+      break;
     }
     return this;
+  }
+
+  getMinValue() {
+    let currentNode = this;
+    //given a node, check if there are smaller values in the leaves
+    while (currentNode.left) {
+      currentNode = currentNode.left;
+    }
+    return currentNode.value;
   }
 }
 

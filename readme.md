@@ -21,7 +21,6 @@ newLetters.push( /* some operation to add new letters */ )
 return newLetters.join(",");```
 
 3. Array switcheroo
-
 Need to swap the places of two elements in an array? Use a helper function to clean up your logic.
 
 ```
