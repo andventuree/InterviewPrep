@@ -441,31 +441,53 @@ function swapHelper(i, j, array) {
 //8b. if given an alphabet, this solution works in terminal but doesn't work on algo expert atm.
 //time: same
 //space: same
-function caesarCipherEncryptor(str, key) {
-  let newLetters = [];
-  //why not make this a string?
-  //because concatentation is actually an O(n) operation for each +=,
-  //so that bloats the time complexity without you knowing it
-  let newKey = key % 26;
-  let alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
-  for (let letter in str) {
-    newLetters.push(getNewLetter(str[letter], newKey, alphabet)); //then add to string
-    console.log(newLetters);
-  }
-  return newLetters.join(","); //return final string
-}
+// function caesarCipherEncryptor(str, key) {
+//   let newLetters = [];
+//   //why not make this a string?
+//   //because concatentation is actually an O(n) operation for each +=,
+//   //so that bloats the time complexity without you knowing it
+//   let newKey = key % 26;
+//   let alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
+//   for (let letter in str) {
+//     newLetters.push(getNewLetter(str[letter], newKey, alphabet)); //then add to string
+//     console.log(newLetters);
+//   }
+//   return newLetters.join(","); //return final string
+// }
 
-function getNewLetter(letter, key, alphabet) {
-  let newLetterCode = alphabet.indexOf(letter) + key;
-  if (newLetterCode <= 25) return alphabet[newLetterCode];
-  else return alphabet[-1 + (newLetterCode % 25)];
-}
+// function getNewLetter(letter, key, alphabet) {
+//   let newLetterCode = alphabet.indexOf(letter) + key;
+//   if (newLetterCode <= 25) return alphabet[newLetterCode];
+//   else return alphabet[-1 + (newLetterCode % 25)];
+// }
 
-// caesarCipherEncryptor("booger", 0);
-// caesarCipherEncryptor("abc", 3);
-// caesarCipherEncryptor("xyz", 2);
-// caesarCipherEncryptor("xyz", 5);
+// // caesarCipherEncryptor("booger", 0);
+// // caesarCipherEncryptor("abc", 3);
+// // caesarCipherEncryptor("xyz", 2);
+// // caesarCipherEncryptor("xyz", 5);
 
-/* --------------------------------------------------------------------- */
+// /* --------------------------------------------------------------------- */
 
-//9.
+// //9a. + 9b. are naive iterative examples
+
+// //9c. recursive
+// function isPalindrome(string) {}
+
+// //9d. iterative
+// //time: O(n) - need to go through entire string at least half
+// //space: O(1) - only storing pointers
+// // function isPalindrome(string) {
+// //   let left = 0;
+// //   let right = string.length - 1;
+// //   while (left <= right) {
+// //     if (string[left] !== string[right]) {
+// //       return false;
+// //     }
+// //     left += 1;
+// //     right -= 1;
+// //   }
+// //   console.log(true);
+// //   return true;
+// // }
+
+// isPalindrome("absba");
