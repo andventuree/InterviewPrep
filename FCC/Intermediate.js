@@ -43,14 +43,16 @@ function destroyer(arr) {
 
 // destroyer([1, 2, 3, 1, 2, 3], 2, 3);
 
+//time: O(n * m) - b/c collection and source can have diff num of keys
+//space: O(n) - worst case would store all elements of collection
 function whatIsInAName(collection, source) {
   // What's in a name?
   var arr = [];
   // Only change code below this line
   let allMatch = null;
-  for (var i in collection) {
+  for (let i in collection) {
     allMatch = true;
-    for (var key in source) {
+    for (let key in source) {
       if (source[key] !== collection[i][key]) {
         allMatch = false;
       }
@@ -90,3 +92,35 @@ function whatIsInAName(collection, source) {
 //   { apple: 1, bat: 2 }
 // ); // [{ "apple": 1, "bat": 2 }, { "apple": 1, "bat": 2, "cookie":2 }]
 // whatIsInAName([{ a: 1, b: 2, c: 3 }], { a: 1, b: 9999, c: 3 }); // []
+
+//time: not sure time complexity of regex but likely O(2n) => O(n);
+//space: O(1) - only store string
+function spinalCase(str) {
+  str = str
+    .replace(/([a-z])([A-Z])/g, "$1 $2")
+    .replace(/\s+|_+/g, "-")
+    .toLowerCase();
+  return str;
+}
+
+// spinalCase("This Is Spinal Tap");
+// spinalCase("thisIsSpinalTap"); // "this-is-spinal-tap".
+// spinalCase("The_Andy_Griffith_Show"); // "the-andy-griffith-show".
+// spinalCase("Teletubbies say Eh-oh"); // "teletubbies-say-eh-oh".
+// spinalCase("AllThe-small Things"); // "all-the-small-things".
+
+function translatePigLatin(str) {
+  let vowels = "aeiou";
+  let consonants = "bcdfghjklmnpqrstvwxyz";
+  if (vowels.indexOf(str[0])) return (str += "way");
+  let vowelIndex = 0;
+
+  return str;
+}
+
+translatePigLatin("consonant");
+translatePigLatin("california"); // "aliforniacay".
+translatePigLatin("paragraphs"); // "aragraphspay".
+translatePigLatin("glove"); // "oveglay".
+translatePigLatin("algorithm"); // "algorithmway".
+translatePigLatin("eight"); // "eightway".
