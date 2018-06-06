@@ -19,3 +19,18 @@ It may be tempting to use `str += letter` when asked to create a new string. But
 let newLetters = [];
 newLetters.push( /* some operation to add new letters */ )
 return newLetters.join(",");```
+
+3. Array switcheroo
+
+Need to swap the places of two elements in an array? Use a helper function to clean up your logic.
+
+```
+function swap(index1, index2, array){
+  let largerNum = arr[index1]; //assuming number at index1 is larger
+  let smallerNum = arr[index2];
+  arr[index1] = smallerNum;
+  arr[index2] = largerNum;
+}```
+
+As arrays are passed by reference, calling this helper in your code will mutate the given array and give you the desired effect.
+
