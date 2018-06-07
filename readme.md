@@ -1,6 +1,7 @@
-_Interview Prep_
+__Interview Prep__
 
 Pro tips:
+
 1. Not enough parameters
 If given a problem and you're not allowed to change the parameters of the original function, make a helper then accepts more parameters.
 
@@ -18,7 +19,8 @@ It may be tempting to use `str += letter` when asked to create a new string. But
 ```
 let newLetters = [];
 newLetters.push( /* some operation to add new letters */ )
-return newLetters.join(",");```
+return newLetters.join(",");
+```
 
 3. Array switcheroo
 Need to swap the places of two elements in an array? Use a helper function to clean up your logic.
@@ -32,4 +34,3 @@ function swap(index1, index2, array){
 }```
 
 As arrays are passed by reference, calling this helper in your code will mutate the given array and give you the desired effect.
-

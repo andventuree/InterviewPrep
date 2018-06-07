@@ -1,7 +1,7 @@
 // Medium problems
 
 /* --------------------------------------------------------------------- */
-//1.
+//1. Traversal methods for BST
 //time: O(n) - must go to each node
 //space: O(v) - b/c recursive, only as deep as the longest branch on the call stack
 function inOrderTraverse(tree, array) {
@@ -72,7 +72,7 @@ postOrderTraverse(testTree, []);
 // console.log(testTree.contains(9));
 
 /* --------------------------------------------------------------------- */
-//2.
+//2. Construct a BST
 //time and space complexity: see respective methods
 class BST {
   constructor(val) {
@@ -86,7 +86,6 @@ class BST {
   insert(val) {
     let currentNode = this;
     while (currentNode) {
-      console.log(currentNode);
       if (val >= currentNode.value) {
         if (currentNode.right) {
           currentNode = currentNode.right;
@@ -207,5 +206,23 @@ let testBST = new BST(10)
 // console.log(testBST);
 // console.log(testBST.contains(6));
 // console.log(testBST.contains(5));
-console.log(testBST.remove(5));
+// console.log(testBST.remove(5));
 // testBST.remove(5);
+
+/* --------------------------------------------------------------------- */
+//3. Validate a given BST
+//time: O(n) must go to each node
+//space: O(d) adds as many frames as there is depth of a branch
+function validateBst(tree) {
+  return validateHelper(tree, -Infinity, Infinity);
+}
+
+function validateHelper(tree, min, max) {
+  if (!tree) return true;
+  if (tree.value < min || tree.value >= max) return false;
+  let validLeft = validateHelper(tree.left, min, tree.value);
+  let validRight = validateHelper(tree.right, tree.value, max);
+  return validLeft && validRight;
+}
+
+console.log(validateBst(testTree));
