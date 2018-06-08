@@ -119,16 +119,100 @@ function translatePigLatin(str) {
 }
 
 // translatePigLatin("consonant");
-// translatePigLatin("california"); // "aliforniacay".
-// translatePigLatin("paragraphs"); // "aragraphspay".
-// translatePigLatin("glove"); // "oveglay".
-// translatePigLatin("algorithm"); // "algorithmway".
-// translatePigLatin("eight"); // "eightway".
+// translatePigLatin("california"); // "aliforniacay"
+// translatePigLatin("paragraphs"); // "aragraphspay"
+// translatePigLatin("glove"); // "oveglay"
+// translatePigLatin("algorithm"); // "algorithmway"
+// translatePigLatin("eight"); // "eightway"
 
-// Incomplete - https://learn.freecodecamp.org/javascript-algorithms-and-data-structures/intermediate-algorithm-scripting/make-a-person
-//what you have to do is assign a firstName and lastName prop once an instance is created (NOT DONE)
-//then you want to edit as necessary (DONE)
-//
+//time: O(n) - need to look through all elems
+//space: O(1) - doesn't really need to stoe anything
+function fearNotLetter(str) {
+  let missingLetter;
+  console.log("start");
+  for (let i = 0; i < str.length - 1; i++) {
+    let currentChar = str[i].charCodeAt(0);
+    let nextChar = str[i + 1].charCodeAt(0);
+    if (currentChar + 1 !== nextChar) {
+      missingLetter = String.fromCharCode(currentChar + 1);
+    }
+  }
+  return missingLetter;
+}
+
+fearNotLetter("abce");
+
+function steamrollArray(arr) {
+  return arr.reduce(
+    (r, e) =>
+      Array.isArray(e) ? (r = r.concat(steamrollArray(e))) : r.push(e) && r,
+    []
+  );
+}
+
+//time: O(n) - need to go through every elem to check
+//space: O(n) - worst case, first elem is true and we want all of them
+function dropElements(arr, func) {
+  let newArr = [];
+  let i = 0;
+  while (!func(arr[i])) {
+    i += 1;
+  }
+  newArr = arr.slice(i);
+  return newArr;
+}
+
+dropElements([1, 2, 3], function(n) {
+  return n < 3;
+});
+
+//time: O(n) - need to go through each letter but no compounding
+//space: O(n) - need to temp store each letter
+function binaryAgent(str) {
+  let binaryArr = str.split(" ");
+  let letterArr = binaryArr.map(bi =>
+    String.fromCharCode(parseInt(bi, 2).toString(10))
+  );
+  return letterArr.join("");
+}
+
+// binaryAgent(
+//   "01000001 01110010 01100101 01101110 00100111 01110100 00100000 01100010 01101111 01101110 01100110 01101001 01110010 01100101 01110011 00100000 01100110 01110101 01101110 00100001 00111111"
+// );
+
+//time: O(n) - does only 1 pass through
+//space: O(1) - not storing anything
+function truthCheck(collection, pre) {
+  let allTrue = true;
+  collection.forEach(elem => {
+    if (!elem[pre]) allTrue = false;
+  });
+  return allTrue;
+}
+
+// truthCheck([{"user": "Tinky-Winky", "sex": "male"}, {"user": "Dipsy", "sex": "male"}, {"user": "Laa-Laa", "sex": "female"}, {"user": "Po", "sex": "female"}], "sex");
+
+//time: O(1) - does only 1 pass through
+//space: O(1) - not storing anything
+function addTogether() {
+  let args = Array.from(arguments);
+  if (args.length === 1) {
+    if (typeof args[0] !== "number") return;
+    let x = args[0];
+    return y => {
+      if (typeof y !== "number") return;
+      return x + y;
+    };
+  } else if (args.length === 2) {
+    if (typeof args[0] !== "number" || typeof args[1] !== "number") return;
+    return args.reduce((a, b) => a + b);
+  }
+}
+
+// addTogether(2, 3);
+
+//time: O(1) - only 2 values in array and length never increases
+//space: O(1) - only 2 values in array
 var Person = function(firstAndLast) {
   // Complete the method below and implement the others similarly
   let firstName = firstAndLast.split(" ")[0];
@@ -170,6 +254,8 @@ var Person = function(firstAndLast) {
 // bob.setFullName("Haskell Curry");
 // console.log("Curry:", bob.getLastName()); //"Curry"
 
+//time: O(n) - must may through each obj passed in from array
+//space: O(n) - new array is created
 function orbitalPeriod(arr) {
   var GM = 398600.4418;
   var earthRadius = 6367.4447;
@@ -187,20 +273,3 @@ function orbitalPeriod(arr) {
 }
 
 // orbitalPeriod([{name : "sputnik", avgAlt : 35873.5553}]);
-
-function addTogether() {
-  let args = Array.from(arguments);
-  if (args.length === 1) {
-    if (typeof args[0] !== "number") return;
-    let x = args[0];
-    return y => {
-      if (typeof y !== "number") return;
-      return x + y;
-    };
-  } else if (args.length === 2) {
-    if (typeof args[0] !== "number" || typeof args[1] !== "number") return;
-    return args.reduce((a, b) => a + b);
-  }
-}
-
-addTogether(2, 3);
