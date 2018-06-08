@@ -169,3 +169,38 @@ var Person = function(firstAndLast) {
 // console.log("Haskell:", bob.getFirstName()); //"Haskell"
 // bob.setFullName("Haskell Curry");
 // console.log("Curry:", bob.getLastName()); //"Curry"
+
+function orbitalPeriod(arr) {
+  var GM = 398600.4418;
+  var earthRadius = 6367.4447;
+  let array = [];
+
+  array = arr.map(function(obj) {
+    var createdObj = {};
+    createdObj.name = obj.name;
+    createdObj.orbitalPeriod = Math.round(
+      2 * Math.PI * Math.pow(Math.pow(obj.avgAlt + earthRadius, 3) / GM, 0.5)
+    );
+    return createdObj;
+  });
+  return array;
+}
+
+// orbitalPeriod([{name : "sputnik", avgAlt : 35873.5553}]);
+
+function addTogether() {
+  let args = Array.from(arguments);
+  if (args.length === 1) {
+    if (typeof args[0] !== "number") return;
+    let x = args[0];
+    return y => {
+      if (typeof y !== "number") return;
+      return x + y;
+    };
+  } else if (args.length === 2) {
+    if (typeof args[0] !== "number" || typeof args[1] !== "number") return;
+    return args.reduce((a, b) => a + b);
+  }
+}
+
+addTogether(2, 3);
