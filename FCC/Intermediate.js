@@ -129,48 +129,35 @@ function translatePigLatin(str) {
 //what you have to do is assign a firstName and lastName prop once an instance is created (NOT DONE)
 //then you want to edit as necessary (DONE)
 //
-// var Person = function(firstAndLast) {
-//   // Complete the method below and implement the others similarly
-//   // Person.setFullName(firstAndLast);
+var Person = function(firstAndLast) {
+  // Complete the method below and implement the others similarly
+  let firstName = firstAndLast.split(" ")[0];
+  let lastName = firstAndLast.split(" ")[1];
 
-//   this.getFullName = function() {
-//     return this.firstName + " " + this.lastName;
-//   };
-//   this.getFirstName = function() {
-//     if (firstAndLast) {
-//       this.firstName = firstAndLast.split(" ")[0];
-//       return this.firstName;
-//     }
-//     return this.firstName;
-//   };
-//   this.getLastName = function() {
-//     if (firstAndLast) {
-//       this.lastName = firstAndLast.split(" ")[1];
-//       return this.lastName;
-//     }
-//     return this.lastName;
-//   };
-//   this.setFirstName = function(first) {
-//     this.firstName = first;
-//   };
-//   this.setLastName = function(last) {
-//     this.lastName = last;
-//   };
-//   this.setFullName = function(fullName) {
-//     // console.log(firstAndLast);
-//     let splitName = fullName.split(" ");
-//     this.firstName = splitName[0];
-//     this.lastName = splitName[1];
-//   };
-// };
+  this.getFullName = function() {
+    return firstName + " " + lastName;
+  };
+  this.getFirstName = function() {
+    return firstName;
+  };
+  this.getLastName = function() {
+    return lastName;
+  };
+  this.setFirstName = function(first) {
+    firstName = first;
+  };
+  this.setLastName = function(last) {
+    lastName = last;
+  };
+  this.setFullName = function(fullName) {
+    // console.log(firstAndLast);
+    let splitName = fullName.split(" ");
+    firstName = splitName[0];
+    lastName = splitName[1];
+  };
+};
 
 // var bob = new Person("Bob Ross");
-
-// // bob.firstName should return undefined.
-// // bob.lastName should return undefined.
-// // bob.getFirstName() should return "Bob".
-// // bob.getLastName() should return "Ross".
-// // bob.getFullName() should return "Bob Ross".
 // console.log(bob.getFullName());
 // bob.setFirstName("Haskell");
 // console.log("Haskell Ross:", bob.getFullName()); //"Haskell Ross"
