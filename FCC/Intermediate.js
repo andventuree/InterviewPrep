@@ -125,6 +125,24 @@ function translatePigLatin(str) {
 // translatePigLatin("algorithm"); // "algorithmway"
 // translatePigLatin("eight"); // "eightway"
 
+//time: O(n^3) - double for loops and indexOf is another loops!
+//space: O(n) - only takes uniques so not more than all the arrays provided
+function uniteUnique(arr) {
+  let args = Array.from(arguments);
+  let store = arr;
+  for (let i = 0; i < args.length; i++) {
+    for (let j = 0; j < args[i].length; j++) {
+      if (store.indexOf(args[i][j]) === -1) {
+        store.push(args[i][j]);
+      }
+    }
+  }
+  arr = store;
+  return arr;
+}
+
+uniteUnique([1, 3, 2], [5, 2, 1, 4], [2, 1]);
+
 //time: O(n) - need to look through all elems
 //space: O(1) - doesn't really need to stoe anything
 function fearNotLetter(str) {
