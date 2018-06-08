@@ -118,9 +118,67 @@ function translatePigLatin(str) {
   return str;
 }
 
-translatePigLatin("consonant");
-translatePigLatin("california"); // "aliforniacay".
-translatePigLatin("paragraphs"); // "aragraphspay".
-translatePigLatin("glove"); // "oveglay".
-translatePigLatin("algorithm"); // "algorithmway".
-translatePigLatin("eight"); // "eightway".
+// translatePigLatin("consonant");
+// translatePigLatin("california"); // "aliforniacay".
+// translatePigLatin("paragraphs"); // "aragraphspay".
+// translatePigLatin("glove"); // "oveglay".
+// translatePigLatin("algorithm"); // "algorithmway".
+// translatePigLatin("eight"); // "eightway".
+
+// Incomplete - https://learn.freecodecamp.org/javascript-algorithms-and-data-structures/intermediate-algorithm-scripting/make-a-person
+//what you have to do is assign a firstName and lastName prop once an instance is created (NOT DONE)
+//then you want to edit as necessary (DONE)
+//
+// var Person = function(firstAndLast) {
+//   // Complete the method below and implement the others similarly
+//   // Person.setFullName(firstAndLast);
+
+//   this.getFullName = function() {
+//     return this.firstName + " " + this.lastName;
+//   };
+//   this.getFirstName = function() {
+//     if (firstAndLast) {
+//       this.firstName = firstAndLast.split(" ")[0];
+//       return this.firstName;
+//     }
+//     return this.firstName;
+//   };
+//   this.getLastName = function() {
+//     if (firstAndLast) {
+//       this.lastName = firstAndLast.split(" ")[1];
+//       return this.lastName;
+//     }
+//     return this.lastName;
+//   };
+//   this.setFirstName = function(first) {
+//     this.firstName = first;
+//   };
+//   this.setLastName = function(last) {
+//     this.lastName = last;
+//   };
+//   this.setFullName = function(fullName) {
+//     // console.log(firstAndLast);
+//     let splitName = fullName.split(" ");
+//     this.firstName = splitName[0];
+//     this.lastName = splitName[1];
+//   };
+// };
+
+// var bob = new Person("Bob Ross");
+
+// // bob.firstName should return undefined.
+// // bob.lastName should return undefined.
+// // bob.getFirstName() should return "Bob".
+// // bob.getLastName() should return "Ross".
+// // bob.getFullName() should return "Bob Ross".
+// console.log(bob.getFullName());
+// bob.setFirstName("Haskell");
+// console.log("Haskell Ross:", bob.getFullName()); //"Haskell Ross"
+// bob.setLastName("Curry");
+// console.log("Haskell Curry:", bob.getFullName()); //"Haskell Curry"
+// bob.setFullName("Haskell Curry");
+// console.log("Haskell Curry:", bob.getFullName()); //"Haskell Curry"
+// bob.setFullName("Haskell Curry");
+// console.log("Haskell:", bob.getFirstName()); //"Haskell"
+// bob.setFullName("Haskell Curry");
+// console.log("Curry:", bob.getLastName()); //"Curry"
