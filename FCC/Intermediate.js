@@ -126,22 +126,29 @@ function translatePigLatin(str) {
 // translatePigLatin("eight"); // "eightway"
 
 //time: O(n^3) - double for loops and indexOf is another loops!
+//improved with:
+//time: O(n^2) - only 2 for loops, used hash table instead of indexOf
 //space: O(n) - only takes uniques so not more than all the arrays provided
 function uniteUnique(arr) {
   let args = Array.from(arguments);
-  let store = arr;
+  let store = {};
+  arr.forEach(elem => (store[elem] = true));
+  let finalArr = arr;
   for (let i = 0; i < args.length; i++) {
     for (let j = 0; j < args[i].length; j++) {
-      if (store.indexOf(args[i][j]) === -1) {
-        store.push(args[i][j]);
+      if (!store[args[i][j]]) {
+        //used a hashtable instead of indexOf
+        store[args[i][j]] = true;
+        finalArr.push(args[i][j]);
       }
     }
+    console.log("!!!!", store);
   }
-  arr = store;
+  arr = finalArr;
   return arr;
 }
 
-uniteUnique([1, 3, 2], [5, 2, 1, 4], [2, 1]);
+uniteUnique([1, 3, 2], [5, 2, 1, 4], [2, 1]); //[1,3,2,5,4]
 
 //time: O(n) - need to look through all elems
 //space: O(1) - doesn't really need to stoe anything
