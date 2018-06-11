@@ -226,3 +226,28 @@ function validateHelper(tree, min, max) {
 }
 
 console.log(validateBst(testTree));
+
+/* --------------------------------------------------------------------- */
+
+//4.
+//time: O(n * d) d = # of denominations
+//space: O(n) b/c you need an array to the extend of what number you're looking for
+function numberOfWaysToMakeChange(n, denoms) {
+  let ways = new Array(n + 1).fill(0);
+  ways[0] = 1;
+  for (let i = 0; i < denoms.length; i++) {
+    let denomination = denoms[i];
+    console.log("denomination: ", denomination);
+    for (let j = 1; j < n + 1; j++) {
+      if (denomination <= j) {
+        ways[j] += ways[j - denomination];
+        console.log(ways);
+      }
+    }
+  }
+
+  console.log(ways);
+  return ways[n];
+}
+
+numberOfWaysToMakeChange(10, [1, 5, 10, 25]); //4
