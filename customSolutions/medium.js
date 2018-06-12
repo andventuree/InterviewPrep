@@ -225,7 +225,7 @@ function validateHelper(tree, min, max) {
   return validLeft && validRight;
 }
 
-console.log(validateBst(testTree));
+// console.log(validateBst(testTree));
 
 /* --------------------------------------------------------------------- */
 
@@ -250,4 +250,37 @@ function numberOfWaysToMakeChange(n, denoms) {
   return ways[n];
 }
 
-numberOfWaysToMakeChange(10, [1, 5, 10, 25]); //4
+// numberOfWaysToMakeChange(10, [1, 5, 10, 25]); //4
+
+/* --------------------------------------------------------------------- */
+
+//5.
+//time: O(n^2) only using 2 loops
+//space: O(n)
+function threeNumberSum(array, targetSum) {
+  let combinations = [];
+  //since its likely that time complexity is at least O(n^2),
+  //it doesn't hurt to sort to make it easier
+  array.sort((a, b) => a - b); //selection sort < 10 O(n^2), quick sort >= 10 O(n log n)
+  console.log(array);
+  for (let i = 0; i < array.length; i++) {
+    let left = i + 1;
+    let right = array.length - 1;
+    while (left < right) {
+      let calculation = array[i] + array[left] + array[right];
+      if (calculation < targetSum) {
+        left += 1;
+      } else if (calculation > targetSum) {
+        right -= 1;
+      } else if (calculation === targetSum) {
+        combinations.push([array[i], array[left], array[right]]);
+        left += 1;
+      }
+    }
+  }
+
+  console.log("final combinations: ", combinations);
+  return combinations;
+}
+
+threeNumberSum([12, 3, 1, 2, -6, 5, -8, 6], 0); //
