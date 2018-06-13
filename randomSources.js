@@ -1,3 +1,5 @@
+//time:
+//space:
 function sumSubArr(arr, size) {
   let queue = [];
   let currentCalc = 0;
@@ -25,3 +27,48 @@ function sumSubArr(arr, size) {
 console.log(sumSubArr([1, 2, 3, 4, 5], 2)); //last 2 numbers, so index 3
 console.log(sumSubArr([1, 2, 3, 4, 5], 3)); //last 3 numbers, so index 2
 console.log(sumSubArr([1, 2, 3, 4, 5], 1)); //last 1 numbers, so index 4
+
+//iterative
+//time: O(n)
+//space: O(1)
+// const reverseStr = s => {
+//   let reversed = [];
+//   for (let i = s.length - 1; i >= 0; i--) {
+//     reversed.push(s[i]);
+//   }
+//   return reversed.join("");
+// };
+
+// const reverseStr = s => {
+//   let reversed = s.split("");
+//   let left = 0;
+//   while (left < s.length - left) {
+//     swap(left, s.length - left, reversed);
+//     left += 1;
+//   }
+//   return reversed.join("");
+// };
+
+// recursive
+// time: O(n)
+// space: O(n)
+const helper = (arr, left) => {
+  if (left >= arr.length - left) return arr;
+  arr = swap(left, arr.length - left - 1, arr);
+  return helper(arr, left + 1);
+};
+
+const reverseStr = s => {
+  return console.log("helper", helper(s.split(""), 0).join(""));
+};
+
+console.log(reverseStr("booger"));
+console.log(reverseStr("boger"));
+
+function swap(i, j, arr) {
+  let front = arr[j];
+  let back = arr[i];
+  arr[i] = front;
+  arr[j] = back;
+  return arr;
+}
