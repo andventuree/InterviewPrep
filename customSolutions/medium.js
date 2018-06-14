@@ -256,6 +256,7 @@ function numberOfWaysToMakeChange(n, denoms) {
 
 //5.
 //time: O(n^2) only using 2 loops
+//uses sort b/c O(n^2) is already worst than O(n log n) so it doesn't hurt
 //space: O(n)
 function threeNumberSum(array, targetSum) {
   let combinations = [];
@@ -283,4 +284,44 @@ function threeNumberSum(array, targetSum) {
   return combinations;
 }
 
-threeNumberSum([12, 3, 1, 2, -6, 5, -8, 6], 0); //
+// threeNumberSum([12, 3, 1, 2, -6, 5, -8, 6], 0); //[ [ -8, 2, 6 ], [ -8, 3, 5 ], [ -6, 1, 5 ] ]
+
+/* --------------------------------------------------------------------- */
+
+// 6.
+//time: O(n * n!)
+//time complexity derived by n (1 for loop) * n! (decrementing n for variations)
+// n * n! + n * n! => 2 (n * n!) => n * n!
+//space: O(n * n1)
+function permutations(arr) {
+  let permutationsArr = [];
+  permutationsArrHelper(0, arr, permutationsArr);
+  console.log(permutationsArr);
+  return permutationsArr;
+}
+
+function permutationsArrHelper(i, arr, permutationsArr) {
+  if (i === arr.length - 1) {
+    return permutationsArr.push(arr.slice());
+  } else {
+    for (let j = i; j < arr.length; j++) {
+      //keep swapping the indexes arounds
+      swap(i, j, arr);
+      permutationsArrHelper(i + 1, arr, permutationsArr);
+      //have this here so once each permutation is done and call stack is cleared,
+      //this resets the position of array
+      swap(i, j, arr);
+    }
+  }
+}
+
+function swap(i, j, arr) {
+  let temp = arr[i];
+  arr[i] = arr[j];
+  arr[j] = temp;
+}
+
+// console.log(permutations(["a", "b", "c"]));
+permutations(["a", "b", "c"]);
+
+/* --------------------------------------------------------------------- */

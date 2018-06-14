@@ -136,6 +136,7 @@ function uniteUnique(arr) {
   let finalArr = arr;
   for (let i = 0; i < args.length; i++) {
     for (let j = 0; j < args[i].length; j++) {
+      // console.log(args[i][j], args[i]);
       if (!store[args[i][j]]) {
         //used a hashtable instead of indexOf
         store[args[i][j]] = true;
