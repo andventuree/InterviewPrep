@@ -161,23 +161,52 @@ console.log(insertDelimiter("boo boo      "));
 // 1.6 of 6th edition
 
 //copied
+//time: O(n) b/c the while loop only increments i, the same for loop
 function compressString(str) {
   if (!str) {
     return str;
   }
 
   let cStr = "";
-  for (let i = 0; i < str.length; ++i) {
+  for (let i = 0; i < str.length; i++) {
     let char = str[i],
-      start = i;
+      start = i; //keep track of when this letter was started
+    //only if next char isn't the end of string
+    //&& char is the same as next char
+    //then increment to next char
     while (i + 1 < str.length && char === str[i + 1]) {
       ++i;
     }
+    cStr += i - start + 1 + char;
+    console.log(i, start, char);
     // JS does not have a StringBuilder/StringBuffer style class for creating strings
     // string concatenation has been heavily optimised in JS implementations and
     // is faster than creating a string via an array then using a .join('') at the end
-    cStr += i - start + 1 + char;
   }
-
+  console.log(cStr);
   return cStr.length < str.length ? cStr : str;
 }
+
+compressString("aabbbbcccceeeddd");
+
+//start a for loop
+//keep track of when each different char has started,
+//incrememnt up the for loop
+//ONLY when we're not at the end of the string, and next char is the same
+//then concat the number and char together in the compressed string
+//then return the shorter
+
+//SKIPPED
+// 1.6 Given a an image represented by an N x N matrix, where each pixel of an image
+// is 4 bytes, rotate the picture by 90 degrees. Also try to do it in place.
+
+// 1.7 Write a method that given a M x N matrix, where there is a 0, the entire row and column is set to 0 as well.
+//time:
+//space:
+// function zeroCross(arr) {}
+
+a = 100 + 1.0 / 3 - 100;
+b = 1.0 / 3;
+console.log("a: ", a);
+console.log("b: ", b);
+console.log(a == b);
