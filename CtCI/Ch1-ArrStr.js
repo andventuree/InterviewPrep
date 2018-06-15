@@ -170,15 +170,15 @@ function compressString(str) {
   let cStr = "";
   for (let i = 0; i < str.length; i++) {
     let char = str[i],
-      start = i; //keep track of when this letter was started
+      startOfLetter = i; //keep track of when this letter was start
     //only if next char isn't the end of string
     //&& char is the same as next char
     //then increment to next char
     while (i + 1 < str.length && char === str[i + 1]) {
-      ++i;
+      i++;
     }
-    cStr += i - start + 1 + char;
-    console.log(i, start, char);
+    cStr += i - startOfLetter + 1 + char;
+    console.log(i, startOfLetter, char);
     // JS does not have a StringBuilder/StringBuffer style class for creating strings
     // string concatenation has been heavily optimised in JS implementations and
     // is faster than creating a string via an array then using a .join('') at the end

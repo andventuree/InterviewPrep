@@ -505,3 +505,19 @@ function swap(i, j, arr) {
 // console.log("bubbleSort", bubbleSort([9, 8, 2, 4, 1, 4, 5, 2, 1])); //[ 1, 1, 2, 2, 4, 4, 5, 8, 9 ]
 // console.log("insertionSort", insertionSort([9, 8, 2, 4, 1, 4, 5, 2, 1])); //[ 1, 1, 2, 2, 4, 4, 5, 8, 9 ]
 // console.log("selectionSort", selectionSort([9, 8, 2, 4, 1, 4, 5, 2, 1])); //[ 1, 1, 2, 2, 4, 4, 5, 8, 9 ]
+
+// function compressedStr(str) {
+//   if (!str) return str;
+
+//   let cStr = "";
+//   for (let i = 0; i < str.length; i++) {
+//     let char = str[i]; //hold onto the start of a char
+//     let startOfLetter = i; //holds onto index of the start of a char
+//     while (i + 1 < str.length - 1 && char === str[i + 1]) {
+//       i++;
+//     }
+//     cStr += i - startOfLetter + 1 + char; //number type + string will type coerce to a string
+//     //b/c while loop incremements up i, you want to take away the start of the i,
+//   }
+//   return cStr.length < str.length ? cStr : str;
+// }
