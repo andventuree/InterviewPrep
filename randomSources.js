@@ -72,3 +72,9 @@ function swap(i, j, arr) {
   arr[j] = back;
   return arr;
 }
+
+a = 100 + 1.0 / 3 - 100;
+b = 1.0 / 3;
+console.log("a: ", a); //a: 0.3333333333333286
+console.log("b: ", b); //b: 0.3333333333333333
+console.log(a == b); //false b/c of rounding

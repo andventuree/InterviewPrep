@@ -10,3 +10,67 @@ By the time Pointer 1 is done iterating through, Pointer 2 is likely at the midp
 Generally, its easier to deal with LL through recursion. So give that approach an attempt first.
 
 */
+
+// Linked list implementation
+class Node {
+  constructor(val) {
+    this.value = val;
+    this.previous = null;
+    this.next = null;
+  }
+}
+
+class LinkedList {
+  constructor() {
+    this.head = null;
+    this.tail = null;
+  }
+
+  addToHead(val) {
+    const formerHead = this.head;
+    const newNode = new Node(val);
+    this.head = newNode;
+    if (formerHead) {
+      this.head.next = formerHead;
+      formerHead.previous = this.head;
+    }
+    if (!this.tail) this.tail = this.head;
+  }
+
+  removeHead(val) {
+    const formerHead = this.head;
+    if (!formerHead) return;
+    if (formerHead.next) {
+      this.head = formerHead.next;
+      this.head.previous = null;
+    } else {
+      this.head = null;
+      this.tail = null;
+    }
+    return formerHead.value;
+  }
+
+  addToTail(val) {
+    const formerTail = this.tail;
+    const newNode = new Node(val);
+    this.tail = newNode;
+    if (formerTail) {
+      formerTail.next = this.tail;
+      this.tail.previous = formerTail;
+    }
+    if (!this.head) this.head = this.tail;
+  }
+
+  removeTail(val) {
+    const formerTail = this.tail;
+    if (!formerTail) return;
+    if (formerTail.previous) {
+      this.tail = formerTail.previous;
+      this.tail.next = null;
+    } else {
+      this.tail = null;
+      this.head = null;
+    }
+    return formerTail.value;
+  }
+}

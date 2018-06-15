@@ -204,9 +204,3 @@ compressString("aabbbbcccceeeddd");
 //time:
 //space:
 // function zeroCross(arr) {}
-
-a = 100 + 1.0 / 3 - 100;
-b = 1.0 / 3;
-console.log("a: ", a);
-console.log("b: ", b);
-console.log(a == b);
