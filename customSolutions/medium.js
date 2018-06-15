@@ -322,6 +322,34 @@ function swap(i, j, arr) {
 }
 
 // console.log(permutations(["a", "b", "c"]));
-permutations(["a", "b", "c"]);
+// permutations(["a", "b", "c"]);
 
 /* --------------------------------------------------------------------- */
+
+function smallestDifference(arrayOne, arrayTwo) {
+  arrayOne.sort((a, b) => a - b);
+  arrayTwo.sort((a, b) => a - b);
+  let i = 0;
+  let j = 0;
+  let smallestDiff = Math.abs(arrayOne[0] - arrayTwo[0]);
+  let pair = [];
+  while (i < arrayOne.length && j < arrayTwo.length) {
+    console.log(i, j);
+    let currentCalc = Math.abs(arrayOne[i] - arrayTwo[j]);
+    if (currentCalc < smallestDiff) {
+      smallestDiff = currentCalc;
+      pair = [arrayOne[i], arrayTwo[j]];
+    }
+    if (arrayOne[i] > arrayTwo[j]) {
+      j += 1;
+    } else if (arrayOne[i] < arrayTwo[j]) {
+      i += 1;
+    } else {
+      return [arrayOne[i], arrayTwo[j]];
+    }
+  }
+  console.log(pair);
+  return pair;
+}
+
+smallestDifference([1, 5, 10, 20, 28, 3], [26, 134, 135, 15, 17]);
