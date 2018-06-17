@@ -446,78 +446,285 @@
 
 //time: O(n^2)
 
-function bubbleSort(arr) {
-  let isSorted = false;
-  while (!isSorted) {
-    isSorted = true;
-    for (let i = 0; i < arr.length - 1; i++) {
-      //going forward, check if each pair is in order
-      if (arr[i] > arr[i + 1]) {
-        swap(i, i + 1, arr);
-        //if a pair is not in order, update the tracker to say not sorted
-        isSorted = false;
-      }
-    }
-  }
-  return arr;
-}
-
-//time: O(n^2) need to go through at least once then multiple passes to sort
-//space: O(1) not storing anyting, using same array
-function insertionSort(arr) {
-  for (let i = 1; i < arr.length; i++) {
-    for (let j = i; j > 0; j--) {
-      if (arr[j] < arr[j - 1]) swap(j - 1, j, arr);
-    }
-  }
-  return arr;
-}
-
-//time: O(n^2) need to go through array at least once then multiple passes to sort
-//space: O(1) not storing anything
-//selection sort seems just like insertion sort in the other direction
-function selectionSort(arr) {
-  // let start = Date.now() / 1000;
-  for (let i = 0; i < arr.length; i++) {
-    let smallestIdx = i;
-    for (let j = i + 1; j < arr.length; j++) {
-      if (arr[smallestIdx] > arr[j]) {
-        smallestIdx = j;
-      }
-    }
-    swap(i, smallestIdx, arr);
-    //having this here and not inside that if, doesn't save time
-    //its more about how you go about sorting it,
-    //Curious? call this function with over 400 arguments to see time duration
-  }
-  // let end = Date.now() / 1000;
-  // console.log("duration", end - start);
-  return arr;
-}
-
-function swap(i, j, arr) {
-  let larger = arr[i];
-  let smaller = arr[j];
-  arr[i] = smaller;
-  arr[j] = larger;
-}
-
-// console.log("bubbleSort", bubbleSort([9, 8, 2, 4, 1, 4, 5, 2, 1])); //[ 1, 1, 2, 2, 4, 4, 5, 8, 9 ]
-// console.log("insertionSort", insertionSort([9, 8, 2, 4, 1, 4, 5, 2, 1])); //[ 1, 1, 2, 2, 4, 4, 5, 8, 9 ]
-// console.log("selectionSort", selectionSort([9, 8, 2, 4, 1, 4, 5, 2, 1])); //[ 1, 1, 2, 2, 4, 4, 5, 8, 9 ]
-
-// function compressedStr(str) {
-//   if (!str) return str;
-
-//   let cStr = "";
-//   for (let i = 0; i < str.length; i++) {
-//     let char = str[i]; //hold onto the start of a char
-//     let startOfLetter = i; //holds onto index of the start of a char
-//     while (i + 1 < str.length - 1 && char === str[i + 1]) {
-//       i++;
+// function bubbleSort(arr) {
+//   let isSorted = false;
+//   while (!isSorted) {
+//     isSorted = true;
+//     for (let i = 0; i < arr.length - 1; i++) {
+//       //going forward, check if each pair is in order
+//       if (arr[i] > arr[i + 1]) {
+//         swap(i, i + 1, arr);
+//         //if a pair is not in order, update the tracker to say not sorted
+//         isSorted = false;
+//       }
 //     }
-//     cStr += i - startOfLetter + 1 + char; //number type + string will type coerce to a string
-//     //b/c while loop incremements up i, you want to take away the start of the i,
 //   }
-//   return cStr.length < str.length ? cStr : str;
+//   return arr;
 // }
+
+// //time: O(n^2) need to go through at least once then multiple passes to sort
+// //space: O(1) not storing anyting, using same array
+// function insertionSort(arr) {
+//   for (let i = 1; i < arr.length; i++) {
+//     for (let j = i; j > 0; j--) {
+//       if (arr[j] < arr[j - 1]) swap(j - 1, j, arr);
+//     }
+//   }
+//   return arr;
+// }
+
+// //time: O(n^2) need to go through array at least once then multiple passes to sort
+// //space: O(1) not storing anything
+// //selection sort seems just like insertion sort in the other direction
+// function selectionSort(arr) {
+//   // let start = Date.now() / 1000;
+//   for (let i = 0; i < arr.length; i++) {
+//     let smallestIdx = i;
+//     for (let j = i + 1; j < arr.length; j++) {
+//       if (arr[smallestIdx] > arr[j]) {
+//         smallestIdx = j;
+//       }
+//     }
+//     swap(i, smallestIdx, arr);
+//     //having this here and not inside that if, doesn't save time
+//     //its more about how you go about sorting it,
+//     //Curious? call this function with over 400 arguments to see time duration
+//   }
+//   // let end = Date.now() / 1000;
+//   // console.log("duration", end - start);
+//   return arr;
+// }
+
+// function swap(i, j, arr) {
+//   let larger = arr[i];
+//   let smaller = arr[j];
+//   arr[i] = smaller;
+//   arr[j] = larger;
+// }
+
+// // console.log("bubbleSort", bubbleSort([9, 8, 2, 4, 1, 4, 5, 2, 1])); //[ 1, 1, 2, 2, 4, 4, 5, 8, 9 ]
+// // console.log("insertionSort", insertionSort([9, 8, 2, 4, 1, 4, 5, 2, 1])); //[ 1, 1, 2, 2, 4, 4, 5, 8, 9 ]
+// // console.log("selectionSort", selectionSort([9, 8, 2, 4, 1, 4, 5, 2, 1])); //[ 1, 1, 2, 2, 4, 4, 5, 8, 9 ]
+
+// // function compressedStr(str) {
+// //   if (!str) return str;
+
+// //   let cStr = "";
+// //   for (let i = 0; i < str.length; i++) {
+// //     let char = str[i]; //hold onto the start of a char
+// //     let startOfLetter = i; //holds onto index of the start of a char
+// //     while (i + 1 < str.length - 1 && char === str[i + 1]) {
+// //       i++;
+// //     }
+// //     cStr += i - startOfLetter + 1 + char; //number type + string will type coerce to a string
+// //     //b/c while loop incremements up i, you want to take away the start of the i,
+// //   }
+// //   return cStr.length < str.length ? cStr : str;
+// // }
+
+class Node {
+  constructor(val) {
+    this.value = val;
+    this.next = null;
+    this.previous = null;
+  }
+}
+
+// class Queue {
+//   constructor() {
+//     this.head = null;
+//     this.tail = null;
+//   }
+
+//   add(val) {
+//     let formerTail = this.tail; //hold onto reference
+//     let newNode = new Node(val); //create a new node
+//     this.tail = newNode; //assign the node to be the new tail
+//     if (formerTail) {
+//       //if there was a previous tail
+//       this.tail.previous = formerTail; //connect the former tail with the current tail
+//       formerTail.next = this.tail;
+//     }
+//     if (!this.head) this.head = this.tail; //if there was only 1 node, then the head is also the tail
+//     return this;
+//   }
+
+//   remove() {
+//     let removed = this.head; //hold onto reference
+//     if (!removed) return; //if there were no nodes, return nothing
+//     if (removed.next) {
+//       //if there was more than one node, rewire the queue
+//       this.head = removed.next;
+//       this.head.previous = null; //next of the current head shouldnt exist anymore cause it was removed
+//     } else {
+//       this.head = null; //no values left, then queue is just null
+//       this.tail = null;
+//     }
+//     return removed.value; //return removed value;
+//   }
+
+//   contains(val) {
+//     return queueHelper(val, this.head);
+//   }
+// }
+
+// function queueHelper(val, node) {
+//   if (!node) return false;
+//   else if (node.value === val) return true;
+//   else return queueHelper(val, node.next);
+// }
+
+// let testQueue = new Queue();
+// testQueue
+//   .add(1)
+//   .add(2)
+//   .add(3)
+//   .add(4)
+//   .add(5);
+
+// console.log(testQueue.contains(4));
+// console.log(testQueue.contains(6));
+// console.log(testQueue.remove());
+// console.log(testQueue.remove());
+
+class BSTNode {
+  constructor(val) {
+    this.value = val;
+    this.left = null;
+    this.right = null;
+  }
+}
+
+class BST {
+  constructor(val) {
+    this.value = val;
+    this.left = null;
+    this.right = null;
+    this.size = 1;
+  }
+
+  // time: O(n) | O(n) b/c of recursion
+  // insert(val) {
+  //   const direction = this.value > val ? "left" : "right";
+  //   if (this[direction]) this[direction].insert(val);
+  //   else this[direction] = new BSTNode(val);
+  // }
+
+  insert(val) {
+    let currentNode = this;
+    while (currentNode) {
+      if (this.value >= val) {
+        if (currentNode.left) {
+          currentNode = currentNode.left;
+        } else {
+          currentNode.left = new BSTNode(val);
+          break;
+        }
+      } else if (this.value < val) {
+        if (currentNode.right) {
+          currentNode = currentNode.right;
+        } else {
+          currentNode = new BSTNode(val);
+          break;
+        }
+      }
+    }
+  }
+
+  contains(val) {
+    let currentNode = this;
+    while (currentNode) {
+      if (currentNode.value === val) {
+        return true;
+      } else if (currentNode.value > val) {
+        currentNode = currentNode.left;
+      } else {
+        currentNode = currentNode.right;
+      }
+    }
+    return false;
+  }
+
+  getMinValue() {
+    // let min = this.value;
+    // let currentNode = this;
+    // while (currentNode.left) {
+    //   if (min > currentNode.left.value) {
+    //     min = currentNode.left.value;
+    //     currentNode = currentNode.left;
+    //   } else if (min === currentNode.left.value) {
+    //     break;
+    //   }
+    // }
+    // return min;
+    let currentNode = this;
+    while (currentNode.left) {
+      currentNode = currentNode.left;
+    }
+    return currentNode.value;
+  }
+}
+
+function inOrderTraversal(tree, arr) {
+  if (tree) {
+    inOrderTraversal(tree.left, arr);
+    arr.push(tree.value);
+    inOrderTraversal(tree.right, arr);
+  }
+  return arr;
+}
+
+function preOrderTraversal(tree, arr) {
+  if (tree) {
+    arr.push(tree.value);
+    preOrderTraversal(tree.left, arr);
+    preOrderTraversal(tree.right, arr);
+  }
+  return arr;
+}
+
+function postOrderTraversal(tree, arr) {
+  if (tree) {
+    postOrderTraversal(tree.left, arr);
+    postOrderTraversal(tree.right, arr);
+    arr.push(tree.value);
+  }
+}
+
+function findClosestValue(tree, target) {
+  return findClosestHelper(tree, target, Infinity);
+}
+
+// function findClosestHelper(tree, target, closest) {
+//   if (!tree) return closest;
+//   while (tree) {
+//     if (Math.abs(target - closest) > Math.abs(target - tree.value)) {
+//       closest = tree.value;
+//     }
+
+//     if (target > tree.value) {
+//       return findClosestHelper(tree.right, target, closest);
+//     } else if (target < tree.value) {
+//       return findClosestHelper(tree.left, target, closest);
+//     } else break;
+//   }
+//   return closest;
+// }
+
+function findClosestIterative(tree, target, closest) {
+  //notice the name
+  let currentNode = tree;
+  if (!tree) return closest;
+  while (currentNode) {
+    if (Math.abs(target - closest) > Math.abs(target - tree.value)) {
+      closest = tree.value;
+    }
+
+    if (target > tree.value) {
+      currentNode = tree.right;
+    } else if (target < tree.value) {
+      currentNode = tree.left;
+    } else break;
+  }
+  return closest;
+}
