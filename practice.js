@@ -587,14 +587,6 @@ class Node {
 // console.log(testQueue.remove());
 // console.log(testQueue.remove());
 
-class BSTNode {
-  constructor(val) {
-    this.value = val;
-    this.left = null;
-    this.right = null;
-  }
-}
-
 class BST {
   constructor(val) {
     this.value = val;
@@ -613,22 +605,24 @@ class BST {
   insert(val) {
     let currentNode = this;
     while (currentNode) {
-      if (this.value >= val) {
+      if (currentNode.value >= val) {
         if (currentNode.left) {
           currentNode = currentNode.left;
         } else {
-          currentNode.left = new BSTNode(val);
+          currentNode.left = new BST(val);
           break;
         }
-      } else if (this.value < val) {
+      } else {
+        // if (currentNode.value < val) {
         if (currentNode.right) {
           currentNode = currentNode.right;
         } else {
-          currentNode = new BSTNode(val);
+          currentNode.right = new BST(val);
           break;
         }
       }
     }
+    return this;
   }
 
   contains(val) {
@@ -689,7 +683,21 @@ function postOrderTraversal(tree, arr) {
     postOrderTraversal(tree.right, arr);
     arr.push(tree.value);
   }
+  return arr;
 }
+
+const testBST = new BST(10)
+  .insert(5)
+  .insert(6)
+  .insert(2)
+  .insert(1)
+  .insert(15)
+  .insert(22);
+// console.log(testBST);
+//Order of traversal really just dictates where the root node goes
+console.log(inOrderTraversal(testBST, []));
+console.log(preOrderTraversal(testBST, []));
+console.log(postOrderTraversal(testBST, []));
 
 function findClosestValue(tree, target) {
   return findClosestHelper(tree, target, Infinity);
@@ -727,4 +735,19 @@ function findClosestIterative(tree, target, closest) {
     } else break;
   }
   return closest;
+}
+
+function selectionSort(arr) {
+  let currentIdx = 0;
+  while (currentIdx < arr.length - 1) {
+    let smallestIdx = currentIdx;
+    for (let i = currentIdx + 1; i < arr.length; i++) {
+      if (arr[smallestIdx] > arr[i]) {
+        smallestIdx = i;
+      }
+    }
+    swap(currentIdx, smallestIdx, arr);
+    currentIdx += 1;
+  }
+  return arr;
 }
