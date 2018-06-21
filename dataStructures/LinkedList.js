@@ -168,6 +168,26 @@ class LinkedList {
   print() {
     console.log("Doubly linked list: ", this);
   }
+
+  search(comparator) {
+    let currentNode = this.head;
+
+    //edge case: if given a string instead of a callback
+    if (typeof comparator === "string") {
+      const comparatorString = comparator;
+      comparator = function(elementValue) {
+        return comparatorString === elementValue;
+      };
+    }
+
+    //if given a callback, go straight into finding node
+    while (currentNode !== null) {
+      if (comparator(currentNode.value)) return currentNode.value;
+      currentNode = currentNode.next;
+    }
+
+    return null;
+  }
 }
 
 let list = new LinkedList();
