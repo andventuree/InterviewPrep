@@ -90,25 +90,14 @@ class MostTraded {
     return this;
   }
 
-  //time: O(n^2)
+  //time: O(n^2) -> improved by native sort O(n log n)
+  //space: O(n)
   printMostTraded(n) {
     //how to output all values of array
     let sorted = [];
     for (let key in this.tradeLogs) {
       sorted.push([key, this.tradeLogs[key]]);
     }
-
-    //how to sort nested arrays
-    //try a selection sort
-    // for (let currentIdx = 0; currentIdx < sorted.length; currentIdx++) {
-    //   let largestIdx = currentIdx;
-    //   for (let i = currentIdx + 1; i < sorted.length; i++) {
-    //     if (sorted[largestIdx][1] > sorted[currentIdx][1]) {
-    //       largestIdx = i;
-    //     }
-    //   }
-    //   swap(currentIdx, largestIdx, sorted);
-    // }
 
     //O(n log n) - quick sort if >10 elements
     sorted.sort((a, b) => b[1] - a[1]);

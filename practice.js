@@ -898,63 +898,85 @@ class Node {
 //   }
 // }
 
-class HashNode {
-  constructor(key, val) {
-    this.key = key;
-    this.value = val;
+// class HashNode {
+//   constructor(key, val) {
+//     this.key = key;
+//     this.value = val;
+//   }
+// }
+
+// class HashTable {
+//   constructor(size) {
+//     this.numBuckets = size;
+//     this.buckets = new Array(size);
+//   }
+
+//   set(key, val) {
+//     let hash = this.hash(key);
+//     this.buckets[hash] = this.buckets[hash] || [];
+//     this.buckets[hash].push(new HashNode(key, val));
+//   }
+
+//   get(key) {
+//     let hash = this.hash(key);
+//     let arr = this.buckets[hash];
+//     if (!arr) return "Key does not exist";
+//     for (let i = 0; i < arr.length; i++) {
+//       if (arr[i].key === key) return arr[i].value;
+//     }
+//     return "Key does not exist";
+//   }
+
+//   hasKey(key) {
+//     let hash = this.hash(key);
+//     let arr = this.buckets[hash];
+//     if (!arr) return false;
+//     for (let i = 0; i < arr.length; i++) {
+//       if (arr[i].key === key) return true;
+//     }
+//     return false;
+//   }
+
+//   hash(str) {
+//     let sum = 0;
+//     for (let i = 0; i < str.length; i++) {
+//       sum += str.charCodeAt(i);
+//     }
+//     return sum % this.numBuckets;
+//   }
+// }
+
+// let testHashTable = new HashTable(10);
+// testHashTable.set("booger", "i picked first");
+// testHashTable.set("ham", "not a fan of");
+// testHashTable.set("xyz", "abc");
+// console.log(
+//   testHashTable
+// ); /* HashTable {
+//   buckets: [ [ [Object] ], , , [ [Object] ], , , , , [ [Object] ],  ],
+//   numBuckets: 10 } */
+// console.log(testHashTable.get("ham")); //not a fan
+// console.log(testHashTable.hasKey("ham")); //true
+// console.log(testHashTable.hasKey("cheese")); //false
+
+function bubbleSort(arr) {
+  let isSorted = false;
+  while (!isSorted) {
+    isSorted = true;
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i] > arr[i - 1]) {
+        swap(i, i - 1, arr);
+        isSorted = false;
+      }
+    }
   }
+  return arr;
 }
 
-class HashTable {
-  constructor(size) {
-    this.numBuckets = size;
-    this.buckets = new Array(size);
-  }
-
-  set(key, val) {
-    let hash = this.hash(key);
-    this.buckets[hash] = this.buckets[hash] || [];
-    this.buckets[hash].push(new HashNode(key, val));
-  }
-
-  get(key) {
-    let hash = this.hash(key);
-    let arr = this.buckets[hash];
-    if (!arr) return "Key does not exist";
-    for (let i = 0; i < arr.length; i++) {
-      if (arr[i].key === key) return arr[i].value;
-    }
-    return "Key does not exist";
-  }
-
-  hasKey(key) {
-    let hash = this.hash(key);
-    let arr = this.buckets[hash];
-    if (!arr) return false;
-    for (let i = 0; i < arr.length; i++) {
-      if (arr[i].key === key) return true;
-    }
-    return false;
-  }
-
-  hash(str) {
-    let sum = 0;
-    for (let i = 0; i < str.length; i++) {
-      sum += str.charCodeAt(i);
-    }
-    return sum % this.numBuckets;
-  }
+function swap(i, j, arr) {
+  let temp = arr[i];
+  arr[i] = arr[j];
+  arr[j] = temp;
 }
 
-let testHashTable = new HashTable(10);
-testHashTable.set("booger", "i picked first");
-testHashTable.set("ham", "not a fan of");
-testHashTable.set("xyz", "abc");
-console.log(
-  testHashTable
-); /* HashTable {
-  buckets: [ [ [Object] ], , , [ [Object] ], , , , , [ [Object] ],  ],
-  numBuckets: 10 } */
-console.log(testHashTable.get("ham")); //not a fan
-console.log(testHashTable.hasKey("ham")); //true
-console.log(testHashTable.hasKey("cheese")); //false
+console.log(bubbleSort([9, 3, 26, 2, 16, 2]));
