@@ -35,3 +35,7 @@ function swap(index1, index2, array){
 
 As arrays are passed by reference, calling this helper in your code will mutate the given array and give you the desired effect.
 ES6 destructuring array isn't quite the same.
+
+4. How to compare objects
+
+5. How to print out all properties of an obj

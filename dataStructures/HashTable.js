@@ -3,30 +3,42 @@
 
 class HashNode {
   constructor(key, val) {
-    this.value = val;
     this.key = key;
+    this.value = val;
   }
 }
 
 class HashTable {
-  constructor() {
-    this.numBuckets = 35;
-    this.buckets = new Array(35);
+  constructor(num) {
+    this.buckets = new Array(num);
+    this.numBuckets = num;
   }
-  set(key, val) {
-    if (typeof key !== "string") throw new TypeError("Keys must be strings");
-    const hash = this.hash(key);
-    this.buckets[hash] = this.buckets[hash] || new LinkedList();
-    this.buckets[hash].addToHead(new HashNode(key, val));
+
+  set(key, value) {
+    let hash = this.hash(key);
+    this.buckets[hash] = this.buckets[hash] || [];
+    this.buckets[hash].push(new HashNode(key, value));
   }
+
   get(key) {
-    const hash = this.hash(key);
-    return this.buckets[hash].search(node => node.key === key).value;
+    let hash = this.hash(key);
+    let arr = this.buckets[hash];
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i].key === key) return arr[i].value;
+    }
+    return false;
   }
+
   hasKey(key) {
-    const hash = this.hash(key);
-    return Boolean(this.buckets[hash].search(node => node.key === key));
+    let hash = this.hash(key);
+    let arr = this.buckets[hash];
+    if (!arr) return false;
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i].key === key) return true;
+    }
+    return false;
   }
+
   hash(str) {
     let sum = 0;
     for (let i = 0; i < str.length; i++) {
@@ -35,3 +47,16 @@ class HashTable {
     return sum % this.numBuckets;
   }
 }
+
+let testHashTable = new HashTable(10);
+testHashTable.set("booger", "i picked first");
+testHashTable.set("ham", "not a fan of");
+testHashTable.set("xyz", "abc");
+console.log(
+  testHashTable
+); /* HashTable {
+  buckets: [ [ [Object] ], , , [ [Object] ], , , , , [ [Object] ],  ],
+  numBuckets: 10 } */
+console.log(testHashTable.get("ham")); //not a fan
+console.log(testHashTable.hasKey("ham")); //true
+console.log(testHashTable.hasKey("cheese")); //false

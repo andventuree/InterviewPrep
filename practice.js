@@ -801,53 +801,100 @@ class Node {
 //   }
 // }
 
+// class HashNode {
+//   constructor(key, value) {
+//     this.value = value;
+//     this.key = key;
+//   }
+// }
+
+// class HashTable {
+//   constructor(num) {
+//     this.numBuckets = num;
+//     this.buckets = new Array(num); //make placeholder array
+//   }
+
+//   set(key, val) {
+//     const hash = this.hash(key);
+//     this.buckets[hash] = this.buckets[hash] || []; //or [] //new LinkedList(hash)
+// this.buckets[hash].unshift(new HashNode(key, val));
+//   }
+
+//   get(key) {
+//     let hash = this.hash(key);
+//     let searchArr = this.buckets[hash];
+//     console.log("searchArr: ", searchArr);
+
+//     for (let i = 0; i < searchArr.length; i++) {
+//       if (searchArr[i].key === key) return searchArr[i].value;
+//     }
+//     return "Does not exist in Hash Table";
+//   }
+
+//   hasKey(key) {
+//     let hash = this.hash(key);
+//     let searchArr = this.buckets[hash];
+//     if (!searchArr) return false;
+//     for (let i = 0; i < searchArr.length; i++) {
+//       if (searchArr[i].key === key) return true;
+//     }
+//     return false;
+//   }
+
+//   hash(str) {
+//     let charSum = 0; //create a tracker
+//     for (let i = 0; i < str.length; i++) {
+//       charSum += str.charCodeAt(i); //sum up all the codes
+//     }
+//     // console.log(str, charSum);
+//     return charSum % this.numBuckets; //modulo the tracker for the hash
+//   }
+// }
+
 class HashNode {
-  constructor(key, value) {
-    this.value = value;
+  constructor(key, val) {
     this.key = key;
+    this.value = val;
   }
 }
 
 class HashTable {
   constructor(num) {
+    this.buckets = new Array(num);
     this.numBuckets = num;
-    this.buckets = new Array(num); //make placeholder array
   }
 
-  set(key, val) {
-    const hash = this.hash(key);
-    this.buckets[hash] = this.buckets[hash] || []; //or [] //new LinkedList(hash)
-    this.buckets[hash].unshift(new HashNode(key, val));
+  set(key, value) {
+    let hash = this.hash(key);
+    this.buckets[hash] = this.buckets[hash] || [];
+    this.buckets[hash].push(new HashNode(key, value));
   }
 
   get(key) {
     let hash = this.hash(key);
-    let searchArr = this.buckets[hash];
-    console.log("searchArr: ", searchArr);
-
-    for (let i = 0; i < searchArr.length; i++) {
-      if (searchArr[i].key === key) return searchArr[i].value;
+    let arr = this.buckets[hash];
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i].key === key) return arr[i].value;
     }
-    return "Does not exist in Hash Table";
+    return false;
   }
 
   hasKey(key) {
     let hash = this.hash(key);
-    let searchArr = this.buckets[hash];
-    if (!searchArr) return false;
-    for (let i = 0; i < searchArr.length; i++) {
-      if (searchArr[i].key === key) return true;
+    let arr = this.buckets[hash];
+    if (!arr) return false;
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i].key === key) return true;
     }
     return false;
   }
 
   hash(str) {
-    let charSum = 0; //create a tracker
+    let sum = 0;
     for (let i = 0; i < str.length; i++) {
-      charSum += str.charCodeAt(i); //sum up all the codes
+      sum += str.charCodeAt(i);
     }
-    // console.log(str, charSum);
-    return charSum % this.numBuckets; //modulo the tracker for the hash
+    return sum % this.numBuckets;
   }
 }
 
@@ -855,7 +902,11 @@ let testHashTable = new HashTable(10);
 testHashTable.set("booger", "i picked first");
 testHashTable.set("ham", "not a fan of");
 testHashTable.set("xyz", "abc");
-console.log(testHashTable);
-console.log(testHashTable.get("ham"));
-// console.log(testHashTable.hasKey("ham"));
-// console.log(testHashTable.hasKey("cheese"));
+console.log(
+  testHashTable
+); /* HashTable {
+  buckets: [ [ [Object] ], , , [ [Object] ], , , , , [ [Object] ],  ],
+  numBuckets: 10 } */
+console.log(testHashTable.get("ham")); //not a fan
+console.log(testHashTable.hasKey("ham")); //true
+console.log(testHashTable.hasKey("cheese")); //false
