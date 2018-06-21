@@ -14,7 +14,7 @@ function findClosestHelper(tree, target, closestValue){ /* some operation happen
 ```
 
 2. String concatenation
-It may be tempting to use `str += letter` when asked to create a new string. But as an JS expert, you should know the inner workings of concatentation is an O(n) operation. This can add unnecessary complexity to your algorithm. Rather, create an array to store your characters and the desired order then join them at the end.
+It may be tempting to use `str += letter` when asked to create a new string. But as an JS expert, you should know the inner workings of concatentation is an O(n) operation. This can add unnecessary complexity to your algorithm. Rather, create an array (aka string buffer) to store your characters and the desired order then join them at the end.
 
 ```
 let newLetters = [];
@@ -36,6 +36,3 @@ function swap(index1, index2, array){
 As arrays are passed by reference, calling this helper in your code will mutate the given array and give you the desired effect.
 ES6 destructuring array isn't quite the same.
 
-4. How to compare objects
-
-5. How to print out all properties of an obj

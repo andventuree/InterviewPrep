@@ -851,6 +851,53 @@ class Node {
 //   }
 // }
 
+// class HashNode {
+//   constructor(key, val) {
+//     this.key = key;
+//     this.value = val;
+//   }
+// }
+
+// class HashTable {
+//   constructor(num) {
+//     this.buckets = new Array(num);
+//     this.numBuckets = num;
+//   }
+
+//   set(key, value) {
+//     let hash = this.hash(key);
+//     this.buckets[hash] = this.buckets[hash] || [];
+//     this.buckets[hash].push(new HashNode(key, value));
+//   }
+
+//   get(key) {
+//     let hash = this.hash(key);
+//     let arr = this.buckets[hash];
+//     for (let i = 0; i < arr.length; i++) {
+//       if (arr[i].key === key) return arr[i].value;
+//     }
+//     return false;
+//   }
+
+//   hasKey(key) {
+//     let hash = this.hash(key);
+//     let arr = this.buckets[hash];
+//     if (!arr) return false;
+//     for (let i = 0; i < arr.length; i++) {
+//       if (arr[i].key === key) return true;
+//     }
+//     return false;
+//   }
+
+//   hash(str) {
+//     let sum = 0;
+//     for (let i = 0; i < str.length; i++) {
+//       sum += str.charCodeAt(i);
+//     }
+//     return sum % this.numBuckets;
+//   }
+// }
+
 class HashNode {
   constructor(key, val) {
     this.key = key;
@@ -859,24 +906,25 @@ class HashNode {
 }
 
 class HashTable {
-  constructor(num) {
-    this.buckets = new Array(num);
-    this.numBuckets = num;
+  constructor(size) {
+    this.numBuckets = size;
+    this.buckets = new Array(size);
   }
 
-  set(key, value) {
+  set(key, val) {
     let hash = this.hash(key);
     this.buckets[hash] = this.buckets[hash] || [];
-    this.buckets[hash].push(new HashNode(key, value));
+    this.buckets[hash].push(new HashNode(key, val));
   }
 
   get(key) {
     let hash = this.hash(key);
     let arr = this.buckets[hash];
+    if (!arr) return "Key does not exist";
     for (let i = 0; i < arr.length; i++) {
       if (arr[i].key === key) return arr[i].value;
     }
-    return false;
+    return "Key does not exist";
   }
 
   hasKey(key) {
