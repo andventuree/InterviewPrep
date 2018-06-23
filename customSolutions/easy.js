@@ -27,26 +27,42 @@ function sumTwoNums(arr, desiredSum) {
 //1b. Using hash table
 //time: O(n) -> goes thru array once and stores all values
 //space: O(n) -> will have differences for every value
+// function sumTwoNums2(arr, desiredSum) {
+//   let store = {}; //use as a hash table
+//   for (let i = 0; i < arr.length; i++) {
+//     console.log("current store", store);
+//     let difference = desiredSum - arr[i];
+//     if (store[difference]) {
+//       return [difference, arr[i]].sort((a, b) => {
+//         return a - b;
+//       });
+//     } else {
+//       store[arr[i]] = true;
+//     }
+//   }
+//   return [];
+// }
+
 function sumTwoNums2(arr, desiredSum) {
-  let store = {}; //use as a hash table
+  let store = {};
   for (let i = 0; i < arr.length; i++) {
-    console.log("current store", store);
-    let difference = desiredSum - arr[i];
-    if (store[difference]) {
-      return [difference, arr[i]].sort((a, b) => {
-        return a - b;
-      });
-    } else {
-      store[arr[i]] = true;
+    let diff = desiredSum - arr[i];
+    if (!store[diff]) store[arr[i]] = true;
+    else {
+      return [arr[i], diff];
     }
   }
   return [];
 }
 
 // sumTwoNums2([1, 2, 3, 4, 5], 8); //[3,5]
+console.log(
+  "sumTwoNums2([1, 2, 3, 4, 5], 8): ",
+  sumTwoNums2([1, 2, 3, 4, 5], 8)
+);
 
 //1c. Using better left and right pointers
-//time: O(n) -> worst case is going through entire array
+//time: O(n log n) -> b/c of sorting
 //space: O(1)
 function sumTwoNums3(arr, desiredSum) {
   arr.sort((a, b) => {

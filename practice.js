@@ -522,13 +522,13 @@
 // //   return cStr.length < str.length ? cStr : str;
 // // }
 
-class Node {
-  constructor(val) {
-    this.value = val;
-    this.next = null;
-    this.previous = null;
-  }
-}
+// class Node {
+//   constructor(val) {
+//     this.value = val;
+//     this.next = null;
+//     this.previous = null;
+//   }
+// }
 
 // class Queue {
 //   constructor() {
@@ -959,17 +959,59 @@ class Node {
 // console.log(testHashTable.hasKey("ham")); //true
 // console.log(testHashTable.hasKey("cheese")); //false
 
-function bubbleSort(arr) {
-  let isSorted = false;
-  while (!isSorted) {
-    isSorted = true;
-    for (let i = 0; i < arr.length; i++) {
-      if (arr[i] > arr[i - 1]) {
-        swap(i, i - 1, arr);
-        isSorted = false;
-      }
+// function bubbleSort(arr) {
+//   let isSorted = false;
+//   while (!isSorted) {
+//     isSorted = true;
+//     for (let i = 0; i < arr.length; i++) {
+//       if (arr[i] > arr[i - 1]) {
+//         swap(i, i - 1, arr);
+//         isSorted = false;
+//       }
+//     }
+//   }
+//   return arr;
+// }
+
+// function swap(i, j, arr) {
+//   let temp = arr[i];
+//   arr[i] = arr[j];
+//   arr[j] = temp;
+// }
+
+// console.log(bubbleSort([9, 3, 26, 2, 16, 2]));
+
+// function highestScore(arr) {
+//   let maxStudent = null;
+//   let maxAvg = 0;
+//   let records = {};
+//   arr.forEach(student => {
+//     let name = student[0];
+//     let score = Number(student[1]);
+//     if (!records[name]) {
+//       records[name] = { n: 1, score };
+//     } else {
+//       let prevTotal = records[name].score * records[names].n;
+//       records[name].n += 1;
+//       records[name].score = (prevTotal + score) / records[name].n;
+//     }
+//     if (records[name].score > maxAvg && records[name].n > 1) {
+//       maxAvg = records[name].score;
+//       maxStudent = name;
+//     }
+//   });
+//   return maxStudent, maxAvg;
+// }
+
+function upFrontZeros(arr) {
+  let pointer = 0;
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] === 0) {
+      swap(i, pointer, arr);
+      pointer++;
     }
   }
+  console.log(arr);
   return arr;
 }
 
@@ -979,4 +1021,4 @@ function swap(i, j, arr) {
   arr[j] = temp;
 }
 
-console.log(bubbleSort([9, 3, 26, 2, 16, 2]));
+upFrontZeros([1, 2, 32, 42, 42, 5, 0, 0, 0, 0]);
