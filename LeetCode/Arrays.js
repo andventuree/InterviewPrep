@@ -78,12 +78,43 @@ var rotate = function(nums, k) {
 
 // rotate([1, 2, 3, 4, 5, 6, 7], 3); // [5,6,7,1,2,3,4]
 
+// https://leetcode.com/explore/interview/card/top-interview-questions-easy/92/array/564/
+//time: O(n)
+//space: O(1)
+var maxProfit = function(prices) {
+  let profit = 0;
+  for (let i = 0; i < prices.length; i++) {
+    if (prices[i] > prices[i - 1]) {
+      //this problem doesnt mean you have to buy a stock the day before you sell.
+      //simply, you add up hypothetical profits
+      profit += prices[i] - prices[i - 1];
+    }
+  }
+  // return profit;
+  console.log("profit: ", profit);
+};
+
+// maxProfit([7, 1, 5, 3, 6, 4]); //7
+// maxProfit([1, 2, 3, 4, 5]); //4
+// maxProfit([7, 6, 4, 3, 1]); //0
+
 // https://leetcode.com/explore/interview/card/top-interview-questions-easy/92/array/578/
 var containsDuplicate = function(nums) {
   return new Set(nums);
 };
 
-console.log(
-  "[1, 2, 3, 4, 5, 5, 6, 6]",
-  containsDuplicate([1, 2, 3, 4, 5, 5, 6, 6])
-);
+// console.log(
+//   "[1, 2, 3, 4, 5, 5, 6, 6]",
+//   containsDuplicate([1, 2, 3, 4, 5, 5, 6, 6])
+// );
+
+// https://leetcode.com/explore/interview/card/top-interview-questions-easy/92/array/578/
+
+var containsDuplicate = function(nums) {
+  let tracker = {};
+  for (let i = 0; i < nums.length; i++) {
+    if (tracker[nums[i]]) return true;
+    else tracker[nums[i]] = true;
+  }
+  return false;
+};

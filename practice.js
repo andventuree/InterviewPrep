@@ -1003,22 +1003,187 @@
 //   return maxStudent, maxAvg;
 // }
 
-function upFrontZeros(arr) {
-  let pointer = 0;
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i] === 0) {
-      swap(i, pointer, arr);
-      pointer++;
+// function upFrontZeros(arr) {
+//   let pointer = 0;
+//   for (let i = 0; i < arr.length; i++) {
+//     if (arr[i] === 0) {
+//       swap(i, pointer, arr);
+//       pointer++;
+//     }
+//   }
+//   console.log(arr);
+//   return arr;
+// }
+
+// function swap(i, j, arr) {
+//   let temp = arr[i];
+//   arr[i] = arr[j];
+//   arr[j] = temp;
+// }
+
+// upFrontZeros([1, 2, 32, 42, 42, 5, 0, 0, 0, 0]);
+
+// class HashNode {
+//   constructor(key, val) {
+//     this.value = val;
+//     this.key = key;
+//   }
+// }
+
+// class HashTable {
+//   constructor(num) {
+//     this.numBUckets = num;
+//     this.buckets = new Array(num);
+//   }
+
+//   set(key, val) {
+//     let hash = this.hash(key);
+//     this.buckets[hash] = this.buckets[hash] || [];
+//     this.buckets[hash].push(new HashNode(key, val));
+//     return this;
+//   }
+
+//   get(key) {
+//     let hash = this.hash(key);
+//     let arr = this.buckets[hash];
+//     for (let i = 0; i < arr.length; i++) {
+//       if (arr[i].key === key) {
+//         return arr[i].value;
+//       }
+//     }
+//     return false;
+//   }
+
+//   hasKey(key) {
+//     let hash = this.hash(key);
+//     let arr = this.buckets[hash];
+//     for (let i = 0; i < arr.length; i++) {
+//       if (arr[i].key === key) return true;
+//     }
+//     return false;
+//   }
+
+//   hash(str) {
+//     let sum = 0;
+//     for (let i = 0; i < str.length; i++) {
+//       sum += str.charCodeAt(i);
+//     }
+//     return sum % this.numBuckets;
+//   }
+// }
+
+// let testHash = new HashTable(5);
+// console.log(
+//   testHash.set("booger", "ham"),
+//   testHash.get("booger"),
+//   testHash.hasKey("booger")
+// );
+
+function validBST(tree) {
+  validHelper(tree, -Infinity, Infinity);
+}
+
+function validHelper(tree, min, max) {
+  if (tree.value <= min || tree.value > max) return false;
+  let validLeft = validHelper(tree.left, min, tree.value);
+  return validLeft && validHelper(tree.right, tree.value, max);
+}
+
+class BST {
+  constructor(val) {
+    this.value = val;
+    this.left = null;
+    this.right = null;
+  }
+
+  insert(val) {
+    let currentNode = this;
+    while (currentNode) {
+      if (val > currentNode.value) {
+        if (currentNode.right) {
+          currentNode = currentNode.right;
+        } else {
+          currentNode.right = new BST(val);
+        }
+      } else {
+        if (currentNode.left) {
+          currentNode = currentNode.left;
+        } else {
+          currentNode.left = new BST(val);
+        }
+      }
+    }
+    return this;
+  }
+
+  contains(val) {
+    let currentNode = this;
+    while (currentNode) {
+      if (currentNode.value === val) {
+        return true;
+      } else if (val > currentNode.value) {
+        currentNode = currentNode.right;
+      } else if (val < currentNode.value) {
+        currentNode = currentNode.left;
+      }
+    }
+    return false;
+  }
+
+  getMin(){
+    let currentNode = this;
+    let min = currentNode.value;
+    while(currentNode){
+      if (currentNode.value < min){
+        min = currentNode.value;
+      } else {
+        currentNode = currentNode.left
+      }
+    }
+    return min;
+  }
+
+}
+
+function findClosest(tree, target, closest){
+  let currentNode = this;
+  while(currentNode){
+    if (Math.abs(target-currentNode.value) < Math.abs(target - closest)){
+      closest = currentNode.value;
+    }
+    if (target < currentNode.value){
+      currentNode = currentNode.left //findClosest(currentNode.left, target, closest) wouldnt need the while loop then
+    } else if (target > currentNode.value){
+      currentNode = currentNode.right;
+    } else {
+      return currentNode.value; //b/c it has matched target
     }
   }
-  console.log(arr);
+  return closest;
+}
+
+function DFSinOrder(tree, arr) {
+  if (tree) {
+    DFS(tree.left, arr);
+    arr.push(tree.value);
+    DFS(tree.right, arr);
+  }
   return arr;
 }
 
-function swap(i, j, arr) {
-  let temp = arr[i];
-  arr[i] = arr[j];
-  arr[j] = temp;
+function DFSpreOrder(tree, arr) {
+  if (tree) {
+    arr.push(tree.value);
+    DFSpreOrder(tree.left, arr);
+    DFSpostOrder(tree.right, arr);
+  }
 }
 
-upFrontZeros([1, 2, 32, 42, 42, 5, 0, 0, 0, 0]);
+function DFSpostOrder(tree, arr){
+  if (tree){
+    DFSpostOrder(tree.left, arr)
+    DFSpostOrder(tree.right, arr):
+    arr.push(tree.value)
+  }
+}
+
