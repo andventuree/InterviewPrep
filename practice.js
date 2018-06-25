@@ -1373,3 +1373,20 @@
 //     return formerTail.value;
 //   }
 // }
+
+function compressStr(str) {
+  if (!str) return str;
+  let cStr = "";
+  for (let i = 0; i < str.length; i++) {
+    let char = str[i];
+    let letterStart = i;
+    //not at the end, and next char is the same
+    while (i + 1 < str.length && char === str[i + 1]) {
+      i++;
+    }
+    cStr += i - letterStart + 1 + char;
+  }
+  return cStr.length < str.length ? cStr : str;
+}
+
+compressStr("aabbbbcccceeeddd");

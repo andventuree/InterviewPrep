@@ -240,22 +240,8 @@ return smallerHead if it exists, otherwise, just largerHead
 // EXAMPLE
 // Input: A -> B -> C -> D -> E -> C[thesameCasearlier]
 // Output: C
-
-function findStartOfLoopSet(list) {
-  let visited = new Set(),
-    node = list;
-
-  while (node) {
-    if (visited.has(node)) {
-      return node;
-    }
-    visited.add(node);
-    node = node.next;
-  }
-
-  return null;
-}
-
+//time: O(n) -> must visit all nodes
+//space: O(n) -> Set will store each node
 function findTheStart(list) {
   let visited = new Set(); //O(1) access time, O(n) space
   let node = list;
@@ -267,4 +253,32 @@ function findTheStart(list) {
   }
 
   return null;
+}
+
+//time: O(n) must go through entire list
+//space: O(1) only holding references, no value
+function findStart(list) {
+  if (!list) return null;
+
+  let slow = list;
+  let fast = list;
+
+  while (slow.next && fast.next && fast.next.next) {
+    slow = slow.next;
+    fast = fast.next.next;
+    if (slow === fast) break; //found loop
+  }
+
+  if (!slow || slow !== fast) return null; //no loop!
+
+  //need the below step b/c code doesn't know for sure which is the reason why it broke out of while loop,
+  //any of slow.next, fast.next or fast.next.next may not exist, so it uses the conditional to confirm
+
+  slow = list; //reset slow
+  while (slow !== fast) {
+    //go at same pace, when slow === fast, then you've found start of loop
+    slow = slow.next;
+    fast = fast.next;
+  }
+  return fast;
 }
