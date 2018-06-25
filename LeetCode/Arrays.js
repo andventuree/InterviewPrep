@@ -16,11 +16,11 @@ var removeDuplicates = function(nums) {
   return uniqueLength + 1; //add 1 b/c uniqueLength was zero indexed
 };
 
-function swap(i, j, arr) {
-  let temp = arr[i];
-  arr[i] = arr[j];
-  arr[j] = temp;
-}
+// function swap(i, j, arr) {
+//   let temp = arr[i];
+//   arr[i] = arr[j];
+//   arr[j] = temp;
+// }
 
 // removeDuplicates([0, 0, 1, 1, 1, 2, 2, 3, 3, 4]);
 // removeDuplicates([1, 1, 2]);
@@ -110,6 +110,8 @@ var containsDuplicate = function(nums) {
 
 // https://leetcode.com/explore/interview/card/top-interview-questions-easy/92/array/578/
 
+//time:
+//space: O(n) - need a new object
 var containsDuplicate = function(nums) {
   let tracker = {};
   for (let i = 0; i < nums.length; i++) {
@@ -118,3 +120,131 @@ var containsDuplicate = function(nums) {
   }
   return false;
 };
+
+// containsDuplicate([1, 1, 1, 1, 1]); //false
+
+// https://leetcode.com/explore/interview/card/top-interview-questions-easy/92/array/549/
+var singleNumber = function(nums) {};
+
+//time: O(n) - goes through entire arr
+//space: O(1) - doesn't take up any space, makes use of XOR
+// var singleNumber = function(nums) {
+//   for (let i = 1; i &lt; nums.length; i++) {
+//       nums[0] ^= nums[i]; //uses XOR
+//   }
+//   return nums[0];
+// };
+
+// https://leetcode.com/explore/interview/card/top-interview-questions-easy/92/array/674/
+//time: O(n)
+//space: O(1)
+var intersect = function(nums1, nums2) {
+  let tracker = {};
+  let intersections = [];
+  nums1.forEach(num => {
+    if (tracker[num]) tracker[num]++;
+    else tracker[num] = 1;
+  });
+  nums2.forEach(num2 => {
+    if (tracker[num2]) {
+      tracker[num2]--;
+      intersections.push(num2);
+    }
+  });
+  return intersections;
+};
+
+// console.log(intersect([1, 2, 2, 1], [2, 2])); //[2,2]
+// console.log(intersect([1], [1, 1])); //[1]
+// console.log(intersect([1, 2], [(1, 1)])); //[1]
+
+// https://leetcode.com/explore/interview/card/top-interview-questions-easy/92/array/559/
+// var plusOne = function(digits) {
+//   let result = 0;
+//   let places = 1;
+//   for (let i = digits.length - 1; i >= 0; i--) {}
+// };
+
+// console.log(plusOne([1, 2, 3])); //1234
+// console.log(plusOne([4, 3, 2, 1])); //4322
+// console.log(plusOne([6, 1, 4, 5, 3, 9, 0, 1, 9, 5, 1, 8, 6, 7, 0, 5, 5, 4, 3])); //
+// console.log(plusOne([9])); //
+
+// if (digits[digits.length - 1] + 1 > 9) {
+//   if (digits.length === 1) {
+//     return (digits = [1, 0]);
+//   }
+//   digits[digits.length - 2] += 1;
+//   digits[digits.length - 1] = 0;
+// } else {
+//   digits[digits.length - 1] += 1;
+// }
+// return digits;
+
+// https://leetcode.com/explore/interview/card/top-interview-questions-easy/92/array/567/
+//time: O(n^2) 1st loop to hold current num and 2nd loop to move that num back
+//space: O(1) no extra space really needed
+var moveZeroes = function(nums) {
+  let moves = 0;
+  for (let i = 0; i < nums.length; i++) {
+    let j = i;
+    while (nums[i] === 0 && j < nums.length - 1) {
+      swap(i, j + 1, nums);
+      j++;
+      moves++;
+    }
+  }
+  console.log("moves: ", moves);
+  return nums;
+};
+
+function swap(i, j, arr) {
+  let temp = arr[i];
+  arr[i] = arr[j];
+  arr[j] = temp;
+}
+
+// console.log(moveZeroes([0, 0, 0, 0, 1, 2, 34, 5, 5, 12]));
+
+// var frontZeros = function(nums) {
+//   let zeroPlace = 0;
+//   for (let i = 0; i < nums.length; i++) {
+//     if (nums[i] === 0) {
+//       swap(i, zeroPlace, nums);
+//       zeroPlace++;
+//     }
+//   }
+//   return nums;
+// };
+
+// console.log(frontZeros([1, 2, 34, 5, 6, 0, 0, 0]));
+
+// https://leetcode.com/explore/interview/card/top-interview-questions-easy/92/array/546/
+// var twoSum = function(nums, target) {
+//   //return value
+//   let seen = {};
+//   for (let i = 0; i < nums.length; i++) {
+//     let diff = target - nums[i];
+//     if (seen[diff]) {
+//       return [diff, nums[i]];
+//     } else {
+//       seen[nums[i]] = true;
+//     }
+//   }
+//   return [];
+// };
+
+var twoSum = function(nums, target) {
+  let seen = {};
+  for (let i = 0; i < nums.length; i++) {
+    let diff = target - nums[i];
+    if (seen[diff] !== undefined) {
+      return [seen[diff], i];
+    } else {
+      seen[nums[i]] = i;
+    }
+  }
+  return [];
+};
+
+console.log(twoSum([2, 7, 11, 15], 9));
