@@ -199,17 +199,17 @@ function partition(list, val) {
   return smallerHead || largerHead;
 }
 
-let testLL = new LinkedList();
-testLL.addToHead(5);
-testLL.addToHead(6);
-testLL.addToHead(4);
-testLL.addToHead(7);
-testLL.addToHead(8);
-testLL.addToHead(9);
-testLL.addToHead(2);
+// let testLL = new LinkedList();
+// testLL.addToHead(5);
+// testLL.addToHead(6);
+// testLL.addToHead(4);
+// testLL.addToHead(7);
+// testLL.addToHead(8);
+// testLL.addToHead(9);
+// testLL.addToHead(2);
 
-// console.log(testLL);
-console.log(partition(testLL.head, 10));
+// // console.log(testLL);
+// console.log(partition(testLL.head, 10));
 
 /*
 
@@ -232,33 +232,39 @@ return smallerHead if it exists, otherwise, just largerHead
 
 */
 
-// function partition(list, val){
-//   let node = list;
-//   let smallerHead = null;
-//   let smallerTail = null;
-//   let largerHead = null;
-//   let largerTail = null;
+// 2.8
+// Loop Detection: Given a circular linked list, implement an algorithm that returns the node at the
+// beginning of the loop.
+// DEFINITION
+// Circular linked list: A (corrupt) linked list in which a node's next pointer points to an earlier node, so as to make a loop in the linked list.
+// EXAMPLE
+// Input: A -> B -> C -> D -> E -> C[thesameCasearlier]
+// Output: C
 
-//   while(node){
-//     let next = node.next; //hold onto reference
-//     node.next = null; //kill the connection
+function findStartOfLoopSet(list) {
+  let visited = new Set(),
+    node = list;
 
-//     if (node.value >= val){
-//       if (!largerTail){
-//         largerHead = node;
-//         largerTail = node;
-//       } else {
-//         largerTail = node;
-//         largerTail.next = node;
-//       }
-//     } else if(node.value < val){
-//       if (!smallerHead){
-//         smallerTail = node;
-//         smallerHead = node;
-//       } else {
-//         smallerTail = node;
-//         smallerTail.next = node;
-//       }
-//     }
-//   }
-// }
+  while (node) {
+    if (visited.has(node)) {
+      return node;
+    }
+    visited.add(node);
+    node = node.next;
+  }
+
+  return null;
+}
+
+function findTheStart(list) {
+  let visited = new Set(); //O(1) access time, O(n) space
+  let node = list;
+
+  while (node) {
+    if (!visited.has(node)) visited.add(node);
+    else return node;
+    node = node.next;
+  }
+
+  return null;
+}
