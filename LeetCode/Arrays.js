@@ -239,6 +239,7 @@ var twoSum = function(nums, target) {
   for (let i = 0; i < nums.length; i++) {
     let diff = target - nums[i];
     if (seen[diff] !== undefined) {
+      //b/c 2 will have 0 index, it'll be falsy
       return [seen[diff], i];
     } else {
       seen[nums[i]] = i;

@@ -12,62 +12,71 @@ class Node {
   }
 }
 
-class Stack {
-  constructor() {
-    this.top = null;
-  }
+// class Stack {
+//   //add to tail, remove tail
+//   constructor() {
+//     this.top = null;
+//   }
 
-  addToTop(val) {
-    const formerTop = this.top;
-    const newNode = new Node(val);
-    this.top = newNode;
-    if (formerTop) {
-      this.top.previous = formerTop;
-      formerTop.next = this.top;
-    }
-  }
+//   addToTop(val) {
+//     const formerTop = this.top;
+//     const newNode = new Node(val);
+//     this.top = newNode;
+//     if (formerTop) {
+//       this.top.previous = formerTop;
+//       formerTop.next = this.top;
+//     }
+//   }
 
-  removeTop() {
-    const formerTop = this.top;
-    if (!formerTop) return;
-    if (formerTop.previous) {
-      this.top = formerTop.previous;
-      this.top.next = null;
-    } else {
-      this.top = null;
-    }
-    return formerTop.value;
-  }
+//   removeTop() {
+//     const formerTop = this.top;
+//     if (!formerTop) return;
+//     if (formerTop.previous) {
+//       this.top = formerTop.previous;
+//       this.top.next = null;
+//     } else {
+//       this.top = null;
+//     }
+//     return formerTop.value;
+//   }
 
-  peek() {
-    return this.top.value;
-  }
-}
+//   peek() {
+//     return this.top.value;
+//   }
+// }
 
-class Queue {
-  constructor() {
-    this.head = null;
-    this.tail = null;
-  }
+// class Queue {
+//   //add to tail, remove head
+//   constructor() {
+//     this.head = null;
+//     this.tail = null;
+//   }
+//   addTail(val) {
+//     let formerTail = this.tail;
+//     let newNode = new Node(val);
+//     this.tail = newNode;
+//     if (formerTail) {
+//       this.tail.previous = formerTail;
+//       formerTail.next = this.tail;
+//     }
+//     if (!this.head) this.head = this.tail;
+//     return this;
+//   }
 
-  remove() {
-    let formerHead = this.head;
-    if (formerHead) {
-      this.head = formerHead.next;
-    } else {
-      return;
-    }
-    return formerHead.value;
-  }
+//   removeHead() {
+//     let formerHead = this.head;
+//     if (!formerHead) return "no head";
+//     if (formerHead.next) {
+//       this.head = formerHead.next;
+//       this.head.previous = null;
+//     } else {
+//       this.head = null;
+//       this.tail = null;
+//     }
+//     return formerHead.value;
+//   }
+// }
 
-  add(val) {
-    const formerTail = this.tail;
-    const newNode = new Node(val);
-    this.tail = newNode;
-    if (formerTail) {
-      formerTail.next = this.tail;
-      this.tail.previous = formerTail;
-    }
-    if (!this.head) this.head = this.tail;
-  }
-}
+// let testQueue = new Queue().addTail(5).addTail(8);
+// console.log(testQueue.removeHead());
+// console.log(testQueue.removeHead());

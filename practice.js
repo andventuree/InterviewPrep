@@ -1079,111 +1079,297 @@
 //   testHash.hasKey("booger")
 // );
 
-function validBST(tree) {
-  validHelper(tree, -Infinity, Infinity);
-}
+// function validBST(tree) {
+//   validHelper(tree, -Infinity, Infinity);
+// }
 
-function validHelper(tree, min, max) {
-  if (tree.value <= min || tree.value > max) return false;
-  let validLeft = validHelper(tree.left, min, tree.value);
-  return validLeft && validHelper(tree.right, tree.value, max);
-}
+// function validHelper(tree, min, max) {
+//   if (tree.value <= min || tree.value > max) return false;
+//   let validLeft = validHelper(tree.left, min, tree.value);
+//   return validLeft && validHelper(tree.right, tree.value, max);
+// }
 
-class BST {
-  constructor(val) {
-    this.value = val;
-    this.left = null;
-    this.right = null;
-  }
+// class BST {
+//   constructor(val) {
+//     this.value = val;
+//     this.left = null;
+//     this.right = null;
+//   }
 
-  insert(val) {
-    let currentNode = this;
-    while (currentNode) {
-      if (val > currentNode.value) {
-        if (currentNode.right) {
-          currentNode = currentNode.right;
-        } else {
-          currentNode.right = new BST(val);
-        }
-      } else {
-        if (currentNode.left) {
-          currentNode = currentNode.left;
-        } else {
-          currentNode.left = new BST(val);
-        }
-      }
-    }
-    return this;
-  }
+//   insert(val) {
+//     let currentNode = this;
+//     while (currentNode) {
+//       if (val > currentNode.value) {
+//         if (currentNode.right) {
+//           currentNode = currentNode.right;
+//         } else {
+//           currentNode.right = new BST(val);
+//         }
+//       } else {
+//         if (currentNode.left) {
+//           currentNode = currentNode.left;
+//         } else {
+//           currentNode.left = new BST(val);
+//         }
+//       }
+//     }
+//     return this;
+//   }
 
-  contains(val) {
-    let currentNode = this;
-    while (currentNode) {
-      if (currentNode.value === val) {
-        return true;
-      } else if (val > currentNode.value) {
-        currentNode = currentNode.right;
-      } else if (val < currentNode.value) {
-        currentNode = currentNode.left;
-      }
-    }
-    return false;
-  }
+//   contains(val) {
+//     let currentNode = this;
+//     while (currentNode) {
+//       if (currentNode.value === val) {
+//         return true;
+//       } else if (val > currentNode.value) {
+//         currentNode = currentNode.right;
+//       } else if (val < currentNode.value) {
+//         currentNode = currentNode.left;
+//       }
+//     }
+//     return false;
+//   }
 
-  getMin(){
-    let currentNode = this;
-    let min = currentNode.value;
-    while(currentNode){
-      if (currentNode.value < min){
-        min = currentNode.value;
-      } else {
-        currentNode = currentNode.left
-      }
-    }
-    return min;
-  }
+//   getMin(){
+//     let currentNode = this;
+//     let min = currentNode.value;
+//     while(currentNode){
+//       if (currentNode.value < min){
+//         min = currentNode.value;
+//       } else {
+//         currentNode = currentNode.left
+//       }
+//     }
+//     return min;
+//   }
 
-}
+// }
 
-function findClosest(tree, target, closest){
-  let currentNode = this;
-  while(currentNode){
-    if (Math.abs(target-currentNode.value) < Math.abs(target - closest)){
-      closest = currentNode.value;
-    }
-    if (target < currentNode.value){
-      currentNode = currentNode.left //findClosest(currentNode.left, target, closest) wouldnt need the while loop then
-    } else if (target > currentNode.value){
-      currentNode = currentNode.right;
-    } else {
-      return currentNode.value; //b/c it has matched target
-    }
-  }
-  return closest;
-}
+// function findClosest(tree, target, closest){
+//   let currentNode = this;
+//   while(currentNode){
+//     if (Math.abs(target-currentNode.value) < Math.abs(target - closest)){
+//       closest = currentNode.value;
+//     }
+//     if (target < currentNode.value){
+//       currentNode = currentNode.left //findClosest(currentNode.left, target, closest) wouldnt need the while loop then
+//     } else if (target > currentNode.value){
+//       currentNode = currentNode.right;
+//     } else {
+//       return currentNode.value; //b/c it has matched target
+//     }
+//   }
+//   return closest;
+// }
 
-function DFSinOrder(tree, arr) {
-  if (tree) {
-    DFS(tree.left, arr);
-    arr.push(tree.value);
-    DFS(tree.right, arr);
-  }
-  return arr;
-}
+// function DFSinOrder(tree, arr) {
+//   if (tree) {
+//     DFS(tree.left, arr);
+//     arr.push(tree.value);
+//     DFS(tree.right, arr);
+//   }
+//   return arr;
+// }
 
-function DFSpreOrder(tree, arr) {
-  if (tree) {
-    arr.push(tree.value);
-    DFSpreOrder(tree.left, arr);
-    DFSpostOrder(tree.right, arr);
-  }
-}
+// function DFSpreOrder(tree, arr) {
+//   if (tree) {
+//     arr.push(tree.value);
+//     DFSpreOrder(tree.left, arr);
+//     DFSpostOrder(tree.right, arr);
+//   }
+// }
 
-function DFSpostOrder(tree, arr){
-  if (tree){
-    DFSpostOrder(tree.left, arr)
-    DFSpostOrder(tree.right, arr):
-    arr.push(tree.value)
-  }
-}
+// function DFSpostOrder(tree, arr){
+//   if (tree){
+//     DFSpostOrder(tree.left, arr)
+//     DFSpostOrder(tree.right, arr):
+//     arr.push(tree.value)
+//   }
+// }
 
+// class BST {
+//   constructor(val) {
+//     this.value = val;
+//     this.left = null;
+//     this.right = null;
+//   }
+// }
+
+// function validBST(tree) {
+//   return validHelper(tree, -Infinity, Infinity);
+// }
+
+// function validHelper(tree, min, max) {
+//   if (tree.value < min || tree.value > max) return false;
+//   let leftSearch = validHelper(tree.left, min, tree.value);
+//   return leftSearch && validHelper(tree.right, tree.value, max);
+// }
+
+// //time: O(n) only going forward and order doesn't matter
+// function upFrontZeros(arr) {
+//   let zeroPosition = 0;
+//   for (let i = 0; i < arr.length; i++) {
+//     if (arr[i] === 0) {
+//       swap(i, zeroPosition, arr);
+//       zeroPosition++;
+//     }
+//   }
+//   console.log(arr);
+//   return arr;
+// }
+
+// // upFrontZeros([1, 2, 3, 4, 5, 0, 0, 0, 0]);
+
+// function swap(i, j, arr) {
+//   let temp = arr[i];
+//   arr[i] = arr[j];
+//   arr[j] = temp;
+// }
+
+// //time: O(n^2)
+// function backZeros(arr) {
+//   for (let i = 0; i < arr.length; i++) {
+//     let j = i;
+//     while (arr[i] === 0 && j < arr.length - 1) {
+//       swap(i, j + 1, arr);
+//       j++;
+//     }
+//   }
+//   console.log(arr);
+//   return arr;
+// }
+
+// // backZeros([0, 0, 0, 0, 1, 2, 3, 4, 5]); //[1,2,3,4,5,0,0,0,0]
+
+// function insertSort(arr) {
+//   for (let i = 1; i < arr.length; i++) {
+//     let j = i;
+//     while (j > 0 && arr[j] < arr[j - 1]) {
+//       swap(j, j - 1, arr);
+//       j--;
+//     }
+//   }
+//   console.log(arr);
+//   return arr;
+// }
+
+// // insertSort([1, 2, 3, 4, 5, 0, 0, 0, 0]);
+
+// function selectionSort(arr) {
+//   for (let currIdx = 0; currIdx < arr.length - 1; currIdx++) {
+//     let smallestIdx = currIdx;
+//     for (let i = currIdx + 1; i < arr.length; i++) {
+//       if (arr[smallestIdx] > arr[i]) smallestIdx = i;
+//     }
+//     swap(currIdx, smallestIdx, arr);
+//   }
+//   console.log(arr);
+//   return arr;
+// }
+
+// selectionSort([1, 2, 3, 4, 5, 0, 0, 0, 0]);
+
+// function nWays(n) {
+//   //4
+//   let ways = new Array(n + 1).fill(0);
+//   // [0,1,2,3,4]
+//   ways[0] = 1;
+//   let moves = [1, 2, 3];
+//   for (let i = 0; i < moves.length; i++) {
+//     let stepOption = moves[i];
+//     for (let j = 1; j < ways.length; j++) {
+//       if (stepOption <= j) {
+//         ways[j] = ways[j] + ways[j - stepOption];
+//       }
+//     }
+//   }
+//   console.log(ways[n]);
+//   return ways[n];
+// }
+
+// nWays(4); //1,1,1,1 | 2,1,1 | 2,2 | 3,1
+
+// function rotateTimes(arr) {
+//   for (let i = 0; i < arr.length; i++) {
+//     if (arr[i] < arr[i - 1]) return i;
+//   }
+//   return "not rotated";
+// }
+
+// console.log(rotateTimes([1, 2, 3, 4, 5, 0, 0, 0, 0]));
+
+// function maxProfit(prices) {
+//   let maxProfit = 0;
+//   for (let i = 0; i < prices.length; i++) {
+//     if (prices[i] > prices[i - 1]) {
+//       maxProfit += prices[i] - prices[i - 1];
+//     }
+//   }
+//   return maxProfit;
+// }
+
+// console.log(maxProfit([7, 1, 5, 3, 6, 4])); //7
+// console.log(maxProfit([1, 2, 3, 4, 5])); //4
+// console.log(maxProfit([7, 6, 4, 3, 1])); //0
+
+// class Node {
+//   constructor(val) {
+//     this.value = val;
+//     this.previous = null;
+//     this.next = null;
+//   }
+// }
+
+// class LinekdList {
+//   constructor() {
+//     this.head = null;
+//     this.tail = null;
+//   }
+//   addToHead(val) {
+//     let formerHead = this.head;
+//     let newNode = new Node(val);
+//     this.head = newNode;
+//     if (formerHead) {
+//       formerHead.previous = this.head;
+//       this.head.next = formerHead;
+//     }
+//     if (!this.tail) this.tail = this.head;
+//   }
+
+//   removeHead() {
+//     let formerHead = this.head;
+//     if (!formerHead) return;
+//     if (formerHead.next) {
+//       this.head = formerHead.next;
+//       this.head.previous = null;
+//     } else {
+//       this.head = null;
+//       this.tail = null;
+//     }
+//     return formerHead.value;
+//   }
+
+//   addToTail(val) {
+//     let formerTail = this.tail;
+//     let newNode = new Node(val);
+//     this.tail = newNode;
+//     if (formerTail) {
+//       formerTail.next = this.tail;
+//       this.tail.previous = formerTail;
+//     }
+//     if (!this.head) this.head = this.tail;
+//   }
+
+//   removeTail() {
+//     let formerTail = this.tail;
+//     if (!formerTail) return;
+//     if (formerTail.previous) {
+//       this.tail = formerTail.previous;
+//       this.tail.next = null;
+//     } else {
+//       this.head = null;
+//       this.tail = null;
+//     }
+//     return formerTail.value;
+//   }
+// }
