@@ -121,6 +121,7 @@ let testTrade = new MostTraded()
   .addToTrade("APPL", 600);
 
 console.log(testTrade.printMostTraded(3));
+console.log(testTrade.printMostTraded(2));
 // printMostTraded(3) should print out
 // 'APPL', 1100
 // 'IBM', 1000
