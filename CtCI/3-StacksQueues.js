@@ -4,13 +4,13 @@ Implementation is just liked linked list, except for how you add and delete from
 
 */
 // Stack implementation
-class Node {
-  constructor(val) {
-    this.value = val;
-    this.next = null;
-    this.previous = null;
-  }
-}
+// class Node {
+//   constructor(val) {
+//     this.value = val;
+//     this.next = null;
+//     this.previous = null;
+//   }
+// }
 
 // class Stack {
 //   //add to tail, remove tail
@@ -84,48 +84,61 @@ class Node {
 //3.1
 // Three in One: Describe how you could use a single array to implement three stacks.
 // Hints: #2, #72, #38, #58
-// class TripleStack {
-//   constructor() {
-//     this._array = [];
-//     this._lengths = [0, 0, 0];
-//   }
 
-//   _getLength(stack) {
-//     return this._lengths[stack - 1];
-//   }
+//   0 index | 1 index | 2 index
+// [ 7, 2, 1 | 2, 3, 5 | 1, 2, 6 ]
+// idx = this._getLength(stack) * 3 + stack - 1 (off by 1 offset)
 
-//   push(stack, value) {
-//     let idx = this._getLength(stack) * 3 + stack - 1;
-//     this._array[idx] = value;
-//     ++this._lengths[stack - 1];
-//   }
+// let testTripleStack = new TripleStack();
+// testTripleStack.push(1, 6).push(1, 6).push(1, 6).push(1, 6).push(1, 6).push(1, 6);
+// console.log(testTripleStack._array); // [ 6, , , 6, , , 6, , , 6, , , 6, , , 6 ]
+// Dont need to worry about empty items in other stacks
 
-//   pop(stack) {
-//     let length = this._getLength(stack),
-//       value;
-//     if (length > 0) {
-//       let idx = (length - 1) * 3 + stack - 1;
-//       value = this._array[idx];
-//       this._array[idx] = undefined;
-//       --this._lengths[stack - 1];
-//     }
-//     return value;
-//   }
+// testTripleStack.push(1, 6).push(1, 6).push(1, 6).push(1, 6).push(2, 7).push(2, 7).push(1, 6);
+// console.log(testTripleStack._array); // [ 6, 7, , 6, 7, , 6, , , 6, , , 6 ]
 
-//   peek(stack) {
-//     let length = this._getLength(stack),
-//       value;
-//     if (length > 0) {
-//       let idx = (length - 1) * 3 + stack - 1;
-//       value = this._array[idx];
-//     }
-//     return value;
-//   }
+// Pro tip: If you assign a value to a specific index of array, then it'll fill in empty spaces
 
-//   isEmpty(stack) {
-//     return this._getLength(stack) === 0;
-//   }
-// }
+class TripleStack {
+  constructor() {
+    this._array = [];
+    this._length = [0, 0, 0];
+  }
+  _getLength(stack) {
+    return this._length[stack - 1];
+  }
+  push(stack, value) {
+    //find the right stack and right space to add a value
+    let idx = this._getLength(stack) * 3 + stack - 1; //Memorize formula
+    this._array[idx] = value; //adds value at precise place, not the same as "push"!
+    ++this._length[stack - 1]; //-1 to acct for off by 1
+    return this;
+  }
+  pop(stack) {
+    let length = this._getLength(stack);
+    let value;
+    if (length > 0) {
+      let idx = (length - 1) * 3 + stack - 1; //Memorize formula
+      value = this._array[idx];
+      this._array[idx] = undefined;
+      --this._length[stack - 1]; //-1 to acct for off by 1
+    }
+    return value;
+  }
+  peek(stack) {
+    let length = this._getLength(stack);
+    let value;
+    if (length > 0) {
+      let idx = this._getLength(stack) * 3 + stack - 1;
+      value = this._array[idx];
+      return value;
+    }
+  }
+  isEmpty(stack) {
+    //if you want to see if a stack is empty
+    return this._getLength(stack) === 0;
+  }
+}
 
 //3.2
 // Stack Min: How would you design a stack which, in addition to push and pop, has a function min which returns the minimum element? Push, pop and min should all operate in 0(1) time.
@@ -175,44 +188,6 @@ class MinStack {
     return this._stack.length === 0;
   }
 }
-
-// class MinStack {
-//   constructor() {
-//     this._stack = [];
-//   }
-//   push(val) {
-//     let min = this.min(); //get min from other values
-//     this._stack.push({
-//       value: val,
-//       min: Math.min(min !== undefined ? min : Infinity, val)
-//     });
-//   }
-
-//   pop() {
-//     if (!this.isEmpty()) {
-//       let item = this._stack.pop();
-//       return item.value;
-//     }
-//   }
-
-//   peek() {
-//     if (!this.isEmpty()) {
-//       let item = this._stack[this._stack.length - 1];
-//       return item.value;
-//     }
-//   }
-
-//   min() {
-//     if (!this.isEmpty()) {
-//       let item = this._stack[this._stack.length - 1];
-//       return item.min; //b/c every node knows the min value, return it
-//     }
-//   }
-//   isEmpty() {
-//     if (this._stack.length === 0) return true;
-//     else return false;
-//   }
-// }
 
 // 3.4 Queue via Stacks: Implement a MyQueue class which implements a queue using two stacks.
 //time: O(1) for enqueuing | O(n) for dequeuing

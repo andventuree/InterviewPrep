@@ -1374,19 +1374,77 @@
 //   }
 // }
 
-function compressStr(str) {
-  if (!str) return str;
-  let cStr = "";
-  for (let i = 0; i < str.length; i++) {
-    let char = str[i];
-    let letterStart = i;
-    //not at the end, and next char is the same
-    while (i + 1 < str.length && char === str[i + 1]) {
-      i++;
-    }
-    cStr += i - letterStart + 1 + char;
-  }
-  return cStr.length < str.length ? cStr : str;
-}
+// function compressStr(str) {
+//   if (!str) return str;
+//   let cStr = "";
+//   for (let i = 0; i < str.length; i++) {
+//     let char = str[i];
+//     let letterStart = i;
+//     //not at the end, and next char is the same
+//     while (i + 1 < str.length && char === str[i + 1]) {
+//       i++;
+//     }
+//     cStr += i - letterStart + 1 + char;
+//   }
+//   return cStr.length < str.length ? cStr : str;
+// }
 
-compressStr("aabbbbcccceeeddd");
+// compressStr("aabbbbcccceeeddd");
+
+//Triple Stack - use an array that keeps track of 3 stacks,
+//need an array to hold all values
+//need an array to hold length of each stack
+//push, pop, peak, getLength,
+
+// class TripleStack {
+//   constructor() {
+//     this._arr = []; //keeps all values in increments of 3
+//     this._length = [0, 0, 0]; //track length for each stack
+//   }
+
+//   _getLength(stack) {
+//     //idicate stack you want
+//     return this._length[stack - 1]; //offset index 0
+//   }
+
+//   push(stack, value) {
+//     let length = this._getLength(stack);
+//     let idx = length * 3 + stack - 1;
+//     this._arr[idx] = value; //add value to arr
+//     this._length[stack - 1]++; //add to length tracker
+//   }
+
+//   pop(stack) {
+//     let length = this._getLength(stack);
+//     let value;
+//     if (length > 0){
+//       let idx = length * 3 + stack - 1;
+//       value = this._arr[idx];
+//       this._arr[idx] = undefined;
+//       this._length[stack - 1]--;
+//     }
+//     return value;
+//   }
+
+//   peek(stack) {
+//     let length = this._getLength(stack);
+//     if (length > 0){
+//       let idx = length * 3 + stack - 1;
+//       return this._arr[idx];
+//     }
+//   }
+// }
+
+// function compressStr(str) {
+//   if (!str) return str;
+//   let cStr = "";
+//   for (let i = 0; i < str.length; i++) {
+//     let char = str[i];
+//     let startPoint = i; //startPoint - i + 1(index 0) = how many times a letter repeats
+//     while (char === str[i + 1] && i + 1 < str.length) {
+//       i++;
+//     }
+//     cStr += i - startPoint + 1 + char;
+//   }
+//   return cStr.length < str.length ? cStr : str;
+// }
