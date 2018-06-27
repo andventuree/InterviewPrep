@@ -189,6 +189,9 @@ class MinStack {
   }
 }
 
+//3.3.
+// SetOfStacks should be composed of several stacks and should create a new stack once the previous one exceeds capacity. SetOfStacks. push() and SetOfStacks. pop() should behave identically to a single stack (that is, pop() should return the same values as it would if there were just a single stack).
+
 // 3.4 Queue via Stacks: Implement a MyQueue class which implements a queue using two stacks.
 //time: O(1) for enqueuing | O(n) for dequeuing
 //space: O(n) -> need to store the dequeue somewhere

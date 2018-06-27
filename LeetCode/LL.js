@@ -42,3 +42,17 @@ LL.next.next.next = new ListNode(4);
 LL.next.next.next.next = new ListNode(5);
 // console.log(LL);
 console.log(JSON.stringify(removeNthFromEnd(LL, 2)));
+
+// https://leetcode.com/explore/interview/card/top-interview-questions-easy/93/linked-list/560/
+// LL's are all about references
+// Pro tip: when rerouting pointers, you need to have enough variables before you start rerouting pointers
+var reverseList = function(head) {
+  let prevNode = null;
+  while (head !== null) {
+    let originalNextNode = head.next;
+    head.next = prevNode;
+    prevNode = head;
+    head = originalNextNode;
+  }
+  return prevNode;
+};

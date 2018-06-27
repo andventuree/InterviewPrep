@@ -1448,3 +1448,117 @@
 //   }
 //   return cStr.length < str.length ? cStr : str;
 // }
+
+//use an array to hold values for 3 stacks, stacks add and remove from the top
+//we use a second aray to keep track of length of each stack
+//need a calculator for length to know where to put elements, dont rely on push and pop
+//_getLength, push, pop, peek
+//push(stack, value)
+//pop(stack)
+//peek(stack) - need to know what stack to look at
+
+// class TripleStack {
+//   constructor() {
+//     this._array = [];
+//     this._length = [0, 0, 0];
+//   }
+
+//   _getLength(stack) {
+//     return this._length[stack - 1]; //not using .length method
+//   }
+
+//   push(stack, value) {
+//     //get the length to know where to add next spot
+//     let length = this._getLength(stack);
+//     //use length to figure out idx
+//     let idx = length * 3 + (stack - 1); //add space for next spot
+//     //then put value at that spot
+//     this._array[idx] = value;
+//     this._length[stack - 1]++;
+//   }
+
+//   pop(stack) {
+//     let length = this._getLength(stack);
+//     //if there's even items in the stack you want
+//     let value;
+//     if (length > 0) {
+//       let idx = length * 3 + stack - 1;
+//       value = this._array[idx]; //take the value off
+//       this._array[idx] = undefined; //reset that position
+//       --this._length[stack - 1];
+//     }
+//     return value;
+//   }
+
+//   peek(stack) {
+//     let length = this._getLength(stack);
+//     if (length > 0) {
+//       let idx = length * 3 + stack - 1;
+//       return this._array[idx];
+//     }
+//   }
+// }
+
+//goal is to create a stack that always knows the minimum num O(1) access
+//do this by putting a min property on each node so it always knows the min
+
+//push, pop, isEmpty, peek, min
+
+// class MinStack {
+//   constructor() {
+//     this._stack = [];
+//   }
+
+//   push(val) {
+//     let min = this.min();
+//     this._stack.push({
+//       value: val,
+//       min: Math.min(min !== undefined ? min : Infinity, val)
+//     });
+//   }
+//   min() {
+//     if (!this.isEmpty()) {
+//       return this._stack[this._stack.length - 1].min;
+//     }
+//   }
+//   pop() {
+//     if (!this.isEmpty()) {
+//       return this._stack.pop().value;
+//     }
+//   }
+//   peek() {
+//     if (!this.isEmpty()) {
+//       return this._stack[this._stack.length - 1].value;
+//     }
+//   }
+//   isEmpty() {
+//     return this._stack.length === 0;
+//   }
+// }
+
+//use 2 stacks to operate like a queue
+//use 1 stack normally, but when you dequeue, you shift everything into dequeue stack to reverse the order to behave like a queue
+
+// class DoubleStackQueue {
+//   constructor() {
+//     this.enStack = [];
+//     this.deStack = [];
+//   }
+
+//   enqueue(val) {
+//     this.enStack.push(val);
+//   }
+//   dequeue() {
+//     //if deStack deson't have anything in it,
+//     //then reverse order
+//     if (this.enStack.length === 0 && this.deStack.length === 0) return;
+//     if (this.deStack.length === 0) {
+//       //fill up deStack only if its empty
+//       while (this.enStack.length > 0) {
+//         this.deStack.push(this.enStack.pop()); // reverses order of stack
+//       }
+//     }
+//     return this.deStack.pop();
+//     //deStack has values, then return the top value
+//   }
+// }
