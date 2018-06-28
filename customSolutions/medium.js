@@ -326,6 +326,8 @@ function swap(i, j, arr) {
 
 /* --------------------------------------------------------------------- */
 
+//time: O(n log n) b/c of sort
+//space: O(1)
 function smallestDifference(arrayOne, arrayTwo) {
   arrayOne.sort((a, b) => a - b);
   arrayTwo.sort((a, b) => a - b);
@@ -352,4 +354,22 @@ function smallestDifference(arrayOne, arrayTwo) {
   return pair;
 }
 
-smallestDifference([1, 5, 10, 20, 28, 3], [26, 134, 135, 15, 17]);
+// smallestDifference([1, 5, 10, 20, 28, 3], [26, 134, 135, 15, 17]);
+
+/* --------------------------------------------------------------------- */
+//time: O(n) only going through it with 1 pass
+//space: O(1) only have a couple variables
+function maxSum(arr) {
+  let maxSoFar = arr[0];
+  let maxEndingHere = arr[0];
+  for (let i = 1; i < arr.length; i++) {
+    //start at idx 1 b/c you're already using idx 0
+    let num = arr[i];
+    maxEndingHere = Math.max(num, maxEndingHere + num);
+    maxSoFar = Math.max(maxSoFar, maxEndingHere);
+  }
+  console.log(maxSoFar);
+  return maxSoFar;
+}
+
+maxSum([3, 5, -9, 1, 3, -2, 3, 4, 7, 2, -9, 6, 3, 1, -5, 4]);
