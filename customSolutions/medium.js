@@ -326,6 +326,7 @@ function swap(i, j, arr) {
 
 /* --------------------------------------------------------------------- */
 
+// 8.
 //time: O(n log n) b/c of sort
 //space: O(1)
 function smallestDifference(arrayOne, arrayTwo) {
@@ -357,6 +358,8 @@ function smallestDifference(arrayOne, arrayTwo) {
 // smallestDifference([1, 5, 10, 20, 28, 3], [26, 134, 135, 15, 17]);
 
 /* --------------------------------------------------------------------- */
+
+// 9.
 //time: O(n) only going through it with 1 pass
 //space: O(1) only have a couple variables
 function maxSum(arr) {
