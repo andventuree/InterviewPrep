@@ -1562,3 +1562,31 @@
 //     //deStack has values, then return the top value
 //   }
 // }
+
+// null -> {value: 1, next: 2} - {value: 2, next: 3} - {value: 3, next: 4}
+// {value: 4, next: 3} - {value: 3, next: 2} - {value: 2, next: 1} -> null
+
+// function reverseLL(head) {
+//   let prevNode = null;
+//   while (head !== null) {
+//     //start {value: 1, next: 2}
+//     let originalOrder = head.next;
+//     //originalOrder = {value: 2, next: 3} from {value: 1, *next: 2*}
+//     head.next = prevNode; //{value: 1, next: null}
+//     prevNode = head; //prevNode = null -> {value: 1, next: null}
+//     head = originalOrder; //head = {value: 2, next: 3}
+//   }
+//   return prevNode;
+// }
+
+// function reverse(head) {
+//   let prevNode = null;
+//   while (head !== null) {
+//     let originalNextNode = head.next;
+//     head.next = prevNode;
+//      one thing to realize: we dont need to change head.value, cause each node already has that, rather, you're only updating the next "pointer/reference"
+//     prevNode = head; //makes the whole head available for later
+//     head = originalNextNode; //moves along while loop
+//   }
+//   return prevNode;
+// }
