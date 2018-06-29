@@ -377,6 +377,8 @@ function maxSum(arr) {
 
 maxSum([3, 5, -9, 1, 3, -2, 3, 4, 7, 2, -9, 6, 3, 1, -5, 4]);
 
+/* --------------------------------------------------------------------- */
+
 // 10.
 //time: O(n) - goes through entire string
 //space: O(n) - need to store brackets
@@ -398,10 +400,11 @@ function balancedBrackets(string) {
       stack.push(char);
     }
   }
-  // return false;
   return stack.length === 0 ? true : false;
 }
 
+//time: O(n * 3 brackets) => O(n)
+//space: O(n)
 function bracketsBalanced(str) {
   let open = "[{(";
   let close = "]})";

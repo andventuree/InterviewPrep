@@ -1608,3 +1608,89 @@
 // }
 
 // maxSum([3, 5, -9, 1, 3, -2, 3, 4, 7, 2, -9, 6, 3, 1, -5, 4]);
+
+class Node {
+  constructor(val) {
+    this.value = val;
+    this.next = null;
+  }
+}
+class SingleLL {
+  constructor() {
+    this.head = null;
+  }
+
+  add(val) {
+    let formerHead = this.head;
+    let newNode = new Node(val);
+    this.head = newNode;
+    if (formerHead) this.head.next = formerHead;
+    return this;
+  }
+
+  remove() {
+    let formerHead = this.head;
+    if (!formerHead) return;
+    if (formerHead.next) {
+      this.head = formerHead.next;
+    }
+  }
+}
+
+let List129 = new SingleLL()
+  .add(9)
+  .add(2)
+  .add(1);
+let List21 = new SingleLL().add(1).add(2);
+
+function addTwoLinkedList(list1Head, list2Head) {
+  let digits1 = [],
+    digits2 = [];
+
+  while (list1Head) {
+    //takes numbers out of LL 1
+    digits1.push(list1Head.value);
+    list1Head = list1Head.next;
+  }
+  while (list2Head) {
+    //takes numbers out of LL 2
+    digits2.push(list2Head.value);
+    list2Head = list2Head.next;
+  }
+
+  let lastIdx1 = digits1.length - 1;
+  let lastIdx2 = digits2.length - 1;
+  console.log("digits1: ", digits1);
+  console.log("digits2: ", digits2);
+
+  let total = "";
+  let carry = 0;
+  for (let i = Math.max(lastIdx1, lastIdx2); i >= 0; i--) {
+    //only use this to run through longest array so no numbers are missed
+    let a = digits1[lastIdx1] || 0;
+    let b = digits2[lastIdx2] || 0;
+    let sum = a + b + carry; //undefined doesn't get added up b/c its all numbers
+    if (sum > 9) {
+      sum -= 10;
+      carry = 1;
+    } else {
+      carry = 0;
+    }
+
+    total = sum + total;
+    console.log("total: ", total);
+
+    //these are the manual incrementers
+    lastIdx1--; //move to next number
+    lastIdx2--; //move to next number
+  }
+
+  if (carry) total = carry + total; //so we can parse later
+
+  console.log(
+    total.split("").map(function(value) {
+      return parseInt(value);
+    }) //turn string into numbers
+  );
+}
+addTwoLinkedList(List129.head, List21.head);

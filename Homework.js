@@ -98,15 +98,15 @@ let homeworkTonight = new QuestionList()
 homeworkTonight
   .add(true, "", "add nums of 2 linked list", "bloomberg", "LL")
   .add(true, "", "reverseLinkedList", "bloomberg", "LL")
-  .add(true, "", "reverse integer", "bloomberg", "")
+  // .add(false, "", "reverse integer", "bloomberg", "")
   .add(true, "", "most traded", "bloomberg", "")
-  .add(true, "", "first unique character in a string", "bloomberg", "string")
-  .add(false, "", "linked list cycle", "bloomberg", "LL")
-  .add(false, "", "valid parentheses", "bloomberg", "")
-  .add(false, "", "trap rain water", "bloomberg", "")
+  // .add(false, "", "first unique character in a string", "bloomberg", "string")
+  // .add(false, "", "linked list cycle", "bloomberg", "LL")
+  .add(true, "", "valid parentheses", "bloomberg", "") //same as algo expert balanced brackets
+  // .add(false, "", "trap rain water", "bloomberg", "")
   .add(true, "", "string compression", "bloomberg", "string")
   .add(true, "", "move zeros", "bloomberg", "array")
-  .add(false, "", "intersection of two linked lists", "bloomberg", "LL")
+  // .add(false, "", "intersection of two linked lists", "bloomberg", "LL")
   .add(true, "", "validate BST", "bloomberg", "BST")
   .add(true, "", "min stack", "bloomberg", "stack");
 
