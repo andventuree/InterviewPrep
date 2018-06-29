@@ -1590,3 +1590,21 @@
 //   }
 //   return prevNode;
 // }
+
+//time: O(n + 2) => O(n)
+//space: O(1)
+// function maxSum(arr) {
+//   //keep track of maxSoFar
+//   //keep track of sumUp to current num;
+//   //compare sum to current num, if current number, the entire thing is scrapped
+//   let maxSoFar = arr[0];
+//   let sumTilHere = arr[0];
+//   for (let i = 1; i < arr.length; i++) {
+//     let currNum = arr[i];
+//     sumTilHere = Math.max(currNum, sumTilHere + currNum);
+//     maxSoFar = Math.max(maxSoFar, sumTilHere); //compare itself and reassign as necessary
+//   }
+//   console.log("maxSoFar: ", maxSoFar);
+// }
+
+// maxSum([3, 5, -9, 1, 3, -2, 3, 4, 7, 2, -9, 6, 3, 1, -5, 4]);
