@@ -376,3 +376,50 @@ function maxSum(arr) {
 }
 
 maxSum([3, 5, -9, 1, 3, -2, 3, 4, 7, 2, -9, 6, 3, 1, -5, 4]);
+
+// 10.
+//time: O(n) - goes through entire string
+//space: O(n) - need to store brackets
+function balancedBrackets(string) {
+  let stack = [];
+  for (let i = 0; i < string.length; i++) {
+    let char = string[i];
+    let lastBracket = stack[stack.length - 1];
+    if (char === "]") {
+      if (lastBracket === "[") stack.pop();
+      else return false;
+    } else if (char === ")") {
+      if (lastBracket === "(") stack.pop();
+      else return false;
+    } else if (char === "}") {
+      if (lastBracket === "{") stack.pop();
+      else return false;
+    } else {
+      stack.push(char);
+    }
+  }
+  // return false;
+  return stack.length === 0 ? true : false;
+}
+
+function bracketsBalanced(str) {
+  let open = "[{(";
+  let close = "]})";
+  let brackets = { "]": "[", "}": "{", ")": "(" };
+  let stack = [];
+  for (let i = 0; i < str.length; i++) {
+    let char = str[i];
+    if (open.includes(char)) {
+      //is includes O(n)???
+      stack.push(char);
+    } else if (close.includes(char)) {
+      if (stack.length === 0) return false;
+      if (stack[stack.length - 1] === brackets[char]) {
+        stack.pop();
+      } else {
+        return false;
+      }
+    }
+  }
+  return stack.length === 0;
+}

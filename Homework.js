@@ -1,5 +1,5 @@
 // types: array, string, stacks, BT, BST, LL, tries, graphs, heaps, DP, recursion, sorting, search
-// source: leetcode, AE, ctci
+// source: leetcode, AE, ctci, bloomberg
 
 class Question {
   constructor(
@@ -33,7 +33,9 @@ class QuestionList {
   //time: O(n) | space: O(n)
   generateRand(num, type, source) {
     let list = this._questions.filter(quest => quest.learnedStatus);
-    if (type !== undefined) list = list.filter(quest => quest.type === type);
+    if (type !== undefined && type !== "all") {
+      list = list.filter(quest => quest.type === type);
+    }
     if (source !== undefined) {
       list = list.filter(quest => quest.source === source);
     }
@@ -92,7 +94,25 @@ let homeworkTonight = new QuestionList()
   .add(false, "medium", "Longest Palindrome SubString", "AE", "string")
   .add(false, "medium", "Suffix Trie Construction", "AE", "tries");
 
-homeworkTonight.generateRand(5);
+//Bloomberg popular questions
+homeworkTonight
+  .add(true, "", "add nums of 2 linked list", "bloomberg", "LL")
+  .add(true, "", "reverseLinkedList", "bloomberg", "LL")
+  .add(true, "", "reverse integer", "bloomberg", "")
+  .add(true, "", "most traded", "bloomberg", "")
+  .add(true, "", "first unique character in a string", "bloomberg", "string")
+  .add(false, "", "linked list cycle", "bloomberg", "LL")
+  .add(false, "", "valid parentheses", "bloomberg", "")
+  .add(false, "", "trap rain water", "bloomberg", "")
+  .add(true, "", "string compression", "bloomberg", "string")
+  .add(true, "", "move zeros", "bloomberg", "array")
+  .add(false, "", "intersection of two linked lists", "bloomberg", "LL")
+  .add(true, "", "validate BST", "bloomberg", "BST")
+  .add(true, "", "min stack", "bloomberg", "stack");
+
+// homeworkTonight.generateRand(5);
 // homeworkTonight.generateRand(5, "string");
 // homeworkTonight.generateRand(1, "sorting", "AE");
 // homeworkTonight.generateRand(6, "BST", "AE");
+
+homeworkTonight.generateRand(5, "all", "bloomberg");
