@@ -1761,3 +1761,43 @@ let List21 = new SingleLL().add(1).add(2);
 // }
 
 // moveZeros([0, 0, 0, 0, 1, 2, 3, 4, 5]);
+
+// function trappedRain(landscapes) {
+//   const maxes = new Array(landscapes.length).fill(0);
+//   let leftMax = 0;
+//   for (let i = 0; i < landscapes.length; i++) {
+//     const column = landscapes[i];
+//     maxes[i] = leftMax;
+//     leftMax = Math.max(leftMax, column);
+//   }
+//   let rightMax = 0;
+//   for (let j = landscapes.length - 1; j >= 0; j--) {
+//     const column = landscapes[j];
+//     const minHeight = Math.min(rightMax, maxes[j]); //compares right and left
+//     if (column < minHeight) {
+//       maxes[j] = minHeight - column;
+//     } else {
+//       maxes[j] = 0; //no room to save water
+//     }
+//     rightMax = Math.max(rightMax, column);
+//   }
+//   console.log(maxes.reduce((a, b) => a + b, 0));
+// }
+
+// trappedRain([0, 8, 0, 0, 5, 0, 0, 10, 0, 0, 1, 1, 0, 3]); //48
+
+// function isAnagram(str1, str2) {
+//   let correctLength = str1.length;
+//   let uniques = new Set(str1.split(""));
+//   if (uniques.length < correctLength) return false;
+//   else {
+//     for (let i = 0; i < str2.length; i++) {
+//       let char = str2[i];
+//       if (!uniques.has(char)) return false;
+//     }
+//   }
+//   return true;
+// }
+
+// console.log(isAnagram("boger", "boger"));
+// console.log(isAnagram("boosdfsr", "boger"));

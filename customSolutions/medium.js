@@ -426,3 +426,29 @@ function bracketsBalanced(str) {
   }
   return stack.length === 0;
 }
+
+/* --------------------------------------------------------------------- */
+
+// 11. Invert binary search tree
+//time: O(n)
+//space: O(n)
+
+function invertBinaryTree(tree) {
+  const queue = [tree];
+  while (queue.length) {
+    const current = queue.shift();
+    if (current !== null) {
+      //if current is null, it is skipped
+      swapLeftAndRight(current);
+      queue.push(current.left);
+      queue.push(current.right);
+    }
+  }
+}
+
+function swapLeftAndRight(tree) {
+  //just like normal swap
+  const left = tree.left;
+  tree.left = tree.right;
+  tree.right = left;
+}

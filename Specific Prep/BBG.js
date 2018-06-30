@@ -164,7 +164,7 @@ function trappingRainWater(landscapes) {
   return maxes.reduce((a, b) => a + b, 0);
 }
 
-trappingRainWater([0, 8, 0, 0, 5, 0, 0, 10, 0, 0, 1, 1, 0, 3]);
+trappingRainWater([0, 8, 0, 0, 5, 0, 0, 10, 0, 0, 1, 1, 0, 3]); //48
 
 //STRING COMPRESSION
 //time: O(n^2) | space: O(n)

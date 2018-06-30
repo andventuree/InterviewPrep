@@ -227,3 +227,31 @@ let reversed = reverseList(list.head);
 console.log("reversed: ", reversed);
 
 //Linked list is all about holding onto references, even if its temporarily.
+
+//Triple Stack //leetcode
+class TripleStack {
+  constructor() {
+    this.stacks = [];
+    this.length = [0, 0, 0];
+  }
+  getLength(stack) {
+    return this.length[stack - 1];
+  }
+  push(stack, val) {
+    let length = this.getLength(stack);
+    let idx = length * 3 + stack - 1;
+    this.stacks[idx] = val;
+    this.length[stack - 1] += 1;
+  }
+
+  pop(stack) {
+    let length = this.getLength(stack);
+    if (length > 0) {
+      let idx = length * 3 + stack - 1;
+      let value = this.stack[idx];
+      this.stack[idx] = undefined;
+      this.length[stack - 1] -= 1;
+      return value;
+    }
+  }
+}
