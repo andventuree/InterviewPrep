@@ -110,6 +110,7 @@ homeworkTonight
   .add(true, "", "validate BST", "bloomberg", "BST")
   .add(true, "", "min stack", "bloomberg", "stack");
 
+// console.log(homeworkTonight._questions);
 // homeworkTonight.generateRand(5);
 // homeworkTonight.generateRand(5, "string");
 // homeworkTonight.generateRand(1, "sorting", "AE");

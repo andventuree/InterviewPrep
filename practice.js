@@ -1685,7 +1685,7 @@ let List21 = new SingleLL().add(1).add(2);
 //     lastIdx2--; //move to next number
 //   }
 
-//   if (carry) total = carry + total; //so we can parse later
+//   // if (carry) total = carry + total; //so we can parse later
 
 //   console.log(
 //     total.split("").map(function(value) {
@@ -1743,21 +1743,21 @@ let List21 = new SingleLL().add(1).add(2);
 //   if (arr[i] === "x") arr[count++] = arr[i]; //move numbers up; it will repeat
 // }
 
-function moveZeros(arr) {
-  let count = 0;
-  //"count" does a number of things
-  //servers as a spot to shift up numbers
-  //counter til end of arr is the number of zeros that is in the array
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i] !== 0) {
-      arr[count++] = arr[i];
-    }
-  }
+// function moveZeros(arr) {
+//   let count = 0;
+//   //"count" does a number of things
+//   //servers as a spot to shift up numbers
+//   //counter til end of arr is the number of zeros that is in the array
+//   for (let i = 0; i < arr.length; i++) {
+//     if (arr[i] !== 0) {
+//       arr[count++] = arr[i];
+//     }
+//   }
 
-  while (count < arr.length) {
-    arr[count++] = 0;
-  }
-  console.log(arr);
-}
+//   while (count < arr.length) {
+//     arr[count++] = 0;
+//   }
+//   console.log(arr);
+// }
 
 // moveZeros([0, 0, 0, 0, 1, 2, 3, 4, 5]);
