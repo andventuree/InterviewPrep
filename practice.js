@@ -1693,42 +1693,46 @@ let List21 = new SingleLL().add(1).add(2);
 //     }) //turn string into numbers
 //   );
 // }
-addTwoLinkedList(List129.head, List21.head);
+// addTwoLinkedList(List129.head, List21.head);
 
-funciton addTwoLinkedList(list1, list2){
-  //copy the list into arrays so its more managable
+// function addTwoLinkedList(list1, list2) {
+//   //copy the list into arrays so its more managable
 
-  //add up each column of numbers, we need the last digit
-  //sum + carry (> 10)
-  //then add this total to a string
-  //so we can split it after, into an array, we want to show the number as a string
-  let digits1 = [];
-  let digits2 = [];
-  while (list1){
-    digits1.push(list1.value)
-    list1 = list1.next;
-  }
-  while (list2){
-    digits2.push(list2.value);
-    list2 = list2.next;
-  }
+//   //add up each column of numbers, we need the last digit
+//   //sum + carry (> 10)
+//   //then add this total to a string
+//   //so we can split it after, into an array, we want to show the number as a string
+//   let digits1 = [];
+//   let digits2 = [];
+//   while (list1) {
+//     digits1.push(list1.value);
+//     list1 = list1.next;
+//   }
+//   while (list2) {
+//     digits2.push(list2.value);
+//     list2 = list2.next;
+//   }
 
-  let lastIdx1 = digits1.length - 1;
-  let lastIdx2 = digits2.length - 1;
-  let total = "";
-  // let carry = 0;
-  //let sum = 0; dont need this here;
-  for (let i = Math.max(lastIdx1, lastIdx2); i >= 0; i--){
-    let a = digits1[lastIdx1]
-    let b = digits2[lastIdx2];
-    let sum = a + b;
-    console.log(sum);
-    // if (sum > 9){
-    //   sum -= 10;
-    // } else {
+//   let lastIdx1 = digits1.length - 1;
+//   let lastIdx2 = digits2.length - 1;
+//   let total = "";
+//   let carry = 0;
+//   for (let i = Math.max(lastIdx1, lastIdx2); i >= 0; i--) {
+//     let a = digits1[lastIdx1] || 0;
+//     let b = digits2[lastIdx2] || 0;
+//     let sum = a + b + carry;
+//     console.log(sum);
+//     if (sum > 9) {
+//       sum -= 10;
+//       carry++; //update this, so this goes to next number in array
+//     } else {
+//       carry = 0;
+//     }
 
-    // }
-  }
+//     total = sum + total;
+//     lastIdx1--;
+//     lastIdx2--;
+//   }
 
-
-}
+//   console.log(total.split("").map(num => parseInt(num)));
+// }
