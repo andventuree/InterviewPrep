@@ -129,7 +129,42 @@ function linkedListCycle() {}
 function validParentheses() {}
 
 //TRAP RAIN WATER
-function trappingRainWater() {}
+//a)find the left highest value
+//b)find right highest value
+//c)take the min so you can find what water is trapped
+//d)then go thorugh landscape and see if it has room above it to add
+
+//time: O(n) no compouned operations | space: O(n) - just need 1 new arr
+function trappingRainWater(landscapes) {
+  const maxes = new Array(landscapes.length).fill(0);
+  let leftMax = 0;
+  //part a)
+  for (let i = 0; i < landscapes.length; i++) {
+    const column = landscapes[i];
+    maxes[i] = leftMax;
+    leftMax = Math.max(leftMax, column);
+  }
+
+  let rightMax = 0;
+  for (let j = landscapes.length - 1; j >= 0; j--) {
+    const column = landscapes[j];
+    //b)find right highest value
+    //dont have to store minHeight in its own array to save space!
+    const minHeight = Math.min(rightMax, maxes[i]); //maxes filled with left height;
+
+    //c)take the min so you can find what water is trapped
+    if (column < minHeight) {
+      maxes[i] = minHeight - column;
+    } else {
+      maxes[i] = 0;
+    }
+    rightMax = Math.max(rightMax, column);
+  }
+  //d)then go thorugh landscape and see if it has room above it to add
+  return maxes.reduce((a, b) => a + b, 0);
+}
+
+trappingRainWater([0, 8, 0, 0, 5, 0, 0, 10, 0, 0, 1, 1, 0, 3]);
 
 //STRING COMPRESSION
 //time: O(n^2) | space: O(n)
