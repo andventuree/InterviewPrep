@@ -120,7 +120,7 @@ function BFS(tree) {
     let current = queue.shift(); //takes off the first elem
     //add the values to array
     //then add the children to the queue
-    values.push(curret.value);
+    values.push(current.value);
     if (current !== null) {
       values.push(current.left);
       values.push(current.right);
