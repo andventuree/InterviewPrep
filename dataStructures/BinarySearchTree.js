@@ -130,3 +130,25 @@ function BFS(tree) {
 }
 
 // When order matters, use a LL, Stack, Queue
+
+function invertTree(tree) {
+  //use a queue
+  //add children to queue,
+  //use a while loop
+  //take off children from queue
+  let queue = [tree];
+  while (queue.length) {
+    let current = queue.shift();
+    if (current !== null) {
+      swapLeftAndRight(current);
+      queue.push(current.left);
+      queue.push(current.right);
+    }
+  }
+}
+
+function swapLeftAndRight(tree) {
+  let left = tree.left;
+  tree.left = tree.right;
+  tree.right = left;
+}

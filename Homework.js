@@ -64,7 +64,7 @@ let homeworkTonight = new QuestionList()
   .add(true, "easy", "Two Number Sum", "AE", "array")
   .add(true, "easy", "Find Closest Value in BST", "AE", "BST")
   .add(true, "easy", "Depth First Search", "AE", "graphs")
-  // .add(false, "easy", "Nth Fib", "AE", "recursion")
+  // .add(false, "easy", "Nth Fib", "AE", "recursion") //started but didnt fully understand
   .add(true, "easy", "Binary Search", "AE", "search")
   .add(true, "easy", "Find 3 Largest Num Sum", "AE", "search")
   .add(true, "easy", "Bubble Sort", "AE", "sorting")
@@ -85,8 +85,8 @@ let homeworkTonight = new QuestionList()
   .add(true, "medium", "Kadanes Algo - Max Sum", "AE")
   // .add(false, "medium", "Breath-First Search", "AE", "graphs")
   // .add(false, "medium", "River Sizes", "AE", "graphs")
-  // .add(false, "medium", "Min Heap Construction", "AE", "heaps")
-  // .add(false, "medium", "Remove kth Node from End", "AE", "LL")
+  // .add(false, "medium", "Min Heap Construction", "AE", "heaps") //started but didnt fully understand
+  .add(true, "medium", "Remove kth Node from End", "AE", "LL")
   .add(true, "medium", "Permutations", "AE", "recursion")
   // .add(false, "medium", "Powerset", "AE", "recursion")
   // .add(false, "medium", "Search in Sorted Matrix", "AE", "search")
@@ -102,7 +102,7 @@ homeworkTonight
   // .add(false, "", "reverse integer", "bloomberg", "")
   .add(true, "", "most traded", "bloomberg", "")
   // .add(false, "", "first unique character in a string", "bloomberg", "string")
-  // .add(false, "", "linked list cycle", "bloomberg", "LL")
+  .add(true, "", "linked list cycle", "bloomberg", "LL")
   .add(true, "", "valid parentheses", "bloomberg", "") //same as AE balanced brackets
   .add(true, "", "trap rain water", "bloomberg", "") //same as AE water area
   .add(true, "", "string compression", "bloomberg", "string")
@@ -110,6 +110,9 @@ homeworkTonight
   // .add(false, "", "intersection of two linked lists", "bloomberg", "LL")
   .add(true, "", "validate BST", "bloomberg", "BST")
   .add(true, "", "min stack", "bloomberg", "stack");
+
+//ctci
+homeworkTonight.add();
 
 // console.log(homeworkTonight._questions);
 // homeworkTonight.generateRand(5);

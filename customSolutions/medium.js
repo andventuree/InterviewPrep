@@ -452,3 +452,30 @@ function swapLeftAndRight(tree) {
   tree.left = tree.right;
   tree.right = left;
 }
+
+/* --------------------------------------------------------------------- */
+
+// 12. removeKthNodeFromEnd
+//time: O(n) - length of linkedlist
+//space: O(1)
+function removeKthNodeFromEnd(head, k) {
+  // if (!head) return head;
+  let kth = head;
+  let normal = head;
+  for (let i = 0; i < k; i++) {
+    kth = kth.next;
+  }
+
+  if (kth === null) {
+    //edge case for when list isnt long enough (1 node)
+    head.value = head.next.value;
+    head.next = head.next.next;
+    return;
+  }
+
+  while (kth.next !== null) {
+    kth = kth.next; //k will hit the end
+    normal = normal.next; //normal will hit kth nodes from end
+  }
+  normal.next = normal.next.next;
+}

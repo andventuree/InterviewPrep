@@ -3,6 +3,10 @@
   head -> next -> next -> tail
 */
 
+//cycle =/= loop
+// 1 - 2 - 3 - 4 - 5 - 3 - 4 - 5 loop - starts off then hits a point that cycles in the middle
+// 1 - 2 - 3 - 4 - 1 - 2 - 3 - 4 cycle - goes round and round
+
 class SingleNode {
   constructor(v) {
     this.value = v;

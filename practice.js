@@ -1801,3 +1801,37 @@ let List21 = new SingleLL().add(1).add(2);
 
 // console.log(isAnagram("boger", "boger"));
 // console.log(isAnagram("boosdfsr", "boger"));
+
+// function maxProfit(prices) {
+//   if (prices.length === 0) return 0;
+//   let max = 0;
+//   for (let i = 1; i < prices.length; i++) {
+//     if (prices[i] > prices[i - 1]) max += prices[i] - prices[i - 1];
+//   }
+//   return max;
+// }
+
+// var maxProfit = function(prices) {
+//   let res = 0;
+//   for (let i = 1; i < prices.length; i++) {
+//     res += prices[i] > prices[i - 1] ? prices[i] - prices[i - 1] : 0;
+//   }
+//   return res;
+// };
+
+var maxProfit = function(prices) {
+  let maxTotal = 0;
+  let maxPrice = 0;
+  for (let i = 1; i < prices.length; i++) {
+    console.log(maxPrice, maxTotal);
+    let test = maxPrice + prices[i] - prices[i - 1];
+    console.log("test: ", test);
+    maxPrice = Math.max(0, (maxPrice += prices[i] - prices[i - 1]));
+    maxTotal = Math.max(maxPrice, maxTotal);
+  }
+  return maxTotal;
+};
+
+// console.log(maxProfit([7, 1, 5, 3, 6, 4])); //7
+// console.log(maxProfit([1, 2, 3, 4, 5])); //4
+// console.log(maxProfit([7, 6, 4, 3, 1])); //0
