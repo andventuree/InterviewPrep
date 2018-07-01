@@ -73,6 +73,15 @@ class LinkedList {
     }
     return formerTail.value;
   }
+  print() {
+    let head = this.head;
+    let values = [];
+    while (head) {
+      values.push(head.value);
+      head = head.next;
+    }
+    return values;
+  }
 }
 
 function removeDuplicatesSet(list) {
@@ -175,19 +184,28 @@ function partition(list, val) {
     node.next = null; //this is necessary b/c once this is reordered, you want to override the existing ref
     if (node.value >= val) {
       if (!largerTail) {
+        //implies there's no node at all
         largerHead = node;
         largerTail = node;
+        largerTail.next = null;
       } else {
-        largerTail = node;
-        largerTail.next = node;
+        //basically with new node, add to head
+        let formerHead = largerHead;
+        largerHead = node;
+        largerHead.next = formerHead;
+        // largerTail.next = node; //circular //why do we need this???
+        // largerTail = node;
       }
     } else if (node.value < val) {
-      if (!smallerHead) {
+      if (!smallerTail) {
         smallerHead = node;
         smallerTail = node;
       } else {
-        smallerTail = node;
-        smallerTail.next = node;
+        // smallerTail = node;
+        // smallerTail.next = node;
+        let formerHead = smallerHead;
+        smallerHead = node;
+        smallerHead.next = formerHead;
       }
     }
     node = next;
@@ -196,20 +214,33 @@ function partition(list, val) {
   if (smallerTail) {
     smallerTail.next = largerHead;
   }
-  return smallerHead || largerHead;
+
+  let finalLL = smallerTail !== undefined ? smallerHead : largerHead;
+  let finalValues = [];
+  while (finalLL) {
+    finalValues.push(finalLL.value);
+    finalLL = finalLL.next;
+  }
+  console.log("Partitioned LL order: ", finalValues);
+  // return smallerHead || largerHead;
+  return (
+    console.log("smallerHead: ", smallerHead) ||
+    console.log("largerHead: ", largerHead)
+  );
+  //catches edge cases, if given a value < all values of LL or > all values
 }
 
-// let testLL = new LinkedList();
-// testLL.addToHead(5);
-// testLL.addToHead(6);
-// testLL.addToHead(4);
-// testLL.addToHead(7);
-// testLL.addToHead(8);
-// testLL.addToHead(9);
-// testLL.addToHead(2);
+let testLL = new LinkedList(); //class written above
+testLL.addToHead(5);
+testLL.addToHead(6);
+testLL.addToHead(4);
+testLL.addToHead(7);
+testLL.addToHead(8);
+testLL.addToHead(9);
+testLL.addToHead(2);
 
-// // console.log(testLL);
-// console.log(partition(testLL.head, 10));
+console.log("Original order of LL: ", testLL.print());
+partition(testLL.head, 5);
 
 /*
 
@@ -255,6 +286,10 @@ function findTheStart(list) {
   return null;
 }
 
+//keep a set to see if you've seen this node before
+//then add nodes if you haven't seen them
+//if you have seen the same node, then you can return
+
 //time: O(n) must go through entire list
 //space: O(1) only holding references, no value
 function findStart(list) {
@@ -277,6 +312,32 @@ function findStart(list) {
   slow = list; //reset slow
   while (slow !== fast) {
     //go at same pace, when slow === fast, then you've found start of loop
+    slow = slow.next;
+    fast = fast.next;
+  }
+  return fast;
+}
+
+//2 runners
+//1 slow 1 fast
+//have it run until it has reached either nodes are null or its the same node
+//then run them 1 by 1, then when fast and slow meet, you've got the fast one
+
+function findStart(list) {
+  if (!list) return list;
+
+  let slow = list;
+  let fast = list;
+  while (slow.next && fast.next && fast.next.next) {
+    slow = slow.next;
+    fast = fast.next.next;
+    if (slow === fast) break; //found loop
+  }
+
+  if (!slow || slow !== fast) return null;
+
+  slow = list;
+  while (slow !== fast) {
     slow = slow.next;
     fast = fast.next;
   }
