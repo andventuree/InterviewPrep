@@ -1850,3 +1850,59 @@ let List21 = new SingleLL().add(1).add(2);
 // }
 
 // maxSumKadanes([3, 5, -9, 1, 3, -2, 3, 4, 7, 2, -9, 6, 3, 1, -5, 4]); //19
+
+function shiftedArrSearch(arr) {
+  // 1) find pivot point
+  let pivotIdx = findPivot(arr, 0, arr.length - 1, num);
+  // 2) then use binary serch
+}
+
+function findPivot(arr, start, end, num) {
+  let mid = Math.floor((start + end) / 2);
+  while (start <= end) {
+    if (num > arr[mid]) {
+      start++;
+    } else if (num < arr[mid]) {
+      end--;
+    } else {
+      return mid;
+    }
+  }
+}
+
+function shiftedArrSearch(shiftArr, num) {
+  //1) use binary search to find pivotIdx
+  let pivotIdx = findPivotPoint(shiftArr);
+  if (pivotIdx == 0 || num < shiftArr[0]) {
+    //if num is smaller than last item, start from back
+    return binarySearch(shiftArr, pivotIdx, shiftArr.length - 1, num);
+  }
+  //2) use binary search to find numIdx
+  return binarySearch(shiftArr, 0, pivotIdx - 1, num);
+}
+
+function findPivotPoint(arr) {
+  let begin = 0;
+  let end = arr.length - 1;
+  while (begin <= end) {
+    let mid = begin + Math.floor((end - begin) / 2); //find midpoint
+    if (mid == 0 || arr[mid] < arr[mid - 1]) {
+      return mid;
+    }
+    //since we didnt find it, shrink the arr by 1 then reloop
+    if (arr[mid] > arr[0]) begin = mid + 1;
+    else end = mid - 1;
+  }
+
+  return 0; //turns out it wasn't shfited at all
+}
+
+function binarySearch(arr, begin, end, num) {
+  while (begin <= end) {
+    let mid = begin + Math.floor((end - begin) / 2);
+    if (arr[mid] < num) begin = mid + 1;
+    else if (arr[mid] == num) return mid;
+    else end = mid - 1;
+  }
+  return -1;
+}

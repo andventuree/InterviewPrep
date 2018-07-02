@@ -60,4 +60,60 @@ function binarySearch(arr, begin, end, num) {
   return -1;
 }
 
-shiftedArrSearch([9, 12, 17, 2, 4, 5], 17);
+console.log(shiftedArrSearch([9, 12, 17, 2, 4, 5], 17)); //2
+
+/* *************************************************************** */
+// //anything sorted can use binary search, even nums!
+// //pramp provided solution
+// //time: O(log n) | space: O(1)
+// function root(x, n) {
+//   if (x == 0) return 0; //edge case
+
+//   let lowerBound = 0;
+//   let upperBound = Math.max(1, x);
+//   let approxRoot = (upperBound + lowerBound) / 2;
+
+//   while (approxRoot - lowerBound >= 0.001) {
+//     if (Math.pow(approxRoot, n) > x) {
+//       upperBound = approxRoot;
+//     } else if (Math.pow(approxRoot, n) < x) {
+//       lowerBound = approxRoot;
+//     } else {
+//       break;
+//     }
+//     approxRoot = (upperBound + lowerBound) / 2;
+//   }
+//   return approxRoot;
+// }
+
+// function root(x, n) {
+//   if (x === 0) return 0;
+// }
+
+function truncFloat(x, points) {
+  let power = Math.pow(10, points);
+  return parseInt("" + x * power) / power;
+}
+
+function root(x, n) {
+  if (x === 0) return 0; //edge case
+  if (n === 1) return x; //edge case
+  let begin = 0;
+  let end = x;
+  while (begin <= end) {
+    //binary search
+    let mid = (begin + end) / 2;
+    let y = Math.pow(mid, n); //assume Math.pow = O(1);
+    let diff = Math.abs(x - y); //difference from target
+    console.log("diff: ", diff);
+
+    if (diff < 0.001) return truncFloat(mid, 3);
+
+    if (y < x) begin = mid + 0.001;
+    else end = mid - 0.001;
+  }
+
+  return truncFloat(begin, 3);
+}
+
+console.log(root(9, 2));
