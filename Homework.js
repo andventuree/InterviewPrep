@@ -121,4 +121,4 @@ homeworkTonight.add();
 // homeworkTonight.generateRand(1, "sorting", "AE");
 // homeworkTonight.generateRand(6, "BST", "AE");
 
-homeworkTonight.generateRand(15, "all", "bloomberg");
+homeworkTonight.generateRand(6, "all", "bloomberg");

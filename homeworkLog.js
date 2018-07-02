@@ -329,7 +329,7 @@ function moveZeros(arr) {
   console.log(arr);
 }
 
-moveZeros([0, 0, 0, 0, 0, 2, 2, 1, 2, 12]);
+// moveZeros([0, 0, 0, 0, 0, 2, 2, 1, 2, 12]);
 
 function strCompression(str) {
   //need to keep track of a letter
@@ -351,7 +351,7 @@ function strCompression(str) {
   return cStr.length < str.length ? cStr : str;
 }
 
-strCompression("aabbccccc"); //2a2b5c
+// strCompression("aabbccccc"); //2a2b5c
 
 class MostTraded {
   constructor() {
@@ -432,3 +432,214 @@ function validateHelper(tree, min, max) {
   let validateLeftHelper = validateHelper(tree.left, min, tree.value);
   return validateLeftHelper && validateHelper(tree.right, tree.value, max);
 }
+
+// **************** Homework for Mon Jul 02 2018 ****************
+// [ Question {name: 'add nums of 2 linked list',learnedStatus: true,difficulty: '',source: 'bloomberg',type: 'LL' },
+//   Question {name: 'move zeros',learnedStatus: true,difficulty: '',source: 'bloomberg',type: 'array' },
+//   Question {name: 'string compression',learnedStatus: true,difficulty: '',source: 'bloomberg',type: 'string' },
+//   Question {name: 'trap rain water',learnedStatus: true,difficulty: '',source: 'bloomberg',type: '' },
+//   Question {name: 'min stack',learnedStatus: true,difficulty: '',source: 'bloomberg',type: 'stack' } ]
+
+class Node {
+  constructor(val) {
+    this.value = val;
+    this.next = null;
+  }
+}
+
+class LL {
+  constructor() {
+    this.head = null;
+  }
+  add(val) {
+    let formerHead = this.head;
+    let newNode = new Node(val);
+    this.head = newNode;
+    if (formerHead) this.head.next = formerHead;
+    return this;
+  }
+  remove() {
+    let formerHead = this.head;
+    if (!formerHead) return;
+    if (formerHead.next) this.head = formerHead.next;
+    else this.head = null;
+    return formerHead.value;
+  }
+  print() {
+    let values = [];
+    let node = this.head;
+    while (node) {
+      values.push(node.value);
+      node = node.next;
+    }
+    return values;
+  }
+}
+
+function addTwoLL(list1, list2) {
+  //need all the values from each list, make array for them
+  //then have some sort of way to add up numbers,
+  //which starts from the singles column (right) then moves left
+  //since these are numbers, i want them to be a string so i can split them later into array as desired
+  let digits1 = [];
+  let digits2 = [];
+
+  while (list1 !== null) {
+    //assuming the end would be null
+    digits1.push(list1.value);
+    list1 = list1.next;
+  }
+  while (list2 !== null) {
+    digits2.push(list2.value);
+    list2 = list2.next;
+  }
+  console.log(digits1, digits2);
+  let lastIdx1 = digits1.length - 1;
+  let lastIdx2 = digits2.length - 1;
+  let totalStr = "";
+  let carry = 0;
+  for (let i = Math.max(lastIdx1, lastIdx2); i >= 0; i--) {
+    let numFrom1 = digits1[lastIdx1--] || 0;
+    let numFrom2 = digits2[lastIdx2--] || 0;
+    let sum = numFrom1 + numFrom2 + carry;
+    if (sum > 9) {
+      sum -= 10;
+      carry = 1;
+    } else {
+      carry = 0;
+    }
+    console.log(sum);
+
+    //needs to be this exact placement for string
+    //sum will convert to string here
+    totalStr = sum + totalStr;
+    //lastIdx1-- //was moved above
+    //lastIdx2--
+  }
+  console.log(totalStr.split("").map(num => parseInt(num)));
+}
+let List129 = new LL()
+  .add(9)
+  .add(2)
+  .add(1);
+let List21 = new LL().add(1).add(2);
+
+// addTwoLL(List129.head, List21.head);
+
+function moveZeros(arr) {
+  //we wnat to move all zeros to the back,
+  //we need to count all the zero's we have, then add them to the back
+  //lets instead count the non zeros
+  //shift all the non-zeros up then add zeros to the back
+  let count = 0;
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] !== 0) arr[count++] = arr[i];
+  }
+  while (count < arr.length) {
+    arr[count] = 0;
+    count++;
+  }
+  console.log(arr);
+}
+
+// moveZeros([0, 0, 0, 0, 0, 1, 2, 3, 3, 4, 5, 5]);
+
+function stringCompression(str) {
+  //need to count each letter, so lets compare current letter with the next one
+  //if the next one is the same, we'll increment a counter
+  //we also need to create a string so we can start a new string
+  //new string + counter + char
+  //then return only if its shorter
+  let compressed = "";
+  for (let i = 0; i < str.length; i++) {
+    let char = str[i];
+    let counter = 1;
+    while (char === str[i + 1]) {
+      counter++;
+      i++; //need to increment i to move it along as well;
+    }
+    compressed += counter + char;
+    counter = 1;
+  }
+
+  console.log("compressed: ", compressed);
+}
+
+// stringCompression("aaabbbbccccccc"); //3a4b7c
+
+function trapRain(landscape) {
+  //first, find the largest left, then largest right, then compare to make minHeight, then is current landscape is shorter thna min height, you can save water there
+  let maxLeftLandscape = [];
+  let maxLeft = 0;
+  for (let i = 0; i < landscape.length; i++) {
+    let column = landscape[i];
+    maxLeft = Math.max(column, maxLeft);
+    maxLeftLandscape.push(maxLeft);
+  }
+
+  let maxRightLandscape = [];
+  let maxRight = 0;
+  for (let j = landscape.length - 1; j >= 0; j--) {
+    let column = landscape[j];
+    maxRight = Math.max(column, maxRight);
+    maxRightLandscape[j] = maxRight;
+  }
+
+  // console.log(maxLeftLandscape, maxRightLandscape);
+  // let rainWater = []; //or use a tracker to keep total of all water trapped, saves having to use reduce
+  let totalRain = 0;
+  for (let k = 0; k < landscape.length; k++) {
+    let minHeight = Math.min(maxRightLandscape[k], maxLeftLandscape[k]);
+    let column = landscape[k];
+    if (column < minHeight) {
+      totalRain += minHeight - column;
+    }
+  }
+  console.log(totalRain);
+}
+
+// trapRain([0, 8, 0, 0, 5, 0, 0, 10, 0, 0, 1, 1, 0, 3]); //48
+
+class MinStack {
+  constructor() {
+    this.array = [];
+  }
+
+  //push //pop // min //
+  push(val) {
+    let min = this.min();
+    this.array.push({
+      value: val,
+      min: Math.min(min !== undefined ? min : Infinity, val)
+    });
+    return this;
+  }
+
+  pop() {
+    if (this.array.length > 0) {
+      let item = this.array.pop();
+      console.log(item.value);
+    }
+  }
+  peek() {
+    if (this.array.length > 0) {
+      let item = this.array[this.array.length - 1];
+      console.log(item);
+    }
+  }
+
+  min() {
+    if (this.array.length > 0) {
+      console.log(this.array[this.array.length - 1].min);
+      return this.array[this.array.length - 1].min;
+    }
+  }
+}
+
+let testMinStack = new MinStack()
+  .push(2)
+  .push(5)
+  .push(6);
+
+// testMinStack.min();
+// testMinStack.peek();
