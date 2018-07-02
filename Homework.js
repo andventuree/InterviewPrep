@@ -94,6 +94,7 @@ let homeworkTonight = new QuestionList()
   // .add(false, "medium", "Longest Palindrome SubString", "AE", "string")
   // .add(false, "medium", "Suffix Trie Construction", "AE", "tries")
   .add(true, "hard", "Water Area / Trap Rain", "AE", "DP");
+  .add(true, "hard", "Find loop", "AE", "LL");
 
 //Bloomberg popular questions
 homeworkTonight
