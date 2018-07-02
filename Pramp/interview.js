@@ -95,25 +95,41 @@ function truncFloat(x, points) {
   return parseInt("" + x * power) / power;
 }
 
+// function root(x, n) {
+//   if (x === 0) return 0; //edge case
+//   if (n === 1) return x; //edge case
+//   let begin = 0;
+//   let end = x;
+//   while (begin <= end) {
+//     //binary search
+//     let mid = (begin + end) / 2;
+//     let y = Math.pow(mid, n); //assume Math.pow = O(1);
+//     let diff = Math.abs(x - y); //difference from target
+//     console.log("diff: ", diff);
+
+//     if (diff < 0.001) return truncFloat(mid, 3);
+
+//     if (y < x) begin = mid + 0.001;
+//     else end = mid - 0.001;
+//   }
+
+//   return truncFloat(begin, 3);
+// }
+
+console.log(root(9, 2));
+
 function root(x, n) {
-  if (x === 0) return 0; //edge case
-  if (n === 1) return x; //edge case
+  //goal is to find a number that we'll use n times to equal x with <0.0001 accuracy
   let begin = 0;
   let end = x;
   while (begin <= end) {
-    //binary search
-    let mid = (begin + end) / 2;
-    let y = Math.pow(mid, n); //assume Math.pow = O(1);
-    let diff = Math.abs(x - y); //difference from target
+    let mid = Math.floor((begin + end) / 2);
+    let y = Math.pow(mid, n);
+    let diff = Math.abs(x - y);
     console.log("diff: ", diff);
 
-    if (diff < 0.001) return truncFloat(mid, 3);
-
-    if (y < x) begin = mid + 0.001;
-    else end = mid - 0.001;
+    if (diff < 0.001) return mid;
+    else if (x > y) begin = mid + 0.001;
+    else if (x < y) end = mid - 0.001;
   }
-
-  return truncFloat(begin, 3);
 }
-
-console.log(root(9, 2));

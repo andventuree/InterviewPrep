@@ -390,23 +390,23 @@ function insertSwap(i, j, array) {
 // 7.
 //time: O(n^2) - b/c you must go thru arr 1 times, and multiple times for comparing
 //space: O(1) - not storing too much
-// function selectionSort(array) {
-//   let currentIdx = 0;
-//   while (currentIdx < array.length - 1) {
-//     //- 1 b/c you dont need to swap the last num
-//     let smallestIdx = currentIdx;
-//     for (let i = currentIdx + 1; i < array.length; i++) {
-//       if (array[smallestIdx] > array[i]) {
-//         smallestIdx = i;
-//       }
-//     }
-//     //use currentIdx b/c its sorted up until that point
-//     swapHelper(currentIdx, smallestIdx, array);
-//     currentIdx++;
-//   }
-//   console.log("sorted", array);
-//   return array;
-// }
+function selectionSort(array) {
+  let currentIdx = 0;
+  while (currentIdx < array.length - 1) {
+    //- 1 b/c you dont need to swap the last num
+    let smallestIdx = currentIdx;
+    for (let i = currentIdx + 1; i < array.length; i++) {
+      if (array[smallestIdx] > array[i]) {
+        smallestIdx = i;
+      }
+    }
+    //use currentIdx b/c its sorted up until that point
+    swapHelper(currentIdx, smallestIdx, array);
+    currentIdx++;
+  }
+  console.log("sorted", array);
+  return array;
+}
 
 //shorter and more consistent with insertion sort
 function selectionSort(array) {
