@@ -93,7 +93,7 @@ let homeworkTonight = new QuestionList()
   .add(true, "medium", "Balanced Brackets", "AE", "stacks")
   // .add(false, "medium", "Longest Palindrome SubString", "AE", "string")
   // .add(false, "medium", "Suffix Trie Construction", "AE", "tries")
-  .add(true, "hard", "Water Area / Trap Rain", "AE", "DP");
+  .add(true, "hard", "Water Area / Trap Rain", "AE", "DP")
   .add(true, "hard", "Find loop", "AE", "LL");
 
 //Bloomberg popular questions
@@ -121,4 +121,4 @@ homeworkTonight.add();
 // homeworkTonight.generateRand(1, "sorting", "AE");
 // homeworkTonight.generateRand(6, "BST", "AE");
 
-homeworkTonight.generateRand(5, "all", "bloomberg");
+homeworkTonight.generateRand(15, "all", "bloomberg");

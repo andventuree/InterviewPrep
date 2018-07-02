@@ -1607,7 +1607,7 @@
 //   console.log("maxSoFar: ", maxSoFar);
 // }
 
-// maxSum([3, 5, -9, 1, 3, -2, 3, 4, 7, 2, -9, 6, 3, 1, -5, 4]);
+maxSum([3, 5, -9, 1, 3, -2, 3, 4, 7, 2, -9, 6, 3, 1, -5, 4]); //19
 
 class Node {
   constructor(val) {
@@ -1819,19 +1819,34 @@ let List21 = new SingleLL().add(1).add(2);
 //   return res;
 // };
 
-var maxProfit = function(prices) {
-  let maxTotal = 0;
-  let maxPrice = 0;
-  for (let i = 1; i < prices.length; i++) {
-    console.log(maxPrice, maxTotal);
-    let test = maxPrice + prices[i] - prices[i - 1];
-    console.log("test: ", test);
-    maxPrice = Math.max(0, (maxPrice += prices[i] - prices[i - 1]));
-    maxTotal = Math.max(maxPrice, maxTotal);
-  }
-  return maxTotal;
-};
+// var maxProfit = function(prices) {
+//   let maxTotal = 0;
+//   let maxPrice = 0;
+//   for (let i = 1; i < prices.length; i++) {
+//     console.log(maxPrice, maxTotal);
+//     let test = maxPrice + prices[i] - prices[i - 1];
+//     console.log("test: ", test);
+//     maxPrice = Math.max(0, (maxPrice += prices[i] - prices[i - 1]));
+//     maxTotal = Math.max(maxPrice, maxTotal);
+//   }
+//   return maxTotal;
+// };
 
 // console.log(maxProfit([7, 1, 5, 3, 6, 4])); //7
 // console.log(maxProfit([1, 2, 3, 4, 5])); //4
 // console.log(maxProfit([7, 6, 4, 3, 1])); //0
+
+// function maxSumKadanes(arr) {
+//   let maxSoFar = arr[0];
+//   let total = arr[0];
+//   //max total sum of numbers, if the curr num is greater than adding the num, then keep curr, then update max so far
+//   for (let i = 1; i < arr.length; i++) {
+//     let num = arr[i];
+//     maxSoFar = Math.max(num, num + maxSoFar);
+//     total = Math.max(maxSoFar, total);
+//   }
+
+//   console.log("total: ", total);
+// }
+
+// maxSumKadanes([3, 5, -9, 1, 3, -2, 3, 4, 7, 2, -9, 6, 3, 1, -5, 4]); //19
