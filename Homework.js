@@ -651,159 +651,260 @@ let { homeworkTonight, tricks } = require("./HwHelper");
 // // testMinStack.min();
 // // testMinStack.peek();
 
-// **************** Tricks for Mon Jul 02 2018 ****************
-// Question {"binary search"}
-// Question {"shift array up by 1"}
-// Question {"swap arr spaces"}
-// Question {"insertion sort"}
-// Question {"selection sort"}
-// Question {"bubble sort"}
-// Question {"add nums by array back to front "}
-// Question {"delete linked list pointer"}
-// Question {"reverse linked list"}
-// Question {"return function that excutes all callback onto input")}
+// // **************** Tricks for Mon Jul 02 2018 ****************
+// // Question {"binary search"}
+// // Question {"shift array up by 1"}
+// // Question {"swap arr spaces"}
+// // Question {"insertion sort"}
+// // Question {"selection sort"}
+// // Question {"bubble sort"}
+// // Question {"add nums by array back to front "}
+// // Question {"delete linked list pointer"}
+// // Question {"reverse linked list"}
+// // Question {"return function that excutes all callback onto input")}
 
-function binarySearch(arr, target) {
-  let left = 0;
-  let right = arr.length - 1;
-  while (left <= right) {
-    let mid = Math.floor((left + right) / 2);
-    if (arr[mid] === target) return mid;
-    else if (target < arr[mid]) right = mid - 1;
-    else if (target > arr[mid]) left = mid + 1;
-  }
-  return left;
-}
+// function binarySearch(arr, target) {
+//   let left = 0;
+//   let right = arr.length - 1;
+//   while (left <= right) {
+//     let mid = Math.floor((left + right) / 2);
+//     if (arr[mid] === target) return mid;
+//     else if (target < arr[mid]) right = mid - 1;
+//     else if (target > arr[mid]) left = mid + 1;
+//   }
+//   return left;
+// }
 
-function shiftUp(arr) {
-  let count = 0;
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i] !== 0) arr[count++] = arr[i];
-  }
-  console.log(arr.slice(0, count));
-}
+// function shiftUp(arr) {
+//   let count = 0;
+//   for (let i = 0; i < arr.length; i++) {
+//     if (arr[i] !== 0) arr[count++] = arr[i];
+//   }
+//   console.log(arr.slice(0, count));
+// }
 
-// shiftUp([0, 0, 0, 0, 0, 1, 2, 3, 4, 5, 6]);
+// // shiftUp([0, 0, 0, 0, 0, 1, 2, 3, 4, 5, 6]);
 
-function swap(i, j, arr) {
-  let temp = arr[i];
-  arr[i] = arr[j];
-  arr[j] = temp;
-}
+// function swap(i, j, arr) {
+//   let temp = arr[i];
+//   arr[i] = arr[j];
+//   arr[j] = temp;
+// }
 
-function swapObj(obj) {
-  let left = obj.left;
-  obj.left = obj.right;
-  obj.right = left;
-}
+// function swapObj(obj) {
+//   let left = obj.left;
+//   obj.left = obj.right;
+//   obj.right = left;
+// }
 
-function insertionSort(arr) {
-  for (let i = 1; i < arr.length; i++) {
-    let j = i;
-    while (j > 0 && arr[j] < arr[j - 1]) {
-      j--;
-    }
-  }
-  return arr;
-}
-
-function selectionSort(arr) {
-  for (let currIdx = 0; currIdx < arr.length - 1; currIdx++) {
-    //will not need to sort the last item
-    let smallest = currIdx;
-    for (let nextIdx = currIdx + 1; nextIdx < arr.length; nextIdx++) {
-      if (arr[nextIdx] < arr[smallest]) smallest = nextIdx;
-    }
-    swap(currIdx, smallest, arr);
-  }
-  console.log(arr);
-}
-
-// selectionSort([12, 31, 3, 12, 312, 3, 12, 2, 1, 1, 1, 1]);
-//O(n^2)
-function bubbleSort(arr) {
-  let isSorted = false;
-  while (!isSorted) {
-    isSorted = true;
-    for (let i = 0; i < arr.length - 1; i++) {
-      if (arr[i + 1] < arr[i]) {
-        swap(i, i + 1, arr);
-        isSorted = false;
-      }
-    }
-  }
-  console.log(arr);
-}
-
-// bubbleSort([12, 31, 3, 12, 312, 3, 12, 2, 1, 1, 1, 1]);
-
-function manuallyAddNums(nums1, nums2) {
-  let lastIdx1 = nums1.length - 1;
-  let lastIdx2 = nums2.length - 1;
-  let carry = 0;
-  let stringTotal = "";
-  for (let i = Math.max(lastIdx1, lastIdx2); i >= 0; i--) {
-    let a = nums1[lastIdx1--] || 0;
-    let b = nums2[lastIdx2--] || 0;
-    let sum = a + b + carry;
-
-    if (sum > 9) {
-      sum -= 10;
-      carry += 1;
-    } else {
-      carry = 0;
-    }
-
-    stringTotal = sum + stringTotal;
-  }
-  console.log(stringTotal.split("").map(num => parseInt(num)));
-}
-
-// manuallyAddNums([1, 2, 3], [2, 9]);
-
-function deleteLLNode(node) {
-  if (!node) return node;
-  node.value = node.next.value;
-  node.next = node.next.next;
-}
-
-function reverseLL(head) {
-  let prevNode = null;
-  if (!head) {
-    let originalNextNode = head.next;
-    head.next = prevNode;
-    prevNode = head;
-    head = originalNextNode;
-  }
-}
-
-// function GSQuestion(callbacks) {
-//   return function(input) {
-//     for (let i = 0; i < callbacks; i++) {
-//       input = callbacks[i](input);
+// function insertionSort(arr) {
+//   for (let i = 1; i < arr.length; i++) {
+//     let j = i;
+//     while (j > 0 && arr[j] < arr[j - 1]) {
+//       j--;
 //     }
-//     return input;
+//   }
+//   return arr;
+// }
+
+// function selectionSort(arr) {
+//   for (let currIdx = 0; currIdx < arr.length - 1; currIdx++) {
+//     //will not need to sort the last item
+//     let smallest = currIdx;
+//     for (let nextIdx = currIdx + 1; nextIdx < arr.length; nextIdx++) {
+//       if (arr[nextIdx] < arr[smallest]) smallest = nextIdx;
+//     }
+//     swap(currIdx, smallest, arr);
+//   }
+//   console.log(arr);
+// }
+
+// // selectionSort([12, 31, 3, 12, 312, 3, 12, 2, 1, 1, 1, 1]);
+// //O(n^2)
+// function bubbleSort(arr) {
+//   let isSorted = false;
+//   while (!isSorted) {
+//     isSorted = true;
+//     for (let i = 0; i < arr.length - 1; i++) {
+//       if (arr[i + 1] < arr[i]) {
+//         swap(i, i + 1, arr);
+//         isSorted = false;
+//       }
+//     }
+//   }
+//   console.log(arr);
+// }
+
+// // bubbleSort([12, 31, 3, 12, 312, 3, 12, 2, 1, 1, 1, 1]);
+
+// function manuallyAddNums(nums1, nums2) {
+//   let lastIdx1 = nums1.length - 1;
+//   let lastIdx2 = nums2.length - 1;
+//   let carry = 0;
+//   let stringTotal = "";
+//   for (let i = Math.max(lastIdx1, lastIdx2); i >= 0; i--) {
+//     let a = nums1[lastIdx1--] || 0;
+//     let b = nums2[lastIdx2--] || 0;
+//     let sum = a + b + carry;
+
+//     if (sum > 9) {
+//       sum -= 10;
+//       carry += 1;
+//     } else {
+//       carry = 0;
+//     }
+
+//     stringTotal = sum + stringTotal;
+//   }
+//   console.log(stringTotal.split("").map(num => parseInt(num)));
+// }
+
+// // manuallyAddNums([1, 2, 3], [2, 9]);
+
+// function deleteLLNode(node) {
+//   if (!node) return node;
+//   node.value = node.next.value;
+//   node.next = node.next.next;
+// }
+
+// function reverseLL(head) {
+//   let prevNode = null;
+//   if (!head) {
+//     let originalNextNode = head.next;
+//     head.next = prevNode;
+//     prevNode = head;
+//     head = originalNextNode;
+//   }
+// }
+
+// // function GSQuestion(callbacks) {
+// //   return function(input) {
+// //     for (let i = 0; i < callbacks; i++) {
+// //       input = callbacks[i](input);
+// //     }
+// //     return input;
+// //   };
+// // }
+
+// let a = function(num) {
+//   return num + 2;
+// };
+// let b = function(num) {
+//   return num * 3;
+// };
+// let c = function(num) {
+//   return 10;
+// };
+// let callbacks = [a, b, c];
+// let composeWithValue = compose(callbacks);
+// // console.log(composeWithValue(1)); //32
+
+// function compose(callbacks) {
+//   return function(value) {
+//     for (let i = callbacks.length - 1; i >= 0; i--) {
+//       value = callbacks[i](value);
+//     }
+//     return value;
 //   };
 // }
 
-let a = function(num) {
-  return num + 2;
-};
-let b = function(num) {
-  return num * 3;
-};
-let c = function(num) {
-  return 10;
-};
-let callbacks = [a, b, c];
-let composeWithValue = compose(callbacks);
-// console.log(composeWithValue(1)); //32
+// **************** Homework for Tue Jul 03 2018 ****************
+// num of ways to make change
+// kadanes
+// find 3 largest num sum
+// find closest value in BST
 
-function compose(callbacks) {
-  return function(value) {
-    for (let i = callbacks.length - 1; i >= 0; i--) {
-      value = callbacks[i](value);
+function waysToMakeChange(amt, denoms) {
+  let ways = new Array(amt + 1).fill(0);
+  ways[0] = 1;
+  //create an array 0 - amt, ways to add up to each of these nums given denominations
+  //fill array with 0's, except index 0 which will be 1, only 1 way to get 0
+  //then loop through to look at how many times a coin can fit in current idx;
+  //then we'll return the last idx b/c that should group together all ways
+  for (let i = 0; i < denoms.length; i++) {
+    let denom = denoms[i];
+    for (let j = 1; j < ways.length; j++) {
+      if (denom <= j) ways[j] += ways[j - denom];
     }
-    return value;
-  };
+    console.log(ways);
+  }
+  console.log(ways[amt]);
 }
+
+// waysToMakeChange(10, [1, 5, 10, 25]); //4
+// waysToMakeChange(5, [1, 5, 10, 25]); //2
+//  0, 1, 2, 3, 4, 5
+// [1, 0, 0, 0, 0, 0];
+/*
+  denom 1 | j 1
+    +  +  +  +  +  +
+    0  0  0  0  0  +
+
+*/
+
+function kadanesMaxSum(arr) {
+  //want to keep track of total
+  //iterate through and add to total
+  //if total < current num, then we can drop the total and update with curr num
+  //then return current num at the end
+  let maxSoFar = arr[0];
+  let maxTotal = arr[0];
+  for (let i = 1; i < arr.length; i++) {
+    maxSoFar = Math.max(maxSoFar + arr[i], arr[i]);
+    maxTotal = Math.max(maxTotal, maxSoFar);
+  }
+  console.log(maxTotal);
+}
+
+// ex [1, 2, 3, 4, 5, -15, 5] | maxSoFar 15 -15 => 0 + 5 then itll thnk 5 is max
+//need maxTotal
+// kadanesMaxSum([1, 2, 3, 4, 5, -15, 5]);
+
+function threeNumSum(arr, target) {
+  //first, sort the array
+  //then have a pointer in the left right and adjacent to left
+  //this will only need 1 loop b/c we're using pointers
+  //once we've found the correct target, we return
+  let combinations = [];
+  arr.sort((a, b) => a - b); //smallest to largest
+  for (let i = 0; i < arr.length; i++) {
+    let left = i + 1;
+    let right = arr.length - 1;
+    while (left < right) {
+      let total = arr[left] + arr[i] + arr[right];
+      if (target > total) {
+        left++;
+      } else if (target < total) {
+        right--;
+      } else if (target === total) {
+        combinations.push([arr[left], arr[i], arr[right]]);
+        left++;
+      }
+    }
+  }
+  console.log(combinations);
+}
+
+// threeNumSum([12, 3, 1, 2, -6, 5, -8, 6], 0); //[ [ -8, 2, 6 ], [ -8, 3, 5 ], [ -6, 1, 5 ] ]
+
+function findClosest(tree, target) {
+  // return closestHelper(tree, target, Infinity);
+  let closest = tree.value;
+  while (tree !== null) {
+    let diff = Math.abs(target - closest);
+    if (Math.abs(tree.value - target) < diff) closest = tree.value;
+
+    if (target < tree.value) tree = tree.left;
+    else if (target > tree.value) tree = tree.right;
+    else break;
+  }
+  return closest;
+}
+
+/*  6 target
+    5 tree
+  3   9
+*/
+
+//tree, tree.left, tree.right, .value and update closest if difference is smaller
+//then we move left or right depending on difference
