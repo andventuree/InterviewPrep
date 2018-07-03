@@ -92,9 +92,9 @@ let homeworkTonight = new QuestionList()
 homeworkTonight
   .add(true, "", "add nums of 2 linked list", "bloomberg", "LL")
   .add(true, "", "reverseLinkedList", "bloomberg", "LL")
-  // .add(false, "", "reverse integer", "bloomberg", "")
+  .add(true, "", "reverse integer", "bloomberg", "")
   .add(true, "", "most traded", "bloomberg", "")
-  // .add(false, "", "first unique character in a string", "bloomberg", "string")
+  .add(true, "", "first unique character in a string", "bloomberg", "string")
   .add(true, "", "linked list cycle", "bloomberg", "LL")
   .add(true, "", "valid parentheses", "bloomberg", "") //same as AE balanced brackets
   .add(true, "", "trap rain water", "bloomberg", "") //same as AE water area

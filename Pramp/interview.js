@@ -116,7 +116,7 @@ function truncFloat(x, points) {
 //   return truncFloat(begin, 3);
 // }
 
-console.log(root(9, 2));
+// console.log(root(9, 2));
 
 function root(x, n) {
   //goal is to find a number that we'll use n times to equal x with <0.0001 accuracy
@@ -133,3 +133,57 @@ function root(x, n) {
     else if (x < y) end = mid - 0.001;
   }
 }
+
+var search = function(nums, target) {
+  let pivotPoint = pivot(nums);
+  console.log("pivotPoint: ", pivotPoint);
+  if (target < nums[0]) {
+    return bSearch(nums, pivotPoint, nums.length - 1, target);
+  }
+  return bSearch(nums, 0, pivotPoint - 1, target);
+};
+
+function pivot(nums) {
+  let left = 0;
+  let right = nums.length - 1;
+  while (left <= right) {
+    let mid = Math.floor((left + right) / 2);
+    if (nums[mid] < nums[mid - 1]) return mid;
+
+    if (nums[mid] > nums[0]) left = mid + 1;
+    else right = mid - 1;
+  }
+  return 0;
+}
+
+function bSearch(nums, left, right, target) {
+  while (left <= right) {
+    let mid = left + Math.floor((left - right) / 2);
+    if (nums[mid] === target) return mid;
+
+    if (nums[mid] < target) left = mid + 1;
+    else right = mid + 1;
+  }
+  return -1;
+}
+
+// search([4, 5, 6, 7, 0, 1, 2], 0);
+
+//https://leetcode.com/explore/learn/card/binary-search/136/template-analysis/935/
+// Template 1: basic
+// Initial Condition: left = 0, right = length-1
+// Termination: left > right
+// Searching Left: right = mid-1 <- exclude current node is next search
+// Searching Right: left = mid+1 <- exclude current node is next search
+
+// Template 2: advanced - check right
+// Initial Condition: left = 0, right = length
+// Termination: left == right
+// Searching Left: right = mid
+// Searching Right: left = mid+1 <- exclude current node is next search
+
+// Template 3: check left + right;
+// Initial Condition: left = 0, right = length-1
+// Termination: left + 1 == right
+// Searching Left: right = mid
+// Searching Right: left = mid
