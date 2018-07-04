@@ -100,7 +100,7 @@ homeworkTonight
   .add(true, "", "trap rain water", "bloomberg", "") //same as AE water area
   .add(true, "", "string compression", "bloomberg", "string")
   .add(true, "", "move zeros", "bloomberg", "array")
-  // .add(false, "", "intersection of two linked lists", "bloomberg", "LL")
+  .add(true, "", "intersection of two linked lists", "bloomberg", "LL")
   .add(true, "", "validate BST", "bloomberg", "BST")
   .add(true, "", "min stack", "bloomberg", "stack");
 
@@ -117,8 +117,9 @@ let tricks = new QuestionList()
   .add(true, "", "add nums by array back to front ")
   .add(true, "", "delete linked list pointer")
   .add(true, "", "reverse linked list")
-  .add(true, "", "return function that excutes all callback onto input")
-  .add(true, "", "memo calculation");
+  .add(true, "", "return fn that excutes callbacks on input")
+  .add(true, "", "memo calculation")
+  .add(true, "", "shift up nums + add val at specific idx");
 
 module.exports = {
   homeworkTonight,

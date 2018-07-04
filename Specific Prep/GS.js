@@ -1,5 +1,5 @@
 //*****************************************************************
-//Questions compiled from Glass Door on GS Software Engineering
+//Questions compiled from Glass Door on Software Engineering
 //*****************************************************************
 
 // Write a program to check whether given tree is binary search tree

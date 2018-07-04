@@ -934,10 +934,129 @@ function bubbleSort(arr) {
 
 // bubbleSort([4, 123, 125, 1, 51, 21, 2, 11, 1, 21]);
 
-function largestNumSum(arr) {
-  let largestThree = []; //3 O(n^2) <10 merge sort
+//have an array to hold 3 numbers,
+//look at each number (searching)
+//compare with numbers we stored if num is bigger, add to the end and shift everything up (sorting)
+//[0, 1, 2]
+//[18, 141, 541]
+//[141, 1, 17, -7, -17, -27, 18, 541, 8, 7, 7] => [18,141,541]
+//duplicates, negatives, unsorted => no binary search
 
-  return largestThree.sort((a, b) => a - b);
+function largestNumSum(arr) {
+  let largestThree = [null, null, null];
+  for (let num of arr) {
+    findLargest(largestThree, num);
+  }
+  console.log(largestThree);
 }
 
-largestNumSum([141, 1, 17, -7, -17, -27, 18, 541, 8, 7, 7]); // [18,141,541]
+function findLargest(largestThree, num) {
+  if (largestThree[2] === null || num > largestThree[2]) {
+    shiftUpAndInsert(largestThree, num, 2);
+  } else if (largestThree[1] === null || num > largestThree[1]) {
+    shiftUpAndInsert(largestThree, num, 1);
+  } else if (largestThree[0] === null || num > largestThree[0]) {
+    shiftUpAndInsert(largestThree, num, 0);
+  }
+}
+
+function shiftUpAndInsert(largestThree, num, specifiedIdx) {
+  for (let i = 0; i <= specifiedIdx; i++) {
+    if (i === specifiedIdx) largestThree[specifiedIdx] = num;
+    else largestThree[i] = largestThree[i + 1];
+  }
+}
+
+// largestNumSum([141, 1, 17, -7, -17, -27, 18, 541, 8, 7, 7]); // [18,141,541]
+
+// landscape [0, 8, 0, 0, 5, 0, 0, 10,  0,  0,  1,  1,  0,  3]
+// leftMax   [0, 8, 8, 8, 8, 8, 8, 10, 10, 10, 10, 10, 10, 10]   min
+// rightMax  [10, 10, 10, 10, 10, 10,  10, 10,  3,  3,  3,  3, 3,  3]
+// minHeight [0, 8, 8, 8, 8, 8, 8, 10,  3,  3,  3,  3,  3,  3] Math.min(leftMax[i], rightmax[i])
+// trapped   [0, 0, 8, 8, 3, 8, 8, 0, 3, 3, 2, 2, 3, 0]
+
+function trapRain(landscapes) {
+  let leftMaxes = [];
+  let leftMax = 0;
+  for (let i = 0; i < landscapes.length; i++) {
+    if (landscapes[i] > leftMax) {
+      leftMax = landscapes[i];
+    }
+    leftMaxes.push(leftMax);
+  }
+  console.log("leftMaxes: ", leftMaxes);
+
+  let rightMaxes = [];
+  let rightMax = 0;
+  for (let j = landscapes.length - 1; j >= 0; j--) {
+    if (landscapes[j] > rightMax) {
+      rightMax = landscapes[j];
+    }
+    rightMaxes[j] = rightMax;
+  }
+  console.log("rightMaxes: ", rightMaxes);
+
+  let trapped = 0;
+  for (let k = 0; k < landscapes.length; k++) {
+    let column = landscapes[k];
+    let minHeight = Math.min(leftMaxes[k], rightMaxes[k]);
+    if (column < minHeight) trapped += minHeight - column;
+  }
+
+  console.log("trapped: ", trapped);
+}
+// trapRain([0, 8, 0, 0, 5, 0, 0, 10, 0, 0, 1, 1, 0, 3]); //48
+
+/*
+      7
+    5   10
+  2  3    15
+
+      7
+   10    5
+    15  3  2
+
+  Queue: [7,5,10,2,3,15]
+
+*/
+
+//given a tree, we want to look at each child
+//then swap left and rights
+//then look and their children too
+//repeat -> suggests a while loop
+
+function invertBinaryTree(tree) {
+  let queue = [tree];
+  while (queue.length > 0) {
+    let node = queue.shift(); //b/c is a queue
+    if (node !== null) {
+      queue.push(node.left); //add its children to queue
+      queue.push(node.right); //add its children to queue
+      swapLeftAndRight(node);
+    }
+  }
+}
+
+function swapLeftAndRight(node) {
+  let left = node.left;
+  node.left = node.right;
+  node.right = left;
+}
+
+/* 'tacocat'
+    tacocat => true
+   'booger'
+   b    r => false
+    */
+
+function palindromeCheck(str) {
+  let left = 0;
+  // let right = str.length - left - 1; //primitive => not dynamic
+  while (left <= str.length - 1 - left) {
+    if (str[left] !== str[str.length - 1 - left]) return false;
+    left++;
+  }
+  return true;
+}
+
+// console.log(palindromeCheck("tacocat"));

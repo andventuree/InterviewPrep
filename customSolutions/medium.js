@@ -477,5 +477,6 @@ function removeKthNodeFromEnd(head, k) {
     kth = kth.next; //k will hit the end
     normal = normal.next; //normal will hit kth nodes from end
   }
+
   normal.next = normal.next.next;
 }
