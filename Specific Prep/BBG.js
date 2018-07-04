@@ -63,6 +63,14 @@ function reversedLinkList(head) {
   return prev;
 }
 
+function reverseLLRecur(head) {
+  if (head.next === null || head === null) return head;
+  let formerHead = reverseLLRecur(head.next);
+  head.next.next = head;
+  head.next = null;
+  return formerHead;
+}
+
 //REVERSE INTEGER
 function reverseInteger(int) {
   let rev = 0;
@@ -122,11 +130,37 @@ function firstUnique(str) {
   }
 }
 
-//LINKED LIST CYCLE
-function linkedListCycle() {}
+//LINKED LIST CYCLE (which is not the same as loop - loop has extra step)
+//1 2 3 4 5 6 7  <-> 5  6 7
+function linkedListCycle(list) {
+  if (!list) return list;
+  let fast = list;
+  let slow = list;
+  while (slow.next && fast.next && fast.next.next) {
+    fast = fast.next.next;
+    slow = slow.next;
+    if (slow === fast) break;
+  }
+  return fast;
+}
 
 //VALID PARENTHESES
-function validParentheses() {}
+function validParentheses(brackets) {
+  let stack = [];
+  for (let i = 0; i < brackets.length; i++) {
+    let bracket = brackets[i];
+    if (bracket === "}") {
+      if (stack.pop() !== "{") return false;
+    } else if (bracket === "]") {
+      if (stack.pop() !== "[") return false;
+    } else if (bracket === ")") {
+      if (stack.pop() !== "(") return false;
+    } else {
+      stack.push(bracket);
+    }
+  }
+  return stack.length === 0;
+}
 
 //TRAP RAIN WATER
 //a)find the left highest value
@@ -225,6 +259,39 @@ function moveZeroToFront(arr) {
 // moveZeroToFront([112, 51, 4, 3, 2, 1, 0, 0, 0, 0]);
 
 //INTERSECTION OF TWO LINKED LISTS
+// 1 -> 2 -> 3 -> 4
+//                   -> 5 -> 6
+//           8 -> 9
+
+// 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> | 8 -> 9 -> 5 -> 6
+// 8 -> 9 -> 5 -> 6 | -> 1 -> 2 -> 3 -> 4 -> 5 -> 6
+
+function intersection(headA, headB) {
+  var set = {};
+  while (headA) {
+    set[headA.val] = true;
+    headA = headA.next;
+  }
+  while (headB) {
+    if (set[headB.val]) {
+      return headB;
+    }
+    headB = headB.next;
+  }
+  return null;
+}
+
+var getIntersectionNode = function(headA, headB) {
+  if (headA === null || headB === null) return null;
+
+  let a = headA;
+  let b = headB;
+  while (a !== b) {
+    a = a === null ? headB : a.next;
+    b = b === null ? headA : b.next;
+  }
+  return a;
+};
 
 //VALIDATE BST
 //time: O(n) worst case 1 long branch | space: O(n) recursion

@@ -1920,8 +1920,8 @@ function reverseInteger(int) {
   // return rev;
 }
 
-reverseInteger(123); //321
-reverseInteger(123456789); //321
+// reverseInteger(123); //321
+// reverseInteger(123456789); //321
 
 function reverseNum(int) {
   //1234
@@ -1937,4 +1937,85 @@ function reverseNum(int) {
   console.log("reversed: ", reversed);
 }
 
-reverseNum(1234);
+// reverseNum(1234);
+
+//1234
+// 4 => 1234 % 10
+// 1234 / 10 => Math.floor(123.4) => 123
+// 4 + nextOnesPlace
+// 4321
+
+// function reverseInts(num) {
+//   //extract out onesPlace -> make a variable
+//   //then remove onesPlace from original number
+//   //have a total we add to, each time, we move it out of the onesPlace by x 10
+//   let reversedNum = 0;
+//   while (num !== 0) {
+//     let onesPlace = num % 10;
+//     num = Math.floor(num / 10);
+//     reversedNum = reversedNum * 10 + onesPlace;
+//   }
+//   console.log("here", reversedNum);
+// }
+
+// reverseInts(1234);
+
+//INTERSECTION OF TWO LINKED LISTS
+function intersection(headA, headB) {
+  var set = {};
+  while (headA) {
+    set[headA.val] = true;
+    headA = headA.next;
+  }
+  while (headB) {
+    if (set[headB.val]) {
+      return headB;
+    }
+    headB = headB.next;
+  }
+  return null;
+}
+
+var getIntersectionNode = function(headA, headB) {
+  if (headA === null || headB === null) return null;
+
+  let a = headA;
+  let b = headB;
+  while (a !== b) {
+    a = a === null ? headB : a.next;
+    b = b === null ? headA : b.next;
+  }
+  return a;
+};
+
+// 1 -> 2 -> 3 -> 4
+//                   -> 5 -> 6
+//           8 -> 9 //edge case is diff length
+
+// 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> | 8 -> 9 -> 5 -> 6
+// 8 -> 9 -> 5 -> 6 | -> 1 -> 2 -> 3 -> 4 -> 5 -> 6
+
+function intersectionLL(headA, headB) {
+  let set = {};
+  while (headA) {
+    set[headA.value] = true;
+    headA = headA.next;
+  }
+
+  while (headB) {
+    if (set[headB.value]) return headB;
+    headB = headB.next;
+  }
+  return null;
+}
+
+function intersectionLL2(headA, headB) {
+  if (headA === null || headB === null) return null;
+  let a = headA;
+  let b = headB;
+  while (a !== b) {
+    a = a === null ? b : a.next;
+    b = b === null ? a : b.next;
+  }
+  return a;
+}

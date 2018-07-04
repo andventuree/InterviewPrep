@@ -3,7 +3,7 @@ let { homeworkTonight, tricks } = require("./HwHelper");
 // homeworkTonight.generateRand(5);
 // homeworkTonight.generateRand(6, "BST", "AE");
 // homeworkTonight.generateRand(6, "all", "bloomberg");
-// tricks.generateRand(10, "all");
+// tricks.generateRand(5, "all");
 
 // // **************** Homework for Thu Jun 28 2018 ****************
 // // [ Question {name: 'BST Traversal',learnedStatus: true,difficulty: 'medium',source: 'AE',type: 'BST' },
@@ -1060,3 +1060,83 @@ function palindromeCheck(str) {
 }
 
 // console.log(palindromeCheck("tacocat"));
+
+// **************** tricks for Wed Jul 04 2018 ****************
+// [ Question {name: 'shift up nums + add val at specific idx',learned: true,level: '',source: null,type: null },
+// Question {name: 'reverse linked list',learned: true,level: '',source: null,type: null },
+// Question {name: 'return fn that excutes callbacks on input',learned: true,level: '',source: null,type: null },
+// Question {name: 'delete linked list pointer',learned: true,level: '',source: null,type: null },
+// Question {name: 'bubble sort',learned: true,level: '',source: null,type: null },
+// Question {name: 'shift array up by 1',learned: true,level: '',source: null,type: null } ]
+
+function shiftUpAndInsert(arr, insertVal, idx) {
+  for (let i = 0; i <= idx; i++) {
+    if (i === idx) arr[i] = insertVal;
+    //insert into desired spot
+    else arr[i] = arr[i + 1]; //shift nums up by 1
+  }
+}
+
+//1 - 2 - 3 - 4 -> 5 <- 5
+
+//reverse the LL and make a cycle
+function reverseLL(head) {
+  //this should work, need to confirm
+  let lastNode = head;
+  while (head) {
+    let formerNext = head.next;
+    head.next = lastNode;
+    lastNode = head;
+    head = formerNext;
+  }
+  return lastNode;
+}
+
+function reverseLLRecur(head) {
+  if (head.next === null || head === null) return head; //head.next === null is to quit at the end
+  let formerHead = reverseLLRecur(head.next);
+  head.next.next = head;
+  head.next = null;
+  return formerHead; //it actually only reaches this 1 time
+}
+
+function funcProgramming(callbacks) {
+  return function(input) {
+    for (let i = callbacks.length - 1; i >= 0; i--) {
+      input = callbacks[i](input);
+    }
+    return input;
+  };
+}
+
+function deleteLLPointer(node) {
+  if (node === null) return node;
+  node.value = node.next.value;
+  node.next = node.next.next;
+}
+
+function bubbleSort(arr) {
+  let isSorted = false;
+  while (!isSorted) {
+    isSorted = true;
+    for (let i = 1; i < arr.length; i++) {
+      if (arr[i] < arr[i + 1]) {
+        let temp = arr[i];
+        arr[i] = arr[i + 1];
+        arr[i + 1] = temp;
+        isSorted = false;
+      }
+    }
+  }
+  return arr;
+}
+
+function shiftUpBy1(arr) {
+  for (let i = 0; i <= arr.length - 1; i++) {
+    if (i === arr.length - 1) arr.pop();
+    else arr[i] = arr[i + 1];
+  }
+  console.log(arr);
+}
+
+// shiftUpBy1([12, 3, 123, 1]);
