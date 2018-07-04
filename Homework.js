@@ -908,3 +908,36 @@ function findClosest(tree, target) {
 
 //tree, tree.left, tree.right, .value and update closest if difference is smaller
 //then we move left or right depending on difference
+
+// **************** Homework for Tue Jul 03 2018 ****************
+// [ Question {name: 'Bubble Sort',learned: true,level: 'easy',source: 'AE',type: 'sorting' },
+//   Question {name: 'Find 3 Largest Num Sum',learned: true,level: 'easy',source: 'AE',type: 'search' },
+//   Question {name: 'trap rain water',learned: true,level: '',source: 'bloomberg',type: '' },
+//   Question {name: 'Invert Binary Tree',learned: true,level: 'medium',source: 'AE',type: 'BT' },
+//   Question {name: 'Palindrome Check',learned: true,level: 'easy',source: 'AE',type: 'string' } ]
+
+function bubbleSort(arr) {
+  let isSorted = false;
+  while (!isSorted) {
+    isSorted = true;
+    for (let i = 1; i < arr.length; i++) {
+      if (arr[i] < arr[i - 1]) {
+        let temp = arr[i];
+        arr[i] = arr[i - 1];
+        arr[i - 1] = temp;
+        isSorted = false;
+      }
+    }
+  }
+  console.log(arr);
+}
+
+// bubbleSort([4, 123, 125, 1, 51, 21, 2, 11, 1, 21]);
+
+function largestNumSum(arr) {
+  let largestThree = []; //3 O(n^2) <10 merge sort
+
+  return largestThree.sort((a, b) => a - b);
+}
+
+largestNumSum([141, 1, 17, -7, -17, -27, 18, 541, 8, 7, 7]); // [18,141,541]
