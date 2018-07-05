@@ -1140,3 +1140,79 @@ function shiftUpBy1(arr) {
 }
 
 // shiftUpBy1([12, 3, 123, 1]);
+
+// **************** Homework for Thu Jul 05 2018 ****************
+// [ Question {name: 'memo calculation',learned: true },
+//   Question {name: 'shift up nums + add val at specific idx',learned: true },
+//   Question {name: 'shift up nums + add val at specific idx',learned: true },
+//   Question {name: 'binary search',learned: true },
+//   Question {name: 'add nums by array back to front ',learned: true } ]
+
+function memoCalculation(arr, target) {
+  //store index of num or true,
+  let set = {};
+  for (let i = 0; i < arr.length; i++) {
+    let diff = Math.abs(arr[i] - target);
+    console.log("diff: ", diff);
+    if (!set[diff]) set[arr[i]] = true;
+    else console.log([arr[i], diff]);
+  }
+  console.log(set);
+  // console.log([]);
+}
+
+// memoCalculation([1, 2, 3, 4, 5, 6], 9);
+// memoCalculation([1, 2, 3, 4, 5, 6], 11);
+
+// hashset {} to store unique values;
+
+function shiftUpAndAdd(arr, insertVal, specificIdx) {
+  for (let i = 0; i <= specificIdx; i++) {
+    //specificIdx off by 1 like arr.length;
+    if (i === specificIdx) arr[specificIdx] = insertVal;
+    else arr[i] = arr[i + 1];
+  }
+  console.log(arr);
+}
+
+// shiftUpAndAdd([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 10000000, 5);
+
+function shiftUp(arr) {
+  for (let i = 0; i < arr.length; i++) {
+    if (i === arr.length - 1) arr[i] = 123123123123;
+    else arr[i] = arr[i + 1];
+  }
+  console.log(arr);
+}
+
+// shiftUp([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+
+function binarySearch(arr, target) {
+  //template 1
+  let left = 0;
+  let right = arr.length - 1;
+  while (left <= right) {
+    let mid = Math.floor((left + right) / 2);
+    if (arr[mid] === target) return console.log(mid);
+    else if (target > arr[mid]) left = mid + 1;
+    else if (target < arr[mid]) right = mid - 1;
+  }
+  return console.log("didi not match");
+}
+
+// binarySearch([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 3); //3
+// binarySearch([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 5); //4
+// binarySearch([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 6); //4
+
+function addZerosToBack(arr) {
+  let zeroCounter = 0;
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] !== 0) arr[zeroCounter++] = arr[i];
+  }
+  while (zeroCounter < arr.length) {
+    arr[zeroCounter++] = 0;
+  }
+  console.log(arr);
+}
+
+// addZerosToBack([0, 0, 0, 0, 0, 0, 1, 2, 31, 23, 12, 2]);
