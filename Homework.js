@@ -1218,3 +1218,101 @@ function addZerosToBack(arr) {
 // addZerosToBack([0, 0, 0, 0, 0, 0, 1, 2, 31, 23, 12, 2]);
 
 // STILL NEED TO FIGURE OUT BEST WAY TO TAKES VALUES OUT OF AN OBJ
+
+// **************** Homework for Thu Jul 05 2018 ****************
+// [ Question {name: 'reverse integer',learned: true,level: '',source: 'bloomberg',type: '' },
+//   Question {name: 'move zeros',learned: true,level: '',source: 'bloomberg',type: 'array' },
+//   Question {name: 'trap rain water',learned: true,level: '',source: 'bloomberg',type: '' },
+//   Question {name: 'min stack',learned: true,level: '',source: 'bloomberg',type: 'stack' } ]
+
+function reverseInt(num) {
+  let reversed = 0;
+  while (num !== 0) {
+    let onesPlace = num % 10;
+    num = Math.floor(num / 10);
+    reversed = reversed * 10 + onesPlace;
+  }
+  console.log(reversed);
+}
+
+// reverseInt(987654);
+
+function moveZeros(arr) {
+  let count = 0;
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] !== 0) arr[count++] = arr[i];
+  }
+
+  while (count < arr.length) {
+    arr[count++] = 0;
+  }
+  console.log(arr);
+}
+
+// moveZeros([0, 0, 0, 0, 0, 0, 1231, 41, 24, 124, 124]);
+
+function shiftUp(arr) {
+  for (let i = 0; i < arr.length; i++) {
+    if (i === arr.length - 1) arr[i] = "dont need this index, can pop";
+    else arr[i] = arr[i + 1];
+  }
+  console.log(arr);
+}
+
+// shiftUp([1, 123, 12, 312, 31, 231, 23, 123, 123, 1]);
+
+function trapRains(landscapes) {
+  let maxLefts = [];
+  let maxLeftTracker = landscapes[0];
+  for (let i = 0; i < landscapes.length; i++) {
+    let column = landscapes[i];
+    if (column > maxLeftTracker) maxLeftTracker = column;
+    maxLefts.push(maxLeftTracker);
+  }
+
+  let maxRights = [];
+  let maxRight = landscapes[landscapes.length - 1];
+  for (let k = landscapes.length - 1; k >= 0; k--) {
+    let column = landscapes[k];
+    if (maxRight < column) maxRight = column;
+    maxRights[k] = maxRight;
+  }
+
+  let totalRain = 0;
+  for (let j = 0; j < landscapes.length; j++) {
+    let minHeight = Math.min(maxLefts[j], maxRights[j]);
+    let column = landscapes[j];
+    if (column < minHeight) totalRain += minHeight - column;
+  }
+  console.log(totalRain);
+}
+
+// trapRains([0, 8, 0, 0, 5, 0, 0, 10, 0, 0, 1, 1, 0, 3]); //48
+
+class MinStack {
+  constructor() {
+    this.stack = [];
+  }
+  push(val) {
+    let min = this.min();
+    this.stack.push({
+      value: val,
+      min: Math.min(min !== undefined ? min : Infinity, val)
+    });
+    return this;
+  }
+
+  pop() {
+    if (this.stack.length > 0) {
+      let item = this.stack.pop();
+      return item.value;
+    }
+  }
+
+  min() {
+    if (this.stack.length > 0) {
+      let item = this.stack[this.stack.length - 1]; //return last item
+      return item.min;
+    }
+  }
+}
