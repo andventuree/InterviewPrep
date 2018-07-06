@@ -1,3 +1,8 @@
+let { homeworkTonight, tricks } = require("./HwHelper");
+
+// homeworkTonight.genQuestions(5);
+// tricks.genQuestions(5);
+
 // //linked list
 // class Node {
 //   constructor(value) {
@@ -2070,3 +2075,134 @@ function root(x, n) {
 }
 
 // console.log(root(9, 3));
+
+// Question {name: 'Binary Search',learned: true,level: 'easy',source: 'AE',type: 'search' }
+// Question {name: 'Find 3 Largest Num Sum',learned: true,level: 'easy',source: 'AE',type: 'search' }
+// Question {name: 'Depth First Search',learned: true,level: 'easy',source: 'AE',type: 'graphs' }
+// Question {name: 'Two Number Sum',learned: true,level: 'easy',source: 'AE',type: 'array' }
+// Question {name: 'Find Closest Value in BST',learned: true,level: 'easy',source: 'AE',type: 'BST' }
+
+function binarySearch(arr, target) {
+  let left = 0;
+  let right = arr.length - 1;
+  while (left <= right) {
+    let mid = Math.floor((left + right) / 2);
+    if (arr[mid] === target) return mid;
+    else if (arr[mid] > target) left = mid + 1;
+    else if (arr[mid] < target) right = mid - 1;
+  }
+  return -1;
+}
+
+function findThreeLargestNumSum(nums) {
+  //not sorted, duplicates
+  let largestThree = [null, null, null];
+  nums.forEach(num => {
+    compareThree(largestThree, num);
+  });
+  console.log(largestThree);
+}
+
+function compareThree(largestThree, num) {
+  if (largestThree[2] === null || largestThree[2] < num) {
+    shiftUpAndInsert(largestThree, num, 2);
+  } else if (largestThree[1] === null || largestThree[1] < num) {
+    shiftUpAndInsert(largestThree, num, 1);
+  } else if (largestThree[0] === null || largestThree[0] < num) {
+    shiftUpAndInsert(largestThree, num, 0);
+  }
+}
+
+function shiftUpAndInsert(arr, insertVal, specificIdx) {
+  for (let i = 0; i <= specificIdx; i++) {
+    if (i === specificIdx) arr[i] = insertVal;
+    else arr[i] = arr[i + 1];
+  }
+}
+
+// findThreeLargestNumSum([9012, 1, 23, 102, 301, 302]); //[ 301, 302, 9012 ]
+
+function inOrderDFS(tree, arr) {
+  if (!tree) {
+    inOrderDFS(tree.left, arr);
+    arr.push(tree.value);
+    inOrderDFS(tree.right, arr);
+  }
+  return arr;
+}
+
+function preOrderDFS(tree, arr) {
+  if (!tree) {
+    arr.push(tree.value);
+    preOrderDFS(tree.left, arr);
+    preOrderDFS(tree.right, arr);
+  }
+  return arr;
+}
+function postOrderDFS(tree, arr) {
+  if (!tree) {
+    postOrderDFS(tree.left, arr);
+    postOrderDFS(tree.right, arr);
+    arr.push(tree.value);
+  }
+  return arr;
+}
+
+function BFS(tree) {
+  let values = [];
+  let queue = [tree];
+  while (queue.length > 0) {
+    let currentNode = queue.shift();
+    values.push(tree.value);
+    if (currentNode !== null) {
+      queue.push(tree.left);
+      queue.push(tree.right);
+    }
+  }
+  return values;
+}
+
+function BFS(tree) {
+  let values = [];
+  let queue = [tree]; //to start off
+  while (queue.length) {
+    let current = queue.shift(); //takes off the first elem
+    //add the values to array
+    //then add the children to the queue
+    values.push(current.value);
+    if (current !== null) {
+      values.push(current.left);
+      values.push(current.right);
+    }
+  }
+  return values;
+}
+
+//assuming its sorted with no duplicates
+function twoNumSum(arr, target) {
+  let hashTable = {};
+  for (let i = 0; i < arr.length; i++) {
+    let diff = Math.abs(target - arr[i]);
+    if (hashTable[diff]) return [diff, arr[i]];
+    else hashTable[arr[i]] = true;
+  }
+  return [];
+}
+
+// console.log(twoNumSum([1, 2, 3, 4], 7));
+
+function closestVal(tree, target) {
+  let closest = tree.value;
+  //then traverse all the nodes to find closest
+  // depending on how far the target is, go left or right
+  while (tree) {
+    if (Math.abs(target - tree.value) < Math.abs(target - closest)) {
+      closest = tree.value;
+    }
+
+    if (tree.value > target) tree = tree.left;
+    else if (tree.value < target) tree = tree.right;
+    else break;
+  }
+  return closest;
+}
