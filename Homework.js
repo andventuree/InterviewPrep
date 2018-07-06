@@ -3,7 +3,7 @@ let { homeworkTonight, tricks } = require("./HwHelper");
 // homeworkTonight.genQuestions(5);
 // homeworkTonight.genQuestions(6, "BST", "AE");
 // homeworkTonight.genQuestions(6, "all", "bloomberg");
-// tricks.genQuestions(5, "all");
+// tricks.genQuestions(5);
 
 // // **************** Homework for Thu Jun 28 2018 ****************
 // // [ Question {name: 'BST Traversal',learnedStatus: true,difficulty: 'medium',source: 'AE',type: 'BST' },
@@ -1395,4 +1395,84 @@ function addLLs(headA, headB) {
   console.log(total.split("").map(num => parseInt(num)));
 }
 
-addLLs();
+// addLLs();
+
+// **************** Homework for Fri Jul 06 2018 ****************
+// Question {name: 'selection sort',learned: true,level: '',source: null,type: null }
+// Question {name: 'shift array up by 1',learned: true,level: '',source: null,type: null }
+// Question {name: 'binary search',learned: true,level: '',source: null,type: null }
+// Question {name: 'insertion sort',learned: true,level: '',source: null,type: null }
+
+// function selectionSort(arr) {
+//   let currIdx = 0;
+//   while (currIdx < arr.length - 1) {
+//     let smallestIdx = currIdx;
+//     for (let i = currIdx + 1; i < arr.length; i++) {
+//       if (arr[smallestIdx] > arr[i]) smallestIdx = i;
+//     }
+
+//     // swap(smallestIdx, currIdx, arr)
+//     let temp = arr[smallestIdx];
+//     arr[smallestIdx] = arr[currIdx];
+//     arr[currIdx] = temp;
+//     currIdx++;
+//   }
+
+//   console.log(arr);
+// }
+
+function selectionSort(arr) {
+  let currIdx = 0;
+  while (currIdx < arr.length - 1) {
+    let smallestIdx = currIdx;
+    for (let i = currIdx + 1; i < arr.length; i++) {
+      if (arr[smallestIdx] > arr[i]) smallestIdx = i;
+    }
+    let temp = arr[smallestIdx];
+    arr[smallestIdx] = arr[currIdx];
+    arr[currIdx] = temp;
+    currIdx++;
+  }
+  console.log(arr);
+}
+
+// selectionSort([1, 2, 3, 52, 3, 23, 2, 3, 2, 14, 1, 2, 3, 1, 10, 0, 0, 4]);
+
+function shiftUp(arr) {
+  for (let i = 0; i < arr.length; i++) {
+    if (i !== arr.length - 1) arr[i] = arr[i + 1];
+    else arr[i] = "jsaldfkjsalkdfjask";
+  }
+  console.log(arr);
+}
+
+// shiftUp([1, 2, 3, 4, 5, 6]);
+
+function binarySearch(arr, target) {
+  let left = 0;
+  let right = arr.length - 1;
+  while (left <= right) {
+    let mid = Math.floor((left + right) / 2);
+    if (arr[mid] === target) return mid;
+    else if (arr[mid] < target) left = mid + 1;
+    else if (arr[mid] > target) right = mid - 1;
+  }
+  return -1;
+}
+
+// console.log(binarySearch([1, 2, 3, 4, 5, 6, 7, 14, 15], 13)); //12 off by 1 b/c 0 index
+
+function insertionSort(arr) {
+  for (let i = 1; i < arr.length; i++) {
+    let j = i;
+    while (j >= 0 && arr[j] < arr[j - 1]) {
+      let temp = arr[j];
+      arr[j] = arr[j - 1];
+      arr[j - 1] = temp;
+      j--;
+    }
+  }
+  console.log(arr);
+}
+
+// insertionSort([12, 212, 312, 124, 512, 6, 7, 14, 15]);
