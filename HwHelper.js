@@ -23,28 +23,35 @@ class QuestionList {
   }
 
   //time: O(n) | space: O(n)
-  generateRand(num, type, source) {
+  genQuestions(num, type, source) {
     let list = this._questions.filter(quest => quest.learned);
-    if (type !== undefined && type !== "all") {
-      list = list.filter(quest => quest.type === type);
-    }
-    if (source !== undefined) {
-      list = list.filter(quest => quest.source === source);
-    }
-    let max = list.length;
-    let hwQuestions = [];
-    if (max > 0) {
-      for (let i = 0; i < Math.min(num, max); i++) {
-        let questionNum = Math.floor(Math.random() * max);
-        hwQuestions.push(list[questionNum]);
+    if (type || source) list = this.addFilters(list, type, source);
+    let maxQuestions = list.length;
+    let uniques = new Set("-"); //need to give set a value to give it size to trigger while loop
+    let numOfQuestions = Math.min(num, maxQuestions);
+    while (uniques.size <= numOfQuestions) {
+      if (numOfQuestions === 0) {
+        console.log(`No questions by these criteria: ${type} ${source}`);
       }
-    } else {
-      return console.log(`No questions by these criteria: ${type} ${source}`);
+      let questionNum = Math.floor(Math.random() * numOfQuestions);
+      if (!uniques.has(questionNum)) uniques.add(list[questionNum]);
+      else break;
     }
 
     let date = this.dateToday();
     console.log(`**************** Homework for ${date} ****************`);
-    console.log(hwQuestions);
+    uniques.forEach(quest => console.log(quest));
+  }
+
+  addFilters(list, type, source) {
+    if (type !== "all") {
+      list = list.filter(quest => quest.type === type);
+    }
+    if (source !== null) {
+      list = list.filter(quest => quest.source === source);
+    }
+    console.log(list);
+    return list; //dont need to return this
   }
 
   dateToday() {

@@ -1,9 +1,9 @@
 let { homeworkTonight, tricks } = require("./HwHelper");
 
-// homeworkTonight.generateRand(5);
-// homeworkTonight.generateRand(6, "BST", "AE");
-// homeworkTonight.generateRand(6, "all", "bloomberg");
-// tricks.generateRand(5, "all");
+// homeworkTonight.genQuestions(5);
+// homeworkTonight.genQuestions(6, "BST", "AE");
+homeworkTonight.genQuestions(6, "all", "bloomberg");
+// tricks.genQuestions(5, "all");
 
 // // **************** Homework for Thu Jun 28 2018 ****************
 // // [ Question {name: 'BST Traversal',learnedStatus: true,difficulty: 'medium',source: 'AE',type: 'BST' },

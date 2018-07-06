@@ -2029,7 +2029,7 @@ function memoCalc(arr, target) {
   }
 }
 
-console.log(memoCalc([1, 2, 3], 5));
+// console.log(memoCalc([1, 2, 3], 5));
 
 function memot(arr, target) {
   let memoHashTable = {};
@@ -2050,3 +2050,23 @@ function intersectingLL(headA, headB) {
   }
   return a;
 }
+
+function root(x, n) {
+  if (x === 0) return 0;
+  if (n === 1) return x;
+  let left = 0;
+  let right = x;
+  while (left <= right) {
+    let mid = Math.floor((left + right) / 2);
+    let y = Math.pow(mid, n);
+    let diff = Math.abs(x - y);
+    if (diff < 0.001) {
+      return mid;
+    }
+    if (y < x) left = mid + 0.001;
+    else right = mid - 0.001;
+  }
+  return 0;
+}
+
+// console.log(root(9, 3));
