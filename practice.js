@@ -2019,3 +2019,34 @@ function intersectionLL2(headA, headB) {
   }
   return a;
 }
+
+function memoCalc(arr, target) {
+  let memo = {};
+  for (let i = 0; i < arr.length; i++) {
+    let diff = Math.abs(target - arr[i]);
+    if (!memo[diff]) memo[arr[i]] = true;
+    else return [diff, arr[i]];
+  }
+}
+
+console.log(memoCalc([1, 2, 3], 5));
+
+function memot(arr, target) {
+  let memoHashTable = {};
+  for (let i = 0; i < arr.length; i++) {
+    let diff = Math.abs(arr[i] - target);
+    if (memoHashTable[diff]) memoHashTable[arr[i]] = true;
+    else return [diff, arr[i]];
+  }
+}
+
+function intersectingLL(headA, headB) {
+  if (headA === null || headB === null) return "not possible";
+  let a = headA;
+  let b = headB;
+  while (a !== b) {
+    a = a === null ? b : a.next;
+    b = b === null ? b : b.next;
+  }
+  return a;
+}

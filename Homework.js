@@ -1216,3 +1216,5 @@ function addZerosToBack(arr) {
 }
 
 // addZerosToBack([0, 0, 0, 0, 0, 0, 1, 2, 31, 23, 12, 2]);
+
+// STILL NEED TO FIGURE OUT BEST WAY TO TAKES VALUES OUT OF AN OBJ

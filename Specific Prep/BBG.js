@@ -1,3 +1,9 @@
+//facts from bloomberg
+let charityContributions2017 = 702000000; //702 mil
+let totalContribution = 6000000000; //6 bil
+let profitableYear = 1985;
+let currentYear = 2018;
+
 //ADD NUMBERS OF 2 LINKED LISTS
 let addTwoNumbers = function(l1, l2) {
   //initialize 2 empty arrays
