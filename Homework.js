@@ -2,7 +2,7 @@ let { homeworkTonight, tricks } = require("./HwHelper");
 
 // homeworkTonight.genQuestions(5);
 // homeworkTonight.genQuestions(6, "BST", "AE");
-homeworkTonight.genQuestions(6, "all", "bloomberg");
+// homeworkTonight.genQuestions(6, "all", "bloomberg");
 // tricks.genQuestions(5, "all");
 
 // // **************** Homework for Thu Jun 28 2018 ****************
@@ -1316,3 +1316,83 @@ class MinStack {
     }
   }
 }
+
+// **************** Homework for Fri Jul 06 2018 ****************
+// Question {name: 'most traded',learned: true,level: '',source: 'bloomberg',type: '' }
+// Question {name: 'linked list cycle',learned: true,level: '',source: 'bloomberg',type: 'LL' }
+// Question {name: 'reverse integer',learned: true,level: '',source: 'bloomberg',type: '' }
+// Question {name: 'reverseLinkedList',learned: true,level: '',source: 'bloomberg',type: 'LL' }
+// Question {name: 'add nums of 2 linked list',learned: true,level: '',source: 'bloomberg',type: 'LL' }
+// Question {name: 'first unique character in a string',learned: true,level: '',source: 'bloomberg',type: 'string' }
+
+function reversedLL(head) {
+  let lastNode = null;
+  while (head) {
+    let trueNext = head.next;
+    head.next = lastNode;
+    lastNode = head;
+    head = trueNext;
+  }
+  return lastNode;
+}
+
+function LLcycle(head) {
+  if (!head) return head;
+
+  let slow = head;
+  let fast = head;
+  while (slow.next && fast.next && fast.next.next) {
+    fast = fast.next.next;
+    slow = slow.next;
+    if (slow === fast) break; // found loop
+  }
+  //now find first node
+
+  //this is a check to see it didnt exit b/c there was no loop
+  if (!slow || slow !== fast) return "there was no loop ";
+
+  slow = head;
+  while (slow !== fast) {
+    slow.next;
+    fast.next;
+  }
+  return fast;
+}
+
+function addLLs(headA, headB) {
+  let digits1 = [1, 2, 9];
+  let digits2 = [2, 1];
+  // while (headA) {
+  //   digits1.push(headA);
+  //   headA = headA.next;
+  // }
+  // while (headB) {
+  //   digits2.push(headB);
+  //   headB = headB.next;
+  // }
+
+  let lastIdx1 = digits1.length - 1;
+  let lastIdx2 = digits2.length - 1;
+  let total = "";
+  let carry = 0;
+  for (let i = Math.max(lastIdx1, lastIdx2); i >= 0; i--) {
+    let a = digits1[lastIdx1] || 0;
+    let b = digits2[lastIdx2] || 0;
+    let sum = a + b + carry;
+
+    if (sum > 9) {
+      sum -= 10;
+      carry = 1;
+    } else {
+      carry = 0;
+    }
+
+    total = sum + total;
+    console.log("total: ", total);
+    lastIdx1--;
+    lastIdx2--;
+  }
+  console.log(total.split("").map(num => parseInt(num)));
+}
+
+addLLs();
