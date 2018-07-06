@@ -50,7 +50,6 @@ class QuestionList {
     if (source !== null) {
       list = list.filter(quest => quest.source === source);
     }
-    console.log(list);
     return list; //dont need to return this
   }
 
