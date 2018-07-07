@@ -2419,3 +2419,72 @@ class DoubleLL {
     return false;
   }
 }
+
+class BST {
+  constructor(val) {
+    this.value = val;
+    this.left = null;
+    this.right = null;
+  }
+  insert(val) {
+    let direction = this.value > val ? "left" : "right";
+    if (this[direction]) this[direction].insert(val);
+    else this[direction] = new BST(val);
+    return this;
+  }
+  insertIterative(val) {
+    let currNode = this;
+    while (currNode) {
+      if (val > currNode.value) {
+        if (currNode.right) currNode = currNode.right;
+        else {
+          currNode.right = new BST(val);
+          break;
+        }
+      } else {
+        if (currNode.left) currNode = currNode.left;
+        else {
+          currNode.left = new BST(val);
+          break;
+        }
+      }
+    }
+    return this;
+  }
+  BFS() {
+    let values = [];
+    let queue = [this];
+    while (queue.length > 0) {
+      console.log("queue: ", queue);
+
+      let currNode = queue.shift();
+      if (currNode) {
+        values.push(currNode.value);
+        queue.push(currNode.left);
+        queue.push(currNode.right);
+      }
+    }
+    return values;
+  }
+
+  min() {
+    let currNode = this;
+    let minimum = currNode.value;
+    while (currNode) {
+      if (currNode.value < minimum) minimum = currNode.value;
+      currNode = currNode.left;
+    }
+    console.log(minimum);
+    return minimum;
+  }
+}
+
+let testBST = new BST(5)
+  .insertIterative(6)
+  .insertIterative(7)
+  .insertIterative(8);
+// .insert(6)
+// .insert(7)
+// .insert(8);
+
+console.log(testBST.min());
