@@ -2346,5 +2346,76 @@ function bubbleSort(arr) {
   }
   console.log(arr);
 }
-
 // bubbleSort([1, 23, 123, 12, 31, 3, 21, 2, 5, 74, 7, 8, 4623]);
+
+// practice data structures
+
+class LLNode {
+  constructor(val) {
+    this.value = val;
+    this.previous = null;
+    this.next = null;
+  }
+}
+
+class DoubleLL {
+  constructor() {
+    this.head = null;
+    this.tail = null;
+  }
+  addToHead(val) {
+    let formerHead = this.head;
+    let newNode = new LLNode(val);
+    this.head = newNode;
+    if (formerHead) {
+      formerHead.previous = this.head;
+      this.head.next = formerHead;
+    }
+    if (!this.tail) this.tail = this.head;
+  }
+  removeHead() {
+    let formerHead = this.head;
+    if (!formerHead) return;
+    if (formerHead.next) {
+      this.head = formerHead.next;
+      this.head.previous = null;
+    } else {
+      this.head = null;
+      this.tail = null;
+    }
+    return formerHead.value;
+  }
+
+  addToTail(val) {
+    let formerTail = this.tail;
+    let newTail = new LLNode(val);
+    this.tail = newTail;
+    if (formerTail) {
+      formerTail.next = this.tail;
+      this.tail.previous = formerTail;
+    }
+    if (!this.head) this.head = this.tail;
+  }
+
+  removeTail() {
+    let formerTail = this.tail;
+    if (!formerTail) return;
+    if (formerTail.previous) {
+      this.tail = formerTail.previous;
+      this.tail.next = null;
+    } else {
+      this.tail = null;
+      this.head = null;
+    }
+    return formerTail.value;
+  }
+
+  contains(val) {
+    let currentNode = this;
+    while (currentNode) {
+      if (currentNode === val) return currentNode;
+      else currentNode = currentNode.next;
+    }
+    return false;
+  }
+}
