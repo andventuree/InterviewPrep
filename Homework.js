@@ -1,6 +1,6 @@
 let { homeworkTonight, tricks } = require("./HwHelper");
 
-homeworkTonight.genQuestions(5);
+// homeworkTonight.genQuestions(5);
 // console.log(homeworkTonight._questions);
 // homeworkTonight.genQuestions(6, "BST", "AE");
 // homeworkTonight.genQuestions(6, "all", "bloomberg");
@@ -1477,3 +1477,105 @@ function insertionSort(arr) {
 }
 
 // insertionSort([12, 212, 312, 124, 512, 6, 7, 14, 15]);
+
+// **************** Homework for Sat Jul 07 2018 ****************
+// Question {name: 'Kadanes Algo - Max Sum',learned: true,level: 'medium',source: 'AE',type: null }
+// Question {name: 'Remove kth Node from End',learned: true,level: 'medium',source: 'AE',type: 'LL' }
+// Question {name: 'first unique character in a string',learned: true,level: '',source: 'bloomberg',type: 'string' }
+// Question {name: 'Smallest Difference',learned: true,level: 'medium',source: 'AE',type: 'array' }
+// Question {name: 'Number of Ways to Make Change',learned: true,level: 'medium',source: 'AE',type: 'DP' }
+
+function kadaneMaxSum(arr) {
+  let maxSoFar = 0;
+  let max = 0;
+  for (let i = 0; i < arr.length; i++) {
+    let num = arr[i];
+    maxSoFar = Math.max(num, maxSoFar + num);
+    max = Math.max(max, maxSoFar);
+  }
+  console.log("max: ", max);
+}
+
+// kadaneMaxSum([1, 2, 3, 4, -5]);
+
+function removeKthNode(head, k) {
+  if (!head) return head;
+  let kth = head;
+  let end = head;
+  //could also use a for loop to make new var
+  while (k > 0) {
+    //fast forwad kth node
+    end = end.next;
+    k--;
+  }
+
+  while (end.next !== null) {
+    //if next is null, you've reached the end
+    //not when the current node is null;
+    //would otherwise be off by 1
+    end = end.next;
+    kth = kth.next;
+  }
+  return kth;
+}
+
+// function smallestDiff(arr1, arr2) {
+//   arr1.sort((a, b) => a - b);
+//   arr2.sort((a, b) => a - b);
+//   let i = 0;
+//   let j = 0;
+//   let smallest = Math.abs(arr1[i] - arr2[j]);
+//   let pair = [];
+//   while (i < arr1.length && j < arr2.length) {
+//     let currCalc = Math.abs(arr1[i] - arr2[j]);
+//     if (currCalc < smallest) {
+//       smallest = currCalc;
+//       pair = [arr1[i], arr2[j]];
+//     }
+//     if (arr1[i] > arr2[j]) j++;
+//     else if (arr1[i] < arr2[j]) i++;
+//     else break;
+//   }
+//   console.log(pair);
+// }
+
+function smallestDiff(a1, a2) {
+  //first sort the arrays so we'lll be able to use pointers - better than 2 for loops
+  //then keep track of current calculation
+  //use a while loop to check that before it gets to the end,
+  //if there are smaller compbinations, record it
+  a1.sort((a, b) => a - b);
+  a2.sort((a, b) => a - b);
+  let i = 0;
+  let j = 0;
+  let smallest = Math.abs(a1[i] - a2[j]);
+  let pair = [];
+  while (i < a1.length && j < a2.length) {
+    let calc = Math.abs(a1[i] - a2[j]);
+    if (calc < smallest) {
+      smallest = calc;
+      pair = [a1[i], a2[j]];
+    }
+    if (a1[i] < a2[j]) i++;
+    else if (a1[i] > a2[j]) j++;
+    else break;
+  }
+  console.log(pair);
+}
+
+// smallestDiff([-1, 5, 10, 20, 28, 3], [26, 134, 135, 15, 17]); //28, 26
+
+function nWayToAmt(amt, denoms) {
+  let ways = new Array(amt + 1).fill(0);
+  ways[0] = 1;
+  for (let i = 0; i < denoms.length; i++) {
+    let denom = denoms[i];
+    for (let j = 1; j < ways.length; j++) {
+      console.log("ways: ", ways);
+      if (denom <= j) ways[j] += ways[j - denom];
+    }
+  }
+  console.log(ways[amt]);
+}
+
+// nWayToAmt(10, [1, 5, 10, 20]); //4
