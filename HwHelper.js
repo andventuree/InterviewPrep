@@ -33,7 +33,7 @@ class QuestionList {
       if (numOfQuestions === 0) {
         console.log(`No questions by these criteria: ${type} ${source}`);
       }
-      let questionNum = Math.floor(Math.random() * numOfQuestions);
+      let questionNum = Math.floor(Math.random() * maxQuestions);
       if (!uniques.has(questionNum)) uniques.add(list[questionNum]);
       else break;
     }
