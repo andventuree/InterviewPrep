@@ -60,7 +60,7 @@ function binarySearch(arr, begin, end, num) {
   return -1;
 }
 
-console.log(shiftedArrSearch([9, 12, 17, 2, 4, 5], 17)); //2
+// console.log(shiftedArrSearch([9, 12, 17, 2, 4, 5], 17)); //2
 
 /* *************************************************************** */
 // //anything sorted can use binary search, even nums!
@@ -187,3 +187,74 @@ function bSearch(nums, left, right, target) {
 // Termination: left + 1 == right
 // Searching Left: right = mid
 // Searching Right: left = mid
+
+// Given a 2D array binaryMatrix of 0s and 1s, implement a function getNumberOfIslands that returns the number of islands of 1s in binaryMatrix.
+
+// An island is defined as a group of adjacent values that are all 1s. A cell in binaryMatrix is considered adjacent to another cell if they are next to each either on the same row or column. Note that two values of 1 are not part of the same island if they’re sharing only a mutual “corner” (i.e. they are diagonally neighbors).
+
+// input:  binaryMatrix = [ [0,    1,    0,    1,    0],
+//                          [0,    0,    1,    1,    1],
+//                          [1,    0,    0,    1,    0],
+//                          [0,    1,    1,    0,    0],
+//                          [1,    0,    1,    0,    1] ]
+
+// output: 6 # since this is the number of islands in binaryMatrix.
+//           # See all 6 islands color-coded below.
+
+// Time Complexity: let N and M be the numbers of columns and rows in binaryMatrix, respectively. Each cell in binaryMatrix is visited a constant number of times. Once during the iteration and up to 4 times during an island expansion. Therefore, the time complexity is linear in the size of the input, i.e. O(N⋅M).
+
+// Space Complexity: since we are allocating a queue in the algorithm, the space complexity is linear O(N⋅M). For instance, consider a matrix that is all 1s.
+
+function getNumberOfIslands(binaryMatrix) {
+  let islands = 0;
+  let rows = binaryMatrix.length; // number of rows
+  let cols = binaryMatrix[0].length; // number of columns
+  for (let i = 0; i < rows; i++) {
+    for (let j = 0; j < cols; j++) {
+      if (binaryMatrix[i][j] === 1) {
+        markIsland(binaryMatrix, rows, cols, i, j);
+        islands++;
+      }
+    } // O(n)
+  } // O(n)
+  console.log(islands);
+}
+
+function markIsland(binaryMatrix, rows, cols, i, j) {
+  let queue = [];
+  queue.push([i, j]);
+  while (queue.length > 0) {
+    let item = queue.pop();
+    console.log(item);
+    let originalX = item[0];
+    let originalY = item[1];
+    if (binaryMatrix[originalX][originalY] === 1) {
+      binaryMatrix[originalX][originalY] = -1; //to mark as visited
+      pushIfValid(queue, rows, cols, originalX - 1, originalY); //left
+      pushIfValid(queue, rows, cols, originalX, originalY - 1); //right
+      pushIfValid(queue, rows, cols, originalX + 1, originalY); //top
+      pushIfValid(queue, rows, cols, originalX, originalY + 1); //bottom
+    }
+  }
+}
+
+function pushIfValid(queue, rows, cols, x, y) {
+  if (x >= 0 && x < rows && y >= 0 && y < cols) {
+    queue.push([x, y]);
+  }
+}
+
+getNumberOfIslands([
+  [0, 1, 0, 1, 0],
+  [0, 0, 1, 1, 1],
+  [1, 0, 0, 1, 0],
+  [0, 1, 1, 0, 0],
+  [1, 0, 1, 0, 1]
+]);
+
+//j  i
+//0 [0, 1, 2, 3, 4],
+//1 [0, 1, 2, 3, 4],
+//2 [0, 1, 2, 3, 4],
+//3 [0, 1, 2, 3, 4],
+//4 [0, 1, 2, 3, 4]

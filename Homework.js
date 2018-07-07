@@ -1,6 +1,6 @@
 let { homeworkTonight, tricks } = require("./HwHelper");
 
-// homeworkTonight.genQuestions(5);
+homeworkTonight.genQuestions(5);
 // homeworkTonight.genQuestions(6, "BST", "AE");
 // homeworkTonight.genQuestions(6, "all", "bloomberg");
 // tricks.genQuestions(5);
