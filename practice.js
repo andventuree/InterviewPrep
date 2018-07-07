@@ -2206,3 +2206,145 @@ function closestVal(tree, target) {
   }
   return closest;
 }
+
+// Question {name: 'valid parentheses',learned: true,level: '',source: 'bloomberg',type: '' }
+// Question {name: 'move zeros',learned: true,level: '',source: 'bloomberg',type: 'array' }
+// Question {name: 'add nums of 2 linked list',learned: true,level: '',source: 'bloomberg',type: 'LL' }
+// Question {name: 'Find Closest Value in BST',learned: true,level: 'easy',source: 'AE',type: 'BST' }
+// Question {name: 'Bubble Sort',learned: true,level: 'easy',source: 'AE',type: 'sorting' }
+
+function validParens(str) {
+  let stack = [];
+  for (let i = 0; i < str.length; i++) {
+    let char = str[i];
+    if (char === "}") {
+      if (stack[stack.length - 1] !== "{") return false;
+      else stack.pop();
+    } else if (char === ")") {
+      if (stack[stack.length - 1] !== "(") return false;
+      else stack.pop();
+    } else if (char === "]") {
+      if (stack[stack.length - 1] !== "[") return false;
+      else stack.pop();
+    } else {
+      stack.push(char);
+    }
+  }
+  return stack.length === 0;
+}
+
+// console.log(validParens("({}()[])"));
+// console.log(validParens("({}()"));
+
+// function moveZeros(arr) {
+//   let count = 0;
+//   for (let i = 0; i < arr.length; i++) {
+//     if (arr[i] !== 0) {
+//       arr[count] = arr[i];
+//       count++;
+//     }
+//   }
+//   while (count < arr.length) {
+//     arr[count] = 0;
+//     count++;
+//   }
+//   console.log(arr);
+// }
+
+// moveZeros([0, 0, 0, 0, 0, 1, 1, 2, 12, 3, 12, 31, 3, 1]);
+
+function shiftUp(arr) {
+  console.log("before", arr);
+  for (let i = 0; i < arr.length - 1; i++) {
+    arr[i] = arr[i + 1];
+  }
+  console.log("after", arr);
+}
+
+// shiftUp([0, 1, 1, 2, 12, 3, 12, 31, 3, 1]);
+
+function shiftUpSpecific(arr, insertVal, idx) {
+  //will get rid of 0 idx element
+  for (let i = 0; i <= idx; i++) {
+    if (i === idx) arr[i] = insertVal;
+    else arr[i] = arr[i + 1];
+  }
+  console.log(arr);
+}
+
+// shiftUpSpecific([0, 1, 1, 2, 12, 3, 12, 31, 3, 1], 199, 3);
+
+function addTwoLinkedList(list1, list2) {
+  let nums1 = [1, 2, 9];
+  let nums2 = [2, 1];
+  // while (list1) {
+  //   nums1.push(list1.value);
+  //   list1 = list1.next;
+  // }
+  // while (list2) {
+  //   nums2.push(list2.value);
+  //   list2 = list2.next;
+  // }
+  let lastIdx1 = nums1.length - 1;
+  let lastIdx2 = nums2.length - 1;
+  let strTotal = "";
+  let carry = 0;
+  for (let i = Math.max(lastIdx1, lastIdx2); i >= 0; i--) {
+    //need to start a variable in loop for it to create something every time
+    //need a variable outside if you need it to hold a value for awhile
+    let a = nums1[lastIdx1] || 0;
+    let b = nums2[lastIdx2] || 0;
+    let sum = a + b + carry;
+    if (sum > 9) {
+      sum -= 10;
+      carry = 1;
+    } else {
+      carry = 0;
+    }
+
+    strTotal = sum + strTotal; //will turn to a string
+    lastIdx1--;
+    lastIdx2--;
+  }
+  console.log(strTotal.split("").map(num => parseInt(num)));
+}
+
+// addTwoLinkedList();
+
+function findClosestValInBST(tree, target) {
+  //need to go through tree
+  //compare val to target and record the closest
+  //then traverse the tree to nums that would be closer
+  let closest = tree.value;
+  while (tree) {
+    if (Math.abs(tree.value - target) < Math.abs(tree.value - closest)) {
+      closest = tree.value;
+    }
+    if (tree.value > target) {
+      tree = tree.left;
+    } else if (tree.value < target) {
+      tree = tree.right;
+    } else {
+      break;
+    }
+  }
+  console.log(closest);
+}
+
+function bubbleSort(arr) {
+  let isSorted = false;
+  while (!isSorted) {
+    isSorted = true;
+    for (let i = 0; i < arr.length - 1; i++) {
+      if (arr[i] > arr[i + 1]) {
+        let temp = arr[i];
+        arr[i] = arr[i + 1];
+        arr[i + 1] = temp;
+        isSorted = false;
+      }
+    }
+  }
+  console.log(arr);
+}
+
+// bubbleSort([1, 23, 123, 12, 31, 3, 21, 2, 5, 74, 7, 8, 4623]);
