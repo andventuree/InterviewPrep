@@ -351,13 +351,9 @@ class MinStack {
 }
 
 /************************************************************************************************/
-/************************************************************************************************/
-/************************************************************************************************/
-/************************************************************************************************/
-
 /*
 //arrays and strings
-merge sorted array
+merge sorted array - done
 third maximum number
 reverse words in a string II
 intersection of two arrays
@@ -403,3 +399,105 @@ LRU cache
 square root
 sliding window maximum
 */
+/************************************************************************************************/
+
+function mergeSortedArr(arr1, arr2) {
+  //add space to one of the arrays
+  //look at last items of each array
+  //compare for whichever is greater, then add the last item to total arr
+  //sorted, pointers,
+  let final = [];
+  let lastIdx1 = arr1.length - 1;
+  let lastIdx2 = arr2.length - 1;
+  let currIdx = lastIdx1 + lastIdx2 + 1;
+  while (currIdx > -1) {
+    console.log(currIdx);
+    if (arr1[lastIdx1] > arr2[lastIdx2] || !arr2[lastIdx2]) {
+      final[currIdx] = arr1[lastIdx1]; //feel like i can use Math.max here
+      lastIdx1--;
+    } else {
+      final[currIdx] = arr2[lastIdx2]; //feel like i can use Math.max here
+      lastIdx2--;
+    }
+    currIdx--;
+  }
+  console.log(final);
+}
+
+// mergeSortedArr([1, 3, 5, 7, 9], [2, 4, 6, 8, 10]);
+// mergeSortedArr([1, 3, 5], [2, 4, 6, 7, 8, 912]);
+
+function mergeSortedArr2(arr1, m, arr2, n) {
+  //add numbers from the back and then move as necesary
+  let currIdx = m + n - 1;
+  let lastIdx1 = m - 1;
+  let lastIdx2 = n - 1;
+  while (currIdx > -1) {
+    if (arr1[lastIdx1] > arr2[lastIdx2] || !arr2[lastIdx2]) {
+      arr1[currIdx] = arr1[lastIdx1--];
+    } else {
+      arr1[currIdx] = arr2[lastIdx2--];
+    }
+    currIdx--;
+  }
+  console.log(arr1);
+}
+
+// mergeSortedArr2([1, 2, 3, 0, 0, 0], 3, [2, 5, 6], 3);
+
+// Input:
+// nums1 = [1,2,3,0,0,0], m = 3
+// nums2 = [2,5,6],       n = 3
+// Output: [1,2,2,3,5,6]
+
+// https://leetcode.com/problems/third-maximum-number/description/
+// 414. Third Maximum Number
+// DescriptionHintsSubmissionsDiscussSolution
+// Given a non-empty array of integers, return the third maximum number in this array. If it does not exist, return the maximum number. The time complexity must be in O(n).
+
+// Example 1: Input: [3, 2, 1] | Output: 1
+// Example 2: Input: [1, 2] | Output: 2
+// Example 3: Input: [2, 2, 3, 1] | Output: 1
+
+// Explanation: Note that the third maximum here means the third maximum distinct number.
+// Both numbers with value 2 are both considered as second maximum.
+
+function thirdLargestNum(arr) {
+  let threeLargest = [null, null, null];
+  for (let num of arr) {
+    addToArray(threeLargest, num);
+  }
+
+  console.log("threeLargest: ", threeLargest);
+  if (arr.length >= 3) {
+    return threeLargest[0];
+  } else {
+    //if (arr.length === 2)
+    return threeLargest[2];
+  }
+}
+
+function addToArray(threeLargest, num) {
+  if (threeLargest[2] === null || threeLargest[2] < num) {
+    shiftUpAndInsert(threeLargest, num, 2);
+  } else if (threeLargest[1] === null || threeLargest[1] < num) {
+    if (num !== threeLargest[2]) {
+      shiftUpAndInsert(threeLargest, num, 1);
+    }
+  } else if (threeLargest[0] === null || threeLargest[0] < num) {
+    if (num !== threeLargest[1] && num !== threeLargest[0]) {
+      shiftUpAndInsert(threeLargest, num, 0);
+    }
+  }
+}
+
+function shiftUpAndInsert(arr, insertVal, idx) {
+  for (let i = 0; i <= idx; i++) {
+    if (i === idx) arr[i] = insertVal;
+    else arr[i] = arr[i + 1];
+  }
+}
+
+console.log(thirdLargestNum([3, 2, 1])); // 1
+console.log(thirdLargestNum([2, 1])); // 2
+console.log(thirdLargestNum([3, 2, 1, 2])); // 1
