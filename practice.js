@@ -2487,28 +2487,37 @@ let testBST = new BST(5)
 // .insert(7)
 // .insert(8);
 
-console.log(testBST.min());
-
-class StackNode {
-  constructor(val) {
-    this.value = val;
-    this.next = null;
-  }
-}
+// console.log(testBST.min());
 
 class Stack {
   constructor() {
     this.stack = [];
   }
-  add(val) {
-    let newStack = new StackNode(val);
-    this.stack = newStack;
-    if (formerStack) {
-      this.stack.next = formerStack;
-    }
-    return this;
+  insert(val) {
+    this.stack[this.stack.length] = val;
   }
   remove() {
-    let lastVal = this.stack[this.stack.length - 1];
+    if (this.stack.length > 0) {
+      let removedItem = this.stack[this.stack.length - 1];
+      return removedItem;
+    }
   }
 }
+
+//time: O(n) - 1 time to go through string, then O(n) to go again but doesn't compound
+//space: O(n);
+function firstUnique(str) {
+  let hashMap = {};
+  for (let i = 0; i < str.length; i++) {
+    if (!hashMap[str[i]]) hashMap[str[i]] = 1;
+    else hashMap[str[i]]++;
+  }
+  for (let j = 0; j < str.length; j++) {
+    if (hashMap[str[j]] === 1) return j;
+  }
+  return false;
+}
+
+// console.log(firstUnique("booger")); //0 b
+// console.log(firstUnique("leetcode")); //0 l
+// console.log(firstUnique("loveleetcode")); //2 v

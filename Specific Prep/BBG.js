@@ -128,22 +128,20 @@ class MostTraded {
 
 //FIRST UNIQUE CHARACTER IN A STRING
 function firstUnique(str) {
-  let map = {};
+  let hashMap = {};
   for (let i = 0; i < str.length; i++) {
-    let character = str[i];
-    if (map[character]) {
-      map[character]++;
-    } else {
-      map[character] = 1;
-    }
+    if (!hashMap[str[i]]) hashMap[str[i]] = 1;
+    else hashMap[str[i]]++;
   }
   for (let j = 0; j < str.length; j++) {
-    let character = str[j];
-    if (map[character] === 1) {
-      return character;
-    }
+    if (hashMap[str[j]] === 1) return j;
   }
+  return false;
 }
+
+// console.log(firstUnique("booger")); //0 b
+// console.log(firstUnique("leetcode")); //0 l
+// console.log(firstUnique("loveleetcode")); //2 v
 
 //LINKED LIST CYCLE (which is not the same as loop - loop has extra step)
 //1 2 3 4 5 6 7  <-> 5  6 7

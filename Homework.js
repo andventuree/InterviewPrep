@@ -1579,3 +1579,170 @@ function nWayToAmt(amt, denoms) {
 }
 
 // nWayToAmt(10, [1, 5, 10, 20]); //4
+
+// **************** Homework for Sun Jul 08 2018 ****************
+// Question {name: 'Find 3 Largest Num Sum',learned: true,level: 'easy',source: 'AE',type: 'search' }
+// Question {name: 'reverseLinkedList',learned: true,level: '',source: 'bloomberg',type: 'LL' }
+// Question {name: 'min stack',learned: true,level: '',source: 'bloomberg',type: 'stack' }
+// Question {name: 'Find loop',learned: true,level: 'hard',source: 'AE',type: 'LL' }
+// Question {name: 'most traded',learned: true,level: '',source: 'bloomberg',type: '' }
+
+function threeLargestSum(arr) {
+  let largest = [null, null, null];
+  //brute force
+  //largest as a tracker, use an array [];
+  //then look at each number, and see if its larger than the items in our array
+  //if it is, then we'll shift everything up
+  //then by the end, we'll have a sorted array;
+  //time: O(n) || space: O(1);
+  for (let num of arr) {
+    if (largest[2] === null || num > largest[2]) {
+      shiftUpAndInsert(largest, num, 2);
+    } else if (largest[1] === null || num > largest[1]) {
+      shiftUpAndInsert(largest, num, 1);
+    } else if (largest[0] === null || num > largest[1]) {
+      shiftUpAndInsert(largest, num, 0);
+    }
+  }
+  console.log(largest);
+}
+
+function shiftUpAndInsert(arr, insertVal, specificIdx) {
+  for (let i = 0; i <= specificIdx; i++) {
+    if (i === specificIdx) arr[i] = insertVal;
+    else arr[i] = arr[i + 1];
+  }
+}
+
+// threeLargestSum([12, 123, 63465, 345634, 34563, 3453, 234222]); //[ 63465, 234222, 345634 ]
+
+function reverseLL(head) {
+  let prevNode = null;
+  while (head) {
+    let tempNextHolder = head.next;
+    head.next = prevNode;
+    prevNode = head;
+    head = tempNextHolder;
+  }
+  console.log(prevNode);
+}
+
+class LLNode {
+  constructor(val) {
+    this.value = val;
+    this.next = null;
+  }
+}
+
+class LL {
+  constructor() {
+    this.head = null;
+  }
+  add(val) {
+    let formerHead = this.head;
+    let newNode = new LLNode(val);
+    this.head = newNode;
+    if (formerHead) this.head.next = formerHead;
+    return this;
+  }
+  print() {
+    let values = [];
+    let currNode = this.head;
+    while (currNode) {
+      values.push(currNode.value);
+      currNode = currNode.next;
+    }
+    console.log(values);
+    return values;
+  }
+}
+
+let testLL = new LL()
+  .add(5)
+  .add(4)
+  .add(3)
+  .add(2)
+  .add(1);
+
+function reversedLLRecur(head) {
+  if (head.next === null || head === null) return head;
+  let formerHead = reverseLLRecur(head.next);
+  head.next.next = head; //this comes from if stmt
+  head.next = null; //used to catch the if stmt
+  return formerHead;
+}
+// testLL.print();
+// console.log("recursive, optimal", reversedLLRecur(testLL.head));
+// console.log(reverseLL(testLL.head));
+
+// 1 - 2 - 3 - 4 - 5 -> null
+//                  5.next = null.next = 5
+//first build a callstack til 5
+//then hold onto reference of formerHead
+
+class MinStack2 {
+  constructor() {
+    this.stack = [];
+  }
+
+  min() {
+    if (this.stack.length > 0) {
+      let item = this.stack[this.stack.length - 1];
+      return item.min;
+    }
+  }
+
+  add(val) {
+    let min = this.min();
+    this.stack.push({
+      value: val,
+      min: Math.min(min !== undefined ? min : Infinity, val)
+    });
+  }
+  pop() {
+    if (this.stack.length > 0) {
+      let item = this.stack[this.stack.length - 1];
+      return item.value;
+    }
+  }
+}
+
+function findLLloop(list) {
+  if (!list) return list;
+
+  let fast = list;
+  let slow = list;
+  while (slow.next && fast.next && fast.next.next) {
+    slow = slow.next;
+    fast = fast.next;
+    if (slow === fast) break;
+  }
+
+  if (!slow || slow !== fast) return "no looop~";
+  slow = list;
+  while (slow !== fast) {
+    slow = slow.next;
+    fast = fast.next;
+  }
+  return fast;
+}
+
+class MostTradedStocks {
+  constructor() {
+    this.tradeLogs = {};
+  }
+
+  add(ticker, vol) {
+    if (!this.tradeLogs[ticker]) this.tradeLogs[ticker] = vol;
+    else this.tradeLogs[ticker] += vol;
+  }
+
+  print(n) {
+    let uniqueTickers = [];
+    for (let ticker in this.tradeLogs) {
+      uniqueTickers.push(ticker, this.tradeLogs[ticker]);
+    }
+    uniqueTickers.sort((a, b) => b[1] - a[1]);
+    console.log(uniqueTickers.slice(0, n));
+  }
+}
