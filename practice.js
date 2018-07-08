@@ -2488,3 +2488,27 @@ let testBST = new BST(5)
 // .insert(8);
 
 console.log(testBST.min());
+
+class StackNode {
+  constructor(val) {
+    this.value = val;
+    this.next = null;
+  }
+}
+
+class Stack {
+  constructor() {
+    this.stack = [];
+  }
+  add(val) {
+    let newStack = new StackNode(val);
+    this.stack = newStack;
+    if (formerStack) {
+      this.stack.next = formerStack;
+    }
+    return this;
+  }
+  remove() {
+    let lastVal = this.stack[this.stack.length - 1];
+  }
+}

@@ -3,6 +3,15 @@ let charityContributions2017 = 702000000; //702 mil
 let totalContribution = 6000000000; //6 bil
 let profitableYear = 1985;
 let currentYear = 2018;
+let employee = 19000;
+let subscribers = 325000; //professional subscribers
+let CostOfTerminal = 24000;
+//https://qz.com/84961/this-is-how-much-a-bloomberg-terminal-costs/
+//Bloomberg’s revenue was $7.9 billion 2012
+// console.log(subscribers * CostOfTerminal * 0.65);
+// console.log((subscribers * CostOfTerminal) / employee);
+
+// 7, 800, 000, 000;
 
 //ADD NUMBERS OF 2 LINKED LISTS
 let addTwoNumbers = function(l1, l2) {
@@ -190,13 +199,13 @@ function trappingRainWater(landscapes) {
     const column = landscapes[j];
     //b)find right highest value
     //dont have to store minHeight in its own array to save space!
-    const minHeight = Math.min(rightMax, maxes[i]); //maxes filled with left height;
+    const minHeight = Math.min(rightMax, maxes[j]); //maxes filled with left height;
 
     //c)take the min so you can find what water is trapped
     if (column < minHeight) {
-      maxes[i] = minHeight - column;
+      maxes[j] = minHeight - column;
     } else {
-      maxes[i] = 0;
+      maxes[j] = 0;
     }
     rightMax = Math.max(rightMax, column);
   }
