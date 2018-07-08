@@ -113,6 +113,13 @@ homeworkTonight
 //ctci
 homeworkTonight.add();
 
+//Pramp
+homeworkTonight
+  .add(true, "hard", "getNumberOfIslands", "pramp", "graphs") //matrix
+  .add(true, "hard", "root", "pramp", "binary search")
+  .add(true, "medium", "shiftedArray", "pramp", "array")
+  .add(true, "easy", "merging 2 packages", "pramp", "array");
+
 let tricks = new QuestionList()
   .add(true, "", "binary search")
   .add(true, "", "shift array up by 1")

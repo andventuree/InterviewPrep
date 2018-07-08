@@ -231,9 +231,9 @@ function markIsland(binaryMatrix, rows, cols, i, j) {
     if (binaryMatrix[originalX][originalY] === 1) {
       binaryMatrix[originalX][originalY] = -1; //to mark as visited
       pushIfValid(queue, rows, cols, originalX - 1, originalY); //left
-      pushIfValid(queue, rows, cols, originalX, originalY - 1); //right
-      pushIfValid(queue, rows, cols, originalX + 1, originalY); //top
-      pushIfValid(queue, rows, cols, originalX, originalY + 1); //bottom
+      pushIfValid(queue, rows, cols, originalX, originalY - 1); //bottom
+      pushIfValid(queue, rows, cols, originalX + 1, originalY); //right
+      pushIfValid(queue, rows, cols, originalX, originalY + 1); //top
     }
   }
 }
@@ -244,17 +244,70 @@ function pushIfValid(queue, rows, cols, x, y) {
   }
 }
 
-getNumberOfIslands([
+// getNumberOfIslands([
+//   [0, 1, 0, 1, 0],
+//   [0, 0, 1, 1, 1],
+//   [1, 0, 0, 1, 0],
+//   [0, 1, 1, 0, 0],
+//   [1, 0, 1, 0, 1]
+// ]);
+
+//j = y |  i = x
+//    0 | [0, 1, 2, 3, 4]
+//    1 | [0, 1, 2, 3, 4]
+//    2 | [0, 1, 2, 3, 4]
+//    3 | [0, 1, 2, 3, 4]
+//    4 | [0, 1, 2, 3, 4]
+
+function allIslands(matrix) {
+  //part 1 - set up pointers so you can traverse graph
+  let islands = 0;
+  let rows = matrix.length; //set up way to traverse matrix
+  let cols = matrix[0].length; //^same
+  for (let i = 0; i < rows; i++) {
+    for (let j = 0; j < cols; j++) {
+      if (matrix[i][j] === 1) {
+        markIsland2(matrix, rows, cols, i, j);
+        islands++; //at the minimum, must account for this island as 1
+      } else {
+        matrix[i][j] = "";
+      }
+    }
+  }
+  console.log();
+  console.log(matrix, islands);
+}
+
+function markIsland2(matrix, rowSize, colsSize, i, j) {
+  let queue = []; //use DS to organize traversal  - likely BFS due to queue
+  queue.push([i, j]);
+  let counter = 0;
+  while (queue.length > 0) {
+    let item = queue.pop();
+    let originalX = item[0]; //i
+    let originalY = item[1]; //j
+    if (matrix[originalX][originalY] === 1) {
+      matrix[originalX][originalY] = -4; //mark as visited
+      console.log(`matrix ${counter++}: `, item);
+      console.log(matrix);
+      addIfValid(queue, rowSize, colsSize, originalX - 1, originalY); //left
+      addIfValid(queue, rowSize, colsSize, originalX, originalY - 1); //bottom
+      addIfValid(queue, rowSize, colsSize, originalX + 1, originalY); //right
+      addIfValid(queue, rowSize, colsSize, originalX, originalY + 1); //top
+    }
+  }
+}
+
+function addIfValid(queue, rows, cols, x, y) {
+  if (x >= 0 && x < rows && y >= 0 && y < cols) {
+    queue.push([x, y]); //push only if its in range of matrix
+  }
+}
+
+allIslands([
   [0, 1, 0, 1, 0],
   [0, 0, 1, 1, 1],
   [1, 0, 0, 1, 0],
   [0, 1, 1, 0, 0],
   [1, 0, 1, 0, 1]
-]);
-
-//j  i
-//0 [0, 1, 2, 3, 4],
-//1 [0, 1, 2, 3, 4],
-//2 [0, 1, 2, 3, 4],
-//3 [0, 1, 2, 3, 4],
-//4 [0, 1, 2, 3, 4]
+]); //6
