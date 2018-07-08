@@ -2521,3 +2521,179 @@ function firstUnique(str) {
 // console.log(firstUnique("booger")); //0 b
 // console.log(firstUnique("leetcode")); //0 l
 // console.log(firstUnique("loveleetcode")); //2 v
+
+// **************** Homework for Sun Jul 08 2018 ****************
+// Question {name: 'reverse integer',learned: true,source: 'bloomberg',type: '' }
+// Question {name: 'intersection of two linked lists',learned: true,source: 'bloomberg',type: 'LL' }
+// Question {name: 'move zeros',learned: true,source: 'bloomberg',type: 'array' }
+// Question {name: 'first unique character in a string',learned: true,source: 'bloomberg',type: 'string' }
+// Question {name: 'trap rain water',learned: true,source: 'bloomberg',type: '' }
+// Question {name: 'reverseLinkedList',learned: true,source: 'bloomberg',type: 'LL' }
+
+//1234 => 4321
+//1234 % 10 => 123             4
+//1234 / 10 => 123.4 Math.floor() //takes number off the end
+//4 * 10 + 3 //adds number to the end
+//time; O(n) -> 1 loop, going forward, taking a number off each time
+//space: O(1) not {} [] LL Tree Graph
+
+function reverseInt(int) {
+  let reverseInt = 0;
+  while (int) {
+    let onesPlace = int % 10;
+    int = Math.floor(int / 10);
+    reverseInt = reverseInt * 10 + onesPlace;
+  }
+  return reverseInt;
+}
+
+//listen for key words
+//use big examples
+//draw a picture
+//pseudo code the brute force
+//time complexity || trade off space complexity
+//optimize
+//time complexity
+//code
+//test with small examples
+
+//how to handle a linked list with duplicate values?
+/*
+
+1 -   2 -   3 -   4 - 5
+                      - 6 - 7 - 8 - 9
+10 - 11- 12 - 14 -  15
+
+1 - 2 - 3 - 4 - 5                   10 - 11- 12 - 14
+                  - 6 - 7 - 8 - 9
+10 - 11- 12 - 14                    1 - 2 - 3 - 4 - 5
+
+time: O(n + m)
+space: O(n + m) -> no duplicates, so put nodes in a set
+
+*/
+
+function intersectLL(list1, list2) {
+  if (!list1 || !list2) return null;
+  let a = list1; //need extra pointers so we dont mutate original list
+  let b = list2; //we need the start of each list for later
+  while (a !== b) {
+    a = a.next === null ? list2 : a.next; //add start of 2nd list to end of 1st list
+    b = b.next === null ? list1 : b.next;
+  }
+  return list1;
+}
+
+function intersectLL2(list1, list2) {
+  let set = new Set();
+  while (list1) {
+    if (!set.has(list1.value)) set.add(list1.value);
+    list1 = list1.next;
+  }
+  while (list2) {
+    if (set.has(list2.value)) return list2.value;
+    list2 = list2.next;
+  }
+  return null;
+}
+
+/*
+[0,0,0,0,1,2,3,0,4,5] => [1,2,3,4,5,0,0,0,0,0]
+count = 0; ++ 1
+[1]
+count = 1; ++ 2
+[1,2]
+count = 2; ++ 3
+[1,2,3]
+count = 5; ++ 6
+[1,2,3,4,5,      0]
+count = 7; ++ 8
+[1,2,3,4,5,      0,0,0]
+count = 8; ++ 9
+[1,2,3,4,5,      0,0,0,0,0]
+
+*/
+
+function moveZerosxyz(arr) {
+  let count = 0;
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] !== 0) {
+      arr[count] = arr[i];
+      count++;
+    }
+  }
+  while (count < arr.length) {
+    arr[count] = 0;
+    count++;
+  }
+  console.log(arr);
+}
+
+// moveZerosxyz([0, 0, 0, 0, 1, 2, 3, 0, 4, 5]);
+
+//time: O(n) - 2 passes but doesn't compound each other
+//space: O(n) - only store the entire string
+function firstUniqueChar(str) {
+  let set = {};
+  for (let i = 0; i < str.length; i++) {
+    let char = str[i];
+    if (!set[char]) set[char] = 1;
+    else set[char]++;
+  }
+  for (let j = 0; j < str.length; j++) {
+    let char = str[j];
+    if (set[char] === 1) return char;
+  }
+  return null;
+}
+
+// console.log(firstUniqueChar("aaaaabbbbcccd"));
+
+function trapRainWater(landscapes) {
+  let leftMaxes = [];
+  let maxLeft = 0;
+  for (let i = 0; i < landscapes.length; i++) {
+    let column = landscapes[i];
+    maxLeft = Math.max(maxLeft, column);
+    leftMaxes[i] = maxLeft;
+  }
+  console.log("leftMaxes: ", leftMaxes);
+
+  let rightMaxes = [];
+  let maxRight = 0;
+  for (let j = landscapes.length - 1; j >= 0; j--) {
+    let column = landscapes[j];
+    maxRight = Math.max(maxRight, column);
+    rightMaxes[j] = maxRight;
+  }
+  console.log("rightMaxes: ", rightMaxes);
+
+  let totalRain = 0;
+  for (let k = 0; k < landscapes.length; k++) {
+    let minHeight = Math.min(leftMaxes[k], rightMaxes[k]);
+    let column = landscapes[k];
+    if (column < minHeight) totalRain += minHeight - column;
+  }
+  console.log(totalRain);
+}
+
+// trapRainWater([0, 8, 0, 0, 5, 0, 0, 10, 0, 0, 1, 1, 0, 3]); //48
+
+function reverseLL(head) {
+  let prevNode = null;
+  while (head) {
+    let tempNext = head.next;
+    head.next = prevNode;
+    prevNode = head;
+    head = tempNext;
+  }
+  return prevNode;
+}
+
+function reverseLLRecursively(head) {
+  if (head === null || head.next === null) return head;
+  let tempHead = reverseLLRecursively(head.next);
+  head.next.next = head;
+  head.next = null;
+  return tempHead;
+}
