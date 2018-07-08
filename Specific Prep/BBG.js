@@ -349,3 +349,57 @@ class MinStack {
     }
   }
 }
+
+/************************************************************************************************/
+/************************************************************************************************/
+/************************************************************************************************/
+/************************************************************************************************/
+
+/*
+//arrays and strings
+merge sorted array
+third maximum number
+reverse words in a string II
+intersection of two arrays
+intersection of two arrays II
+spiral matrix
+
+//linked list
+palindrome linked list
+plus one linked list
+
+//trees and graphs
+invert binary tree
+binary tree level order traversal
+populating next right pointers in each node
+populating next right pointers in each node II
+lowest common ancestor of a binary tree
+convert sorted array to binary search tree
+kth smallest element in a BST
+island perimeter
+number of islands
+walls and gates
+alien dictionary
+
+//sorting and searching
+search in rotated sorted array
+search in rotated sorted array II
+sort characters by frequency
+kth largest lement in array
+top k frequency elements
+
+//dynamic programming
+unique paths II
+unique binary search trees II
+word break
+
+//design
+moving average from data stream
+implement stack using queues
+encode and decode strings
+LRU cache
+
+//others
+square root
+sliding window maximum
+*/
