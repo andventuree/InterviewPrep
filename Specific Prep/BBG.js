@@ -381,7 +381,7 @@ spiral matrix
 
 //linked list
 palindrome linked list - learned
-plus one linked list
+plus one linked list - learned
 
 //trees and graphs
 invert binary tree
@@ -604,7 +604,7 @@ function plusOneLinkedList(head) {
 
     let sum = intArr[lastIdx] + carry;
 
-    if (intArr[lastIdx] > 9) {
+    if (sum > 9) {
       sum -= 10;
       carry = 1;
     } else {
@@ -616,9 +616,9 @@ function plusOneLinkedList(head) {
   console.log("string split", total.split("").map(num => parseInt(num)));
 
   //Add this back to linked list
-  let idx = 0;
-  while (head && idx < intArr.length) {
-    head.value = intArr[idx++];
+  let idx = intArr.length - 1;
+  while (head && idx >= 0) {
+    head.value = intArr[idx--];
     head = head.next;
   }
   return head;
@@ -626,41 +626,23 @@ function plusOneLinkedList(head) {
 
 // plusOneLinkedList();
 
-// }
-// ListNode p=h2;
-// while(p!=null){
-//     if(p.val+1<=9){
-//         p.val=p.val+1;
+// function plusOne(head) { //not sure if this works
+//   //reverse the LL so you can access onesPlace
+//   //then reverse it back to give you LL in original order
+//   let reversed = reverseLL(head);
+//   let copy = reversed;
+//   while (copy !== null) {
+//     if (copy.val + 1 <= 9) {
+//       copy.val += 1;
+//       break;
+//     } else {
+//       copy.val = 0;
+//       if (copy.next === null) {
+//         copy.next = new ListNode(1);
 //         break;
-//     }else{
-//         p.val=0;
-//         if(p.next==null){
-//             p.next = new ListNode(1);
-//             break;
-//         }
-//         p=p.next;
+//       }
+//       copy = copy.next;
 //     }
+//   }
+//   return reverseLL(reversed);
 // }
-// return reverse(h2);
-// }
-
-function plusOne(head) {
-  //reverse the LL so you can access onesPlace
-  //then reverse it back to give you LL in original order
-  let reversed = reverseLL(head);
-  let copy = reversed;
-  while (copy !== null) {
-    if (copy.val + 1 <= 9) {
-      copy.val += 1;
-      break;
-    } else {
-      copy.val = 0;
-      if (copy.next === null) {
-        copy.next = new ListNode(1);
-        break;
-      }
-      copy = copy.next;
-    }
-  }
-  return reverseLL(reversed);
-}
