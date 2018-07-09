@@ -354,7 +354,7 @@ class MinStack {
 /*
 //arrays and strings
 merge sorted array - done
-third maximum number
+third maximum number - done
 reverse words in a string II
 intersection of two arrays
 intersection of two arrays II

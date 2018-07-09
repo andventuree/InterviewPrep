@@ -304,13 +304,13 @@ function addIfValid(queue, rows, cols, x, y) {
   }
 }
 
-allIslands([
-  [0, 1, 0, 1, 0],
-  [0, 0, 1, 1, 1],
-  [1, 0, 0, 1, 0],
-  [0, 1, 1, 0, 0],
-  [1, 0, 1, 0, 1]
-]); //6
+// allIslands([
+//   [0, 1, 0, 1, 0],
+//   [0, 0, 1, 1, 1],
+//   [1, 0, 0, 1, 0],
+//   [0, 1, 1, 0, 0],
+//   [1, 0, 1, 0, 1]
+// ]); //6
 
 // Pancake Sort
 // Given an array of integers arr:
@@ -330,3 +330,28 @@ function pancakeSort(arr) {
   }
   return arr;
 }
+
+// Merging 2 Packages
+// Given a package with a weight limit `limit` and an array `arr` of item weights, implement a function getIndicesOfItemWeights that finds two items whose sum of weights equals the weight limit `limit`. Your function should return a pair [i, j] of the indices of the item weights, ordered such that i > j. If such a pair doesn’t exist, return an empty array.
+
+// input:  arr = [4, 6, 10, 15, 16],  lim = 21
+// output: [3, 1] # since these are the indices of the
+//                # weights 6 and 15 whose sum equals to 21
+
+function getIndicesOfItemWeights(arr, limit) {
+  let pair = [];
+  let map = {};
+  for (let i = 0; i < arr.length; i++) {
+    let num = arr[i];
+    let diff = Math.abs(limit - num);
+    //we want the indices
+    if (map[diff] !== undefined) pair = [i, map[diff]];
+    else map[num] = i;
+  }
+  console.log(pair);
+  return pair;
+}
+
+// getIndicesOfItemWeights([4, 6, 10, 15, 16], 21); //[3, 1]
+// getIndicesOfItemWeights([4, 6, 10, 15, 16], 20); //[4, 0]
+// getIndicesOfItemWeights([12, 6, 7, 14, 19, 3, 0, 25, 40], 7); //[6, 2]
