@@ -259,3 +259,22 @@ class TripleStack {
     }
   }
 }
+
+//LinkedList with duplicates
+function removeLLDuplicates(head) {
+  let set = {};
+  while (head) {
+    if (!set[head.value]) set[head.value] = true;
+    else {
+      //deletes reference to duplicate nodes
+      head.value = head.next.value;
+      head.next = head.next.next;
+    }
+    head = head.next;
+  }
+}
+
+// 1 - 2 - |2| - 3 - 4
+//head.value 3 = head.next.value;
+//head.next 4 = head.next.next
+//head.previous // dont need to rewire b/c its already good

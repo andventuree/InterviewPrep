@@ -311,3 +311,22 @@ allIslands([
   [0, 1, 1, 0, 0],
   [1, 0, 1, 0, 1]
 ]); //6
+
+// Pancake Sort
+// Given an array of integers arr:
+
+// Write a function flip(arr, k) that reverses the order of the first k elements in the array arr.
+// Write a function pancakeSort(arr) that sorts and returns the input array. You are allowed to use only the function flip you wrote in the first step in order to make changes in the array.
+
+function pancakeSort(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    let j = i - 1;
+    while (j <= arr.length - 1 && arr[j + 1] < arr[j]) {
+      let temp = arr[j + 1];
+      arr[j + 1] = arr[j];
+      arr[j] = temp;
+      j++;
+    }
+  }
+  return arr;
+}
