@@ -2733,3 +2733,172 @@ function revLL(head) {
   }
   return prevNode;
 }
+
+// Question {name: 'merge sorted array',learned: true,level: '',source: 'bbg',type: 'arrays' }
+// Question {name: 'plus one linked list',learned: true,level: '',source: 'bbg',type: 'LL' }
+// Question {name: 'palindrome linked list',learned: true,level: '',source: 'bbg',type: 'LL' }
+// Question {name: 'third maximum number',learned: true,level: '',source: 'bbg',type: 'arrays' }
+
+function mergeSortedArrays(arr1, m, arr2, n) {
+  //have one idx indicating the combined arr's last idx,
+  //idx of each array
+  //compare each of the last values in a loop then move to final idx
+
+  let finalIdx = m + n - 1;
+  let lastIdx1 = m - 1;
+  let lastIdx2 = n - 1;
+  while (finalIdx > -1) {
+    if (arr1[lastIdx1] > arr2[lastIdx2] || !arr2[lastIdx2]) {
+      arr1[finalIdx] = arr1[lastIdx1--];
+    } else {
+      arr1[finalIdx] = arr2[lastIdx2--];
+    }
+    finalIdx--;
+  }
+  console.log(arr1);
+}
+
+// mergeSortedArrays([1, 3, 5], 3, [2, 3, 6, 7], 4);
+
+class LLNODE {
+  constructor(val) {
+    this.value = val;
+    this.next = null;
+  }
+}
+
+class SLL {
+  constructor() {
+    this.head = null;
+  }
+  add(val) {
+    let formerHead = this.head;
+    let newNode = new LLNODE(val);
+    this.head = newNode;
+    if (formerHead) this.head.next = formerHead;
+    return this;
+  }
+  print() {
+    let values = [];
+    let currNode = this;
+    while (currNode) {
+      values.push(currNode.value);
+      currNode = currNode.next;
+    }
+  }
+}
+
+let testingLL = new SLL()
+  .add(9)
+  .add(2)
+  .add(1);
+testingLL.print();
+
+function plusOneLinkedList(list) {
+  // let values = [1, 9, 9]; //queue
+  let values = []; //queue
+  let copy = list;
+  while (copy) {
+    //need a copy to collect values
+    //make a copy then the last value is null anyways so memory released
+    values.push(copy.value);
+    copy = copy.next;
+  }
+
+  let total = "";
+  let carry = 0;
+  for (let i = values.length - 1; i >= 0; i--) {
+    if (i === values.length - 1) values[i] += 1;
+    let sum = values[i] + carry;
+    if (sum > 9) {
+      sum -= 10;
+      carry = 1;
+    } else {
+      carry = 0;
+    }
+
+    total = sum + total;
+  }
+
+  console.log((values = total.split("").map(num => parseInt(num))));
+  copy = list; //need second copy to iterate through and add values
+  while (values.length > 0) {
+    copy.value = values.shift();
+    copy = copy.next;
+  }
+  console.log(list); //original list now reflects new values
+}
+
+// plusOneLinkedList(testingLL.head);
+
+function palindroLL(head) {
+  //find the middle point, use 2 runners
+  //then reverse the second half
+  //split the link head by setting midpoint to null
+  //go through each at the same pace
+  if (head === null || head.next === null) return true;
+
+  let mid = findMidPoint(head);
+  let rightNode = reversedLinkList(mid.next);
+  mid.next = null;
+  let leftNode = head;
+  while (leftNode && rightNode) {
+    if (leftNode.value !== rightNode.value) return false;
+    leftNode = leftNode.next;
+    rightNode = rightNode.next;
+  }
+  return true;
+}
+
+function findMidPoint(head) {
+  let fast = head.next;
+  let slow = head;
+  while (fast && fast.next) {
+    slow = slow.next;
+    fast = fast.next.next;
+  }
+  return slow;
+}
+
+function reversedLinkList(head) {
+  let prevNode = head;
+  while (head) {
+    let tempNext = head.next;
+    head.next = prevNode;
+    prevNode = head;
+    head = tempNext;
+  }
+  return prevNode;
+}
+
+function thirdMaxNum(arr) {
+  //use an array to hold our max values, gives us O(1) access time
+  //then have conditions to check if the current value is bigger
+  //if curr val is bigger, then shift the numbers up from the array
+  let max = [null, null, null];
+  for (let num of arr) {
+    threeLargestHelper(max, num);
+  }
+  if (arr.length >= 3) return max[0];
+  else return max[2];
+}
+
+/*eslint-disable */
+function threeLargestHelper(max, num) {
+  if (max[2] === null || max[2] < num) {
+    shiftUpAndInsertHere(max, num, 2);
+  } else if (max[1] === null || max[1] < num) {
+    if (num !== max[2]) shiftUpAndInsertHere(max, num, 1);
+  } else if (max[0] === null || max[0] < num) {
+    if (num !== max[1] || num !== max[0]) {
+      shiftUpAndInsertHere(max, num, 0);
+    }
+  }
+}
+
+function shiftUpAndInsertHere(max, num, idx) {
+  for (let i = 0; i <= idx; i++) {
+    if (i === idx) max[i] = num;
+    else max[i] = max[i + 1];
+  }
+}

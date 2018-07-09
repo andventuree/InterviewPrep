@@ -113,7 +113,8 @@ homeworkTonight
   //Less common ------------------------------------------
   .add(true, "", "merge sorted array", "bbg", "arrays")
   .add(true, "", "third maximum number", "bbg", "arrays")
-  .add(true, "", "palindrome linked list", "bbg", "LL");
+  .add(true, "", "palindrome linked list", "bbg", "LL")
+  .add(true, "", "plus one linked list", "bbg", "LL");
 
 //ctci
 homeworkTonight.add();

@@ -371,7 +371,7 @@ class MinStack {
 
 /************************************************************************************************/
 /*
-//arrays and strings
+//*** arrays and strings ***
 merge sorted array - learned
 third maximum number - learned
 reverse words in a string II
@@ -379,11 +379,11 @@ intersection of two arrays
 intersection of two arrays II
 spiral matrix
 
-//linked list
+//*** linked list ***
 palindrome linked list - learned
 plus one linked list - learned
 
-//trees and graphs
+//*** trees and graphs ***
 invert binary tree
 binary tree level order traversal
 populating next right pointers in each node
@@ -396,25 +396,25 @@ number of islands
 walls and gates
 alien dictionary
 
-//sorting and searching
+//*** sorting and searching ***
 search in rotated sorted array
 search in rotated sorted array II
 sort characters by frequency
-kth largest lement in array
+kth largest element in array
 top k frequency elements
 
-//dynamic programming
+//*** dynamic programming ***
 unique paths II
 unique binary search trees II
 word break
 
-//design
+//*** design ***
 moving average from data stream
 implement stack using queues
 encode and decode strings
 LRU cache
 
-//others
+//*** others ***
 square root
 sliding window maximum
 */
@@ -496,6 +496,7 @@ function thirdLargestNum(arr) {
   }
 }
 
+// /*eslint-disable */
 function addToArray(threeLargest, num) {
   if (threeLargest[2] === null || threeLargest[2] < num) {
     shiftUpAndInsert(threeLargest, num, 2);
