@@ -1,5 +1,5 @@
 // types: array, string, stacks, BT, BST, LL, tries, graphs, heaps, DP, recursion, sorting, search
-// source: leetcode, AE, ctci, bloomberg
+// source: leetcode, AE, ctci, bbg
 
 class Question {
   constructor(learned, level = null, name, source = null, type = null) {
@@ -94,21 +94,26 @@ let homeworkTonight = new QuestionList()
   .add(true, "hard", "Water Area / Trap Rain", "AE", "DP")
   .add(true, "hard", "Find loop", "AE", "LL");
 
-//Bloomberg popular questions
+//bbg popular questions
 homeworkTonight
-  .add(true, "", "add nums of 2 linked list", "bloomberg", "LL")
-  .add(true, "", "reverseLinkedList", "bloomberg", "LL")
-  .add(true, "", "reverse integer", "bloomberg", "")
-  .add(true, "", "most traded", "bloomberg", "")
-  .add(true, "", "first unique character in a string", "bloomberg", "string")
-  .add(true, "", "linked list cycle", "bloomberg", "LL")
-  .add(true, "", "valid parentheses", "bloomberg", "") //same as AE balanced brackets
-  .add(true, "", "trap rain water", "bloomberg", "") //same as AE water area
-  .add(true, "", "string compression", "bloomberg", "string")
-  .add(true, "", "move zeros", "bloomberg", "array")
-  .add(true, "", "intersection of two linked lists", "bloomberg", "LL")
-  .add(true, "", "validate BST", "bloomberg", "BST")
-  .add(true, "", "min stack", "bloomberg", "stack");
+  //Most common ------------------------------------------
+  // .add(true, "", "add nums of 2 linked list", "bbg", "LL")
+  // .add(true, "", "reverseLinkedList", "bbg", "LL")
+  // .add(true, "", "reverse integer", "bbg", "")
+  // .add(true, "", "most traded", "bbg", "")
+  // .add(true, "", "first unique character in a string", "bbg", "string")
+  // .add(true, "", "linked list cycle", "bbg", "LL")
+  // .add(true, "", "valid parentheses", "bbg", "") //same as AE balanced brackets
+  // .add(true, "", "trap rain water", "bbg", "") //same as AE water area
+  // .add(true, "", "string compression", "bbg", "string")
+  // .add(true, "", "move zeros", "bbg", "array")
+  // .add(true, "", "intersection of two linked lists", "bbg", "LL")
+  // .add(true, "", "validate BST", "bbg", "BST")
+  // .add(true, "", "min stack", "bbg", "stack");
+  //Less common ------------------------------------------
+  .add(true, "", "merge sorted array", "bbg", "arrays")
+  .add(true, "", "third maximum number", "bbg", "arrays")
+  .add(true, "", "palindrome linked list", "bbg", "LL");
 
 //ctci
 homeworkTonight.add();
@@ -118,7 +123,8 @@ homeworkTonight
   .add(true, "hard", "getNumberOfIslands", "pramp", "graphs") //matrix
   .add(true, "hard", "root", "pramp", "binary search")
   .add(true, "medium", "shiftedArray", "pramp", "array")
-  .add(true, "easy", "merging 2 packages", "pramp", "array");
+  .add(true, "easy", "merging 2 packages", "pramp", "array")
+  .add(true, "easy", "pancake sort", "pramp", "stack"); //backwards insertion sort
 
 let tricks = new QuestionList()
   .add(true, "", "binary search")
@@ -132,7 +138,8 @@ let tricks = new QuestionList()
   .add(true, "", "reverse linked list")
   .add(true, "", "return fn that excutes callbacks on input")
   .add(true, "", "memo calculation")
-  .add(true, "", "shift up nums + add val at specific idx");
+  .add(true, "", "shift up nums + add val at specific idx")
+  .add(true, "", "pancake sort (stack)");
 
 module.exports = {
   homeworkTonight,

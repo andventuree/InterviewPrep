@@ -67,23 +67,42 @@ let addTwoNumbers = function(l1, l2) {
 };
 
 //REVERSE LINKED LIST
-function reversedLinkList(head) {
-  let prev = null;
-  while (head) {
-    let nextHead = head.next;
-    head.next = prev;
-    prev = head;
-    head = nextHead;
-  }
-  return prev;
-}
+// function reversedLinkList(head) {
+//   let prev = null;
+//   while (head) {
+//     let nextHead = head.next;
+//     head.next = prev;
+//     prev = head;
+//     head = nextHead;
+//   }
+//   return prev;
+// }
 
 function reverseLLRecur(head) {
   if (head.next === null || head === null) return head;
-  let formerHead = reverseLLRecur(head.next);
+  let formerHead = reverseLLRecur(head.next); //adds to callstack
   head.next.next = head;
+  //this doesn't apply until the entire callstack is built
+
   head.next = null;
-  return formerHead;
+  //at each step, .next is set to null,
+  //but the root node resurfaces, this is replace with the line above,
+  //so "null" only sticks around for the last node
+
+  return formerHead; //once the callstack is completely built, this will only return 1 time
+}
+
+function reverseLinkedListHead(head) {
+  let start = head;
+  let nextItem = start.next;
+  while (nextItem !== null) {
+    let tempNext = nextItem.next;
+    nextItem.next = start;
+    start = nextItem;
+    nextitem = tempNext;
+  }
+  head.next = null;
+  return start;
 }
 
 //REVERSE INTEGER
@@ -353,15 +372,15 @@ class MinStack {
 /************************************************************************************************/
 /*
 //arrays and strings
-merge sorted array - done
-third maximum number - done
+merge sorted array - learned
+third maximum number - learned
 reverse words in a string II
 intersection of two arrays
 intersection of two arrays II
 spiral matrix
 
 //linked list
-palindrome linked list
+palindrome linked list - learned
 plus one linked list
 
 //trees and graphs
@@ -501,3 +520,147 @@ function shiftUpAndInsert(arr, insertVal, idx) {
 // console.log(thirdLargestNum([3, 2, 1])); // 1
 // console.log(thirdLargestNum([2, 1])); // 2
 // console.log(thirdLargestNum([3, 2, 1, 2])); // 1
+
+// https://leetcode.com/problems/palindrome-linked-list/description/
+// Given a singly linked list, determine if it is a palindrome.
+// Example 1: Input: 1->2 Output: false
+// Example 2: Input: 1->2->2->1 Output: true
+//Do it in time: O(n) and space: O(1)
+
+// https://github.com/awangdev/LintCode/blob/master/Java/Palindrome%20Linked%20List.java
+//time: O(n) need to use 2 runner strategy to get to the midpoint, but doesn't compound
+//space: O(1) while we need a var to reverse the second half of LL, we remove the second half from the original after it is copied
+function palindromeLinkedList(head) {
+  if (head === null || head.next === null) return true;
+  //find supposed middle of palindrome
+  //doesn't matter if its even or odd really
+  //find the node before the palindrome starts
+  let mid = findMiddle(head); //mid points to head (keep this in mind)
+  //reverse the supposed palindrome second half
+  let rightNode = reversedLinkList(mid.next);
+  mid.next = null; //this is what separates the LL making it O(1)
+  leftNode = head;
+  while (leftNode !== null && rightNode !== null) {
+    if (leftNode.val !== rightNode.val) return false;
+    leftNode = leftNode.next;
+    rightNode = rightNode.next;
+  }
+  return true;
+}
+
+function findMiddle(head) {
+  let fast = head.next; //.next?
+  let slow = head;
+  while (fast !== null && fast.next !== null) {
+    slow = slow.next;
+    fast = fast.next.next;
+  }
+  return slow;
+}
+
+function reversedLinkList(head) {
+  let prev = null;
+  while (head) {
+    let nextHead = head.next;
+    head.next = prev;
+    prev = head;
+    head = nextHead;
+  }
+  return prev;
+}
+
+/*
+even: 1-2-3-4 | 4-3-2-1
+
+odd: 1-2-3- 4 -3-2-1
+
+
+use 2 runner approach to find the midPoint
+then reverse the second link
+then remove the second half from the original
+then go through each at the same pace
+*/
+
+// Given a non-negative number represented as a singly linked list of digits, plus one to the number.
+// The digits are stored such that the most significant digit is at the head of the list.
+// Input: 9 - 2 - 1 (basically 129)
+
+//time: O(n) need to get all values at least 1 pass
+//space: O(n) need to store all the nums in an array to be manageable
+function plusOneLinkedList(head) {
+  //adding values to arr to make it more managable
+  let intArr = [1, 9, 9];
+  let listCopy = head;
+  while (listCopy) {
+    intArr.push(listCopy.value);
+    listCopy = listCopy.next;
+  }
+
+  //add 1 to values of linked list
+  let total = "";
+  let carry = 0;
+  for (let lastIdx = intArr.length - 1; lastIdx >= 0; lastIdx--) {
+    if (lastIdx === intArr.length - 1) intArr[lastIdx] += 1;
+
+    let sum = intArr[lastIdx] + carry;
+
+    if (intArr[lastIdx] > 9) {
+      sum -= 10;
+      carry = 1;
+    } else {
+      carry = 0;
+    }
+    total = sum + total;
+  }
+  console.log("original", intArr);
+  console.log("string split", total.split("").map(num => parseInt(num)));
+
+  //Add this back to linked list
+  let idx = 0;
+  while (head && idx < intArr.length) {
+    head.value = intArr[idx++];
+    head = head.next;
+  }
+  return head;
+}
+
+// plusOneLinkedList();
+
+// }
+// ListNode p=h2;
+// while(p!=null){
+//     if(p.val+1<=9){
+//         p.val=p.val+1;
+//         break;
+//     }else{
+//         p.val=0;
+//         if(p.next==null){
+//             p.next = new ListNode(1);
+//             break;
+//         }
+//         p=p.next;
+//     }
+// }
+// return reverse(h2);
+// }
+
+function plusOne(head) {
+  //reverse the LL so you can access onesPlace
+  //then reverse it back to give you LL in original order
+  let reversed = reverseLL(head);
+  let copy = reversed;
+  while (copy !== null) {
+    if (copy.val + 1 <= 9) {
+      copy.val += 1;
+      break;
+    } else {
+      copy.val = 0;
+      if (copy.next === null) {
+        copy.next = new ListNode(1);
+        break;
+      }
+      copy = copy.next;
+    }
+  }
+  return reverseLL(reversed);
+}

@@ -2697,3 +2697,39 @@ function reverseLLRecursively(head) {
   head.next = null;
   return tempHead;
 }
+
+//time: O(n) space: O(1)
+function palinLL(head) {
+  if (!head === null || !head.next === null) return true;
+
+  let mid = findMid(head);
+  let rightNode = revLL(mid.next);
+  mid.next = null;
+  let leftNodes = head;
+  while (leftNode !== null && rightNode !== null) {
+    if (leftNode.val !== rightNode.val) return false;
+    leftNode = leftNode.next;
+    rightNode = rightNode.next;
+  }
+  return true;
+}
+
+function findMid(head) {
+  let slow = head;
+  let fast = head.next;
+  while (fast.next !== null && fast.next.next !== null) {
+    slow = slow.next;
+    fast = fast.next.next;
+  }
+}
+
+function revLL(head) {
+  let prevNode = null;
+  while (head) {
+    let tempNext = head.next;
+    head.next = tempNext;
+    tempNext = prevNode;
+    prevNode = head;
+  }
+  return prevNode;
+}
