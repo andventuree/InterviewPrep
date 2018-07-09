@@ -2883,7 +2883,7 @@ function thirdMaxNum(arr) {
   else return max[2];
 }
 
-/*eslint-disable */
+// /*eslint-disable */
 function threeLargestHelper(max, num) {
   if (max[2] === null || max[2] < num) {
     shiftUpAndInsertHere(max, num, 2);
@@ -2902,3 +2902,25 @@ function shiftUpAndInsertHere(max, num, idx) {
     else max[i] = max[i + 1];
   }
 }
+
+// class QueueFromDoubleStack {
+//   constructor() {
+//     this.enStack = [];
+//     this.deStack = [];
+//   }
+//   enqueue(val) {
+//     this.enStack.push(val);
+//   }
+//   dequeue() {
+//     if (this.enStack.length === 0 || this.deStack.length === 0) {
+//       throw new Error("queues are empty");
+//     }
+//     //add to deStack when its empty
+//     if (this.deStack.length === 0) {
+//       if (this.enStack.length > 0) {
+//         this.deStack.push(this.enStack.pop());
+//       }
+//     }
+//     return this.deStack.pop();
+//   }
+// }

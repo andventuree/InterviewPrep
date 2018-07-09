@@ -15,8 +15,7 @@ String buffer - Using += or concat is an O(n) operation. Rather, put your charac
     // JS does not have a StringBuilder/StringBuffer style class for creating strings
     // string concatenation has been heavily optimised in JS implementations and
     // is faster than creating a string via an array then using a .join('') at the end
->>>Interviewer may not know it is heavily optimized so it could be beneficial to do it with array
-b/c interview knows other languages
+>>>Interviewer may not know it is heavily optimized so it could be beneficial to do it with array b/c interview knows other languages
 
 */
 
