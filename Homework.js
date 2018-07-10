@@ -1935,16 +1935,15 @@ class LL {
 
 let testLLForPlusOne = new LL()
   .add(9)
-  .add(9)
+  .add(2)
   .add(1);
 
 // testLLForPlusOne.print();
 
 function plusOneLL(head) {
-  //reverse the linked list, then iterate through it
+  // reverse the linked list, then iterate through it
   let reverse = revLL(head);
   let revReverse = reverse;
-
   let addOne = 1;
   let carry = 0;
   while (reverse) {
@@ -1952,15 +1951,12 @@ function plusOneLL(head) {
       reverse.value += 1;
       addOne -= 1;
     }
-
     reverse.value += carry;
     carry = 0;
-
     if (reverse.value > 9) {
       reverse.value = 0;
       carry = 1;
     }
-
     if (reverse.next === null && carry !== 0) {
       reverse.next = new LLNode(1);
       break; //need to exit or it'll go another loop cause .next is not null
@@ -1971,4 +1967,4 @@ function plusOneLL(head) {
   console.log(revLL(revReverse));
 }
 
-plusOneLL(testLLForPlusOne.head);
+// plusOneLL(testLLForPlusOne.head);
