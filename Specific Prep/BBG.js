@@ -384,7 +384,7 @@ palindrome linked list - learned
 plus one linked list - learned
 
 //*** trees and graphs ***
-invert binary tree
+invert binary tree - learned
 binary tree level order traversal
 populating next right pointers in each node
 populating next right pointers in each node II
@@ -667,3 +667,18 @@ var isAnagram = function(str, anagram) {
 // console.log(isAnagram("booger", "booger"));
 // console.log(isAnagram("booger", "roobge"));
 // console.log(isAnagram("booger", "oorbge"));
+
+function invertBinaryTree(tree) {
+  let queue = [tree];
+  while (queue.length > 0) {
+    let node = queue.shift();
+    if (node !== null) {
+      let temp = node.left;
+      node.left = node.right;
+      node.right = temp;
+
+      queue.push(node.left);
+      queue.push(node.right);
+    }
+  }
+}
