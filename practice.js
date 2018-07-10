@@ -2960,90 +2960,51 @@ function shiftUpAndINsert(arr, num, idx) {
   }
 }
 
-// function getNumberOfIslands(binaryMatrix) {
+// function islandCounter(matrix) {
 //   let islands = 0;
-//   let rows = binaryMatrix.length; // number of rows
-//   let cols = binaryMatrix[0].length; // number of columns
-//   for (let i = 0; i < rows; i++) {
-//     for (let j = 0; j < cols; j++) {
-//       if (binaryMatrix[i][j] === 1) {
-//         markIsland(binaryMatrix, rows, cols, i, j);
+//   let rows = matrix.length; //y //its 5 x 5 regardless, gets complicated if it isnt
+//   let cols = matrix[0].length; //x
+//   for (let y = 0; y < rows; y++) {
+//     //goes up and down
+//     for (let x = 0; x < cols; x++) {
+//       console.log("y", y, "x", x, matrix[y][x] === 1);
+//       //matrix[y] accts for irregular shape
+//       //goes right and left
+//       if (matrix[x][y] === 1) {
+//         //need to flip it b/c its easier to understand
+//         findAllLand(matrix, rows, cols, x, y);
+//         console.log(matrix);
+//         console.log();
 //         islands++;
 //       }
-//     } // O(n)
-//   } // O(n)
+//     }
+//   }
 //   console.log(islands);
 // }
+// //basically find all the 1's then remove all the ones
+// //that it is connected to so it wont be double counted
 
-// function markIsland(binaryMatrix, rows, cols, i, j) {
-//   let queue = [];
-//   queue.push([i, j]);
+// function findAllLand(matrix, rows, cols, x, y) {
+//   let queue = [[x, y]];
 //   while (queue.length > 0) {
-//     let item = queue.pop();
-//     console.log(item);
+//     let item = queue.shift();
 //     let originalX = item[0];
 //     let originalY = item[1];
-//     if (binaryMatrix[originalX][originalY] === 1) {
-//       binaryMatrix[originalX][originalY] = -1; //to mark as visited
-//       pushIfValid(queue, rows, cols, originalX - 1, originalY); //left
-//       pushIfValid(queue, rows, cols, originalX, originalY - 1); //bottom
-//       pushIfValid(queue, rows, cols, originalX + 1, originalY); //right
-//       pushIfValid(queue, rows, cols, originalX, originalY + 1); //top
+//     if (matrix[originalX][originalY] === 1) {
+//       matrix[originalX][originalY] = 0;
+//       addToQueueInBounds(queue, rows, cols, originalX - 1, originalY);
+//       addToQueueInBounds(queue, rows, cols, originalX + 1, originalY);
+//       addToQueueInBounds(queue, rows, cols, originalX, originalY - 1);
+//       addToQueueInBounds(queue, rows, cols, originalX, originalY + 1);
 //     }
 //   }
 // }
 
-// function pushIfValid(queue, rows, cols, x, y) {
+// function addToQueueInBounds(queue, rows, cols, x, y) {
 //   if (x >= 0 && x < rows && y >= 0 && y < cols) {
 //     queue.push([x, y]);
 //   }
 // }
-
-function islandCounter(matrix) {
-  let islands = 0;
-  let rows = matrix.length; //y //its 5 x 5 regardless, gets complicated if it isnt
-  let cols = matrix[0].length; //x
-  for (let y = 0; y < rows; y++) {
-    //goes up and down
-    for (let x = 0; x < cols; x++) {
-      console.log("y", y, "x", x, matrix[y][x] === 1);
-      //matrix[y] accts for irregular shape
-      //goes right and left
-      if (matrix[x][y] === 1) {
-        //need to flip it b/c its easier to understand
-        findAllLand(matrix, rows, cols, x, y);
-        console.log(matrix);
-        console.log();
-        islands++;
-      }
-    }
-  }
-  console.log(islands);
-}
-//basically find all the 1's then remove all the ones
-//that it is connected to so it wont be double counted
-
-function findAllLand(matrix, rows, cols, x, y) {
-  let queue = [[x, y]];
-  while (queue.length > 0) {
-    let item = queue.shift();
-    let originalX = item[0];
-    let originalY = item[1];
-    if (matrix[originalX][originalY] === 1) {
-      matrix[originalX][originalY] = 0;
-      addToQueueInBounds(queue, rows, cols, originalX - 1, originalY);
-      addToQueueInBounds(queue, rows, cols, originalX + 1, originalY);
-      addToQueueInBounds(queue, rows, cols, originalX, originalY - 1);
-      addToQueueInBounds(queue, rows, cols, originalX, originalY + 1);
-    }
-  }
-}
-
-function addToQueueInBounds(queue, rows, cols, x, y) {
-  if (x >= 0 && x < rows && y >= 0 && y < cols) {
-    queue.push([x, y]);
-  }
-}
 
 // console.log(
 // islandCounter([
@@ -3054,3 +3015,48 @@ function addToQueueInBounds(queue, rows, cols, x, y) {
 //   [1, 0, 1, 0, 1]
 // ]);
 // );
+
+// function countIslands(matrix) {
+//   let counter = 0;
+//   let rows = matrix.length;
+//   let cols = matrix[0].length;
+//   for (let i = 0; i < rows; i++) {
+//     for (let j = 0; j < cols; j++) {
+//       if (matrix[i][j] === 1) {
+//         markLand(matrix, rows, cols, i, j);
+//         //look for all of the same island
+//         counter++;
+//         //count as only 1 island
+//       }
+//     }
+//   }
+//   console.log(counter);
+// }
+
+// function markLand(matrix, rows, cols, originalX, originalY) {
+//   let queue = [[originalX, originalY]];
+//   while (queue.length > 0) {
+//     let land = queue.shift();
+//     let x = land[0];
+//     let y = land[1];
+//     if (matrix[x][y] === 1) {
+//       matrix[x][y] = 0;
+//       addLandInBound(queue, rows, cols, x - 1, y); //left
+//       addLandInBound(queue, rows, cols, x + 1, y); //right
+//       addLandInBound(queue, rows, cols, x, y - 1); //bottom
+//       addLandInBound(queue, rows, cols, x, y + 1); //top
+//     }
+//   }
+// }
+
+// function addLandInBound(queue, rows, cols, x, y) {
+//   if (x >= 0 && x < cols && y < rows && y >= 0) queue.push([x, y]);
+// }
+
+// countIslands([
+//   [0, 1, 0, 1, 0],
+//   [0, 0, 1, 1, 1],
+//   [1, 0, 0, 1, 0],
+//   [0, 1, 1, 0, 0],
+//   [1, 0, 1, 0, 1]
+// ]);
