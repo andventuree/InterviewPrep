@@ -127,7 +127,8 @@ homeworkTonight
   .add(true, "hard", "root", "pramp", "binary search")
   .add(true, "medium", "shiftedArray", "pramp", "array")
   .add(true, "easy", "merging 2 packages", "pramp", "array")
-  .add(true, "easy", "pancake sort", "pramp", "stack"); //backwards insertion sort
+  .add(true, "easy", "pancake sort", "pramp", "stack") //backwards insertion sort
+  .add(true, "medium", "flatten dictionary", "pramp", "object");
 
 let tricks = new QuestionList()
   .add(true, "", "binary search")

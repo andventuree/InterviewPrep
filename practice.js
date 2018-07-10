@@ -2924,3 +2924,133 @@ function shiftUpAndInsertHere(max, num, idx) {
 //     return this.deStack.pop();
 //   }
 // }
+
+// **************** Homework for Tue Jul 10 2018 ****************
+// Question {name: 'memo calculation',learned: true,level: '',source: null,type: null }
+// Question {name: 'delete linked list pointer',learned: true,level: '',source: null,type: null }
+// Question {name: 'pancake sort (stack)',learned: true,level: '',source: null,type: null }
+// Question {name: 'shift array up by 1',learned: true,level: '',source: null,type: null }
+// Question {name: 'shift up nums + add val at specific idx',learned: true,level: '',source: null,type: null }
+
+function memoCalc(arr, target) {
+  let hashmap = {};
+  for (let i = 0; i < arr.length; i++) {
+    let diff = Math.abs(target - arr[i]);
+    if (hashmap[diff]) return [diff, arr[i]];
+    else hashmap[arr[i]] = true;
+  }
+}
+
+function deleteLLNode(node) {
+  if (node === null || node.next === null) return;
+  node.value = node.next.value;
+  node.next = node.next.next;
+}
+
+function shiftOneUp(arr) {
+  for (let i = 0; i < arr.length - 1; i++) {
+    arr[i] = arr[i + 1];
+  }
+}
+
+function shiftUpAndINsert(arr, num, idx) {
+  for (let i = 0; i <= idx; i++) {
+    if (i === idx) arr[i] = num;
+    else arr[i] = arr[i + 1];
+  }
+}
+
+// function getNumberOfIslands(binaryMatrix) {
+//   let islands = 0;
+//   let rows = binaryMatrix.length; // number of rows
+//   let cols = binaryMatrix[0].length; // number of columns
+//   for (let i = 0; i < rows; i++) {
+//     for (let j = 0; j < cols; j++) {
+//       if (binaryMatrix[i][j] === 1) {
+//         markIsland(binaryMatrix, rows, cols, i, j);
+//         islands++;
+//       }
+//     } // O(n)
+//   } // O(n)
+//   console.log(islands);
+// }
+
+// function markIsland(binaryMatrix, rows, cols, i, j) {
+//   let queue = [];
+//   queue.push([i, j]);
+//   while (queue.length > 0) {
+//     let item = queue.pop();
+//     console.log(item);
+//     let originalX = item[0];
+//     let originalY = item[1];
+//     if (binaryMatrix[originalX][originalY] === 1) {
+//       binaryMatrix[originalX][originalY] = -1; //to mark as visited
+//       pushIfValid(queue, rows, cols, originalX - 1, originalY); //left
+//       pushIfValid(queue, rows, cols, originalX, originalY - 1); //bottom
+//       pushIfValid(queue, rows, cols, originalX + 1, originalY); //right
+//       pushIfValid(queue, rows, cols, originalX, originalY + 1); //top
+//     }
+//   }
+// }
+
+// function pushIfValid(queue, rows, cols, x, y) {
+//   if (x >= 0 && x < rows && y >= 0 && y < cols) {
+//     queue.push([x, y]);
+//   }
+// }
+
+function islandCounter(matrix) {
+  let islands = 0;
+  let rows = matrix.length; //y //its 5 x 5 regardless, gets complicated if it isnt
+  let cols = matrix[0].length; //x
+  for (let y = 0; y < rows; y++) {
+    //goes up and down
+    for (let x = 0; x < cols; x++) {
+      console.log("y", y, "x", x, matrix[y][x] === 1);
+      //matrix[y] accts for irregular shape
+      //goes right and left
+      if (matrix[x][y] === 1) {
+        //need to flip it b/c its easier to understand
+        findAllLand(matrix, rows, cols, x, y);
+        console.log(matrix);
+        console.log();
+        islands++;
+      }
+    }
+  }
+  console.log(islands);
+}
+//basically find all the 1's then remove all the ones
+//that it is connected to so it wont be double counted
+
+function findAllLand(matrix, rows, cols, x, y) {
+  let queue = [[x, y]];
+  while (queue.length > 0) {
+    let item = queue.shift();
+    let originalX = item[0];
+    let originalY = item[1];
+    if (matrix[originalX][originalY] === 1) {
+      matrix[originalX][originalY] = 0;
+      addToQueueInBounds(queue, rows, cols, originalX - 1, originalY);
+      addToQueueInBounds(queue, rows, cols, originalX + 1, originalY);
+      addToQueueInBounds(queue, rows, cols, originalX, originalY - 1);
+      addToQueueInBounds(queue, rows, cols, originalX, originalY + 1);
+    }
+  }
+}
+
+function addToQueueInBounds(queue, rows, cols, x, y) {
+  if (x >= 0 && x < rows && y >= 0 && y < cols) {
+    queue.push([x, y]);
+  }
+}
+
+// console.log(
+// islandCounter([
+//   [0, 1, 0, 1, 0],
+//   [0, 0, 1, 1, 1],
+//   [1, 0, 0, 1, 0],
+//   [0, 1, 1, 0, 0],
+//   [1, 0, 1, 0, 1]
+// ]);
+// );
