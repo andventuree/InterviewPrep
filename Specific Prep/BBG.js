@@ -415,7 +415,6 @@ encode and decode strings
 LRU cache
 
 //*** others ***
-square root
 sliding window maximum
 */
 /************************************************************************************************/
@@ -647,3 +646,24 @@ function plusOneLinkedList(head) {
 //   }
 //   return reverseLL(reversed);
 // }
+
+//how far off one string is from the other from being an anagram
+var isAnagram = function(str, anagram) {
+  if (str.length !== anagram.length) return false;
+  let hashmap = {};
+  for (let i = 0; i < str.length; i++) {
+    let char = str[i];
+    if (!hashmap[char]) hashmap[char] = 1;
+    else hashmap[char] += 1;
+  }
+  for (let j = 0; j < anagram.length; j++) {
+    let anChar = anagram[j];
+    if (!hashmap[anChar]) return false;
+    else hashmap[anChar] -= 1;
+  }
+  return true;
+};
+
+// console.log(isAnagram("booger", "booger"));
+// console.log(isAnagram("booger", "roobge"));
+// console.log(isAnagram("booger", "oorbge"));

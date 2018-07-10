@@ -86,10 +86,6 @@ function binarySearch(arr, begin, end, num) {
 //   return approxRoot;
 // }
 
-// function root(x, n) {
-//   if (x === 0) return 0;
-// }
-
 function truncFloat(x, points) {
   let power = Math.pow(10, points);
   return parseInt("" + x * power) / power;
@@ -355,3 +351,25 @@ function getIndicesOfItemWeights(arr, limit) {
 // getIndicesOfItemWeights([4, 6, 10, 15, 16], 21); //[3, 1]
 // getIndicesOfItemWeights([4, 6, 10, 15, 16], 20); //[4, 0]
 // getIndicesOfItemWeights([12, 6, 7, 14, 19, 3, 0, 25, 40], 7); //[6, 2]
+
+// Array Index & Element Equality
+// Given a sorted array arr of distinct integers, write a function indexEqualsValueSearch that returns the lowest index i for which arr[i] == i. Return -1 if there is no such index.
+
+// input: arr = [-8,0,2,5]
+// output: 2 # since arr[2] == 2
+
+// input: arr = [-1,0,3,6]
+// output: -1 # since no index in arr satisfies arr[i] == i
+
+function indexEqualsValueSearch(arr) {
+  let left = 0;
+  let right = arr.length - 1;
+  while (left <= right) {
+    let mid = Math.floor((left + right) / 2);
+    if (arr[mid] === mid) return mid;
+
+    if (arr[mid] < mid) left = mid + 1;
+    else right = mid - 1;
+  }
+  return -1;
+}
