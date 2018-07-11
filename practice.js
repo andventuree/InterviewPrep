@@ -3082,3 +3082,226 @@ function flattenHelper(obj, hashtable, keyNames) {
     }
   }
 }
+
+// **************** Homework for Wed Jul 11 2018 ****************
+// Question {name: 'merge sorted array',learned: true,level: '',source: 'bbg',type: 'array' }
+// Question {name: 'linked list cycle',learned: true,level: '',source: 'bbg',type: 'LL' }
+// Question {name: 'reverse integer',learned: true,level: '',source: 'bbg',type: '' }
+// Question {name: 'third maximum number',learned: true,level: '',source: 'bbg',type: 'array' }
+// Question {name: 'string compression',learned: true,level: '',source: 'bbg',type: 'string' }
+// Question {name: 'plus one linked list',learned: true,level: '',source: 'bbg',type: 'LL' }
+
+function mergeSortedArrays(arr1, m, arr2, n) {
+  //go backwards and move things around
+  let i = m + n - 1; //acc for off by 1
+  let lastIdx1 = m - 1;
+  let lastIdx2 = n - 1;
+  while (i > -1) {
+    if (arr1[lastIdx1] > arr2[lastIdx2] || !arr2[lastIdx2]) {
+      //if there are no more values in arr2
+      arr1[i] = arr1[lastIdx1];
+      lastIdx1--;
+    } else {
+      arr1[i] = arr2[lastIdx2];
+      lastIdx2--;
+    }
+    i--;
+  }
+  console.log(arr1);
+}
+
+// mergeSortedArrays([1, 2, 3, 3], 4, [2, 3, 4, 4, 5], 5); //[ 1, 2, 2, 3, 3, 3, 4, 4, 5 ]
+
+function llCycle(head) {
+  let fast = head;
+  let slow = head;
+  while (slow.next && fast.next && fast.next.next) {
+    slow = slow.next;
+    fast = fast.next.next;
+    if (slow === fast) break;
+  }
+  return slow;
+}
+
+//find kth node form the end
+//accelerate a reference up til k
+//then in a while loop, accelerate both 1 by 1;
+
+function kthNodeLL(head, k) {
+  if (!head) return head;
+  let last = head;
+  let kth = head;
+  while (k > 0) {
+    last = last.next;
+    if (!last) return "list is not long enough";
+    k--;
+  }
+  while (last === null) {
+    last = last.next;
+    kth = kth.next;
+  }
+  return kth;
+}
+
+function reverseInt(int) {
+  //need a way to take out onesPlace -> % 10 => numbers are base 10
+  //then move it the front by adding to a string, possibly push into an array or string
+  let reverse = 0;
+  while (int) {
+    let onesPlace = int % 10; //gives us remainder
+    int = Math.floor(int / 10);
+    reverse = reverse * 10 + onesPlace;
+  }
+  return reverse;
+}
+// console.log(reverseInt(123));
+
+function thirdMaxNumber(arr) {
+  let maxThree = [null, null, null];
+  for (let num of arr) {
+    maxThreeHelper(maxThree, num);
+  }
+  if (arr.length >= 3) {
+    return maxThree[0];
+  } else if (arr.length === 2) {
+    return maxThree[1];
+  } else {
+    return maxThree[0];
+  }
+}
+
+function maxThreeHelper(maxThree, num) {
+  if (maxThree[2] === null || maxThree[2] < num) {
+    addAndShiftOthers(maxThree, num, 2);
+  } else if (maxThree[1] === null || maxThree[1] < num) {
+    if (num !== maxThree[2]) {
+      addAndShiftOthers(maxThree, num, 1);
+    }
+  } else if (maxThree[0] === null || maxThree[0] < num) {
+    if (num !== maxThree[1] && num !== maxThree[2]) {
+      addAndShiftOthers(maxThree, num, 0);
+    }
+  }
+}
+
+function addAndShiftOthers(arr, num, idx) {
+  for (let i = 0; i <= idx; i++) {
+    if (i === idx) arr[i] = num;
+    else arr[i] = arr[i + 1];
+  }
+}
+
+// console.log(thirdMaxNumber([111, 999, 888, 777])); //777
+
+function stringCompression(str) {
+  //have to use a for loop to see each letter,
+  //we just need to total each char in a num
+  //then after we've totalled it, we'll add to a string
+  //then check if the string is shorter
+  let cStr = "";
+  for (let i = 0; i < str.length; i++) {
+    let char = str[i];
+    let startCount = i;
+    while (i < str.length && char === str[i + 1]) {
+      i++;
+    }
+    cStr += i - startCount + 1 + char;
+  }
+  console.log(cStr);
+  return cStr.length < str.length ? cStr : str;
+}
+
+// stringCompression("aaabbbCCCCCC");
+
+function plusOneLL(head) {
+  let digits = [];
+  while (head) {
+    digits.push(head.value);
+    head = head.value;
+  }
+  let lastIdx = digits.length - 1;
+  let total = "";
+  let carry = 0;
+  for (let i = digits.length - 1; i >= 0; i--) {
+    if (i === lastIdx) digits[lastIdx] += 1;
+    let sum = digits[lastIdx] + carry;
+    if (sum > 9) {
+      sum -= 10;
+      carry = 1;
+    } else {
+      carry = 0;
+    }
+    total = sum + total; //this determines each diigit
+  }
+  return total.split("").map(num => parseInt(num));
+}
+
+function plusOneInPlace(head) {
+  //reverse so you get the ones place
+  //keep track of carry
+  //need a copy of the original reference
+  //b/c LL is all about references, you can just manipulate value and its enough
+  let reverse = reverseLL(head);
+  let reverseBackInOrder = reverse;
+
+  let addOne = 1; //truthy
+  let carry = 0;
+  while (reverse) {
+    //add the 1 to the onesPlace
+    if (addOne) {
+      reverse.value += addOne;
+      addOne--;
+    }
+
+    //always add the carry with each loop iteration
+    reverse.value += carry;
+    carry = 0;
+
+    //making sure carry is updated if value is larger
+    if (reverse.value > 9) {
+      carry = 1;
+      reverse.value -= 10;
+    }
+
+    //you've reach the end, and you gotta add a new node now;
+    //you'll need access to the class
+    if (reverse.next === null && carry !== 0) {
+      reverse.next = new LLNode(1);
+      carry = 0;
+      break;
+    }
+    reverse = reverse.next;
+  }
+  console.log(reverseLL(reverseBackInOrder));
+}
+
+function plusOneLL(head) {
+  //reverse the linked list, then iterate through it
+  let reverse = revLL(head);
+  let revReverse = reverse;
+
+  let addOne = 1;
+  let carry = 0;
+  while (reverse) {
+    if (addOne !== 0) {
+      reverse.value += 1;
+      addOne -= 1;
+    }
+
+    reverse.value += carry;
+    carry = 0;
+
+    if (reverse.value > 9) {
+      reverse.value = 0;
+      carry = 1;
+    }
+
+    if (reverse.next === null && carry !== 0) {
+      reverse.next = new LLNode(1);
+      break; //need to exit or it'll go another loop cause .next is not null
+    }
+    reverse = reverse.next;
+  }
+  //reverses back reversed LL
+  console.log(revLL(revReverse));
+}

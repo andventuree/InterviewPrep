@@ -97,19 +97,19 @@ let homeworkTonight = new QuestionList()
 //bbg popular questions
 homeworkTonight
   //Most common ------------------------------------------
-  // .add(true, "", "add nums of 2 linked list", "bbg", "LL")
-  // .add(true, "", "reverseLinkedList", "bbg", "LL")
-  // .add(true, "", "reverse integer", "bbg", "")
-  // .add(true, "", "most traded", "bbg", "")
-  // .add(true, "", "first unique character in a string", "bbg", "string")
-  // .add(true, "", "linked list cycle", "bbg", "LL")
-  // .add(true, "", "valid parentheses", "bbg", "") //same as AE balanced brackets
-  // .add(true, "", "trap rain water", "bbg", "") //same as AE water area
-  // .add(true, "", "string compression", "bbg", "string")
-  // .add(true, "", "move zeros", "bbg", "array")
-  // .add(true, "", "intersection of two linked lists", "bbg", "LL")
-  // .add(true, "", "validate BST", "bbg", "BST")
-  // .add(true, "", "min stack", "bbg", "stack");
+  .add(true, "", "add nums of 2 linked list", "bbg", "LL")
+  .add(true, "", "reverseLinkedList", "bbg", "LL")
+  .add(true, "", "reverse integer", "bbg", "")
+  .add(true, "", "most traded", "bbg", "")
+  .add(true, "", "first unique character in a string", "bbg", "string")
+  .add(true, "", "linked list cycle", "bbg", "LL")
+  .add(true, "", "valid parentheses", "bbg", "") //same as AE balanced brackets
+  .add(true, "", "trap rain water", "bbg", "") //same as AE water area
+  .add(true, "", "string compression", "bbg", "string")
+  .add(true, "", "move zeros", "bbg", "array")
+  .add(true, "", "intersection of two linked lists", "bbg", "LL")
+  .add(true, "", "validate BST", "bbg", "BST")
+  .add(true, "", "min stack", "bbg", "stack")
   //Less common ------------------------------------------
   .add(true, "", "merge sorted array", "bbg", "array")
   .add(true, "", "third maximum number", "bbg", "array")
