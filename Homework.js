@@ -1755,216 +1755,329 @@ let { homeworkTonight, tricks } = require("./HwHelper");
 // Question {name: 'palindrome linked list',learned: true,level: '',source: 'bbg',type: 'LL' }
 // Question {name: 'plus one linked list',learned: true,level: '',source: 'bbg',type: 'LL' }
 
-function thirdMaxNum(arr) {
-  let threeMaxes = [null, null, null];
-  for (let num of arr) {
-    addMaxes(threeMaxes, num);
+// function thirdMaxNum(arr) {
+//   let threeMaxes = [null, null, null];
+//   for (let num of arr) {
+//     addMaxes(threeMaxes, num);
+//   }
+//   if (arr.length >= 3) {
+//     return threeMaxes[0]; //return 3rd largest
+//   } else if (arr.length === 2) {
+//     return threeMaxes[1]; //return 2nd largest
+//   } else {
+//     return threeMaxes[0]; // return only number
+//   }
+// }
+
+// function addMaxes(threeMaxes, num) {
+//   if (threeMaxes[2] === null || threeMaxes[2] < num) {
+//     shiftUpAddIn(threeMaxes, num, 2);
+//   } else if (threeMaxes[1] === null || threeMaxes[1] < num) {
+//     if (num !== threeMaxes[2]) shiftUpAddIn(threeMaxes, num, 1);
+//   } else if (threeMaxes[0] === null || threeMaxes[0] < num) {
+//     if (num !== threeMaxes[1]) shiftUpAddIn(threeMaxes, num, 0);
+//   }
+// }
+// function shiftUpAddIn(threeMaxes, num, idx) {
+//   for (let i = 0; i <= idx; i++) {
+//     if (i === idx) threeMaxes[i] = num;
+//     else threeMaxes[i] = threeMaxes[i + 1];
+//   }
+// }
+
+// // console.log(thirdMaxNum([1, 2, 3, 7, 8])); //3
+// // console.log(thirdMaxNum([2, 3])); //2
+// // console.log(thirdMaxNum([3, 2, 1, 2])); //1
+
+// function mergeSortedArr(arr1, m, arr2, n) {
+//   let i = m + n - 1;
+//   let idx1 = m - 1;
+//   let idx2 = n - 1;
+//   while (idx1 > -1 && idx2 > -1) {
+//     if (arr1[idx1] > arr2[idx2] || !arr2[idx2]) {
+//       arr1[i] = arr1[idx1];
+//       idx1--;
+//     } else {
+//       arr1[i] = arr2[idx2];
+//       idx2--;
+//     }
+//     i--;
+//   }
+//   console.log(arr1);
+// }
+
+// // mergeSortedArr([1, 2, 3, 0, 0, 0], 3, [2, 5, 6], 3); //[1,2,2,3,5,6]
+
+// function invertBST(tree) {
+//   let queue = [tree];
+//   while (queue.length > 0) {
+//     let currNode = queue.shift();
+//     if (currNode !== null) {
+//       let tempLeft = currNode.left;
+//       currNode.left = currNode.right;
+//       currNode.right = tempLeft;
+
+//       queue.push(currNode.left);
+//       queue.push(currNode.right);
+//     }
+//   }
+// }
+
+// function validAnagram(str, anagram) {
+//   if (str.length !== anagram.length) return false;
+//   let hashmap = {};
+//   for (let i = 0; i < str.length; i++) {
+//     let char = str[i];
+//     if (!hashmap[char]) hashmap[char] = 1;
+//     else hashmap[char] += 1;
+//   }
+//   for (let j = 0; j < anagram.length; j++) {
+//     let anChar = anagram[j];
+//     if (!hashmap[anChar]) return false;
+//     else hashmap[anChar]--;
+//   }
+//   return true;
+// }
+
+// function palinLinkedList(head) {
+//   if (!head === null || !head.next === null) return true; //its a palindrome if there's no value
+//   //find midpoint,
+//   //cut the linked list in half
+//   //go through each node at the same time
+
+//   let mid = findMid(head); //finds the point before palindrome starts
+//   let rightNode = revLL(mid.next);
+//   mid.next = null;
+//   let leftNode = head;
+//   while (leftNode && rightNode) {
+//     //as long as they're not null,
+//     //if they weren't equal, it would skip to true => leftNode !== rightNode is not right
+//     if (leftNode.value !== rightNode.value) return false;
+//     leftNode = leftNode.next;
+//     rightNode = rightNode.next;
+//   }
+//   return true;
+// }
+
+// function findMid(head) {
+//   let slow = head;
+//   let fast = head.next;
+//   while (fast && fast.next) {
+//     slow = slow.next;
+//     fast = fast.next;
+//   }
+//   return slow;
+// }
+
+// function revLL(head) {
+//   if (head === null || head.next === null) return head;
+//   let tempHead = revLL(head.next);
+//   head.next.next = head;
+//   head.next = null;
+//   return tempHead;
+// }
+
+// function addOneToLL(head) {
+//   let digits = [1, 9, 9];
+//   let getValuesCopy = head; //b.c i dont want to lose the reference to head;
+//   // while (getValuesCopy) {
+//   //   digits.push(getValuesCopy.value);
+//   //   getValuesCopy = getValuesCopy.next;
+//   // }
+//   let total = "";
+//   let carry = 0;
+//   for (let i = digits.length - 1; i >= 0; i--) {
+//     if (i === digits.length - 1) digits[i] += 1;
+//     let sum = digits[i] + carry;
+//     if (sum > 9) {
+//       sum -= 10;
+//       carry = 1;
+//     } else {
+//       carry = 0;
+//     }
+
+//     total = sum + total;
+//   }
+
+//   console.log(total.split("").map(num => parseInt(num)));
+// }
+
+// // addOneToLL();
+
+// class LLNode {
+//   constructor(val) {
+//     this.value = val;
+//     this.next = null;
+//   }
+// }
+
+// class LL {
+//   constructor() {
+//     this.head = null;
+//   }
+//   add(val) {
+//     let formerHead = this.head;
+//     let newNode = new LLNode(val);
+//     this.head = newNode;
+//     if (formerHead) this.head.next = formerHead;
+//     return this;
+//   }
+//   print() {
+//     let values = [];
+//     let node = this.head;
+//     while (node) {
+//       values.push(node.value);
+//       node = node.next;
+//     }
+//     console.log(values);
+//   }
+// }
+
+// let testLLForPlusOne = new LL()
+//   .add(9)
+//   .add(2)
+//   .add(1);
+
+// // testLLForPlusOne.print();
+
+// function plusOneLL(head) {
+//   // reverse the linked list, then iterate through it
+//   let reverse = revLL(head);
+//   let revReverse = reverse;
+//   let addOne = 1;
+//   let carry = 0;
+//   while (reverse) {
+//     if (addOne !== 0) {
+//       reverse.value += 1;
+//       addOne -= 1;
+//     }
+//     reverse.value += carry;
+//     carry = 0;
+//     if (reverse.value > 9) {
+//       reverse.value = 0;
+//       carry = 1;
+//     }
+//     if (reverse.next === null && carry !== 0) {
+//       reverse.next = new LLNode(1);
+//       break; //need to exit or it'll go another loop cause .next is not null
+//     }
+//     reverse = reverse.next;
+//   }
+//   //reverses back reversed LL
+//   console.log(revLL(revReverse));
+// }
+
+// // plusOneLL(testLLForPlusOne.head);
+
+// **************** Homework for Wed Jul 11 2018 ****************
+// Question {name: 'palindrome linked list',learned: true,level: '',source: 'bbg',type: 'LL' }
+// Question {name: 'Validate BST',learned: true,level: 'medium',source: 'AE',type: 'BST' }
+// Question {name: 'Smallest Difference',learned: true,level: 'medium',source: 'AE',type: 'array' }
+// Question {name: 'Balanced Brackets',learned: true,level: 'medium',source: 'AE',type: 'stacks' }
+// Question {name: 'Two Number Sum',learned: true,level: 'easy',source: 'AE',type: 'array' }
+
+function palindromeLL(head) {
+  //find midpoint, then reverse the second half
+  //then go one by one with reversed half and other half and compare
+  //if any don't match, reutn false;
+  if (!head || !head.next) return true;
+  let mid = findMiddle(head);
+  let rightNode = reverse(mid.next);
+  mid.next = null; //splitting connection from 1st LL to 2nd LL
+  let leftNode = head;
+  while (rightNode && leftNode) {
+    if (rightNode.value !== leftNode.value) return false;
+    rightNode = rightNode.next;
+    leftNode = leftNode.next;
   }
-  if (arr.length >= 3) {
-    return threeMaxes[0]; //return 3rd largest
-  } else if (arr.length === 2) {
-    return threeMaxes[1]; //return 2nd largest
-  } else {
-    return threeMaxes[0]; // return only number
-  }
+  return true;
 }
 
-function addMaxes(threeMaxes, num) {
-  if (threeMaxes[2] === null || threeMaxes[2] < num) {
-    shiftUpAddIn(threeMaxes, num, 2);
-  } else if (threeMaxes[1] === null || threeMaxes[1] < num) {
-    if (num !== threeMaxes[2]) shiftUpAddIn(threeMaxes, num, 1);
-  } else if (threeMaxes[0] === null || threeMaxes[0] < num) {
-    if (num !== threeMaxes[1]) shiftUpAddIn(threeMaxes, num, 0);
+function findMiddle(head) {
+  let slow = head;
+  let fast = fast.next;
+  if (fast && fast.next) {
+    //fast.next should catch whether list is odd or even
+    fast = fast.next.next;
+    slow = slow.next;
   }
-}
-function shiftUpAddIn(threeMaxes, num, idx) {
-  for (let i = 0; i <= idx; i++) {
-    if (i === idx) threeMaxes[i] = num;
-    else threeMaxes[i] = threeMaxes[i + 1];
-  }
+  return slow; //gives you node before middle
 }
 
-// console.log(thirdMaxNum([1, 2, 3, 7, 8])); //3
-// console.log(thirdMaxNum([2, 3])); //2
-// console.log(thirdMaxNum([3, 2, 1, 2])); //1
+function reverse(head) {
+  let prevNode = null;
+  while (head) {
+    let temp = head.next;
+    head.next = prevNode;
+    prevNode = head;
+    head = temp;
+  }
+  return prevNode;
+}
 
-function mergeSortedArr(arr1, m, arr2, n) {
-  let i = m + n - 1;
-  let idx1 = m - 1;
-  let idx2 = n - 1;
-  while (idx1 > -1 && idx2 > -1) {
-    if (arr1[idx1] > arr2[idx2] || !arr2[idx2]) {
-      arr1[i] = arr1[idx1];
-      idx1--;
-    } else {
-      arr1[i] = arr2[idx2];
-      idx2--;
+function validBST(tree) {
+  if (!tree) return tree;
+  return validHelper(tree, -Infinity, Infinity);
+}
+
+function validHelper(tree, min, max) {
+  if (tree.value < min || tree.value >= max) return false;
+  let validLeft = validHelper(tree.left, min, tree.value);
+  return validLeft && validHelper(tree.right, tree.value, max);
+}
+
+function smallestDiffBST(tree, target) {
+  //have a value tracking the smallest
+  //have a loop looking at each node and calculating the difference,
+  //if the difference is smaller than the value sitting in smallest, update the smallest
+  //then iterate through for another round,
+  //then at the end, return smallest
+  //can be optimized by looking at left and right depending on where the target is,
+  //best case is O(log n) while worst case is O(n) where every node is on the same branch
+  let smallest = tree.value;
+  while (tree) {
+    if (Math.abs(target - smallest) > Math.abs(target - tree.value)) {
+      smallest = tree.value;
     }
-    i--;
+    if (target > tree.value) tree = tree.right;
+    else if (target < tree.value) tree = tree.left;
+    else if (target === tree.value) return tree.value;
   }
-  console.log(arr1);
+  return smallest;
 }
 
-// mergeSortedArr([1, 2, 3, 0, 0, 0], 3, [2, 5, 6], 3); //[1,2,2,3,5,6]
-
-function invertBST(tree) {
-  let queue = [tree];
-  while (queue.length > 0) {
-    let currNode = queue.shift();
-    if (currNode !== null) {
-      let tempLeft = currNode.left;
-      currNode.left = currNode.right;
-      currNode.right = tempLeft;
-
-      queue.push(currNode.left);
-      queue.push(currNode.right);
-    }
-  }
-}
-
-function validAnagram(str, anagram) {
-  if (str.length !== anagram.length) return false;
-  let hashmap = {};
+function balancedBrackets(str) {
+  let stack = [];
   for (let i = 0; i < str.length; i++) {
     let char = str[i];
-    if (!hashmap[char]) hashmap[char] = 1;
-    else hashmap[char] += 1;
-  }
-  for (let j = 0; j < anagram.length; j++) {
-    let anChar = anagram[j];
-    if (!hashmap[anChar]) return false;
-    else hashmap[anChar]--;
-  }
-  return true;
-}
-
-function palinLinkedList(head) {
-  if (!head === null || !head.next === null) return true; //its a palindrome if there's no value
-  //find midpoint,
-  //cut the linked list in half
-  //go through each node at the same time
-
-  let mid = findMid(head); //finds the point before palindrome starts
-  let rightNode = revLL(mid.next);
-  mid.next = null;
-  let leftNode = head;
-  while (leftNode && rightNode) {
-    //as long as they're not null,
-    //if they weren't equal, it would skip to true => leftNode !== rightNode is not right
-    if (leftNode.value !== rightNode.value) return false;
-    leftNode = leftNode.next;
-    rightNode = rightNode.next;
-  }
-  return true;
-}
-
-function findMid(head) {
-  let slow = head;
-  let fast = head.next;
-  while (fast && fast.next) {
-    slow = slow.next;
-    fast = fast.next;
-  }
-  return slow;
-}
-
-function revLL(head) {
-  if (head === null || head.next === null) return head;
-  let tempHead = revLL(head.next);
-  head.next.next = head;
-  head.next = null;
-  return tempHead;
-}
-
-function addOneToLL(head) {
-  let digits = [1, 9, 9];
-  let getValuesCopy = head; //b.c i dont want to lose the reference to head;
-  // while (getValuesCopy) {
-  //   digits.push(getValuesCopy.value);
-  //   getValuesCopy = getValuesCopy.next;
-  // }
-  let total = "";
-  let carry = 0;
-  for (let i = digits.length - 1; i >= 0; i--) {
-    if (i === digits.length - 1) digits[i] += 1;
-    let sum = digits[i] + carry;
-    if (sum > 9) {
-      sum -= 10;
-      carry = 1;
+    let last = stack.length - 1;
+    if (char === "}") {
+      if (stack.pop() !== "{") return false;
+    } else if (char === ")") {
+      if (stack.pop() !== "(") return false;
+    } else if (char === "]") {
+      if (stack.pop() !== "[") return false;
     } else {
-      carry = 0;
+      stack.push(char);
     }
-
-    total = sum + total;
   }
-
-  console.log(total.split("").map(num => parseInt(num)));
+  return stack.length === 0;
 }
 
-// addOneToLL();
+// console.log(balancedBrackets("([]{}())"));
 
-class LLNode {
-  constructor(val) {
-    this.value = val;
-    this.next = null;
+function twoNumSum(arr, target) {
+  //use a hashtable to store seen values;
+  //loop through to see each value;
+  //check hashtable if it has seen it before
+  //otherwise just return;
+  let seen = {};
+  for (let i = 0; i < arr.length; i++) {
+    let diff = Math.abs(target - arr[i]);
+    if (seen[diff]) return [diff, arr[i]];
+    else seen[arr[i]] = true;
   }
+  return [];
 }
 
-class LL {
-  constructor() {
-    this.head = null;
-  }
-  add(val) {
-    let formerHead = this.head;
-    let newNode = new LLNode(val);
-    this.head = newNode;
-    if (formerHead) this.head.next = formerHead;
-    return this;
-  }
-  print() {
-    let values = [];
-    let node = this.head;
-    while (node) {
-      values.push(node.value);
-      node = node.next;
-    }
-    console.log(values);
-  }
-}
-
-let testLLForPlusOne = new LL()
-  .add(9)
-  .add(2)
-  .add(1);
-
-// testLLForPlusOne.print();
-
-function plusOneLL(head) {
-  // reverse the linked list, then iterate through it
-  let reverse = revLL(head);
-  let revReverse = reverse;
-  let addOne = 1;
-  let carry = 0;
-  while (reverse) {
-    if (addOne !== 0) {
-      reverse.value += 1;
-      addOne -= 1;
-    }
-    reverse.value += carry;
-    carry = 0;
-    if (reverse.value > 9) {
-      reverse.value = 0;
-      carry = 1;
-    }
-    if (reverse.next === null && carry !== 0) {
-      reverse.next = new LLNode(1);
-      break; //need to exit or it'll go another loop cause .next is not null
-    }
-    reverse = reverse.next;
-  }
-  //reverses back reversed LL
-  console.log(revLL(revReverse));
-}
-
-// plusOneLL(testLLForPlusOne.head);
+// console.log(twoNumSum([1, 2, 4], 6));

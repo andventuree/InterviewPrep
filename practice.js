@@ -3060,3 +3060,25 @@ function shiftUpAndINsert(arr, num, idx) {
 //   [0, 1, 1, 0, 0],
 //   [1, 0, 1, 0, 1]
 // ]);
+
+function flattenDictionary(dict) {
+  let hashtable = {};
+  return flattenHelper(dict, hashtable, []);
+}
+
+function flattenHelper(obj, hashtable, keyNames) {
+  for (let key in obj) {
+    if (typeof obj[key] === "object") {
+      if (key !== "") keyName.push(key);
+      flattenHelper(obj[key], hashtable, keyName);
+    } else {
+      let currentKey = "";
+      if (keyName.length === 0) currentKey = key;
+      else {
+        currentKey = keyName.join(".");
+        if (key !== "") currentKey += "." + key;
+      }
+      hashtable[currentKey] = obj[key];
+    }
+  }
+}
