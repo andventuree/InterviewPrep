@@ -2,6 +2,7 @@ let { homeworkTonight, tricks } = require("./HwHelper");
 
 // homeworkTonight.genQuestions(5);
 // tricks.genQuestions(5);
+// homeworkTonight.genQuestions(6, "all", "bbg");
 
 // //linked list
 // class Node {
@@ -3304,4 +3305,153 @@ function plusOneLL(head) {
   }
   //reverses back reversed LL
   console.log(revLL(revReverse));
+}
+
+// **************** Homework for Wed Jul 11 2018 ****************
+// Question {name: 'valid anagram',learned: true,level: '',source: 'bbg',type: 'string' }
+// Question {name: 'palindrome linked list',learned: true,level: '',source: 'bbg',type: 'LL' }
+// Question {name: 'trap rain water',learned: true,level: '',source: 'bbg',type: '' }
+// Question {name: 'first unique character in a string',learned: true,level: '',source: 'bbg',type: 'string' }
+// Question {name: 'linked list cycle',learned: true,level: '',source: 'bbg',type: 'LL' }
+// Question {name: 'plus one linked list',learned: true,level: '',source: 'bbg',type: 'LL' }
+
+function validAnagram(initial, anagram) {
+  //store the initial in the hash map
+  //then iterate over anagram, if it doesn't match up for any reason, then it isnt an anagram
+  if (initial.length !== anagram.length) return false;
+  let seen = {};
+  for (let char of initial) {
+    if (!seen[char]) seen[char] = 1;
+    else seen[char] += 1;
+  }
+  console.log(seen);
+  for (let letter of anagram) {
+    if (!seen[letter]) return false;
+    else seen[letter] -= 1;
+  }
+  console.log(seen);
+  return true;
+}
+
+// console.log(validAnagram("booger", "rgoob"));
+
+function LLpalindrome(head) {
+  if (!head || !head.next) return true;
+  //find the mid point
+  //the reverse the second half
+  //then compare both sides
+  let mid = findMiddle(head);
+  let rightNode = reverse(mid.next);
+  mid.next = null;
+  let leftNode = head;
+  while (leftNode && rightNode) {
+    if (leftNode.value !== rightNode.value) return false;
+    leftNode = leftNode.next;
+    rightNode = rightNode.next;
+  }
+  return true;
+}
+
+function findMiddle(head) {
+  let slow = head;
+  let fast = fast.next;
+  while (fast && fast.next) {
+    slow = slow.next;
+    fast = fast.next.next;
+  }
+  return slow;
+}
+
+function reverse(head) {
+  if (!head || !head.next) return head;
+  let formerHead = reverse(head.next);
+  head.next.next = head;
+  head.next = null;
+  return formerHead;
+}
+
+function trapRainWater2(landscapes) {
+  let leftMaxes = [];
+  let maxLeft = 0;
+  for (let i = 0; i < landscapes.length; i++) {
+    if (landscapes[i] > maxLeft) maxLeft = landscapes[i];
+    leftMaxes.push(maxLeft);
+  }
+
+  let rightMaxes = [];
+  let maxRight = 0;
+  for (let j = landscapes.length - 1; j >= 0; j--) {
+    if (landscapes[j] > maxRight) maxRight = landscapes[j];
+    rightMaxes[j] = maxRight;
+  }
+
+  let total = 0;
+  for (let k = 0; k < landscapes.length; k++) {
+    let minHeight = Math.min(leftMaxes[k], rightMaxes[k]);
+    if (minHeight > landscapes[k]) total += minHeight - landscapes[k];
+  }
+  return total;
+}
+
+// console.log(trapRainWater2([0, 8, 0, 0, 5, 0, 0, 10, 0, 0, 1, 1, 0, 3])); //48
+
+function firstUnique3(str) {
+  let hashtable = {};
+  for (let char of str) {
+    if (!hashtable[char]) hashtable[char] = 1;
+    else hashtable[char] += 1;
+  }
+  for (let i = 0; i < str.length; i++) {
+    if (hashtable[str[i]] === 1) return str[i];
+  }
+  return false;
+}
+
+// console.log(firstUnique3("oobo"));
+
+function LLcycleFinder(head) {
+  if (!head) return head;
+  let slow = head;
+  let fast = head;
+  while (slow.next && fast.next && fast.next.next) {
+    slow = slow.next;
+    fast = fast.next.next;
+    if (slow === fast) break;
+  }
+  return slow;
+}
+
+function plusOneToLL(head) {
+  //reverse you can access one's place
+  // but keep a copy of start of reverse, cause you'll need to reverse it back
+  // add 1 to num initially
+  // then always add carry then recalculate carry
+  // and if carry !== 0 but you still need to add a new node;
+  let reverse = reverseLL(head);
+  let reverseThisBack = reverse;
+  let carry = 0;
+  let addOne = 1;
+  while (reverse) {
+    //adds 1 only to the ones place
+    if (addOne) {
+      reverse.value += addOne;
+      addOne = 0;
+    }
+
+    reverse.value += carry;
+    carry = 0;
+
+    if (reverse.value > 9) {
+      carry = 1;
+      reverse.value += 10;
+    }
+
+    if (reverse.next === null && carry !== 0) {
+      reverse.next = new LLNode(1);
+      carry = 0;
+      break;
+    }
+    reverse = reverse.next;
+  }
+  return reverseLL(reverseThisBack);
 }

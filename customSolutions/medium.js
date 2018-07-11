@@ -480,3 +480,42 @@ function removeKthNodeFromEnd(head, k) {
 
   normal.next = normal.next.next;
 }
+
+//13. Breath-First Search
+//O(n) - need to visit each node
+//O(n) - the queue you use may be all the nodes if its 1 giant branch
+// function BFSGraph(tree) {
+//   let values = [];
+//   let queue = [tree];
+//   while (queue.length > 0) {
+//     let node = queue.shift();
+//     values.push(node.value);
+//     for (let child of node.children) {
+//       queue.push(child);
+//     }
+//   }
+//   return values;
+// }
+
+class Graph {
+  constructor(val) {
+    this.value = val;
+    this.children = [];
+  }
+
+  add(val) {
+    this.children.push(new Graph(val));
+  }
+
+  BFSGraph(arr) {
+    let queue = [this];
+    while (queue.length > 0) {
+      let node = queue.shift();
+      arr.push(node.value);
+      for (let child of node.children) {
+        queue.push(child);
+      }
+    }
+    return arr;
+  }
+}

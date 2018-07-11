@@ -70,6 +70,7 @@ let homeworkTonight = new QuestionList()
   .add(true, "easy", "Selection Sort", "AE", "sorting")
   .add(true, "easy", "Palindrome Check", "AE", "string")
   .add(true, "easy", "Caesar Cipher Encryptor", "AE", "string")
+  //Medium ------------------------------------------
   .add(true, "medium", "Three Number Sum", "AE", "array")
   .add(true, "medium", "Smallest Difference", "AE", "array")
   .add(true, "medium", "BST Construction", "AE", "BST")
@@ -81,7 +82,7 @@ let homeworkTonight = new QuestionList()
   // .add(false, "medium", "Min Number of Coins", "AE", "DP")
   // .add(false, "medium", "Levenshtein Distance", "AE", "DP")
   .add(true, "medium", "Kadanes Algo - Max Sum", "AE")
-  // .add(false, "medium", "Breath-First Search", "AE", "graphs")
+  .add(true, "medium", "Breath-First Search", "AE", "graphs") //basically tree with children
   // .add(false, "medium", "River Sizes", "AE", "graphs")
   // .add(false, "medium", "Min Heap Construction", "AE", "heaps") //started but didnt fully understand
   .add(true, "medium", "Remove kth Node from End", "AE", "LL")
@@ -91,6 +92,7 @@ let homeworkTonight = new QuestionList()
   .add(true, "medium", "Balanced Brackets", "AE", "stacks")
   // .add(false, "medium", "Longest Palindrome SubString", "AE", "string")
   // .add(false, "medium", "Suffix Trie Construction", "AE", "tries")
+  //Hard ------------------------------------------
   .add(true, "hard", "Water Area / Trap Rain", "AE", "DP")
   .add(true, "hard", "Find loop", "AE", "LL");
 
