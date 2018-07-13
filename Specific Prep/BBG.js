@@ -717,3 +717,144 @@ function invertBinaryTree(tree) {
     }
   }
 }
+
+// Initial problem but pointed out that Math.random can theoretically repeat
+// Write a random generator class where every time you call the next number, it does not repeat.
+class GenerateRandom {
+  constructor(lower, upper) {
+    this.lower = lower;
+    this.upper = upper;
+    this.seen = new Set();
+  }
+
+  nextRandom() {
+    //give me a random num i have not seen before
+    //Problem with this is that Math.random can still generate the same number over and over, causing an infinite loop. How to resolve that?
+    let num = Math.floor(Math.random * this.upper);
+    while (!this.seen.has(num)) {
+      num = Math.floor(Math.random * this.upper);
+    }
+    this.seen.add(num);
+    return num;
+  }
+}
+
+//   giveMeOrder() {
+//     console.log(this.seen);
+//   }
+// }
+
+// let testGenerator = new GenerateRandom(1, 10);
+// testGenerator.giveMeOrder();
+
+class GenerateRandom {
+  constructor(lower, upper) {
+    this.upper = upper;
+    this.lower = lower;
+    this.queue = [];
+    this.generateNewQueue(this.queue);
+  }
+
+  //Time: O(n) to create new queue
+  //Space: O(n) to store nums of queue
+  generateNewQueue(queue) {
+    //Build range
+    for (let i = this.lower; i <= this.upper; i++) {
+      queue.push(i);
+    }
+    return this.randomize(queue);
+  }
+
+  //Time: O(n) to randomize numbers
+  //Space: O(1) , using same queue from before
+  randomize(queue) {
+    //Swap the order around
+    //Doesn't matter even if math.random is the same number over and over
+    let pseudoRandomness = new Date().getMilliseconds();
+    // console.log(date)
+    for (let k = queue.length - 1; k >= 0; k--) {
+      let randomNum = Math.floor(
+        (Math.random() * pseudoRandomness) % this.upper
+      );
+      // let randomNum = Math.floor(
+      //   //If Math.random() was theoretically constant
+      //   (3 * pseudoRandomness) % this.upper
+      // );
+      let temp = queue[k];
+      queue[k] = queue[randomNum];
+      queue[randomNum] = temp;
+      console.log(queue, "index", k, "swaps with", randomNum);
+    }
+    return queue;
+  }
+
+  //time: O(1) its just taking off the number from the queue
+  //space: O(1)
+  nextRandom() {
+    if (this.queue.length > 0) {
+      console.log(this.queue);
+      return this.queue.shift();
+    } else {
+      //edge case: once you use all numbers, generate new the queue
+      this.queue = this.generateNewQueue(this.queue);
+      return this.nextRandom();
+    }
+  }
+}
+
+// let testGenerator = new GenerateRandom(1, 10);
+// [ 1, 2, 3, 10, 5, 6, 7, 8, 9, 4 ] 'index' 9 'swaps with' 3
+// [ 1, 2, 9, 10, 5, 6, 7, 8, 3, 4 ] 'index' 8 'swaps with' 2
+// [ 1, 2, 8, 10, 5, 6, 7, 9, 3, 4 ] 'index' 7 'swaps with' 2
+// [ 1, 2, 7, 10, 5, 6, 8, 9, 3, 4 ] 'index' 6 'swaps with' 2
+// [ 1, 6, 7, 10, 5, 2, 8, 9, 3, 4 ] 'index' 5 'swaps with' 1
+// [ 1, 5, 7, 10, 6, 2, 8, 9, 3, 4 ] 'index' 4 'swaps with' 1
+// [ 1, 5, 7, 10, 6, 2, 8, 9, 3, 4 ] 'index' 3 'swaps with' 3
+// [ 1, 5, 7, 10, 6, 2, 8, 9, 3, 4 ] 'index' 2 'swaps with' 2
+// [ 1, 5, 7, 10, 6, 2, 8, 9, 3, 4 ] 'index' 1 'swaps with' 1
+// [ 1, 5, 7, 10, 6, 2, 8, 9, 3, 4 ] 'index' 0 'swaps with' 0
+// [ 1, 5, 7, 10, 6, 2, 8, 9, 3, 4 ]
+// [ 5, 7, 10, 6, 2, 8, 9, 3, 4 ]
+// [ 7, 10, 6, 2, 8, 9, 3, 4 ]
+// [ 10, 6, 2, 8, 9, 3, 4 ]
+// [ 6, 2, 8, 9, 3, 4 ]
+// [ 2, 8, 9, 3, 4 ]
+// [ 8, 9, 3, 4 ]
+// [ 9, 3, 4 ]
+// [ 3, 4 ]
+// [ 4 ]
+
+// testGenerator.nextRandom(); //1
+// testGenerator.nextRandom(); //2
+// testGenerator.nextRandom(); //3
+// testGenerator.nextRandom(); //4
+// testGenerator.nextRandom(); //5
+// testGenerator.nextRandom(); //6
+// testGenerator.nextRandom(); //7
+// testGenerator.nextRandom(); //8
+// testGenerator.nextRandom(); //9
+// testGenerator.nextRandom(); //10
+// testGenerator.nextRandom(); //new queue created and given new num
+// testGenerator.nextRandom(); //1
+// testGenerator.nextRandom(); //2
+// testGenerator.nextRandom(); //3
+// testGenerator.nextRandom(); //4
+// testGenerator.nextRandom(); //5
+// testGenerator.nextRandom(); //6
+// testGenerator.nextRandom(); //7
+// testGenerator.nextRandom(); //8
+// testGenerator.nextRandom(); //9
+// testGenerator.nextRandom(); //10
+
+// let objTester = { 1: true, 2: true, 3: true, 4: true, 5: true };
+// for (let keys in objTester) {
+//   console.log(keys);
+// }
+// console.log();
+// for (let keys in objTester) {
+//   console.log(keys);
+// }
+// console.log();
+// for (let keys in objTester) {
+//   console.log(keys);
+// }

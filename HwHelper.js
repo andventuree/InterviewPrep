@@ -111,14 +111,14 @@ homeworkTonight
   .add(true, "", "move zeros", "bbg", "array")
   .add(true, "", "intersection of two linked lists", "bbg", "LL")
   .add(true, "", "validate BST", "bbg", "BST")
-  .add(true, "", "min stack", "bbg", "stack")
-  //Less common ------------------------------------------
-  .add(true, "", "merge sorted array", "bbg", "array")
-  .add(true, "", "third maximum number", "bbg", "array")
-  .add(true, "", "palindrome linked list", "bbg", "LL")
-  .add(true, "", "plus one linked list", "bbg", "LL")
-  .add(true, "", "valid anagram", "bbg", "string")
-  .add(true, "", "invert binary tree", "bbg", "BST");
+  .add(true, "", "min stack", "bbg", "stack");
+//Less common ------------------------------------------
+// .add(true, "", "merge sorted array", "bbg", "array")
+// .add(true, "", "third maximum number", "bbg", "array")
+// .add(true, "", "palindrome linked list", "bbg", "LL")
+// .add(true, "", "plus one linked list", "bbg", "LL")
+// .add(true, "", "valid anagram", "bbg", "string")
+// .add(true, "", "invert binary tree", "bbg", "BST");
 
 //ctci
 homeworkTonight.add();

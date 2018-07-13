@@ -3455,3 +3455,119 @@ function plusOneToLL(head) {
   }
   return reverseLL(reverseThisBack);
 }
+
+function printUniques(arr) {
+  let uniques = [];
+  for (let i = 0; i < arr.length; i++) {
+    uniques.push(arr[i]);
+    while (arr[i] === arr[i + 1]) {
+      i++;
+    }
+  }
+  console.log(uniques);
+}
+
+// printUniques([12, 3, 4, 4, 4, 4, 4, 5]);
+
+//print duplicates(arr1, arr2){}
+//2 different applications based on whether the arrays are same length
+
+// function printDuplicates(arr1, arr2) {
+//   let duplicates = [];
+//   let left = 0;
+//   let right = arr2.length - 1;
+//   for (let i = 0; i < arr1.length; i++) {
+//     let num = arr1[i];
+//     while (left <= right) {
+//       let mid = Math.floor((left + right) / 2);
+//       if (num === arr2[mid]) duplicates.push(num);
+//       else if (num > arr2[mid]) left = mid + 1;
+//       else if (num < arr2[mid]) right = mid - 1;
+//     }
+//   }
+//   return duplicates;
+// }
+
+// console.log(printDuplicates([1, 2, 3], [1, 2, 3]));
+
+// **************** Homework for Thu Jul 12 2018 ****************
+// Question {name: 'reverse integer',learned: true,level: '',source: 'bbg',type: '' }
+// Question {name: 'validate BST',learned: true,level: '',source: 'bbg',type: 'BST' }
+// Question {name: 'string compression',learned: true,level: '',source: 'bbg',type: 'string' }
+// Question {name: 'valid parentheses',learned: true,level: '',source: 'bbg',type: '' }
+// Question {name: 'intersection of two linked lists',learned: true,level: '',source: 'bbg',type: 'LL' }
+// Question {name: 'add nums of 2 linked list',learned: true,level: '',source: 'bbg',type: 'LL' }
+
+function reverseInt(int) {
+  let reverse = 0;
+  while (int) {
+    let onesPlace = int % 10;
+    int = Math.floor(int / 10);
+    reverse = reverse * 10 + onesPlace;
+  }
+  return reverse;
+}
+
+function validateBST(tree) {
+  return validHelper(tree, -Infinity, Infinity);
+}
+
+function validHelper(tree, min, max) {
+  if (!tree) return tree;
+  if (tree.value < min || tree.value >= max) return false;
+  let validLeft = validHelper(tree.left, min, tree.value);
+  return validLeft && validHelper(tree.right, tree.value, max);
+}
+
+function compressString(str) {
+  let compressed = "";
+  for (let i = 0; i < str.length; i++) {
+    let char = str[i];
+    let startOfCount = i; //not counting this as 1 b/c it'd be taken out of calculation
+    while (char === str[i + 1] && i < str.length) {
+      i++;
+    }
+    compressed += i - startOfCount + 1 + char;
+  }
+  console.log(compressed);
+}
+// compressString("aaacccbb");
+
+function validParens(str) {
+  let stack = [];
+  for (let i = 0; i < str.length; i++) {
+    let bracket = str[i];
+    let last = stack.length - 1;
+    if (bracket === "}") {
+      if (stack.pop() !== "{") return false;
+    } else if (bracket === "]") {
+      if (stack.pop() !== "[") return false;
+    } else if (bracket === ")") {
+      if (stack.pop() !== "(") return false;
+    } else {
+      stack.push(bracket);
+    }
+  }
+  return stack.length === 0;
+}
+
+// console.log(validParens("({[()]})"));
+
+//1 - 2 - 3 -
+//            - 4 - 5 -
+//6 - 7 - 8 -
+
+//1 - 2 - 3 -           6 - 7 -
+//            - 4 - 5 -
+//6 - 7 -               1 - 2 - 3 -
+
+function linkedListIntersection(head1, head2) {
+  if (head1 === null || head2 === null) return null;
+  let track1 = head1;
+  let track2 = head2;
+  while (track1 !== track2) {
+    track1 = track1.next === null ? track2 : track1.next;
+    track2 = track2.next === null ? track1 : track2.next;
+  }
+  return track1;
+}

@@ -126,3 +126,20 @@ console.log(testTrade.printMostTraded(2));
 // 'APPL', 1100
 // 'IBM', 1000
 // 'NFLX', 1000
+
+//Question: each line of text can only fit 20 chars, and you can't split words
+// function wordWrap(str) {
+//   let totalCount = 0;
+//   const arr = str.split(' '), formattedStr = [];
+
+//   arr.forEach((word, index) => {
+//    totalCount += word.length;
+//    if (totalCount >= 20) {
+//       formattedStr.push('\n', word, ' ');
+//       totalCount = word.length;
+//    } else {
+//       formattedStr.push(word, ' ');
+//    }
+//   });
+//   return formattedStr.join('');
+//  }
