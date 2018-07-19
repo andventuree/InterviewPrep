@@ -1976,127 +1976,440 @@ let { homeworkTonight, tricks } = require("./HwHelper");
 // Question {name: 'Balanced Brackets',learned: true,level: 'medium',source: 'AE',type: 'stacks' }
 // Question {name: 'Two Number Sum',learned: true,level: 'easy',source: 'AE',type: 'array' }
 
-function palindromeLL(head) {
-  //find midpoint, then reverse the second half
-  //then go one by one with reversed half and other half and compare
-  //if any don't match, reutn false;
-  if (!head || !head.next) return true;
-  let mid = findMiddle(head);
-  let rightNode = reverse(mid.next);
-  mid.next = null; //splitting connection from 1st LL to 2nd LL
-  let leftNode = head;
-  while (rightNode && leftNode) {
-    if (rightNode.value !== leftNode.value) return false;
-    rightNode = rightNode.next;
-    leftNode = leftNode.next;
-  }
-  return true;
-}
+// function palindromeLL(head) {
+//   //find midpoint, then reverse the second half
+//   //then go one by one with reversed half and other half and compare
+//   //if any don't match, reutn false;
+//   if (!head || !head.next) return true;
+//   let mid = findMiddle(head);
+//   let rightNode = reverse(mid.next);
+//   mid.next = null; //splitting connection from 1st LL to 2nd LL
+//   let leftNode = head;
+//   while (rightNode && leftNode) {
+//     if (rightNode.value !== leftNode.value) return false;
+//     rightNode = rightNode.next;
+//     leftNode = leftNode.next;
+//   }
+//   return true;
+// }
 
-function findMiddle(head) {
-  let slow = head;
-  let fast = fast.next;
-  if (fast && fast.next) {
-    //fast.next should catch whether list is odd or even
-    fast = fast.next.next;
-    slow = slow.next;
-  }
-  return slow; //gives you node before middle
-}
+// function findMiddle(head) {
+//   let slow = head;
+//   let fast = fast.next;
+//   if (fast && fast.next) {
+//     //fast.next should catch whether list is odd or even
+//     fast = fast.next.next;
+//     slow = slow.next;
+//   }
+//   return slow; //gives you node before middle
+// }
 
-function reverse(head) {
-  let prevNode = null;
-  while (head) {
-    let temp = head.next;
-    head.next = prevNode;
-    prevNode = head;
-    head = temp;
-  }
-  return prevNode;
-}
+// function reverse(head) {
+//   let prevNode = null;
+//   while (head) {
+//     let temp = head.next;
+//     head.next = prevNode;
+//     prevNode = head;
+//     head = temp;
+//   }
+//   return prevNode;
+// }
 
-function validBST(tree) {
-  if (!tree) return tree;
-  return validHelper(tree, -Infinity, Infinity);
-}
+// function validBST(tree) {
+//   if (!tree) return tree;
+//   return validHelper(tree, -Infinity, Infinity);
+// }
 
-function validHelper(tree, min, max) {
-  if (tree.value < min || tree.value >= max) return false;
-  let validLeft = validHelper(tree.left, min, tree.value);
-  return validLeft && validHelper(tree.right, tree.value, max);
-}
+// function validHelper(tree, min, max) {
+//   if (tree.value < min || tree.value >= max) return false;
+//   let validLeft = validHelper(tree.left, min, tree.value);
+//   return validLeft && validHelper(tree.right, tree.value, max);
+// }
 
-function smallestDiffBST(tree, target) {
-  //have a value tracking the smallest
-  //have a loop looking at each node and calculating the difference,
-  //if the difference is smaller than the value sitting in smallest, update the smallest
-  //then iterate through for another round,
-  //then at the end, return smallest
-  //can be optimized by looking at left and right depending on where the target is,
-  //best case is O(log n) while worst case is O(n) where every node is on the same branch
-  let smallest = tree.value;
-  while (tree) {
-    if (Math.abs(target - smallest) > Math.abs(target - tree.value)) {
-      smallest = tree.value;
+// function smallestDiffBST(tree, target) {
+//   //have a value tracking the smallest
+//   //have a loop looking at each node and calculating the difference,
+//   //if the difference is smaller than the value sitting in smallest, update the smallest
+//   //then iterate through for another round,
+//   //then at the end, return smallest
+//   //can be optimized by looking at left and right depending on where the target is,
+//   //best case is O(log n) while worst case is O(n) where every node is on the same branch
+//   let smallest = tree.value;
+//   while (tree) {
+//     if (Math.abs(target - smallest) > Math.abs(target - tree.value)) {
+//       smallest = tree.value;
+//     }
+//     if (target > tree.value) tree = tree.right;
+//     else if (target < tree.value) tree = tree.left;
+//     else if (target === tree.value) return tree.value;
+//   }
+//   return smallest;
+// }
+
+// function balancedBrackets(str) {
+//   let stack = [];
+//   for (let i = 0; i < str.length; i++) {
+//     let char = str[i];
+//     let last = stack.length - 1;
+//     if (char === "}") {
+//       if (stack.pop() !== "{") return false;
+//     } else if (char === ")") {
+//       if (stack.pop() !== "(") return false;
+//     } else if (char === "]") {
+//       if (stack.pop() !== "[") return false;
+//     } else {
+//       stack.push(char);
+//     }
+//   }
+//   return stack.length === 0;
+// }
+
+// // console.log(balancedBrackets("([]{}())"));
+
+// function twoNumSum(arr, target) {
+//   //use a hashtable to store seen values;
+//   //loop through to see each value;
+//   //check hashtable if it has seen it before
+//   //otherwise just return;
+//   let seen = {};
+//   for (let i = 0; i < arr.length; i++) {
+//     let diff = Math.abs(target - arr[i]);
+//     if (seen[diff]) return [diff, arr[i]];
+//     else seen[arr[i]] = true;
+//   }
+//   return [];
+// }
+
+// // console.log(twoNumSum([1, 2, 4], 6));
+// // **************** Homework for Wed Jul 11 2018 ****************
+// // Question {name: 'insertion sort',learned: true,level: '',source: null,type: null }
+// // Question {name: 'pancake sort (stack)',learned: true,level: '',source: null,type: null }
+// // Question {name: 'bubble sort',learned: true,level: '',source: null,type: null }
+// // Question {name: 'shift array up by 1',learned: true,level: '',source: null,type: null }
+// // Question {name: 'delete linked list pointer',learned: true,level: '',source: null,type: null }
+// // Question {name: 'selection sort',learned: true,level: '',source: null,type: null }
+// // Question {name: 'shift up nums + add val at specific idx',learned: true,level: '',source: null,type: null }
+// // Question {name: 'memo calculation',learned: true,level: '',source: null,type: null }
+// // Question {name: 'swap arr spaces',learned: true,level: '',source: null,type: null }
+// // Question {name: 'binary search',learned: true,level: '',source: null,type: null }
+// // Question {name: 'add nums by array back to front ',learned: true,level: '',source: null,type: null }
+// // Question {name: 'return fn that excutes callbacks on input',learned: true,level: '',source: null,type: null }
+// // Question {name: 'reverse linked list',learned: true,level: '',source: null,type: null }
+
+// function insertionSort(arr) {
+//   for (let i = 1; i < arr.length; i++) {
+//     let j = i;
+//     while (j >= 0 && arr[j] < arr[j - 1]) {
+//       let temp = arr[j];
+//       arr[j] = arr[j - 1];
+//       arr[j - 1] = temp;
+//       j--;
+//     }
+//   }
+//   return arr;
+// }
+
+// // console.log(insertionSort([4, 2, 3, 1, 21, 3, 1]));
+
+// function pancakeSort(arr) {
+//   // for (let i = arr.length - 1; i >= 0; i--) {}
+// }
+
+// function flip(arr, k) {
+//   let temp = arr[k];
+//   arr[k] = arr[arr.length - 1];
+//   arr[arr.length - 1] = temp;
+// }
+
+// function bubbleSort2(arr) {
+//   let isSorted = false;
+//   while (!isSorted) {
+//     isSorted = true;
+//     for (let i = 0; i < arr.length - 1; i++) {
+//       if (arr[i] > arr[i + 1]) {
+//         //moves 1 number at a time all the way to the back
+//         let temp = arr[i];
+//         arr[i] = arr[i + 1];
+//         arr[i + 1] = temp;
+//         isSorted = false;
+//       }
+//     }
+//   }
+//   return arr;
+// }
+
+// // console.log(bubbleSort2([4, 2, 3, 1, 21, 3, 1]));
+
+// function shiftUp(arr) {
+//   for (let i = 0; i < arr.length; i++) {
+//     if (i === arr.length - 1) arr[i] = "moved up so this is no value";
+//     else arr[i] = arr[i + 1];
+//   }
+//   return arr;
+// }
+// // console.log(shiftUp([4, 2, 3, 1, 21, 3, 1]));
+
+// function deleteNode(list) {
+//   if (!list) return list;
+//   list.value = list.next.value;
+//   list.next = list.next.next;
+// }
+
+// function selectionSort(arr) {
+//   let currIdx = 0;
+//   while (currIdx < arr.length) {
+//     let smallest = currIdx;
+//     for (let i = currIdx + 1; i < arr.length; i++) {
+//       if (arr[i] < arr[smallest]) smallest = i;
+//     }
+//     let temp = arr[smallest];
+//     arr[smallest] = arr[currIdx];
+//     arr[currIdx] = temp;
+//     currIdx++;
+//   }
+//   return arr;
+// }
+// // console.log(selectionSort([4, 2, 3, 1, 21, 3, 1]));
+
+// function shiftUpAdd(arr, num, idx) {
+//   for (let i = 0; i <= idx; i++) {
+//     if (i === idx) arr[i] = num;
+//     else arr[i] = arr[i + 1];
+//   }
+//   return arr;
+// }
+
+// function shiftBack(arr, num, idx) {
+//   for (let i = arr.length - 1; i >= idx; i--) {
+//     if (i === idx) arr[i] = num;
+//     else arr[i] = arr[i - 1];
+//   }
+//   return arr;
+// }
+
+// // console.log(shiftUpAdd([0, 1, 2, 3, 5, 6], 4, 3)); //[ 1, 2, 3, 4, 5, 6 ]
+// // console.log(shiftBack([1, 2, 3, 5, 6, 0], 4, 3)); //[ 1, 2, 3, 4, 5, 6 ]
+
+// function memo(arr) {
+//   let seen = {};
+//   for (let i = 0; i < arr.length; i++) {
+//     if (!seen[arr[i]]) seen[arr[i]] = 1;
+//     else seen[arr[i]] += 1;
+//   }
+// }
+
+// function swap(i, j, arr) {
+//   let temp = arr[i];
+//   arr[j] = arr[i];
+//   arr[i] = temp;
+// }
+
+// function binarySearch(arr, target) {
+//   let left = 0;
+//   let right = arr.length - 1;
+//   while (left <= right) {
+//     // let mid = right + Math.floor((right - left) / 2)
+//     let mid = Math.floor((right + left) / 2);
+//     if (arr[mid] === target) return mid;
+//     else if (arr[mid] > target) right = mid - 1;
+//     else if (arr[mid] < target) left = mid + 1;
+//   }
+//   return -1;
+// }
+
+// function addNumsBackwards(arr) {
+//   let digits1 = [];
+//   let digits2 = [];
+//   let lastIdx1 = digits1.length - 1;
+//   let lastIdx2 = digits2.length - 1;
+//   let carry = 0;
+//   let total = "";
+//   for (let i = Math.max(lastIdx1, lastIdx2); i >= 0; i--) {
+//     let a = digits1[lastIdx1] || 0;
+//     let b = digits2[lastIdx2] || 0;
+//     let sum = a + b + carry;
+//     if (sum > 9) {
+//       sum -= 10;
+//       carry = 1;
+//     } else {
+//       carry = 0;
+//     }
+//     total = sum + total;
+//     lastIdx1--;
+//     lastIdx2--;
+//   }
+//   return total.split("").map(num => parseInt(num));
+// }
+
+// function addOneToLList(list) {
+//   let digits = [1, 9, 9];
+//   let total = "";
+//   let carry = 0;
+//   for (let i = digits.length - 1; i >= 0; i--) {
+//     if (i === digits.length - 1) digits[i] += 1;
+//     let sum = digits[i] + carry;
+//     if (sum > 9) {
+//       sum -= 10;
+//       carry = 1;
+//     } else {
+//       carry = 0;
+//     }
+//     total = sum + total;
+//   }
+//   return total.split("").map(num => parseInt(num));
+// }
+
+// // console.log(addOneToLList());
+
+// function executeAll(callbacks) {
+//   return function(input) {
+//     for (let i = callbacks.length - 1; i >= 0; i--) {
+//       input = callbacks[i](input);
+//     }
+//     return input;
+//   };
+// }
+
+// function reveLL(head) {
+//   if (!head || !head.next) return head;
+//   let temp = reveLL(head.next);
+//   head.next.next = head;
+//   head.next = null;
+//   return temp;
+// }
+
+// **************** Homework for Thu Jul 19 2018 ****************
+// Question {name: 'selection sort',learned: true,level: '',source: null,type: null }
+// Question {name: 'memo calculation',learned: true,level: '',source: null,type: null }
+// Question {name: 'add nums by array back to front ',learned: true,level: '',source: null,type: null }
+// Question {name: 'binary search',learned: true,level: '',source: null,type: null }
+// Question {name: 'return fn that excutes callbacks on input',learned: true,level: '',source: null,type: null }
+// Question {name: 'reverse linked list',learned: true,level: '',source: null,type: null }
+// Question {name: 'bubble sort',learned: true,level: '',source: null,type: null }
+// Question {name: 'insertion sort',learned: true,level: '',source: null,type: null }
+// Question {name: 'delete linked list pointer',learned: true,level: '',source: null,type: null }
+// Question {name: 'shift up nums + add val at specific idx',learned: true,level: '',source: null,type: null }
+// Question {name: 'shift array up by 1',learned: true,level: '',source: null,type: null }
+// Question {name: 'swap arr spaces',learned: true,level: '',source: null,type: null }
+// Question {name: 'pancake sort (stack)',learned: true,level: '',source: null,type: null }
+
+function selectionSort(arr) {
+  for (let i = 0; i < arr.length; i++) {
+    let smallestIdx = i;
+    let nextIdx = i + 1;
+    while (nextIdx < arr.length) {
+      if (arr[nextIdx] < arr[smallestIdx]) {
+        smallestIdx = nextIdx;
+      }
+      nextIdx++;
     }
-    if (target > tree.value) tree = tree.right;
-    else if (target < tree.value) tree = tree.left;
-    else if (target === tree.value) return tree.value;
+    let temp = arr[i];
+    arr[i] = arr[smallestIdx];
+    arr[smallestIdx] = temp;
   }
-  return smallest;
+  console.log("arr: ", arr);
 }
 
-function balancedBrackets(str) {
-  let stack = [];
-  for (let i = 0; i < str.length; i++) {
-    let char = str[i];
-    let last = stack.length - 1;
-    if (char === "}") {
-      if (stack.pop() !== "{") return false;
-    } else if (char === ")") {
-      if (stack.pop() !== "(") return false;
-    } else if (char === "]") {
-      if (stack.pop() !== "[") return false;
-    } else {
-      stack.push(char);
-    }
-  }
-  return stack.length === 0;
-}
+// selectionSort([1, 23, 423, 4, 2, 12, 3, 41, 512, 34, 5, 3]);
 
-// console.log(balancedBrackets("([]{}())"));
-
-function twoNumSum(arr, target) {
-  //use a hashtable to store seen values;
-  //loop through to see each value;
-  //check hashtable if it has seen it before
-  //otherwise just return;
+function memoCalc(arr, target) {
   let seen = {};
   for (let i = 0; i < arr.length; i++) {
     let diff = Math.abs(target - arr[i]);
     if (seen[diff]) return [diff, arr[i]];
     else seen[arr[i]] = true;
   }
-  return [];
 }
 
-// console.log(twoNumSum([1, 2, 4], 6));
-// **************** Homework for Wed Jul 11 2018 ****************
-// Question {name: 'insertion sort',learned: true,level: '',source: null,type: null }
-// Question {name: 'pancake sort (stack)',learned: true,level: '',source: null,type: null }
-// Question {name: 'bubble sort',learned: true,level: '',source: null,type: null }
-// Question {name: 'shift array up by 1',learned: true,level: '',source: null,type: null }
-// Question {name: 'delete linked list pointer',learned: true,level: '',source: null,type: null }
-// Question {name: 'selection sort',learned: true,level: '',source: null,type: null }
-// Question {name: 'shift up nums + add val at specific idx',learned: true,level: '',source: null,type: null }
-// Question {name: 'memo calculation',learned: true,level: '',source: null,type: null }
-// Question {name: 'swap arr spaces',learned: true,level: '',source: null,type: null }
-// Question {name: 'binary search',learned: true,level: '',source: null,type: null }
-// Question {name: 'add nums by array back to front ',learned: true,level: '',source: null,type: null }
-// Question {name: 'return fn that excutes callbacks on input',learned: true,level: '',source: null,type: null }
-// Question {name: 'reverse linked list',learned: true,level: '',source: null,type: null }
+// console.log(memoCalc([1, 2, 3, 4, 5, 6], 9));
+// console.log(memoCalc([1, 2, 3, 4, 5, 6], 11));
 
-function insertionSort(arr) {
+function addInt(arr1, arr2) {
+  let lastIdx1 = arr1.length - 1;
+  let lastIdx2 = arr2.length - 1;
+  let total = "";
+  let carry = 0;
+  for (let i = Math.max(lastIdx1, lastIdx2); i >= 0; i--) {
+    let a = arr1[lastIdx1--] || 0;
+    let b = arr2[lastIdx2--] || 0;
+    let sum = a + b + carry;
+
+    if (sum > 9) {
+      sum -= 10;
+      carry = 1;
+    } else {
+      carry = 0;
+    }
+
+    total = sum + total;
+  }
+  console.log(total);
+}
+
+// addInt([1, 2, 9], [2, 1]);
+
+function binarySearch(arr, target) {
+  let left = 0;
+  let right = arr.length - 1;
+  while (left <= right) {
+    let mid = Math.floor((left + right) / 2);
+
+    if (arr[mid] === target) return mid;
+    else if (arr[mid] > target) right = mid - 1;
+    else if (arr[mid] < target) left = mid + 1;
+  }
+  return -1;
+}
+
+// console.log(binarySearch([1, 2, 3, 4, 5, 6, 7], 6)); //index 5
+
+function compose(callbacks) {
+  return function(input) {
+    for (let i = callbacks.length - 1; i >= 0; i--) {
+      input = callbacks[i](input);
+    }
+    return input;
+  };
+}
+
+function reverseLL(head) {
+  let prevNode = null;
+  while (head) {
+    let tempNext = head.next;
+    head.next = prevNode;
+    prevNode = head;
+    head = tempNext;
+  }
+  return prevNode;
+}
+
+function reverseLLRecursive(head) {
+  if (head === null || head.next === null) return head;
+  let tempHead = reverseLLRecursive(head.next);
+  head.next.next = head;
+  head.next = null;
+  return tempHead;
+}
+
+let bubbleSort = arr => {
+  let isSorted = false;
+  while (!isSorted) {
+    isSorted = true;
+    for (let i = 0; i < arr.length - 1; i++) {
+      if (arr[i] > arr[i + 1]) {
+        let temp = arr[i];
+        arr[i] = arr[i + 1];
+        arr[i + 1] = temp;
+        isSorted = false;
+      }
+    }
+  }
+  console.log(arr);
+};
+
+// bubbleSort([4, 3, 2, 1]);
+
+let insertSort = arr => {
   for (let i = 1; i < arr.length; i++) {
     let j = i;
     while (j >= 0 && arr[j] < arr[j - 1]) {
@@ -2106,174 +2419,33 @@ function insertionSort(arr) {
       j--;
     }
   }
-  return arr;
+  console.log(arr);
+};
+
+// insertSort([4, 3, 2, 1]);
+
+let deleteLLPointer = node => {
+  if (!node) return node;
+  node.value = node.next.value;
+  node.next = node.next.next;
+};
+
+function deleteLLPoint(node) {
+  if (!node) return node;
+  node.value = node.next.value;
+  node.next = node.next.next;
 }
 
-// console.log(insertionSort([4, 2, 3, 1, 21, 3, 1]));
-
-function pancakeSort(arr) {
-  // for (let i = arr.length - 1; i >= 0; i--) {}
-}
-
-function flip(arr, k) {
-  let temp = arr[k];
-  arr[k] = arr[arr.length - 1];
-  arr[arr.length - 1] = temp;
-}
-
-function bubbleSort2(arr) {
-  let isSorted = false;
-  while (!isSorted) {
-    isSorted = true;
-    for (let i = 0; i < arr.length - 1; i++) {
-      if (arr[i] > arr[i + 1]) {
-        //moves 1 number at a time all the way to the back
-        let temp = arr[i];
-        arr[i] = arr[i + 1];
-        arr[i + 1] = temp;
-        isSorted = false;
-      }
-    }
-  }
-  return arr;
-}
-
-// console.log(bubbleSort2([4, 2, 3, 1, 21, 3, 1]));
-
-function shiftUp(arr) {
-  for (let i = 0; i < arr.length; i++) {
-    if (i === arr.length - 1) arr[i] = "moved up so this is no value";
-    else arr[i] = arr[i + 1];
-  }
-  return arr;
-}
-// console.log(shiftUp([4, 2, 3, 1, 21, 3, 1]));
-
-function deleteNode(list) {
-  if (!list) return list;
-  list.value = list.next.value;
-  list.next = list.next.next;
-}
-
-function selectionSort(arr) {
-  let currIdx = 0;
-  while (currIdx < arr.length) {
-    let smallest = currIdx;
-    for (let i = currIdx + 1; i < arr.length; i++) {
-      if (arr[i] < arr[smallest]) smallest = i;
-    }
-    let temp = arr[smallest];
-    arr[smallest] = arr[currIdx];
-    arr[currIdx] = temp;
-    currIdx++;
-  }
-  return arr;
-}
-// console.log(selectionSort([4, 2, 3, 1, 21, 3, 1]));
-
-function shiftUpAdd(arr, num, idx) {
+let shiftUpAndAddVal = (arr, val, idx) => {
   for (let i = 0; i <= idx; i++) {
-    if (i === idx) arr[i] = num;
+    if (i === idx) arr[i] = val;
     else arr[i] = arr[i + 1];
   }
-  return arr;
-}
+};
 
-function shiftBack(arr, num, idx) {
-  for (let i = arr.length - 1; i >= idx; i--) {
-    if (i === idx) arr[i] = num;
-    else arr[i] = arr[i - 1];
-  }
-  return arr;
-}
-
-// console.log(shiftUpAdd([0, 1, 2, 3, 5, 6], 4, 3)); //[ 1, 2, 3, 4, 5, 6 ]
-// console.log(shiftBack([1, 2, 3, 5, 6, 0], 4, 3)); //[ 1, 2, 3, 4, 5, 6 ]
-
-function memo(arr) {
-  let seen = {};
+let shiftUpNums = arr => {
   for (let i = 0; i < arr.length; i++) {
-    if (!seen[arr[i]]) seen[arr[i]] = 1;
-    else seen[arr[i]] += 1;
+    if (i === arr.length - 1) arr[i] = null;
+    arr[i] = arr[i + 1];
   }
-}
-
-function swap(i, j, arr) {
-  let temp = arr[i];
-  arr[j] = arr[i];
-  arr[i] = temp;
-}
-
-function binarySearch(arr, target) {
-  let left = 0;
-  let right = arr.length - 1;
-  while (left <= right) {
-    // let mid = right + Math.floor((right - left) / 2)
-    let mid = Math.floor((right + left) / 2);
-    if (arr[mid] === target) return mid;
-    else if (arr[mid] > target) right = mid - 1;
-    else if (arr[mid] < target) left = mid + 1;
-  }
-  return -1;
-}
-
-function addNumsBackwards(arr) {
-  let digits1 = [];
-  let digits2 = [];
-  let lastIdx1 = digits1.length - 1;
-  let lastIdx2 = digits2.length - 1;
-  let carry = 0;
-  let total = "";
-  for (let i = Math.max(lastIdx1, lastIdx2); i >= 0; i--) {
-    let a = digits1[lastIdx1] || 0;
-    let b = digits2[lastIdx2] || 0;
-    let sum = a + b + carry;
-    if (sum > 9) {
-      sum -= 10;
-      carry = 1;
-    } else {
-      carry = 0;
-    }
-    total = sum + total;
-    lastIdx1--;
-    lastIdx2--;
-  }
-  return total.split("").map(num => parseInt(num));
-}
-
-function addOneToLList(list) {
-  let digits = [1, 9, 9];
-  let total = "";
-  let carry = 0;
-  for (let i = digits.length - 1; i >= 0; i--) {
-    if (i === digits.length - 1) digits[i] += 1;
-    let sum = digits[i] + carry;
-    if (sum > 9) {
-      sum -= 10;
-      carry = 1;
-    } else {
-      carry = 0;
-    }
-    total = sum + total;
-  }
-  return total.split("").map(num => parseInt(num));
-}
-
-// console.log(addOneToLList());
-
-function executeAll(callbacks) {
-  return function(input) {
-    for (let i = callbacks.length - 1; i >= 0; i--) {
-      input = callbacks[i](input);
-    }
-    return input;
-  };
-}
-
-function reveLL(head) {
-  if (!head || !head.next) return head;
-  let temp = reveLL(head.next);
-  head.next.next = head;
-  head.next = null;
-  return temp;
-}
+};
