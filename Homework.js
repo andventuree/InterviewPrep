@@ -2293,109 +2293,183 @@ let { homeworkTonight, tricks } = require("./HwHelper");
 // Question {name: 'swap arr spaces',learned: true,level: '',source: null,type: null }
 // Question {name: 'pancake sort (stack)',learned: true,level: '',source: null,type: null }
 
-function selectionSort(arr) {
-  for (let i = 0; i < arr.length; i++) {
-    let smallestIdx = i;
-    let nextIdx = i + 1;
-    while (nextIdx < arr.length) {
-      if (arr[nextIdx] < arr[smallestIdx]) {
-        smallestIdx = nextIdx;
-      }
-      nextIdx++;
-    }
-    let temp = arr[i];
-    arr[i] = arr[smallestIdx];
-    arr[smallestIdx] = temp;
-  }
-  console.log("arr: ", arr);
-}
+// function selectionSort(arr) {
+//   for (let i = 0; i < arr.length; i++) {
+//     let smallestIdx = i;
+//     let nextIdx = i + 1;
+//     while (nextIdx < arr.length) {
+//       if (arr[nextIdx] < arr[smallestIdx]) {
+//         smallestIdx = nextIdx;
+//       }
+//       nextIdx++;
+//     }
+//     let temp = arr[i];
+//     arr[i] = arr[smallestIdx];
+//     arr[smallestIdx] = temp;
+//   }
+//   console.log("arr: ", arr);
+// }
 
-// selectionSort([1, 23, 423, 4, 2, 12, 3, 41, 512, 34, 5, 3]);
+// // selectionSort([1, 23, 423, 4, 2, 12, 3, 41, 512, 34, 5, 3]);
 
-function memoCalc(arr, target) {
-  let seen = {};
-  for (let i = 0; i < arr.length; i++) {
-    let diff = Math.abs(target - arr[i]);
-    if (seen[diff]) return [diff, arr[i]];
-    else seen[arr[i]] = true;
-  }
-}
+// function memoCalc(arr, target) {
+//   let seen = {};
+//   for (let i = 0; i < arr.length; i++) {
+//     let diff = Math.abs(target - arr[i]);
+//     if (seen[diff]) return [diff, arr[i]];
+//     else seen[arr[i]] = true;
+//   }
+// }
 
-// console.log(memoCalc([1, 2, 3, 4, 5, 6], 9));
-// console.log(memoCalc([1, 2, 3, 4, 5, 6], 11));
+// // console.log(memoCalc([1, 2, 3, 4, 5, 6], 9));
+// // console.log(memoCalc([1, 2, 3, 4, 5, 6], 11));
 
-function addInt(arr1, arr2) {
-  let lastIdx1 = arr1.length - 1;
-  let lastIdx2 = arr2.length - 1;
-  let total = "";
-  let carry = 0;
-  for (let i = Math.max(lastIdx1, lastIdx2); i >= 0; i--) {
-    let a = arr1[lastIdx1--] || 0;
-    let b = arr2[lastIdx2--] || 0;
-    let sum = a + b + carry;
+// function addInt(arr1, arr2) {
+//   let lastIdx1 = arr1.length - 1;
+//   let lastIdx2 = arr2.length - 1;
+//   let total = "";
+//   let carry = 0;
+//   for (let i = Math.max(lastIdx1, lastIdx2); i >= 0; i--) {
+//     let a = arr1[lastIdx1--] || 0;
+//     let b = arr2[lastIdx2--] || 0;
+//     let sum = a + b + carry;
 
-    if (sum > 9) {
-      sum -= 10;
-      carry = 1;
-    } else {
-      carry = 0;
-    }
+//     if (sum > 9) {
+//       sum -= 10;
+//       carry = 1;
+//     } else {
+//       carry = 0;
+//     }
 
-    total = sum + total;
-  }
-  console.log(total);
-}
+//     total = sum + total;
+//   }
+//   console.log(total);
+// }
 
-// addInt([1, 2, 9], [2, 1]);
+// // addInt([1, 2, 9], [2, 1]);
 
-function binarySearch(arr, target) {
-  let left = 0;
-  let right = arr.length - 1;
-  while (left <= right) {
-    let mid = Math.floor((left + right) / 2);
+// function binarySearch(arr, target) {
+//   let left = 0;
+//   let right = arr.length - 1;
+//   while (left <= right) {
+//     let mid = Math.floor((left + right) / 2);
 
-    if (arr[mid] === target) return mid;
-    else if (arr[mid] > target) right = mid - 1;
-    else if (arr[mid] < target) left = mid + 1;
-  }
-  return -1;
-}
+//     if (arr[mid] === target) return mid;
+//     else if (arr[mid] > target) right = mid - 1;
+//     else if (arr[mid] < target) left = mid + 1;
+//   }
+//   return -1;
+// }
 
-// console.log(binarySearch([1, 2, 3, 4, 5, 6, 7], 6)); //index 5
+// // console.log(binarySearch([1, 2, 3, 4, 5, 6, 7], 6)); //index 5
 
-function compose(callbacks) {
-  return function(input) {
-    for (let i = callbacks.length - 1; i >= 0; i--) {
-      input = callbacks[i](input);
-    }
-    return input;
-  };
-}
+// function compose(callbacks) {
+//   return function(input) {
+//     for (let i = callbacks.length - 1; i >= 0; i--) {
+//       input = callbacks[i](input);
+//     }
+//     return input;
+//   };
+// }
 
-function reverseLL(head) {
-  let prevNode = null;
-  while (head) {
-    let tempNext = head.next;
-    head.next = prevNode;
-    prevNode = head;
-    head = tempNext;
-  }
-  return prevNode;
-}
+// function reverseLL(head) {
+//   let prevNode = null;
+//   while (head) {
+//     let tempNext = head.next;
+//     head.next = prevNode;
+//     prevNode = head;
+//     head = tempNext;
+//   }
+//   return prevNode;
+// }
 
-function reverseLLRecursive(head) {
-  if (head === null || head.next === null) return head;
-  let tempHead = reverseLLRecursive(head.next);
-  head.next.next = head;
-  head.next = null;
-  return tempHead;
-}
+// function reverseLLRecursive(head) {
+//   if (head === null || head.next === null) return head;
+//   let tempHead = reverseLLRecursive(head.next);
+//   head.next.next = head;
+//   head.next = null;
+//   return tempHead;
+// }
 
-let bubbleSort = arr => {
+// let bubbleSort = arr => {
+//   let isSorted = false;
+//   while (!isSorted) {
+//     isSorted = true;
+//     for (let i = 0; i < arr.length - 1; i++) {
+//       if (arr[i] > arr[i + 1]) {
+//         let temp = arr[i];
+//         arr[i] = arr[i + 1];
+//         arr[i + 1] = temp;
+//         isSorted = false;
+//       }
+//     }
+//   }
+//   console.log(arr);
+// };
+
+// // bubbleSort([4, 3, 2, 1]);
+
+// let insertSort = arr => {
+//   for (let i = 1; i < arr.length; i++) {
+//     let j = i;
+//     while (j >= 0 && arr[j] < arr[j - 1]) {
+//       let temp = arr[j];
+//       arr[j] = arr[j - 1];
+//       arr[j - 1] = temp;
+//       j--;
+//     }
+//   }
+//   console.log(arr);
+// };
+
+// // insertSort([4, 3, 2, 1]);
+
+// let deleteLLPointer = node => {
+//   if (!node) return node;
+//   node.value = node.next.value;
+//   node.next = node.next.next;
+// };
+
+// function deleteLLPoint(node) {
+//   if (!node) return node;
+//   node.value = node.next.value;
+//   node.next = node.next.next;
+// }
+
+// let shiftUpAndAddVal = (arr, val, idx) => {
+//   for (let i = 0; i <= idx; i++) {
+//     if (i === idx) arr[i] = val;
+//     else arr[i] = arr[i + 1];
+//   }
+// };
+
+// let shiftUpNums = arr => {
+//   for (let i = 0; i < arr.length; i++) {
+//     if (i === arr.length - 1) arr[i] = null;
+//     arr[i] = arr[i + 1];
+//   }
+// };
+
+// **************** Homework for Sun Jul 22 2018 ****************
+// Question {name: 'bubble sort',learned: true,level: '',source: null,type: null }
+// Question {name: 'binary search',learned: true,level: '',source: null,type: null }
+// Question {name: 'swap arr spaces',learned: true,level: '',source: null,type: null }
+// Question {name: 'pancake sort (stack)',learned: true,level: '',source: null,type: null }
+// Question {name: 'shift array up by 1',learned: true,level: '',source: null,type: null }
+// Question {name: 'shift up nums + add val at specific idx',learned: true,level: '',source: null,type: null }
+// Question {name: 'selection sort',learned: true,level: '',source: null,type: null }
+// Question {name: 'reverse linked list',learned: true,level: '',source: null,type: null }
+// Question {name: 'memo calculation',learned: true,level: '',source: null,type: null }
+// Question {name: 'delete linked list pointer',learned: true,level: '',source: null,type: null }
+// Question {name: 'insertion sort',learned: true,level: '',source: null,type: null }
+// Question {name: 'return fn that excutes callbacks on input',learned: true,level: '',source: null,type: null }
+// Question {name: 'add nums by array back to front ',learned: true,level: '',source: null,type: null }
+
+const bubbleSort = arr => {
   let isSorted = false;
   while (!isSorted) {
     isSorted = true;
-    for (let i = 0; i < arr.length - 1; i++) {
+    for (let i = 0; i < arr.length; i++) {
       if (arr[i] > arr[i + 1]) {
         let temp = arr[i];
         arr[i] = arr[i + 1];
@@ -2404,48 +2478,128 @@ let bubbleSort = arr => {
       }
     }
   }
-  console.log(arr);
+  console.log("arr: ", arr);
 };
 
-// bubbleSort([4, 3, 2, 1]);
+// bubbleSort([3, 2, 1]);
 
-let insertSort = arr => {
-  for (let i = 1; i < arr.length; i++) {
-    let j = i;
-    while (j >= 0 && arr[j] < arr[j - 1]) {
-      let temp = arr[j];
-      arr[j] = arr[j - 1];
-      arr[j - 1] = temp;
-      j--;
-    }
+const binarySearch = (arr, target) => {
+  let left = 0;
+  let right = arr.length - 1;
+  while (left <= right) {
+    let mid = Math.floor((left + right) / 2);
+    if (arr[mid] === target) return mid;
+    else if (arr[mid] > target) right = mid - 1;
+    else if (arr[mid] < target) left = mid + 1;
+  }
+  return -1;
+};
+
+//console.log(binarySearch([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 3));
+
+const swap = (i, j, arr) => {
+  let temp = arr[j];
+  arr[j] = arr[i];
+  arr[i] = temp;
+};
+
+const shiftArrayUpBy1 = arr => {
+  for (let i = 0; i < arr.length; i++) {
+    if (i === arr.length - 1) arr[i] = "moved up";
+    else arr[i] = arr[i + 1];
   }
   console.log(arr);
 };
 
-// insertSort([4, 3, 2, 1]);
+// shiftArrayUpBy1([0, 1, 2, 3, 4]);
 
-let deleteLLPointer = node => {
-  if (!node) return node;
-  node.value = node.next.value;
-  node.next = node.next.next;
-};
-
-function deleteLLPoint(node) {
-  if (!node) return node;
-  node.value = node.next.value;
-  node.next = node.next.next;
-}
-
-let shiftUpAndAddVal = (arr, val, idx) => {
+const shiftUpAndPlus = (arr, val, idx) => {
   for (let i = 0; i <= idx; i++) {
     if (i === idx) arr[i] = val;
     else arr[i] = arr[i + 1];
   }
 };
 
-let shiftUpNums = arr => {
+const selectionSort = arr => {
+  let current = 0;
   for (let i = 0; i < arr.length; i++) {
-    if (i === arr.length - 1) arr[i] = null;
-    arr[i] = arr[i + 1];
+    let smallest = current;
+    let j = current + 1;
+    while (j < arr.length) {
+      if (arr[j] < arr[smallest]) smallest = j;
+      j++;
+    }
+    let temp = arr[current];
+    arr[current] = arr[smallest];
+    arr[smallest] = temp;
+  }
+  console.log(arr);
+};
+
+// selectionSort([3, 2, 1]);
+
+const reverseLL = head => {
+  let lastNode = null;
+  while (head) {
+    let tempNode = head.next;
+    head.next = lastNode;
+    lastNode = head;
+    head = tempNode;
+  }
+  return lastNode;
+};
+
+const revLLRecursive = head => {
+  if (head === null || head.next) return head;
+  let tempHead = revLLRecursive(head.next);
+  head.next.next = head;
+  head.next = null;
+  return tempHead;
+};
+
+const memo = (arr, target) => {
+  let seen = {};
+  for (let i = 0; i < arr.length; i++) {
+    let diff = target - arr[i];
+    if (seen[diff]) return [diff, seen[arr[i]]];
+    else seen[arr[i]] = true;
   }
 };
+
+const deleteLL = () => {
+  if (!node) return node;
+  node.value = node.next.value;
+  node.next = node.next.next;
+};
+
+const compose = callbacks => {
+  return function(input) {
+    for (let i = callbacks.length - 1; i >= 0; i--) {
+      input = callbacks[i](input);
+    }
+    return input;
+  };
+};
+
+const addDigits = (arr1, arr2) => {
+  let lastDigits1 = arr1.length - 1;
+  let lastDigits2 = arr2.length - 1;
+  let total = "";
+  let carry = 0;
+  for (let i = Math.max(lastDigits1, lastDigits2); i >= 0; i--) {
+    let a = arr1[lastDigits1--] || 0;
+    let b = arr2[lastDigits2--] || 0;
+    let sum = a + b + carry;
+    if (sum > 9) {
+      carry = 1;
+      sum -= 10;
+    } else {
+      carry = 0;
+    }
+
+    total = sum + total;
+  }
+  console.log("total: ", total);
+};
+
+addDigits([1, 2, 8], [1, 2]);
