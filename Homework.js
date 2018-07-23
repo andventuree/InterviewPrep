@@ -2465,141 +2465,247 @@ let { homeworkTonight, tricks } = require("./HwHelper");
 // Question {name: 'return fn that excutes callbacks on input',learned: true,level: '',source: null,type: null }
 // Question {name: 'add nums by array back to front ',learned: true,level: '',source: null,type: null }
 
-const bubbleSort = arr => {
-  let isSorted = false;
-  while (!isSorted) {
-    isSorted = true;
-    for (let i = 0; i < arr.length; i++) {
-      if (arr[i] > arr[i + 1]) {
-        let temp = arr[i];
-        arr[i] = arr[i + 1];
-        arr[i + 1] = temp;
-        isSorted = false;
+// const bubbleSort = arr => {
+//   let isSorted = false;
+//   while (!isSorted) {
+//     isSorted = true;
+//     for (let i = 0; i < arr.length; i++) {
+//       if (arr[i] > arr[i + 1]) {
+//         let temp = arr[i];
+//         arr[i] = arr[i + 1];
+//         arr[i + 1] = temp;
+//         isSorted = false;
+//       }
+//     }
+//   }
+//   console.log("arr: ", arr);
+// };
+
+// // bubbleSort([3, 2, 1]);
+
+// const binarySearch = (arr, target) => {
+//   let left = 0;
+//   let right = arr.length - 1;
+//   while (left <= right) {
+//     let mid = Math.floor((left + right) / 2);
+//     if (arr[mid] === target) return mid;
+//     else if (arr[mid] > target) right = mid - 1;
+//     else if (arr[mid] < target) left = mid + 1;
+//   }
+//   return -1;
+// };
+
+// //console.log(binarySearch([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 3));
+
+// const swap = (i, j, arr) => {
+//   let temp = arr[j];
+//   arr[j] = arr[i];
+//   arr[i] = temp;
+// };
+
+// const shiftArrayUpBy1 = arr => {
+//   for (let i = 0; i < arr.length; i++) {
+//     if (i === arr.length - 1) arr[i] = "moved up";
+//     else arr[i] = arr[i + 1];
+//   }
+//   console.log(arr);
+// };
+
+// // shiftArrayUpBy1([0, 1, 2, 3, 4]);
+
+// const shiftUpAndPlus = (arr, val, idx) => {
+//   for (let i = 0; i <= idx; i++) {
+//     if (i === idx) arr[i] = val;
+//     else arr[i] = arr[i + 1];
+//   }
+// };
+
+// const selectionSort = arr => {
+//   let current = 0;
+//   for (let i = 0; i < arr.length; i++) {
+//     let smallest = current;
+//     let j = current + 1;
+//     while (j < arr.length) {
+//       if (arr[j] < arr[smallest]) smallest = j;
+//       j++;
+//     }
+//     let temp = arr[current];
+//     arr[current] = arr[smallest];
+//     arr[smallest] = temp;
+//   }
+//   console.log(arr);
+// };
+
+// // selectionSort([3, 2, 1]);
+
+// const reverseLL = head => {
+//   let lastNode = null;
+//   while (head) {
+//     let tempNode = head.next;
+//     head.next = lastNode;
+//     lastNode = head;
+//     head = tempNode;
+//   }
+//   return lastNode;
+// };
+
+// const revLLRecursive = head => {
+//   if (head === null || head.next) return head;
+//   let tempHead = revLLRecursive(head.next);
+//   head.next.next = head;
+//   head.next = null;
+//   return tempHead;
+// };
+
+// const memo = (arr, target) => {
+//   let seen = {};
+//   for (let i = 0; i < arr.length; i++) {
+//     let diff = target - arr[i];
+//     if (seen[diff]) return [diff, seen[arr[i]]];
+//     else seen[arr[i]] = true;
+//   }
+// };
+
+// const deleteLL = () => {
+//   if (!node) return node;
+//   node.value = node.next.value;
+//   node.next = node.next.next;
+// };
+
+// const compose = callbacks => {
+//   return function(input) {
+//     for (let i = callbacks.length - 1; i >= 0; i--) {
+//       input = callbacks[i](input);
+//     }
+//     return input;
+//   };
+// };
+
+// const addDigits = (arr1, arr2) => {
+//   let lastDigits1 = arr1.length - 1;
+//   let lastDigits2 = arr2.length - 1;
+//   let total = "";
+//   let carry = 0;
+//   for (let i = Math.max(lastDigits1, lastDigits2); i >= 0; i--) {
+//     let a = arr1[lastDigits1--] || 0;
+//     let b = arr2[lastDigits2--] || 0;
+//     let sum = a + b + carry;
+//     if (sum > 9) {
+//       carry = 1;
+//       sum -= 10;
+//     } else {
+//       carry = 0;
+//     }
+
+//     total = sum + total;
+//   }
+//   console.log("total: ", total);
+// };
+
+// addDigits([1, 2, 8], [1, 2]);
+
+// **************** Homework for Mon Jul 23 2018 ****************
+// Question {name: 'Find 3 Largest Num Sum',learned: true,level: 'easy',source: 'AE',type: 'search' }
+// Question {name: 'reverseLinkedList',learned: true,level: '',source: 'bbg',type: 'LL' }
+// Question {name: 'Three Number Sum',learned: true,level: 'medium',source: 'AE',type: 'array' }
+// Question {name: 'trap rain water',learned: true,level: '',source: 'bbg',type: '' }
+// Question {name: 'getNumberOfIslands',learned: true,level: 'hard',source: 'pramp',type: 'graphs' }
+
+function findThreeLargest(arr) {
+  let largest = [null, null, null];
+  for (let num of arr) {
+    findThem(largest, num);
+  }
+  console.log("largest: ", largest);
+}
+
+function findThem(largest, num) {
+  if (largest[2] === null || num > largest[2]) {
+    shiftUpAndAdd(largest, num, 2);
+  } else if (largest[1] === null || num > largest[1]) {
+    shiftUpAndAdd(largest, num, 1);
+  } else if (largest[0] === null || num > largest[0]) {
+    shiftUpAndAdd(largest, num, 0);
+  }
+}
+
+function shiftUpAndAdd(arr, num, idx) {
+  for (let i = 0; i <= idx; i++) {
+    if (i === idx) arr[idx] = num;
+    else arr[i] = arr[i + 1];
+  }
+}
+
+// findThreeLargest([8, 6, 4, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1]);
+
+function trapRain(arr) {
+  let leftMaxes = [];
+  let leftMax = 0;
+  for (let i = 0; i < arr.length; i++) {
+    leftMax = Math.max(leftMax, arr[i]);
+    leftMaxes.push(leftMax);
+  }
+
+  let rightMaxes = [];
+  let rightMax = 0;
+  for (let j = arr.length - 1; j >= 0; j--) {
+    rightMax = Math.max(rightMax, arr[j]);
+    rightMaxes[j] = rightMax;
+  }
+
+  let total = 0;
+  for (let k = 0; k < arr.length; k++) {
+    let minHeight = Math.min(leftMaxes[k], rightMaxes[k]);
+    if (minHeight >= arr[k]) total += minHeight - arr[k];
+  }
+  console.log(total);
+}
+
+// trapRain([0, 8, 0, 0, 5, 0, 0, 10, 0, 0, 1, 1, 0, 3]); //48
+
+function getNumOfIslands(matrix) {
+  let islands = 0;
+  let rows = matrix.length;
+  let cols = matrix[0].length;
+  for (let i = 0; i < rows; i++) {
+    for (let j = 0; j < cols; j++) {
+      if (matrix[j][i] === 1) {
+        checkForLand(matrix, rows, cols, j, i);
+        islands += 1;
       }
     }
   }
-  console.log("arr: ", arr);
-};
+  console.log(islands);
+}
 
-// bubbleSort([3, 2, 1]);
-
-const binarySearch = (arr, target) => {
-  let left = 0;
-  let right = arr.length - 1;
-  while (left <= right) {
-    let mid = Math.floor((left + right) / 2);
-    if (arr[mid] === target) return mid;
-    else if (arr[mid] > target) right = mid - 1;
-    else if (arr[mid] < target) left = mid + 1;
-  }
-  return -1;
-};
-
-//console.log(binarySearch([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 3));
-
-const swap = (i, j, arr) => {
-  let temp = arr[j];
-  arr[j] = arr[i];
-  arr[i] = temp;
-};
-
-const shiftArrayUpBy1 = arr => {
-  for (let i = 0; i < arr.length; i++) {
-    if (i === arr.length - 1) arr[i] = "moved up";
-    else arr[i] = arr[i + 1];
-  }
-  console.log(arr);
-};
-
-// shiftArrayUpBy1([0, 1, 2, 3, 4]);
-
-const shiftUpAndPlus = (arr, val, idx) => {
-  for (let i = 0; i <= idx; i++) {
-    if (i === idx) arr[i] = val;
-    else arr[i] = arr[i + 1];
-  }
-};
-
-const selectionSort = arr => {
-  let current = 0;
-  for (let i = 0; i < arr.length; i++) {
-    let smallest = current;
-    let j = current + 1;
-    while (j < arr.length) {
-      if (arr[j] < arr[smallest]) smallest = j;
-      j++;
+function checkForLand(matrix, rows, cols, initialX, initialY) {
+  let queue = [[initialX, initialY]];
+  while (queue.length > 0) {
+    let item = queue.shift();
+    let x = item[0];
+    let y = item[1];
+    if (matrix[x][y] === 1) {
+      matrix[x][y] = 0;
+      withinBounds(queue, rows, cols, x - 1, y);
+      withinBounds(queue, rows, cols, x + 1, y);
+      withinBounds(queue, rows, cols, x, y - 1);
+      withinBounds(queue, rows, cols, x, y + 1);
     }
-    let temp = arr[current];
-    arr[current] = arr[smallest];
-    arr[smallest] = temp;
   }
-  console.log(arr);
-};
+}
 
-// selectionSort([3, 2, 1]);
-
-const reverseLL = head => {
-  let lastNode = null;
-  while (head) {
-    let tempNode = head.next;
-    head.next = lastNode;
-    lastNode = head;
-    head = tempNode;
+function withinBounds(queue, rows, cols, x, y) {
+  if (x >= 0 && x < rows && y >= 0 && y < cols) {
+    queue.push([x, y]);
   }
-  return lastNode;
-};
+}
 
-const revLLRecursive = head => {
-  if (head === null || head.next) return head;
-  let tempHead = revLLRecursive(head.next);
-  head.next.next = head;
-  head.next = null;
-  return tempHead;
-};
-
-const memo = (arr, target) => {
-  let seen = {};
-  for (let i = 0; i < arr.length; i++) {
-    let diff = target - arr[i];
-    if (seen[diff]) return [diff, seen[arr[i]]];
-    else seen[arr[i]] = true;
-  }
-};
-
-const deleteLL = () => {
-  if (!node) return node;
-  node.value = node.next.value;
-  node.next = node.next.next;
-};
-
-const compose = callbacks => {
-  return function(input) {
-    for (let i = callbacks.length - 1; i >= 0; i--) {
-      input = callbacks[i](input);
-    }
-    return input;
-  };
-};
-
-const addDigits = (arr1, arr2) => {
-  let lastDigits1 = arr1.length - 1;
-  let lastDigits2 = arr2.length - 1;
-  let total = "";
-  let carry = 0;
-  for (let i = Math.max(lastDigits1, lastDigits2); i >= 0; i--) {
-    let a = arr1[lastDigits1--] || 0;
-    let b = arr2[lastDigits2--] || 0;
-    let sum = a + b + carry;
-    if (sum > 9) {
-      carry = 1;
-      sum -= 10;
-    } else {
-      carry = 0;
-    }
-
-    total = sum + total;
-  }
-  console.log("total: ", total);
-};
-
-addDigits([1, 2, 8], [1, 2]);
+// console.log(
+//   getNumOfIslands([
+//     [0, 1, 0, 1, 0],
+//     [0, 0, 1, 1, 1],
+//     [1, 0, 0, 1, 0],
+//     [0, 1, 1, 0, 0],
+//     [1, 0, 1, 0, 1]
+//   ])
+// );
