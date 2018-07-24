@@ -2709,3 +2709,68 @@ function withinBounds(queue, rows, cols, x, y) {
 //     [1, 0, 1, 0, 1]
 //   ])
 // );
+
+// **************** Homework for Tue Jul 24 2018 ****************
+// Question {name: 'Invert Binary Tree',learned: true,level: 'medium',source: 'AE',type: 'BT' }
+// Question {name: 'Find Closest Value in BST',learned: true,level: 'easy',source: 'AE',type: 'BST' }
+// Question {name: 'reverse integer',learned: true,level: '',source: 'bbg',type: '' }
+// Question {name: 'Breath-First Search',learned: true,level: 'medium',source: 'AE',type: 'graphs' }
+
+function invertBinaryTree(tree) {
+  let queue = [tree];
+  while (queue) {
+    let node = queue.shift();
+    if (node !== null) {
+      let temp = node.left;
+      node.left = node.right;
+      node.right = temp;
+      queue.push(node.left);
+      queue.push(node.right);
+    }
+  }
+}
+
+function findClosestValue(tree, target) {
+  let closest = tree.value;
+  while (tree) {
+    if (Math.abs(target - tree.value) < Math.abs(target - closest)) {
+      closest = tree.value;
+    }
+    if (target > tree.value) {
+      tree = tree.right;
+    } else if (target < tree.value) {
+      tree = tree.left;
+    } else {
+      return tree.value;
+    }
+  }
+  return closest;
+}
+
+function reverseInt(num) {
+  let reverse = 0;
+  while (num !== 0) {
+    let onesPlace = num % 10;
+    num = Math.floor(num / 10);
+    reverse = reverse * 10 + onesPlace;
+  }
+  return reverse;
+}
+
+// console.log(reverseInt(123));
+function BFS(tree) {
+  let queue = [tree];
+  let values = [];
+  while (queue.length > 0) {
+    let node = queue.shift();
+    if (node !== null) {
+      values.push(node.value);
+      // queue.push(node.left);
+      // queue.push(node.right);
+      // for (let child of node.children) {
+      //   queue.push(child);
+      // }
+    }
+  }
+  return values;
+}
