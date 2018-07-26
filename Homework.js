@@ -2758,6 +2758,7 @@ function reverseInt(num) {
 }
 
 // console.log(reverseInt(123));
+
 function BFS(tree) {
   let queue = [tree];
   let values = [];
@@ -2774,3 +2775,236 @@ function BFS(tree) {
   }
   return values;
 }
+
+// **************** Homework for Tue Jul 24 2018 ****************
+// Question {name: 'Kadanes Algo - Max Sum',learned: true,level: 'medium',source: 'AE',type: null }
+// Question {name: 'getNumberOfIslands',learned: true,level: 'hard',source: 'pramp',type: 'graphs' }
+
+function maxSum(arr) {
+  let maxSoFar = arr[0];
+  let currentMax = arr[0];
+  for (let i = 1; i < arr.length; i++) {
+    maxSoFar = Math.max(arr[i], maxSoFar + arr[i]);
+    currentMax = Math.max(maxSoFar, currentMax);
+  }
+  // return currentMax;
+  console.log("currentMax: ", currentMax);
+}
+
+// maxSum([3, 5, -9, 1, 3, -2, 3, 4, 7, 2, -9, 6, 3, 1, -5, 4]); //19
+
+function getNumOfIslands(maxtrix) {
+  let islands = 0;
+  let rows = matrix.length;
+  let cols = matrix[0].length;
+  for (let i = 0; i < rows; i++) {
+    for (let j = 0; j < cols; j++) {
+      if (matrix[j][i] === 1) {
+        checkLandSize(matrix, rows, cols, i, j);
+        islands += 1;
+      }
+    }
+  }
+  return islands;
+}
+
+function checkLandSize(matrix, rows, cols, initialX, initialY) {
+  let queue = [[initialX, initialY]];
+  while (queue) {
+    let item = queue.shift();
+    let x = item[0];
+    let y = item[1];
+    if (matrix[x][y] === 1) {
+      matrix[x][y] = 0;
+      areSurroundsingsInBound(queue, rows, cols, x - 1, y);
+      areSurroundsingsInBound(queue, rows, cols, x + 1, y);
+      areSurroundsingsInBound(queue, rows, cols, x, y - 1);
+      areSurroundsingsInBound(queue, rows, cols, x, y + 1);
+    }
+  }
+}
+
+function areSurroundsingsInBound(queue, rows, cols, x, y) {
+  if (x >= 0 && x < rows && y >= 0 && y > cols) {
+    queue.push(x, y);
+  }
+}
+
+// **************** Homework for Tue Jul 24 2018 ****************
+// Question {name: 'Remove kth Node from End',learned: true,level: 'medium',source: 'AE',type: 'LL' }
+// Question {name: 'Selection Sort',learned: true,level: 'easy',source: 'AE',type: 'sorting' }
+// Question {name: 'flatten dictionary',learned: true,level: 'medium',source: 'pramp',type: 'object' }
+
+function removeKthNode(head, k) {
+  let end = head;
+  let kth = head;
+  for (let i = 0; i < k; i++) {
+    //advanced up k times
+    if (end === null) {
+      return "list too short";
+    }
+    end = end.next;
+  }
+
+  while (end.next) {
+    //advanced to the end
+    end = end.next;
+    kth = kth.next;
+  }
+
+  kth.next = kth.next.next;
+  return kth;
+}
+
+function selectionSorting(arr) {
+  let current = 0;
+  for (let i = 0; i < arr.length - 1; i++) {
+    let smallest = current;
+    let j = current + 1;
+    while (j < arr.length) {
+      if (arr[j] < arr[smallest]) {
+        smallest = j;
+      }
+      j++;
+    }
+    let temp = arr[current];
+    arr[current] = arr[smallest];
+    arr[smallest] = temp;
+  }
+  return arr;
+}
+
+// console.log(selectionSorting([3, 5, 52, 4, 2, 342, 34, 234, 23, 43, 2]));
+
+function selectionSort(array) {
+  let currentIdx = 0;
+  while (currentIdx < array.length - 1) {
+    //- 1 b/c you dont need to swap the last num
+    let smallestIdx = currentIdx;
+    for (let i = currentIdx + 1; i < array.length; i++) {
+      if (array[smallestIdx] > array[i]) {
+        smallestIdx = i;
+      }
+    }
+    //use currentIdx b/c its sorted up until that point
+    swapHelper(currentIdx, smallestIdx, array);
+    currentIdx++;
+  }
+  console.log("sorted", array);
+  return array;
+}
+
+function selectingSort(arr) {
+  let current = 0;
+  while (current < arr.length - 1) {
+    let smallest = current + 1;
+    for (let i = current + 1; i < arr.length; i++) {
+      if (array[smallest] > arr[i]) {
+        smallest = i;
+      }
+    }
+  }
+}
+
+// **************** Homework for Thu Jul 26 2018 ****************
+// Question {name: 'Depth First Search',learned: true,level: 'easy',source: 'AE',type: 'graphs' }
+// Question {name: 'flatten dictionary',learned: true,level: 'medium',source: 'pramp',type: 'object' }
+// Question {name: 'min stack',learned: true,level: '',source: 'bbg',type: 'stack' }
+// Question {name: 'Selection Sort',learned: true,level: 'easy',source: 'AE',type: 'sorting' }
+// Question {name: 'Two Number Sum',learned: true,level: 'easy',source: 'AE',ty
+
+const DFS = (tree, arr, type) => {
+  if (tree) {
+    if (type === "pre") arr.push(tree.value);
+    DFS(tree.left, arr, type);
+    if (type === "in-order") arr.push(tree.value);
+    DFS(tree.right, arr, type);
+    if (type === "post") arr.push(tree.value);
+  }
+  return arr;
+};
+
+const flattenDict = dictionary => {
+  let hashtable = {};
+  flattenHelper(dictionary, hashtable, []);
+};
+
+const flattenHelper = (dict, hashtable, keyNames) => {
+  for (let key in dict) {
+    if (typeof dict[key] === "object") {
+      if (key !== "") keyNames.push(key);
+      flattenHelper(dict[key], hashtable, keyNames);
+    } else {
+      let currentKey = "";
+      if (keyNames.length === 0) currentKey = key;
+      else {
+        currentKey = keyNames.join(".");
+        if (key !== "") currentKey += "." + key;
+      }
+      hashtable[currentKey] = dict[key];
+    }
+  }
+};
+
+class MinStack {
+  constructor() {
+    this.stack = [];
+  }
+  add(val) {
+    let min = this.min();
+    if (this.stack.length > 0) {
+      this.stack.push({
+        value: val,
+        min: Math.min(min !== undefined ? min : Infinity, val)
+      });
+    }
+  }
+  remove() {
+    if (this.stack.length > 0) {
+      let item = this.stack.pop();
+      return item.value;
+    }
+  }
+  min() {
+    let item = this.stack[this.stack.length - 1];
+    return item.min;
+  }
+}
+
+class TripleStack {
+  constructor() {
+    this.stacks = [];
+    this.length = [0, 0, 0];
+  }
+  getLength(stack) {
+    return this.length[stack - 1];
+  }
+
+  add(val, stack) {
+    let length = this.getLength(stack);
+    let idx = 3 * length + stack - 1;
+    this.stacks[idx] = val;
+    this.length[stack - 1] += 1;
+  }
+
+  pop(stack) {
+    let length = this.getLength(stack);
+    let value;
+    if (length > 0) {
+      let idx = 3 * length + stack - 1;
+      value = this.stacks[idx];
+      this.stacks[idx] = undefined;
+      this.length[stack - 1] -= 1;
+    }
+    return value;
+  }
+}
+
+const TwoNumSum = (arr, target) => {
+  let seen = {};
+  for (let i = 0; i < arr.length; i++) {
+    let diff = target - arr[i];
+    if (seen[diff]) return [arr[i], seen[diff]];
+    else seen[arr[i]] = true;
+  }
+};

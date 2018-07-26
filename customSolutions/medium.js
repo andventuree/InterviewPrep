@@ -460,25 +460,25 @@ function swapLeftAndRight(tree) {
 //space: O(1)
 function removeKthNodeFromEnd(head, k) {
   // if (!head) return head;
+  let end = head;
   let kth = head;
-  let normal = head;
   for (let i = 0; i < k; i++) {
-    kth = kth.next;
+    end = end.next;
   }
 
-  if (kth === null) {
+  if (end === null) {
     //edge case for when list isnt long enough (1 node)
     head.value = head.next.value;
     head.next = head.next.next;
     return;
   }
 
-  while (kth.next !== null) {
-    kth = kth.next; //k will hit the end
-    normal = normal.next; //normal will hit kth nodes from end
+  while (end.next !== null) {
+    end = end.next; //will hit the end
+    kth = kth.next; //kth will hit kth nodes from end
   }
 
-  normal.next = normal.next.next;
+  kth.next = kth.next.next;
 }
 
 //13. Breath-First Search
