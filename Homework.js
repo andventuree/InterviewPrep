@@ -3008,3 +3008,67 @@ const TwoNumSum = (arr, target) => {
     else seen[arr[i]] = true;
   }
 };
+
+// findThreeLargest([8, 6, 4, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1]);
+
+function trapRain(arr) {
+  let leftMaxes = [];
+  let leftMax = 0;
+  for (let i = 0; i < arr.length; i++) {
+    leftMax = Math.max(leftMax, arr[i]);
+    leftMaxes.push(leftMax);
+  }
+
+  let rightMaxes = [];
+  let rightMax = 0;
+  for (let j = arr.length - 1; j >= 0; j--) {
+    rightMax = Math.max(rightMax, arr[j]);
+    rightMaxes[j] = rightMax;
+  }
+
+  let total = 0;
+  for (let k = 0; k < arr.length; k++) {
+    let minHeight = Math.min(leftMaxes[k], rightMaxes[k]);
+    if (minHeight >= arr[k]) total += minHeight - arr[k];
+  }
+  console.log(total);
+}
+
+// trapRain([0, 8, 0, 0, 5, 0, 0, 10, 0, 0, 1, 1, 0, 3]); //48
+
+function getNumOfIslands(matrix) {
+  let islands = 0;
+  let rows = matrix.length;
+  let cols = matrix[0].length;
+  for (let i = 0; i < rows; i++) {
+    for (let j = 0; j < cols; j++) {
+      if (matrix[j][i] === 1) {
+        checkForLand(matrix, rows, cols, j, i);
+        islands += 1;
+      }
+    }
+  }
+  console.log(islands);
+}
+
+function checkForLand(matrix, rows, cols, initialX, initialY) {
+  let queue = [[initialX, initialY]];
+  while (queue.length > 0) {
+    let item = queue.shift();
+    let x = item[0];
+    let y = item[1];
+    if (matrix[x][y] === 1) {
+      matrix[x][y] = 0;
+      withinBounds(queue, rows, cols, x - 1, y);
+      withinBounds(queue, rows, cols, x + 1, y);
+      withinBounds(queue, rows, cols, x, y - 1);
+      withinBounds(queue, rows, cols, x, y + 1);
+    }
+  }
+}
+
+function withinBounds(queue, rows, cols, x, y) {
+  if (x >= 0 && x < rows && y >= 0 && y < cols) {
+    queue.push([x, y]);
+  }
+}
