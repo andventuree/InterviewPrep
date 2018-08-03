@@ -3571,3 +3571,21 @@ function linkedListIntersection(head1, head2) {
   }
   return track1;
 }
+
+function swap(i, j, arr) {
+  let temp = arr[i];
+  arr[i] = arr[j];
+  arr[j] = temp;
+}
+
+function LLIntersection(head1, head2) {
+  if (head1 === null || head2 === null) return null;
+
+  let track1 = head1;
+  let track2 = head2;
+  while (track1 !== track2) {
+    track1 = track1.next === null ? track2 : track1.next;
+    track2 = track2.next === null ? track1 : track2.next;
+  }
+  return track1;
+}
