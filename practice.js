@@ -3467,6 +3467,17 @@ function printUniques(arr) {
   console.log(uniques);
 }
 
+function printUniques(arr) {
+  let uniques = [];
+  for (let i = 0; i < arr.length; i++) {
+    uniques.push(arr[i]);
+    while (arr[i] === arr[i + 1]) {
+      i++;
+    }
+  }
+  console.log(uniques);
+}
+
 // printUniques([12, 3, 4, 4, 4, 4, 4, 5]);
 
 //print duplicates(arr1, arr2){}
