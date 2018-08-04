@@ -3407,6 +3407,18 @@ function firstUnique3(str) {
   return false;
 }
 
+function firstUnique(str) {
+  let hashtable = {};
+  for (let char of str) {
+    if (!hashtable[char]) hashtable[char] = 1;
+    else hashtable[char] += 1;
+  }
+  for (let i = 0; i < str.length; i++) {
+    if (hashtable[str[i]] === 1) return str[i];
+  }
+  return false;
+}
+
 // console.log(firstUnique3("oobo"));
 
 function LLcycleFinder(head) {
