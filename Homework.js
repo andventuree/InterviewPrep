@@ -4,7 +4,7 @@ let { homeworkTonight, tricks } = require("./HwHelper");
 // console.log(homeworkTonight._questions);
 // homeworkTonight.genQuestions(6, "BST", "AE");
 // homeworkTonight.genQuestions(6, "all", "bbg");
-// tricks.genQuestions(15);
+// tricks.genQuestions(5);
 
 // // **************** Homework for Thu Jun 28 2018 ****************
 // // [ Question {name: 'BST Traversal',learnedStatus: true,difficulty: 'medium',source: 'AE',type: 'BST' },
@@ -2611,464 +2611,557 @@ let { homeworkTonight, tricks } = require("./HwHelper");
 // Question {name: 'trap rain water',learned: true,level: '',source: 'bbg',type: '' }
 // Question {name: 'getNumberOfIslands',learned: true,level: 'hard',source: 'pramp',type: 'graphs' }
 
-function findThreeLargest(arr) {
-  let largest = [null, null, null];
-  for (let num of arr) {
-    findThem(largest, num);
-  }
-  console.log("largest: ", largest);
-}
+// function findThreeLargest(arr) {
+//   let largest = [null, null, null];
+//   for (let num of arr) {
+//     findThem(largest, num);
+//   }
+//   console.log("largest: ", largest);
+// }
 
-function findThem(largest, num) {
-  if (largest[2] === null || num > largest[2]) {
-    shiftUpAndAdd(largest, num, 2);
-  } else if (largest[1] === null || num > largest[1]) {
-    shiftUpAndAdd(largest, num, 1);
-  } else if (largest[0] === null || num > largest[0]) {
-    shiftUpAndAdd(largest, num, 0);
-  }
-}
+// function findThem(largest, num) {
+//   if (largest[2] === null || num > largest[2]) {
+//     shiftUpAndAdd(largest, num, 2);
+//   } else if (largest[1] === null || num > largest[1]) {
+//     shiftUpAndAdd(largest, num, 1);
+//   } else if (largest[0] === null || num > largest[0]) {
+//     shiftUpAndAdd(largest, num, 0);
+//   }
+// }
 
-function shiftUpAndAdd(arr, num, idx) {
-  for (let i = 0; i <= idx; i++) {
-    if (i === idx) arr[idx] = num;
-    else arr[i] = arr[i + 1];
-  }
-}
+// function shiftUpAndAdd(arr, num, idx) {
+//   for (let i = 0; i <= idx; i++) {
+//     if (i === idx) arr[idx] = num;
+//     else arr[i] = arr[i + 1];
+//   }
+// }
 
-// findThreeLargest([8, 6, 4, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1]);
+// // findThreeLargest([8, 6, 4, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1]);
 
-function trapRain(arr) {
-  let leftMaxes = [];
-  let leftMax = 0;
-  for (let i = 0; i < arr.length; i++) {
-    leftMax = Math.max(leftMax, arr[i]);
-    leftMaxes.push(leftMax);
-  }
+// function trapRain(arr) {
+//   let leftMaxes = [];
+//   let leftMax = 0;
+//   for (let i = 0; i < arr.length; i++) {
+//     leftMax = Math.max(leftMax, arr[i]);
+//     leftMaxes.push(leftMax);
+//   }
 
-  let rightMaxes = [];
-  let rightMax = 0;
-  for (let j = arr.length - 1; j >= 0; j--) {
-    rightMax = Math.max(rightMax, arr[j]);
-    rightMaxes[j] = rightMax;
-  }
+//   let rightMaxes = [];
+//   let rightMax = 0;
+//   for (let j = arr.length - 1; j >= 0; j--) {
+//     rightMax = Math.max(rightMax, arr[j]);
+//     rightMaxes[j] = rightMax;
+//   }
 
-  let total = 0;
-  for (let k = 0; k < arr.length; k++) {
-    let minHeight = Math.min(leftMaxes[k], rightMaxes[k]);
-    if (minHeight >= arr[k]) total += minHeight - arr[k];
-  }
-  console.log(total);
-}
+//   let total = 0;
+//   for (let k = 0; k < arr.length; k++) {
+//     let minHeight = Math.min(leftMaxes[k], rightMaxes[k]);
+//     if (minHeight >= arr[k]) total += minHeight - arr[k];
+//   }
+//   console.log(total);
+// }
 
-// trapRain([0, 8, 0, 0, 5, 0, 0, 10, 0, 0, 1, 1, 0, 3]); //48
+// // trapRain([0, 8, 0, 0, 5, 0, 0, 10, 0, 0, 1, 1, 0, 3]); //48
 
-function getNumOfIslands(matrix) {
-  let islands = 0;
-  let rows = matrix.length;
-  let cols = matrix[0].length;
-  for (let i = 0; i < rows; i++) {
-    for (let j = 0; j < cols; j++) {
-      if (matrix[j][i] === 1) {
-        checkForLand(matrix, rows, cols, j, i);
-        islands += 1;
-      }
-    }
-  }
-  console.log(islands);
-}
+// function getNumOfIslands(matrix) {
+//   let islands = 0;
+//   let rows = matrix.length;
+//   let cols = matrix[0].length;
+//   for (let i = 0; i < rows; i++) {
+//     for (let j = 0; j < cols; j++) {
+//       if (matrix[j][i] === 1) {
+//         checkForLand(matrix, rows, cols, j, i);
+//         islands += 1;
+//       }
+//     }
+//   }
+//   console.log(islands);
+// }
 
-function checkForLand(matrix, rows, cols, initialX, initialY) {
-  let queue = [[initialX, initialY]];
-  while (queue.length > 0) {
-    let item = queue.shift();
-    let x = item[0];
-    let y = item[1];
-    if (matrix[x][y] === 1) {
-      matrix[x][y] = 0;
-      withinBounds(queue, rows, cols, x - 1, y);
-      withinBounds(queue, rows, cols, x + 1, y);
-      withinBounds(queue, rows, cols, x, y - 1);
-      withinBounds(queue, rows, cols, x, y + 1);
-    }
-  }
-}
+// function checkForLand(matrix, rows, cols, initialX, initialY) {
+//   let queue = [[initialX, initialY]];
+//   while (queue.length > 0) {
+//     let item = queue.shift();
+//     let x = item[0];
+//     let y = item[1];
+//     if (matrix[x][y] === 1) {
+//       matrix[x][y] = 0;
+//       withinBounds(queue, rows, cols, x - 1, y);
+//       withinBounds(queue, rows, cols, x + 1, y);
+//       withinBounds(queue, rows, cols, x, y - 1);
+//       withinBounds(queue, rows, cols, x, y + 1);
+//     }
+//   }
+// }
 
-function withinBounds(queue, rows, cols, x, y) {
-  if (x >= 0 && x < rows && y >= 0 && y < cols) {
-    queue.push([x, y]);
-  }
-}
+// function withinBounds(queue, rows, cols, x, y) {
+//   if (x >= 0 && x < rows && y >= 0 && y < cols) {
+//     queue.push([x, y]);
+//   }
+// }
 
-// console.log(
-//   getNumOfIslands([
-//     [0, 1, 0, 1, 0],
-//     [0, 0, 1, 1, 1],
-//     [1, 0, 0, 1, 0],
-//     [0, 1, 1, 0, 0],
-//     [1, 0, 1, 0, 1]
-//   ])
-// );
+// // console.log(
+// //   getNumOfIslands([
+// //     [0, 1, 0, 1, 0],
+// //     [0, 0, 1, 1, 1],
+// //     [1, 0, 0, 1, 0],
+// //     [0, 1, 1, 0, 0],
+// //     [1, 0, 1, 0, 1]
+// //   ])
+// // );
 
-// **************** Homework for Tue Jul 24 2018 ****************
-// Question {name: 'Invert Binary Tree',learned: true,level: 'medium',source: 'AE',type: 'BT' }
-// Question {name: 'Find Closest Value in BST',learned: true,level: 'easy',source: 'AE',type: 'BST' }
-// Question {name: 'reverse integer',learned: true,level: '',source: 'bbg',type: '' }
-// Question {name: 'Breath-First Search',learned: true,level: 'medium',source: 'AE',type: 'graphs' }
+// // **************** Homework for Tue Jul 24 2018 ****************
+// // Question {name: 'Invert Binary Tree',learned: true,level: 'medium',source: 'AE',type: 'BT' }
+// // Question {name: 'Find Closest Value in BST',learned: true,level: 'easy',source: 'AE',type: 'BST' }
+// // Question {name: 'reverse integer',learned: true,level: '',source: 'bbg',type: '' }
+// // Question {name: 'Breath-First Search',learned: true,level: 'medium',source: 'AE',type: 'graphs' }
 
-function invertBinaryTree(tree) {
-  let queue = [tree];
-  while (queue) {
-    let node = queue.shift();
-    if (node !== null) {
-      let temp = node.left;
-      node.left = node.right;
-      node.right = temp;
-      queue.push(node.left);
-      queue.push(node.right);
-    }
-  }
-}
+// function invertBinaryTree(tree) {
+//   let queue = [tree];
+//   while (queue) {
+//     let node = queue.shift();
+//     if (node !== null) {
+//       let temp = node.left;
+//       node.left = node.right;
+//       node.right = temp;
+//       queue.push(node.left);
+//       queue.push(node.right);
+//     }
+//   }
+// }
 
-function findClosestValue(tree, target) {
-  let closest = tree.value;
-  while (tree) {
-    if (Math.abs(target - tree.value) < Math.abs(target - closest)) {
-      closest = tree.value;
-    }
-    if (target > tree.value) {
-      tree = tree.right;
-    } else if (target < tree.value) {
-      tree = tree.left;
-    } else {
-      return tree.value;
-    }
-  }
-  return closest;
-}
+// function findClosestValue(tree, target) {
+//   let closest = tree.value;
+//   while (tree) {
+//     if (Math.abs(target - tree.value) < Math.abs(target - closest)) {
+//       closest = tree.value;
+//     }
+//     if (target > tree.value) {
+//       tree = tree.right;
+//     } else if (target < tree.value) {
+//       tree = tree.left;
+//     } else {
+//       return tree.value;
+//     }
+//   }
+//   return closest;
+// }
 
-function reverseInt(num) {
-  let reverse = 0;
-  while (num !== 0) {
-    let onesPlace = num % 10;
-    num = Math.floor(num / 10);
-    reverse = reverse * 10 + onesPlace;
-  }
-  return reverse;
-}
+// function reverseInt(num) {
+//   let reverse = 0;
+//   while (num !== 0) {
+//     let onesPlace = num % 10;
+//     num = Math.floor(num / 10);
+//     reverse = reverse * 10 + onesPlace;
+//   }
+//   return reverse;
+// }
 
-// console.log(reverseInt(123));
+// // console.log(reverseInt(123));
 
-function BFS(tree) {
-  let queue = [tree];
-  let values = [];
-  while (queue.length > 0) {
-    let node = queue.shift();
-    if (node !== null) {
-      values.push(node.value);
-      // queue.push(node.left);
-      // queue.push(node.right);
-      // for (let child of node.children) {
-      //   queue.push(child);
-      // }
-    }
-  }
-  return values;
-}
+// function BFS(tree) {
+//   let queue = [tree];
+//   let values = [];
+//   while (queue.length > 0) {
+//     let node = queue.shift();
+//     if (node !== null) {
+//       values.push(node.value);
+//       // queue.push(node.left);
+//       // queue.push(node.right);
+//       // for (let child of node.children) {
+//       //   queue.push(child);
+//       // }
+//     }
+//   }
+//   return values;
+// }
 
-// **************** Homework for Tue Jul 24 2018 ****************
-// Question {name: 'Kadanes Algo - Max Sum',learned: true,level: 'medium',source: 'AE',type: null }
-// Question {name: 'getNumberOfIslands',learned: true,level: 'hard',source: 'pramp',type: 'graphs' }
+// // **************** Homework for Tue Jul 24 2018 ****************
+// // Question {name: 'Kadanes Algo - Max Sum',learned: true,level: 'medium',source: 'AE',type: null }
+// // Question {name: 'getNumberOfIslands',learned: true,level: 'hard',source: 'pramp',type: 'graphs' }
 
-function maxSum(arr) {
-  let maxSoFar = arr[0];
-  let currentMax = arr[0];
-  for (let i = 1; i < arr.length; i++) {
-    maxSoFar = Math.max(arr[i], maxSoFar + arr[i]);
-    currentMax = Math.max(maxSoFar, currentMax);
-  }
-  // return currentMax;
-  console.log("currentMax: ", currentMax);
-}
+// function maxSum(arr) {
+//   let maxSoFar = arr[0];
+//   let currentMax = arr[0];
+//   for (let i = 1; i < arr.length; i++) {
+//     maxSoFar = Math.max(arr[i], maxSoFar + arr[i]);
+//     currentMax = Math.max(maxSoFar, currentMax);
+//   }
+//   // return currentMax;
+//   console.log("currentMax: ", currentMax);
+// }
 
-// maxSum([3, 5, -9, 1, 3, -2, 3, 4, 7, 2, -9, 6, 3, 1, -5, 4]); //19
+// // maxSum([3, 5, -9, 1, 3, -2, 3, 4, 7, 2, -9, 6, 3, 1, -5, 4]); //19
 
-function getNumOfIslands(maxtrix) {
-  let islands = 0;
-  let rows = matrix.length;
-  let cols = matrix[0].length;
-  for (let i = 0; i < rows; i++) {
-    for (let j = 0; j < cols; j++) {
-      if (matrix[j][i] === 1) {
-        checkLandSize(matrix, rows, cols, i, j);
-        islands += 1;
-      }
-    }
-  }
-  return islands;
-}
+// function getNumOfIslands(maxtrix) {
+//   let islands = 0;
+//   let rows = matrix.length;
+//   let cols = matrix[0].length;
+//   for (let i = 0; i < rows; i++) {
+//     for (let j = 0; j < cols; j++) {
+//       if (matrix[j][i] === 1) {
+//         checkLandSize(matrix, rows, cols, i, j);
+//         islands += 1;
+//       }
+//     }
+//   }
+//   return islands;
+// }
 
-function checkLandSize(matrix, rows, cols, initialX, initialY) {
-  let queue = [[initialX, initialY]];
-  while (queue) {
-    let item = queue.shift();
-    let x = item[0];
-    let y = item[1];
-    if (matrix[x][y] === 1) {
-      matrix[x][y] = 0;
-      areSurroundsingsInBound(queue, rows, cols, x - 1, y);
-      areSurroundsingsInBound(queue, rows, cols, x + 1, y);
-      areSurroundsingsInBound(queue, rows, cols, x, y - 1);
-      areSurroundsingsInBound(queue, rows, cols, x, y + 1);
-    }
-  }
-}
+// function checkLandSize(matrix, rows, cols, initialX, initialY) {
+//   let queue = [[initialX, initialY]];
+//   while (queue) {
+//     let item = queue.shift();
+//     let x = item[0];
+//     let y = item[1];
+//     if (matrix[x][y] === 1) {
+//       matrix[x][y] = 0;
+//       areSurroundsingsInBound(queue, rows, cols, x - 1, y);
+//       areSurroundsingsInBound(queue, rows, cols, x + 1, y);
+//       areSurroundsingsInBound(queue, rows, cols, x, y - 1);
+//       areSurroundsingsInBound(queue, rows, cols, x, y + 1);
+//     }
+//   }
+// }
 
-function areSurroundsingsInBound(queue, rows, cols, x, y) {
-  if (x >= 0 && x < rows && y >= 0 && y > cols) {
-    queue.push(x, y);
-  }
-}
+// function areSurroundsingsInBound(queue, rows, cols, x, y) {
+//   if (x >= 0 && x < rows && y >= 0 && y > cols) {
+//     queue.push(x, y);
+//   }
+// }
 
-// **************** Homework for Tue Jul 24 2018 ****************
-// Question {name: 'Remove kth Node from End',learned: true,level: 'medium',source: 'AE',type: 'LL' }
-// Question {name: 'Selection Sort',learned: true,level: 'easy',source: 'AE',type: 'sorting' }
-// Question {name: 'flatten dictionary',learned: true,level: 'medium',source: 'pramp',type: 'object' }
+// // **************** Homework for Tue Jul 24 2018 ****************
+// // Question {name: 'Remove kth Node from End',learned: true,level: 'medium',source: 'AE',type: 'LL' }
+// // Question {name: 'Selection Sort',learned: true,level: 'easy',source: 'AE',type: 'sorting' }
+// // Question {name: 'flatten dictionary',learned: true,level: 'medium',source: 'pramp',type: 'object' }
 
-function removeKthNode(head, k) {
-  let end = head;
-  let kth = head;
-  for (let i = 0; i < k; i++) {
-    //advanced up k times
-    if (end === null) {
-      return "list too short";
-    }
-    end = end.next;
-  }
+// function removeKthNode(head, k) {
+//   let end = head;
+//   let kth = head;
+//   for (let i = 0; i < k; i++) {
+//     //advanced up k times
+//     if (end === null) {
+//       return "list too short";
+//     }
+//     end = end.next;
+//   }
 
-  while (end.next) {
-    //advanced to the end
-    end = end.next;
-    kth = kth.next;
-  }
+//   while (end.next) {
+//     //advanced to the end
+//     end = end.next;
+//     kth = kth.next;
+//   }
 
-  kth.next = kth.next.next;
-  return kth;
-}
+//   kth.next = kth.next.next;
+//   return kth;
+// }
 
-function selectionSorting(arr) {
-  let current = 0;
-  for (let i = 0; i < arr.length - 1; i++) {
-    let smallest = current;
-    let j = current + 1;
-    while (j < arr.length) {
-      if (arr[j] < arr[smallest]) {
-        smallest = j;
-      }
-      j++;
-    }
-    let temp = arr[current];
-    arr[current] = arr[smallest];
-    arr[smallest] = temp;
-  }
-  return arr;
-}
+// function selectionSorting(arr) {
+//   let current = 0;
+//   for (let i = 0; i < arr.length - 1; i++) {
+//     let smallest = current;
+//     let j = current + 1;
+//     while (j < arr.length) {
+//       if (arr[j] < arr[smallest]) {
+//         smallest = j;
+//       }
+//       j++;
+//     }
+//     let temp = arr[current];
+//     arr[current] = arr[smallest];
+//     arr[smallest] = temp;
+//   }
+//   return arr;
+// }
 
-// console.log(selectionSorting([3, 5, 52, 4, 2, 342, 34, 234, 23, 43, 2]));
+// // console.log(selectionSorting([3, 5, 52, 4, 2, 342, 34, 234, 23, 43, 2]));
 
-function selectionSort(array) {
+// function selectionSort(array) {
+//   let currentIdx = 0;
+//   while (currentIdx < array.length - 1) {
+//     //- 1 b/c you dont need to swap the last num
+//     let smallestIdx = currentIdx;
+//     for (let i = currentIdx + 1; i < array.length; i++) {
+//       if (array[smallestIdx] > array[i]) {
+//         smallestIdx = i;
+//       }
+//     }
+//     //use currentIdx b/c its sorted up until that point
+//     swapHelper(currentIdx, smallestIdx, array);
+//     currentIdx++;
+//   }
+//   console.log("sorted", array);
+//   return array;
+// }
+
+// function selectingSort(arr) {
+//   let current = 0;
+//   while (current < arr.length - 1) {
+//     let smallest = current + 1;
+//     for (let i = current + 1; i < arr.length; i++) {
+//       if (array[smallest] > arr[i]) {
+//         smallest = i;
+//       }
+//     }
+//   }
+// }
+
+// // **************** Homework for Thu Jul 26 2018 ****************
+// // Question {name: 'Depth First Search',learned: true,level: 'easy',source: 'AE',type: 'graphs' }
+// // Question {name: 'flatten dictionary',learned: true,level: 'medium',source: 'pramp',type: 'object' }
+// // Question {name: 'min stack',learned: true,level: '',source: 'bbg',type: 'stack' }
+// // Question {name: 'Selection Sort',learned: true,level: 'easy',source: 'AE',type: 'sorting' }
+// // Question {name: 'Two Number Sum',learned: true,level: 'easy',source: 'AE',ty
+
+// const DFS = (tree, arr, type) => {
+//   if (tree) {
+//     if (type === "pre") arr.push(tree.value);
+//     DFS(tree.left, arr, type);
+//     if (type === "in-order") arr.push(tree.value);
+//     DFS(tree.right, arr, type);
+//     if (type === "post") arr.push(tree.value);
+//   }
+//   return arr;
+// };
+
+// const flattenDict = dictionary => {
+//   let hashtable = {};
+//   flattenHelper(dictionary, hashtable, []);
+// };
+
+// const flattenHelper = (dict, hashtable, keyNames) => {
+//   for (let key in dict) {
+//     if (typeof dict[key] === "object") {
+//       if (key !== "") keyNames.push(key);
+//       flattenHelper(dict[key], hashtable, keyNames);
+//     } else {
+//       let currentKey = "";
+//       if (keyNames.length === 0) currentKey = key;
+//       else {
+//         currentKey = keyNames.join(".");
+//         if (key !== "") currentKey += "." + key;
+//       }
+//       hashtable[currentKey] = dict[key];
+//     }
+//   }
+// };
+
+// class MinStack {
+//   constructor() {
+//     this.stack = [];
+//   }
+//   add(val) {
+//     let min = this.min();
+//     if (this.stack.length > 0) {
+//       this.stack.push({
+//         value: val,
+//         min: Math.min(min !== undefined ? min : Infinity, val)
+//       });
+//     }
+//   }
+//   remove() {
+//     if (this.stack.length > 0) {
+//       let item = this.stack.pop();
+//       return item.value;
+//     }
+//   }
+//   min() {
+//     let item = this.stack[this.stack.length - 1];
+//     return item.min;
+//   }
+// }
+
+// class TripleStack {
+//   constructor() {
+//     this.stacks = [];
+//     this.length = [0, 0, 0];
+//   }
+//   getLength(stack) {
+//     return this.length[stack - 1];
+//   }
+
+//   add(val, stack) {
+//     let length = this.getLength(stack);
+//     let idx = 3 * length + stack - 1;
+//     this.stacks[idx] = val;
+//     this.length[stack - 1] += 1;
+//   }
+
+//   pop(stack) {
+//     let length = this.getLength(stack);
+//     let value;
+//     if (length > 0) {
+//       let idx = 3 * length + stack - 1;
+//       value = this.stacks[idx];
+//       this.stacks[idx] = undefined;
+//       this.length[stack - 1] -= 1;
+//     }
+//     return value;
+//   }
+// }
+
+// const TwoNumSum = (arr, target) => {
+//   let seen = {};
+//   for (let i = 0; i < arr.length; i++) {
+//     let diff = target - arr[i];
+//     if (seen[diff]) return [arr[i], seen[diff]];
+//     else seen[arr[i]] = true;
+//   }
+// };
+
+// // findThreeLargest([8, 6, 4, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1]);
+
+// function trapRain(arr) {
+//   let leftMaxes = [];
+//   let leftMax = 0;
+//   for (let i = 0; i < arr.length; i++) {
+//     leftMax = Math.max(leftMax, arr[i]);
+//     leftMaxes.push(leftMax);
+//   }
+
+//   let rightMaxes = [];
+//   let rightMax = 0;
+//   for (let j = arr.length - 1; j >= 0; j--) {
+//     rightMax = Math.max(rightMax, arr[j]);
+//     rightMaxes[j] = rightMax;
+//   }
+
+//   let total = 0;
+//   for (let k = 0; k < arr.length; k++) {
+//     let minHeight = Math.min(leftMaxes[k], rightMaxes[k]);
+//     if (minHeight >= arr[k]) total += minHeight - arr[k];
+//   }
+//   console.log(total);
+// }
+
+// // trapRain([0, 8, 0, 0, 5, 0, 0, 10, 0, 0, 1, 1, 0, 3]); //48
+
+// function getNumOfIslands(matrix) {
+//   let islands = 0;
+//   let rows = matrix.length;
+//   let cols = matrix[0].length;
+//   for (let i = 0; i < rows; i++) {
+//     for (let j = 0; j < cols; j++) {
+//       if (matrix[j][i] === 1) {
+//         checkForLand(matrix, rows, cols, j, i);
+//         islands += 1;
+//       }
+//     }
+//   }
+//   console.log(islands);
+// }
+
+// function checkForLand(matrix, rows, cols, initialX, initialY) {
+//   let queue = [[initialX, initialY]];
+//   while (queue.length > 0) {
+//     let item = queue.shift();
+//     let x = item[0];
+//     let y = item[1];
+//     if (matrix[x][y] === 1) {
+//       matrix[x][y] = 0;
+//       withinBounds(queue, rows, cols, x - 1, y);
+//       withinBounds(queue, rows, cols, x + 1, y);
+//       withinBounds(queue, rows, cols, x, y - 1);
+//       withinBounds(queue, rows, cols, x, y + 1);
+//     }
+//   }
+// }
+
+// function withinBounds(queue, rows, cols, x, y) {
+//   if (x >= 0 && x < rows && y >= 0 && y < cols) {
+//     queue.push([x, y]);
+//   }
+// }
+
+// **************** Homework for Tue Aug 07 2018 ****************
+// Question {name: 'selection sort',learned: true,level: '',source: null,type: null }
+// Question {name: 'reverse linked list',learned: true,level: '',source: null,type: null }
+// Question {name: 'shift up nums + add val at specific idx',learned: true,level: '',source: null,type: null }
+// Question {name: 'add nums by array back to front ',learned: true,level: '',source: null,type: null }
+// Question {name: 'insertion sort',learned: true,level: '',source: null,type: null }
+
+const selectionSort = arr => {
   let currentIdx = 0;
-  while (currentIdx < array.length - 1) {
-    //- 1 b/c you dont need to swap the last num
-    let smallestIdx = currentIdx;
-    for (let i = currentIdx + 1; i < array.length; i++) {
-      if (array[smallestIdx] > array[i]) {
-        smallestIdx = i;
-      }
-    }
-    //use currentIdx b/c its sorted up until that point
-    swapHelper(currentIdx, smallestIdx, array);
-    currentIdx++;
-  }
-  console.log("sorted", array);
-  return array;
-}
-
-function selectingSort(arr) {
-  let current = 0;
-  while (current < arr.length - 1) {
-    let smallest = current + 1;
-    for (let i = current + 1; i < arr.length; i++) {
-      if (array[smallest] > arr[i]) {
+  while (currentIdx < arr.length - 1) {
+    let smallest = currentIdx;
+    for (let i = currentIdx + 1; i < arr.length; i++) {
+      if (arr[smallest] > arr[i]) {
         smallest = i;
       }
     }
+    let temp = arr[currentIdx];
+    arr[currentIdx] = arr[smallest];
+    arr[smallest] = temp;
+    currentIdx += 1;
   }
-}
-
-// **************** Homework for Thu Jul 26 2018 ****************
-// Question {name: 'Depth First Search',learned: true,level: 'easy',source: 'AE',type: 'graphs' }
-// Question {name: 'flatten dictionary',learned: true,level: 'medium',source: 'pramp',type: 'object' }
-// Question {name: 'min stack',learned: true,level: '',source: 'bbg',type: 'stack' }
-// Question {name: 'Selection Sort',learned: true,level: 'easy',source: 'AE',type: 'sorting' }
-// Question {name: 'Two Number Sum',learned: true,level: 'easy',source: 'AE',ty
-
-const DFS = (tree, arr, type) => {
-  if (tree) {
-    if (type === "pre") arr.push(tree.value);
-    DFS(tree.left, arr, type);
-    if (type === "in-order") arr.push(tree.value);
-    DFS(tree.right, arr, type);
-    if (type === "post") arr.push(tree.value);
-  }
-  return arr;
+  console.log(arr);
 };
 
-const flattenDict = dictionary => {
-  let hashtable = {};
-  flattenHelper(dictionary, hashtable, []);
+// console.log(selectionSort([5, 4, 2, 1, 3]));
+
+const reverseLL = head => {
+  let prevNode = null;
+  while (head) {
+    let temp = head.next;
+    head.next = prevNode;
+    prevNode = head;
+    head = temp;
+  }
+  return prevNode;
 };
 
-const flattenHelper = (dict, hashtable, keyNames) => {
-  for (let key in dict) {
-    if (typeof dict[key] === "object") {
-      if (key !== "") keyNames.push(key);
-      flattenHelper(dict[key], hashtable, keyNames);
+const reverseLLRecur = head => {
+  if (head === null || head.next === null) return null;
+  let temp = reverseLLRecur(head.next);
+  head.next.next = head;
+  head.next = null;
+  return head;
+};
+
+const shiftUpAndAdd = (arr, idx, val) => {
+  for (let i = 0; i <= idx; i++) {
+    if (i === idx) arr[i] = val;
+    else arr[i] = arr[i + 1];
+  }
+};
+
+const addNumsBackToFront = (list1, list2) => {
+  let lastIdx1 = list1.length - 1;
+  let lastIdx2 = list2.length - 1;
+  let total = "";
+  let carry = 0;
+  for (let i = Math.max(lastIdx1, lastIdx2); i >= 0; i--) {
+    let a = list1[lastIdx1] || 0;
+    let b = list2[lastIdx2] || 0;
+    let sum = a + b + carry;
+
+    if (sum > 9) {
+      sum -= 10;
+      carry = 1;
     } else {
-      let currentKey = "";
-      if (keyNames.length === 0) currentKey = key;
-      else {
-        currentKey = keyNames.join(".");
-        if (key !== "") currentKey += "." + key;
-      }
-      hashtable[currentKey] = dict[key];
+      carry = 0;
     }
-  }
-};
 
-class MinStack {
-  constructor() {
-    this.stack = [];
-  }
-  add(val) {
-    let min = this.min();
-    if (this.stack.length > 0) {
-      this.stack.push({
-        value: val,
-        min: Math.min(min !== undefined ? min : Infinity, val)
-      });
-    }
-  }
-  remove() {
-    if (this.stack.length > 0) {
-      let item = this.stack.pop();
-      return item.value;
-    }
-  }
-  min() {
-    let item = this.stack[this.stack.length - 1];
-    return item.min;
-  }
-}
-
-class TripleStack {
-  constructor() {
-    this.stacks = [];
-    this.length = [0, 0, 0];
-  }
-  getLength(stack) {
-    return this.length[stack - 1];
-  }
-
-  add(val, stack) {
-    let length = this.getLength(stack);
-    let idx = 3 * length + stack - 1;
-    this.stacks[idx] = val;
-    this.length[stack - 1] += 1;
-  }
-
-  pop(stack) {
-    let length = this.getLength(stack);
-    let value;
-    if (length > 0) {
-      let idx = 3 * length + stack - 1;
-      value = this.stacks[idx];
-      this.stacks[idx] = undefined;
-      this.length[stack - 1] -= 1;
-    }
-    return value;
-  }
-}
-
-const TwoNumSum = (arr, target) => {
-  let seen = {};
-  for (let i = 0; i < arr.length; i++) {
-    let diff = target - arr[i];
-    if (seen[diff]) return [arr[i], seen[diff]];
-    else seen[arr[i]] = true;
-  }
-};
-
-// findThreeLargest([8, 6, 4, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1]);
-
-function trapRain(arr) {
-  let leftMaxes = [];
-  let leftMax = 0;
-  for (let i = 0; i < arr.length; i++) {
-    leftMax = Math.max(leftMax, arr[i]);
-    leftMaxes.push(leftMax);
-  }
-
-  let rightMaxes = [];
-  let rightMax = 0;
-  for (let j = arr.length - 1; j >= 0; j--) {
-    rightMax = Math.max(rightMax, arr[j]);
-    rightMaxes[j] = rightMax;
-  }
-
-  let total = 0;
-  for (let k = 0; k < arr.length; k++) {
-    let minHeight = Math.min(leftMaxes[k], rightMaxes[k]);
-    if (minHeight >= arr[k]) total += minHeight - arr[k];
+    total = sum + total;
+    lastIdx1--;
+    lastIdx2--;
   }
   console.log(total);
-}
+};
 
-// trapRain([0, 8, 0, 0, 5, 0, 0, 10, 0, 0, 1, 1, 0, 3]); //48
+console.log(addNumsBackToFront([1, 2, 3], [1, 7])); //140
 
-function getNumOfIslands(matrix) {
-  let islands = 0;
-  let rows = matrix.length;
-  let cols = matrix[0].length;
-  for (let i = 0; i < rows; i++) {
-    for (let j = 0; j < cols; j++) {
-      if (matrix[j][i] === 1) {
-        checkForLand(matrix, rows, cols, j, i);
-        islands += 1;
-      }
+const insertionSorting = arr => {
+  for (let i = 1; i < arr.length; i++) {
+    let j = i;
+    while (j >= 0 && arr[j] < arr[j - 1]) {
+      let temp = arr[j];
+      arr[j] = arr[j - 1];
+      arr[j - 1] = temp;
+      j--;
     }
   }
-  console.log(islands);
-}
+  console.log(arr);
+};
 
-function checkForLand(matrix, rows, cols, initialX, initialY) {
-  let queue = [[initialX, initialY]];
-  while (queue.length > 0) {
-    let item = queue.shift();
-    let x = item[0];
-    let y = item[1];
-    if (matrix[x][y] === 1) {
-      matrix[x][y] = 0;
-      withinBounds(queue, rows, cols, x - 1, y);
-      withinBounds(queue, rows, cols, x + 1, y);
-      withinBounds(queue, rows, cols, x, y - 1);
-      withinBounds(queue, rows, cols, x, y + 1);
-    }
-  }
-}
-
-function withinBounds(queue, rows, cols, x, y) {
-  if (x >= 0 && x < rows && y >= 0 && y < cols) {
-    queue.push([x, y]);
-  }
-}
+// console.log(insertionSorting([4, 3, 2, 1]));
