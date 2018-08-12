@@ -3237,3 +3237,10 @@ const shiftAndAddNum = (arr, value, idx) => {
 };
 
 // console.log("shiftAndAddNum: ", shiftAndAddNum([1, 2, 3, 4, 5], 4, 0));
+
+// **************** Homework for Sun Aug 12 2018 ****************
+// Question {name: 'Insert Sort',learned: true,level: 'easy',source: 'AE',type: 'sorting' }
+// Question {name: 'string compression',learned: true,level: '',source: 'bbg',type: 'string' }
+// Question {name: 'intersection of two linked lists',learned: true,level: '',source: 'bbg',type: 'LL' }
+// Question {name: 'min stack',learned: true,level: '',source: 'bbg',type: 'stack' }
+// Question {name: 'Binary Search',learned: true,level: 'easy',source: 'AE',type: 'search' }
