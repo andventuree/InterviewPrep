@@ -3244,3 +3244,25 @@ const shiftAndAddNum = (arr, value, idx) => {
 // Question {name: 'intersection of two linked lists',learned: true,level: '',source: 'bbg',type: 'LL' }
 // Question {name: 'min stack',learned: true,level: '',source: 'bbg',type: 'stack' }
 // Question {name: 'Binary Search',learned: true,level: 'easy',source: 'AE',type: 'search' }
+
+class MinStack {
+  constructor() {
+    this.stack = [];
+  }
+  getLength() {
+    return this.stack.length - 1;
+  }
+
+  insert(val) {
+    let min = this.min();
+    if (this.stack.length > 0) {
+      this.stack.push({
+        value: val,
+        min: Math.min(min !== undefined ? min : Infinity, val)
+      });
+    }
+  }
+  min() {
+    return this.stack[this.getLength()].min;
+  }
+}
