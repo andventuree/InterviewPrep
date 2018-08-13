@@ -1,6 +1,6 @@
 ## Interview Prep
 
-Disclaimer: These are simply my notes for approach for analyzing algorithms. Happy to make changes or consider any suggestions provided.
+Disclaimer: These are simply my notes on approaching and analyzing algorithms. Happy to make changes or consider any suggestions provided.
 
 ### Interview observations:
 
