@@ -1,8 +1,8 @@
-##Interview Prep
+## Interview Prep
 
 Disclaimer: These are simply my notes for approach for analyzing algorithms. Happy to make changes or consider any suggestions provided.
 
-###Interview observations:
+### Interview observations:
 
 <details><summary>Click Here</summary>
 
@@ -36,7 +36,7 @@ function outerFn(callbackArr) {
 
 6. Companies want you to think outside the box. If you've already provided the most optimal approach, consider providing other solutions that are not as optimized.
 
-####Space trade-off for time
+#### Space trade-off for time
 
 1. Sorted array implies using pointers - Remove 1 O(n) time
    When an array is sorted, 1 order of complexity can be removed from the naive approach. So think of ways to systematically use the array.
@@ -48,7 +48,7 @@ function outerFn(callbackArr) {
 
 </details>
 
-###Pro tips/tricks:
+### Pro tips/tricks:
 
 <details><summary>Click Here</summary>
 
