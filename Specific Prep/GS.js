@@ -425,3 +425,11 @@ function compose(callbacks) {
 // }
 
 // nestedObjCreator(["a.b.c"], [1]);
+
+
+//FICC Trading
+// given n steps count number of ways a child can take steps given they can only step 1 or 2 or 3 steps
+// totally fucked me lol, it was the was to make change on algo expert
+// also got robot walker given robot can only go up down left right return final coordinates in array form
+
+// then also asked for longest substring with length of the substring and the start index so for abbbbc return [1, 4]
