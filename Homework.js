@@ -303,8 +303,12 @@ const reverseInt = int => {
   return reverse;
 };
 
+<<<<<<< HEAD
 // console.log(reverseInt(123));
 // console.log(reverseInt(1234567));
+=======
+// console.log(addNumsBackToFront([1, 2, 3], [1, 7])); //140
+>>>>>>> 7c485aeadfdb7cb19306abe00dfff5549804c3e1
 
 const maxSum = arr => {
   let maxTotal = arr[0];
@@ -316,4 +320,109 @@ const maxSum = arr => {
   return maxTotal;
 };
 
+<<<<<<< HEAD
 // console.log(maxSum([3, 5, -9, 1, 3, -2, 3, 4, 7, 2, -9, 6, 3, 1, -5, 4])); //19
+=======
+// console.log(insertionSorting([4, 3, 2, 1]));
+
+// **************** Homework for Sun Aug 12 2018 ****************
+// Question {name: 'insertion sort',learned: true,level: '',source: null,type: null }
+// Question {name: 'add nums by array back to front ',learned: true,level: '',source: null,type: null }
+// Question {name: 'binary search',learned: true,level: '',source: null,type: null }
+// Question {name: 'shift up nums + add val at specific idx',learned: true,level: '',source: null,type: null }
+
+const insertSort = arr => {
+  for (let i = 1; i < arr.length; i++) {
+    let j = i;
+    while ((j >= 0) & (arr[j] < arr[j - 1])) {
+      let temp = arr[j];
+      arr[j] = arr[j - 1];
+      arr[j - 1] = temp;
+      j--;
+    }
+  }
+  return arr;
+};
+
+// console.log(insertSort([4,3,2,1]))
+
+const addNumsToBack = (arr1, arr2) => {
+  let lastDigit1 = arr1.length - 1;
+  let lastDigit2 = arr2.length - 1;
+  let carry = 0;
+  let total = "";
+  for (let i = Math.max(lastDigit1, lastDigit2); i >= 0; i--) {
+    let a = arr1[lastDigit1] || 0;
+    let b = arr2[lastDigit2] || 0;
+    let sum = a + b + carry;
+
+    if (sum > 9) {
+      carry = 1;
+      sum -= 10;
+    } else {
+      carry = 0;
+    }
+
+    total = sum + total;
+    lastDigit1--;
+    lastDigit2--;
+  }
+  console.log(total);
+};
+
+// addNumsToBack([1,2,3],[7])
+
+const binarySearchx = (arr, target) => {
+  let left = 0;
+  let right = arr.length - 1;
+  while (left <= right) {
+    let mid = Math.floor((left + right) / 2);
+    if (arr[mid] === target) return arr[mid];
+    else if (target < arr[mid]) right = mid - 1;
+    else if (target > arr[mid]) left = mid + 1;
+  }
+  return false;
+};
+
+// console.log(binarySearchx([1, 2, 3, 4, 5, 6], 5));
+
+const shiftAndAddNum = (arr, value, idx) => {
+  for (let i = 0; i <= idx; i++) {
+    if (i === idx) arr[i] = value;
+    else arr[i] = arr[i + 1];
+    console.log(i, arr);
+  }
+  return arr;
+};
+
+// console.log("shiftAndAddNum: ", shiftAndAddNum([1, 2, 3, 4, 5], 4, 0));
+
+// **************** Homework for Sun Aug 12 2018 ****************
+// Question {name: 'Insert Sort',learned: true,level: 'easy',source: 'AE',type: 'sorting' }
+// Question {name: 'string compression',learned: true,level: '',source: 'bbg',type: 'string' }
+// Question {name: 'intersection of two linked lists',learned: true,level: '',source: 'bbg',type: 'LL' }
+// Question {name: 'min stack',learned: true,level: '',source: 'bbg',type: 'stack' }
+// Question {name: 'Binary Search',learned: true,level: 'easy',source: 'AE',type: 'search' }
+
+class MinStack {
+  constructor() {
+    this.stack = [];
+  }
+  getLength() {
+    return this.stack.length - 1;
+  }
+
+  insert(val) {
+    let min = this.min();
+    if (this.stack.length > 0) {
+      this.stack.push({
+        value: val,
+        min: Math.min(min !== undefined ? min : Infinity, val)
+      });
+    }
+  }
+  min() {
+    return this.stack[this.getLength()].min;
+  }
+}
+>>>>>>> 7c485aeadfdb7cb19306abe00dfff5549804c3e1
