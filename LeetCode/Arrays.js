@@ -257,3 +257,126 @@ var twoSum = function(nums, target) {
 };
 
 // console.log(twoSum([2, 7, 11, 15], 9));
+
+// https://leetcode.com/explore/learn/card/array-and-string/201/introduction-to-array/1144/
+
+//time: O(n) - several passes but doesn't compound
+//space: O(n) - 2 extra copies but thats a constant
+// var pivotIndex = function(nums) {
+//   let leftValues = [nums[0]];
+//   let rightValues = [];
+//   for (let i = 1; i < nums.length; i++) {
+//     leftValues[i] = nums[i] + leftValues[i - 1];
+//   }
+//   for (let k = nums.length - 1; k >= 0; k--) {
+//     if (k === nums.length - 1) rightValues[k] = nums[k];
+//     else rightValues[k] = nums[k] + rightValues[k + 1];
+//   }
+//   console.log("nums:        ", nums);
+//   console.log("rightValues: ", rightValues);
+//   console.log("leftValues:  ", leftValues);
+//   for (let j = 1; j < nums.length - 1; j++) {
+//     // if (leftValues[j - 1] === undefined && rightValues[1] === 0) return j;
+//     // else if (leftValues[j + 1] === undefined && leftValues[j] === 0) return j;
+//     // else
+//     if (leftValues[j - 1] === rightValues[j + 1]) return j;
+//   }
+//   if (rightValues[1] === 0 || rightValues[0] === 0) return 0;
+//   if (leftValues[nums.length - 2] === 0) return nums.length - 1;
+//   return -1;
+// };
+
+// var pivotIndex = function(nums) { //broken
+//   let rightSum = 0;
+//   nums.forEach(num => {
+//     console.log("num: ", num);
+//     rightSum += num;
+//   });
+
+//   let leftSum = 0;
+//   let i = 0;
+//   while (i < nums.length - 1) {
+//     if (leftSum === rightSum - nums[i]) {
+//       return i;
+//     }
+//     leftSum += nums[i];
+//     i++;
+//   }
+//   return -1;
+//   console.log("rightSum: ", rightSum);
+// };
+
+// console.log(pivotIndex([1, 7, 3, 6, 5, 6])); //3
+// console.log(pivotIndex([1, 2, 3])); //-1
+// console.log(pivotIndex([-1, -1, -1, 0, 1, 1])); //0
+// console.log(pivotIndex([-1, -1, -1, 0, -3, 0])); //3
+// console.log(pivotIndex([-1, -1, -1, -1, 1, 1])); //-1
+// console.log(pivotIndex([-1, -1, 0, 1, 0, -1])); //4
+// console.log(pivotIndex([-1, -1, 0, 1, 1, 0])); //5
+// console.log(pivotIndex([-1, -1, -1, 1, 1, 1])); //-1
+// console.log(pivotIndex([-1, -1, -1, -1, 0, 0])); //-1
+
+// https://leetcode.com/explore/learn/card/array-and-string/201/introduction-to-array/1147/
+
+//time: O(n) - technically O(n + 2) but constant is dropped
+//space: O(n) - worst case is that every number is larger and seen{} gets n values
+var dominantIndex = function(nums) {
+  let largestTwo = [null, null];
+  let seen = {};
+  nums.forEach((num, i) => {
+    helper(largestTwo, num, i, seen);
+  });
+
+  console.log(seen);
+  if (largestTwo[1] >= 2 * largestTwo[0]) return seen[largestTwo[1]];
+
+  return -1;
+};
+
+function helper(largestTwo, num, i, seen) {
+  if (largestTwo[1] === null || largestTwo[1] < num) {
+    seen[num] = i;
+    shiftRest(largestTwo, 1, num);
+  } else if (largestTwo[0] === null || largestTwo[0] < num) {
+    shiftRest(largestTwo, 0, num);
+  }
+}
+
+function shiftRest(arr, idx, val) {
+  for (let i = 0; i <= idx; i++) {
+    if (i === idx) arr[i] = val;
+    else arr[i] = arr[i + 1];
+  }
+}
+
+// console.log(dominantIndex([0, 0, 0, 3]));
+
+// https://leetcode.com/explore/learn/card/array-and-string/201/introduction-to-array/1148/
+
+//time: O(n) only goes through one pass
+//space: O(1) constant b/c of small variables
+var plusOne = function(digits) {
+  let total = "";
+  let carry = 0;
+  let lastIdx = digits.length - 1;
+  for (let i = lastIdx; i >= 0; i--) {
+    let num = digits[i];
+    num += carry;
+    if (i === lastIdx) num += 1;
+    if (num > 9) {
+      carry = 1;
+      num -= 10;
+    } else {
+      carry = 0;
+    }
+    total = num + total;
+  }
+  if (carry !== 0) total = carry + total; //for when an extra number is added
+  return total.split("").map(num => Number(num));
+};
+
+// console.log(plusOne([4, 3, 2, 1])); //[ 4, 3, 2, 2 ]
+// console.log(plusOne([9]));
+// console.log(plusOne([0]));
+// console.log(plusOne([9, 9]));
+// console.log(plusOne([9, 9, 9]));
