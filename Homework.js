@@ -170,259 +170,304 @@ let { homeworkTonight, tricks } = require("./HwHelper");
 
 // console.log(moveZeros([1, 2, 3, 0, 0, 4, 5])); //[ 1, 2, 3, 4, 5, 0, 0 ]
 
-// Question {name: 'bubble sort',learned: true,level: '',source: null,type: null }
-// Question {name: 'shift array up by 1',learned: true,level: '',source: null,type: null }
-// Question {name: 'reverse linked list',learned: true,level: '',source: null,type: null }
-// Question {name: 'add nums by array back to front ',learned: true,level: '',source: null,type: null }
+// // Question {name: 'bubble sort',learned: true,level: '',source: null,type: null }
+// // Question {name: 'shift array up by 1',learned: true,level: '',source: null,type: null }
+// // Question {name: 'reverse linked list',learned: true,level: '',source: null,type: null }
+// // Question {name: 'add nums by array back to front ',learned: true,level: '',source: null,type: null }
 
-function bubSort(arr) {
-  let isSorted = false;
-  while (!isSorted) {
-    isSorted = true;
-    for (let i = 0; i < arr.length; i++) {
-      if (arr[i] > arr[i + 1]) {
-        swap(arr, i, i + 1);
-        isSorted = false;
-      }
-    }
-  }
-  return arr;
-}
+// function bubSort(arr) {
+//   let isSorted = false;
+//   while (!isSorted) {
+//     isSorted = true;
+//     for (let i = 0; i < arr.length; i++) {
+//       if (arr[i] > arr[i + 1]) {
+//         swap(arr, i, i + 1);
+//         isSorted = false;
+//       }
+//     }
+//   }
+//   return arr;
+// }
 
-function swap(arr, i, j) {
-  let temp = arr[i];
-  arr[i] = arr[j];
-  arr[j] = temp;
-}
+// function swap(arr, i, j) {
+//   let temp = arr[i];
+//   arr[i] = arr[j];
+//   arr[j] = temp;
+// }
 
-// console.log(bubSort([3, 2, 1]));
+// // console.log(bubSort([3, 2, 1]));
 
-function shiftNumsUpBy1(arr) {
-  for (let i = 0; i < arr.length - 1; i++) {
-    arr[i] = arr[i + 1];
-  }
-  return arr;
-}
+// function shiftNumsUpBy1(arr) {
+//   for (let i = 0; i < arr.length - 1; i++) {
+//     arr[i] = arr[i + 1];
+//   }
+//   return arr;
+// }
 
-// console.log(shiftNumsUpBy1([1, 2, 3])); //[2,3,3]
+// // console.log(shiftNumsUpBy1([1, 2, 3])); //[2,3,3]
 
-function reverseLinkedList(head) {
-  let prevNode = head;
-  while (head) {
-    let temp = head.next;
-    head.next = prevNode;
-    prevNode = head;
-    head = temp;
-  }
-  return prevNode;
-}
+// function reverseLinkedList(head) {
+//   let prevNode = head;
+//   while (head) {
+//     let temp = head.next;
+//     head.next = prevNode;
+//     prevNode = head;
+//     head = temp;
+//   }
+//   return prevNode;
+// }
 
-function reverseLinkedListRecur(head) {
-  if (head === null || head.next === null) return head;
-  let temp = reverseLinkedListRecur(head.next);
-  head.next.next = head;
-  head.next = null;
-  return head;
-}
+// function reverseLinkedListRecur(head) {
+//   if (head === null || head.next === null) return head;
+//   let temp = reverseLinkedListRecur(head.next);
+//   head.next.next = head;
+//   head.next = null;
+//   return head;
+// }
 
-function addDigits(list1, list2) {
-  let lastDigit1 = list1.length - 1;
-  let lastDigit2 = list2.length - 1;
-  let carry = 0;
-  let total = "";
-  for (let i = Math.max(lastDigit1, lastDigit2); i >= 0; i--) {
-    let a = list1[lastDigit1] || 0;
-    let b = list2[lastDigit2] || 0;
-    let sum = a + b + carry;
-    if (sum > 9) {
-      carry = 1;
-      sum -= 10;
-    } else {
-      carry = 0;
-    }
-    total = sum + total;
-    lastDigit1--;
-    lastDigit2--;
-  }
-  return total.split("");
-}
+// function addDigits(list1, list2) {
+//   let lastDigit1 = list1.length - 1;
+//   let lastDigit2 = list2.length - 1;
+//   let carry = 0;
+//   let total = "";
+//   for (let i = Math.max(lastDigit1, lastDigit2); i >= 0; i--) {
+//     let a = list1[lastDigit1] || 0;
+//     let b = list2[lastDigit2] || 0;
+//     let sum = a + b + carry;
+//     if (sum > 9) {
+//       carry = 1;
+//       sum -= 10;
+//     } else {
+//       carry = 0;
+//     }
+//     total = sum + total;
+//     lastDigit1--;
+//     lastDigit2--;
+//   }
+//   return total.split("");
+// }
 
-// console.log(addDigits([1, 2, 3], [1, 2, 7]));
+// // console.log(addDigits([1, 2, 3], [1, 2, 7]));
 
-// **************** Homework for Fri Aug 24 2018 ****************
-// Question {name: 'Balanced Brackets',learned: true,level: 'medium',source: 'AE',type: 'stacks' }
-// Question {name: 'first unique character in a string',learned: true,level: '',source: 'bbg',type: 'string' }
-// Question {name: 'reverse integer',learned: true,level: '',source: 'bbg',type: '' }
-// Question {name: 'Kadanes Algo - Max Sum',learned: true,level: 'medium',source: 'AE',type: null }
+// // **************** Homework for Fri Aug 24 2018 ****************
+// // Question {name: 'Balanced Brackets',learned: true,level: 'medium',source: 'AE',type: 'stacks' }
+// // Question {name: 'first unique character in a string',learned: true,level: '',source: 'bbg',type: 'string' }
+// // Question {name: 'reverse integer',learned: true,level: '',source: 'bbg',type: '' }
+// // Question {name: 'Kadanes Algo - Max Sum',learned: true,level: 'medium',source: 'AE',type: null }
 
-const balancedBrackets = brackets => {
-  let stack = [];
-  let pair = { "}": "{", "]": "[", ")": "(" };
-  for (let i = 0; i < brackets.length; i++) {
-    let bracket = brackets[i];
-    let lastBracket = stack[stack.length - 1];
-    if (bracket === "]") {
-      if (lastBracket !== pair[bracket]) return false;
-      stack.pop();
-    } else if (bracket === "}") {
-      if (lastBracket !== pair[bracket]) return false;
-      stack.pop();
-    } else if (bracket === ")") {
-      if (lastBracket !== pair[bracket]) return false;
-      stack.pop();
-    } else {
-      stack.push(bracket);
-    }
-  }
-  return stack.length === 0;
-};
+// const balancedBrackets = brackets => {
+//   let stack = [];
+//   let pair = { "}": "{", "]": "[", ")": "(" };
+//   for (let i = 0; i < brackets.length; i++) {
+//     let bracket = brackets[i];
+//     let lastBracket = stack[stack.length - 1];
+//     if (bracket === "]") {
+//       if (lastBracket !== pair[bracket]) return false;
+//       stack.pop();
+//     } else if (bracket === "}") {
+//       if (lastBracket !== pair[bracket]) return false;
+//       stack.pop();
+//     } else if (bracket === ")") {
+//       if (lastBracket !== pair[bracket]) return false;
+//       stack.pop();
+//     } else {
+//       stack.push(bracket);
+//     }
+//   }
+//   return stack.length === 0;
+// };
 
-// console.log(balancedBrackets("[{}()]")); //true
-// console.log(balancedBrackets("[{{}([[[{}]]])}]")); //true
-// console.log(balancedBrackets("[{}(]")); //false
+// // console.log(balancedBrackets("[{}()]")); //true
+// // console.log(balancedBrackets("[{{}([[[{}]]])}]")); //true
+// // console.log(balancedBrackets("[{}(]")); //false
 
-const oneUniqueChar = str => {
-  let seen = {};
-  for (let i = 0; i < str.length; i++) {
-    let char = str[i];
-    if (seen[char]) seen[char] += 1;
-    else seen[char] = 1;
-  }
-  return Object.keys(seen).filter(key => seen[key] === 1);
-};
+// const oneUniqueChar = str => {
+//   let seen = {};
+//   for (let i = 0; i < str.length; i++) {
+//     let char = str[i];
+//     if (seen[char]) seen[char] += 1;
+//     else seen[char] = 1;
+//   }
+//   return Object.keys(seen).filter(key => seen[key] === 1);
+// };
 
-// console.log(oneUniqueChar("aaaabbbcddeee"));
+// // console.log(oneUniqueChar("aaaabbbcddeee"));
 
-const reverseInt = int => {
-  let reverse = "";
-  while (int > 0) {
-    let onesPlace = int % 10;
-    int = Math.floor(int / 10);
-    reverse = reverse + onesPlace;
-  }
-  return reverse;
-};
+// const reverseInt = int => {
+//   let reverse = "";
+//   while (int > 0) {
+//     let onesPlace = int % 10;
+//     int = Math.floor(int / 10);
+//     reverse = reverse + onesPlace;
+//   }
+//   return reverse;
+// };
 
-<<<<<<< HEAD
-// console.log(reverseInt(123));
-// console.log(reverseInt(1234567));
-=======
-// console.log(addNumsBackToFront([1, 2, 3], [1, 7])); //140
->>>>>>> 7c485aeadfdb7cb19306abe00dfff5549804c3e1
+// // console.log(reverseInt(123));
+// // console.log(reverseInt(1234567));
 
-const maxSum = arr => {
-  let maxTotal = arr[0];
-  let maxSoFar = arr[0];
-  for (let i = 1; i < arr.length; i++) {
-    maxSoFar = Math.max(arr[i], maxSoFar + arr[i]);
-    maxTotal = Math.max(maxTotal, maxSoFar);
-  }
-  return maxTotal;
-};
+// const maxSum = arr => {
+//   let maxTotal = arr[0];
+//   let maxSoFar = arr[0];
+//   for (let i = 1; i < arr.length; i++) {
+//     maxSoFar = Math.max(arr[i], maxSoFar + arr[i]);
+//     maxTotal = Math.max(maxTotal, maxSoFar);
+//   }
+//   return maxTotal;
+// };
 
-<<<<<<< HEAD
-// console.log(maxSum([3, 5, -9, 1, 3, -2, 3, 4, 7, 2, -9, 6, 3, 1, -5, 4])); //19
-=======
-// console.log(insertionSorting([4, 3, 2, 1]));
+// // console.log(maxSum([3, 5, -9, 1, 3, -2, 3, 4, 7, 2, -9, 6, 3, 1, -5, 4])); //19
 
-// **************** Homework for Sun Aug 12 2018 ****************
-// Question {name: 'insertion sort',learned: true,level: '',source: null,type: null }
-// Question {name: 'add nums by array back to front ',learned: true,level: '',source: null,type: null }
-// Question {name: 'binary search',learned: true,level: '',source: null,type: null }
-// Question {name: 'shift up nums + add val at specific idx',learned: true,level: '',source: null,type: null }
+// // **************** Homework for Sat Aug 25 2018 ****************
+// // Question {name: 'selection sort',learned: true,level: '',source: null,type: null }
+// // Question {name: 'return fn that excutes callbacks on input',learned: true,level: '',source: null,type: null }
+// // Question {name: 'add nums by array back to front ',learned: true,level: '',source: null,type: null }
 
-const insertSort = arr => {
-  for (let i = 1; i < arr.length; i++) {
-    let j = i;
-    while ((j >= 0) & (arr[j] < arr[j - 1])) {
-      let temp = arr[j];
-      arr[j] = arr[j - 1];
-      arr[j - 1] = temp;
-      j--;
-    }
-  }
-  return arr;
-};
+// const selectionSort = arr => {
+//   let currentIdx = 0;
+//   for (let i = currentIdx + 1; i < arr.length; i++) {
+//     let smallestIdx = currentIdx;
+//     let j = i;
+//     while (j < arr.length) {
+//       if (arr[j] < arr[smallestIdx]) {
+//         smallestIdx = j;
+//       }
+//       j++;
+//     }
+//     let temp = arr[smallestIdx];
+//     arr[smallestIdx] = arr[currentIdx];
+//     arr[currentIdx] = temp;
+//     currentIdx += 1;
+//   }
+//   return arr;
+// };
 
-// console.log(insertSort([4,3,2,1]))
+// console.log(selectionSort([4, 3, 2, 1]));
 
-const addNumsToBack = (arr1, arr2) => {
-  let lastDigit1 = arr1.length - 1;
-  let lastDigit2 = arr2.length - 1;
-  let carry = 0;
-  let total = "";
-  for (let i = Math.max(lastDigit1, lastDigit2); i >= 0; i--) {
-    let a = arr1[lastDigit1] || 0;
-    let b = arr2[lastDigit2] || 0;
-    let sum = a + b + carry;
+// const compose = callbacks => {
+//   return input => {
+//     for (let i = callbacks.length - 1; i >= 0; i--) {
+//       input = callbacks[i](input);
+//     }
+//     return input;
+//   };
+// };
 
-    if (sum > 9) {
-      carry = 1;
-      sum -= 10;
-    } else {
-      carry = 0;
-    }
+// const addFromBack = (list1, list2) => {
+//   let lastIdx1 = list1.length - 1;
+//   let lastIdx2 = list2.length - 1;
+//   let carry = 0;
+//   let total = "";
+//   for (let i = Math.max(lastIdx1, lastIdx2); i >= 0; i--) {
+//     let a = list1[lastIdx1--] || 0;
+//     let b = list2[lastIdx2--] || 0;
+//     let sum = a + b + carry;
 
-    total = sum + total;
-    lastDigit1--;
-    lastDigit2--;
-  }
-  console.log(total);
-};
+//     if (sum > 9) {
+//       carry = 1;
+//       sum -= 10;
+//     } else {
+//       carry = 0;
+//     }
+//     total = sum + total;
+//   }
+//   return total;
+// };
 
-// addNumsToBack([1,2,3],[7])
+// // console.log(addFromBack([1, 2, 3], [1, 2, 7]));
 
-const binarySearchx = (arr, target) => {
-  let left = 0;
-  let right = arr.length - 1;
-  while (left <= right) {
-    let mid = Math.floor((left + right) / 2);
-    if (arr[mid] === target) return arr[mid];
-    else if (target < arr[mid]) right = mid - 1;
-    else if (target > arr[mid]) left = mid + 1;
-  }
-  return false;
-};
-
-// console.log(binarySearchx([1, 2, 3, 4, 5, 6], 5));
-
-const shiftAndAddNum = (arr, value, idx) => {
-  for (let i = 0; i <= idx; i++) {
-    if (i === idx) arr[i] = value;
-    else arr[i] = arr[i + 1];
-    console.log(i, arr);
-  }
-  return arr;
-};
-
-// console.log("shiftAndAddNum: ", shiftAndAddNum([1, 2, 3, 4, 5], 4, 0));
-
-// **************** Homework for Sun Aug 12 2018 ****************
-// Question {name: 'Insert Sort',learned: true,level: 'easy',source: 'AE',type: 'sorting' }
-// Question {name: 'string compression',learned: true,level: '',source: 'bbg',type: 'string' }
-// Question {name: 'intersection of two linked lists',learned: true,level: '',source: 'bbg',type: 'LL' }
+// Question {name: 'add nums of 2 linked list',learned: true,level: '',source: 'bbg',type: 'LL' }
 // Question {name: 'min stack',learned: true,level: '',source: 'bbg',type: 'stack' }
-// Question {name: 'Binary Search',learned: true,level: 'easy',source: 'AE',type: 'search' }
+// Question {name: 'Breath-First Search',learned: true,level: 'medium',source: 'AE',type: 'graphs' }
+// Question {name: 'Three Number Sum',learned: true,level: 'medium',source: 'AE',type: 'array' }
+
+// const addTwoLinkedLists = (list1, list2) => {
+//   let digits1 = [];
+//   while (list1) {
+//     digits1.push(list1.value);
+//     list1 = list1.next;
+//   }
+//   let digits2 = [];
+//   while (list2) {
+//     digits2.push(list2.value);
+//     list2 = list2.next;
+//   }
+// };
 
 class MinStack {
   constructor() {
-    this.stack = [];
-  }
-  getLength() {
-    return this.stack.length - 1;
+    this._stack = [];
   }
 
-  insert(val) {
+  getLength() {
+    return this._stack.length - 1;
+  }
+
+  add(val) {
     let min = this.min();
-    if (this.stack.length > 0) {
-      this.stack.push({
-        value: val,
-        min: Math.min(min !== undefined ? min : Infinity, val)
-      });
+    this._stack.push({
+      value: val,
+      min: Math.min(min !== undefined ? min : Infinity, val)
+    });
+  }
+
+  min() {
+    if (!this.isEmpty()) {
+      return this._stack[this.getLength()].min;
     }
   }
-  min() {
-    return this.stack[this.getLength()].min;
+
+  isEmpty() {
+    return this._stack.length === 0;
   }
 }
->>>>>>> 7c485aeadfdb7cb19306abe00dfff5549804c3e1
+
+const preOrderBFS = (tree, arr) => {
+  if (tree) {
+    arr.push(tree.value);
+    if (tree.left) preOrderBFS(tree.left, arr);
+    if (tree.right) preOrderBFS(tree.right, arr);
+  }
+  return arr;
+};
+
+const inOrderBFS = (tree, arr) => {
+  if (tree) {
+    if (tree.left) inOrderBFS(tree.left, arr);
+    arr.push(tree.value);
+    if (tree.right) inOrderBFS(tree.right, arr);
+  }
+  return arr;
+};
+
+const postOrderBFS = (tree, arr) => {
+  if (tree) {
+    if (tree.left) postOrderBFS(tree.left, arr);
+    if (tree.right) postOrderBFS(tree.right, arr);
+    arr.push(tree.value);
+  }
+  return arr;
+};
+
+const threeNumberSum = (arr, targetSum) => {
+  let combinations = [];
+  arr.sort((a, b) => a - b);
+  for (let i = 0; i < arr.length; i++) {
+    let left = i + 1;
+    let right = arr.length - 1;
+    while (left < right) {
+      let calculation = arr[i] + arr[left] + arr[right];
+      if (calculation > targetSum) {
+        right -= 1;
+      } else if (calculation < targetSum) {
+        left += 1;
+      } else {
+        combinations.push([arr[i], arr[left], arr[right]]);
+        left += 1;
+      }
+    }
+  }
+  return combinations;
+};
+
+console.log(threeNumberSum([12, 3, 1, 2, -6, 5, -8, 6], 0)); //[ [ -8, 2, 6 ], [ -8, 3, 5 ], [ -6, 1, 5 ] ]

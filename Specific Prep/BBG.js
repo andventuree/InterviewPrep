@@ -18,29 +18,28 @@ let addTwoNumbers = function(l1, l2) {
   //initialize 2 empty arrays
   let digits1 = [];
   let digits2 = [];
-  let item = l1; //copy the head of the fake list
-  while (item) {
-    digits1.push(item.val); //push each value into array
-    item = item.next; //move to the next node
+  let list1Node = l1; //copy the head of the fake list
+  while (list1Node) {
+    digits1.push(list1Node.val); //push each value into array
+    list1Node = list1Node.next; //move to the next node
   }
 
-  let item2 = l2;
-  while (item2) {
+  let list2Node = l2;
+  while (list2Node) {
     //push each value into array
-    digits2.push(item2.val);
-    item2 = item2.next;
+    digits2.push(list2Node.val);
+    list2Node = list2Node.next;
   }
 
-  var index1 = digits1.length - 1;
-  var index2 = digits2.length - 1;
+  var lastDigit1 = digits1.length - 1;
+  var lastDigit2 = digits2.length - 1;
 
   var total = "";
-  var tens = 0;
   var carry = 0;
   //loop backwards on the math.max of either of 2 arrays
-  for (var i = Math.max(index1, index2); i > 0; i--) {
-    a = digits1[index1 - 1];
-    b = digits2[index2 - 1];
+  for (var i = Math.max(lastDigit1, lastDigit2); i >= 0; i--) {
+    a = digits1[lastDigit1] || 0;
+    b = digits2[lastDigit2] || 0;
     var sum = a + b + carry;
 
     if (sum > 9) {
@@ -53,12 +52,8 @@ let addTwoNumbers = function(l1, l2) {
 
     total = sum + total;
 
-    index1--;
-    index2--;
-  }
-
-  if (carry) {
-    total = carry + total;
+    lastDigit1--;
+    lastDigit2--;
   }
 
   return total.split("").map(function(value) {
