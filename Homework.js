@@ -470,4 +470,82 @@ const threeNumberSum = (arr, targetSum) => {
   return combinations;
 };
 
-console.log(threeNumberSum([12, 3, 1, 2, -6, 5, -8, 6], 0)); //[ [ -8, 2, 6 ], [ -8, 3, 5 ], [ -6, 1, 5 ] ]
+// console.log(threeNumberSum([12, 3, 1, 2, -6, 5, -8, 6], 0)); //[ [ -8, 2, 6 ], [ -8, 3, 5 ], [ -6, 1, 5 ] ]
+
+// **************** Homework for Mon Aug 27 2018 ****************
+// {name: 'Find Closest Value in BST',learned: true,level: 'easy',source: 'AE',type: 'BST' }
+// {name: 'Number of Ways to Make Change',learned: true,level: 'medium',source: 'AE',type: 'DP' }
+//// {name: 'Invert Binary Tree',learned: true,level: 'medium',source: 'AE',type: 'BT' }
+//// {name: 'Selection Sort',learned: true,level: 'easy',source: 'AE',type: 'sorting' }
+// {name: 'Water Area / Trap Rain',learned: true,level: 'hard',source: 'AE',type: 'DP' }
+
+//time: O(log n) - b/c you can always remove half of results
+//space: O(1) - only 1 constant
+const findClosestValue = (node, target) => {
+  let closest = node.value;
+  while (node) {
+    let diff = target - closest;
+    if (target - node.value < target - closest) {
+      closest = node.value;
+    }
+
+    if (node.value === target) {
+      return target;
+    } else if (node.value < target) {
+      node = node.right;
+    } else if (node.value > target) {
+      node = node.left;
+    }
+  }
+  return closest;
+};
+
+//time: O(n * d)
+//space: O(n) - based on target
+const numWaysForChange = (target, denominations) => {
+  let ways = new Array(target + 1).fill(0);
+  ways[0] = 1;
+  for (let i = 0; i < denominations.length; i++) {
+    let denom = denominations[i];
+    for (let j = 1; j <= target; j++) {
+      if (denom <= j) {
+        ways[j] += ways[j - denom];
+      }
+    }
+  }
+  return ways[target];
+};
+
+// console.log(numWaysForChange(10, [1, 5, 10, 25])); //4
+
+//time: O(n) - several passes but never compounds
+//space: O(n) - 3 arrays but thats constant
+const trapWater = landscape => {
+  let leftMaxes = [];
+  let maxLeft = 0;
+  for (let i = 0; i < landscape.length; i++) {
+    let columnHeight = landscape[i];
+    if (columnHeight > maxLeft) maxLeft = columnHeight;
+    leftMaxes[i] = maxLeft;
+  }
+  let rightMaxes = [];
+  let maxRight = 0;
+  for (let j = landscape.length - 1; j >= 0; j--) {
+    let columnHeight = landscape[j];
+    if (columnHeight > maxRight) maxRight = columnHeight;
+    rightMaxes[j] = maxRight;
+  }
+
+  // console.log("leftMaxes: ", leftMaxes);
+  // console.log("rightMaxes: ", rightMaxes);
+  let totalRain = 0;
+  for (let k = 0; k < landscape.length; k++) {
+    let minColumn = Math.min(leftMaxes[k], rightMaxes[k]);
+    if (landscape[k] < minColumn) {
+      totalRain += minColumn - landscape[k];
+    }
+  }
+  return totalRain;
+};
+
+// console.log(trapWater([0, 8, 0, 0, 5, 0, 0, 10, 0, 0, 1, 1, 0, 3]));

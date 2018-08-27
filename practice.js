@@ -26,3 +26,18 @@ const threeNumberSum = (arr, targetSum) => {
 };
 
 console.log(threeNumberSum([12, 3, 1, 2, -6, 5, -8, 6], 0)); //[ [ -8, 2, 6 ], [ -8, 3, 5 ], [ -6, 1, 5 ] ]
+
+const stringCompression = str => {
+  let compressed = "";
+  for (let i = 0; i < str.length; i++) {
+    let char = str[i];
+    let start = i;
+    while (char === str[i + 1]) {
+      i++;
+    }
+    compressed += i - start + 1 + char;
+  }
+  return compressed.length < str.length ? compressed : str;
+};
+
+// console.log(stringCompression("aaabbbccdddd"));
