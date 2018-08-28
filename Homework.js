@@ -549,3 +549,95 @@ const trapWater = landscape => {
 };
 
 // console.log(trapWater([0, 8, 0, 0, 5, 0, 0, 10, 0, 0, 1, 1, 0, 3]));
+
+// **************** Homework for Tue Aug 28 2018 ****************
+// Question {name: 'move zeros',learned: true,level: '',source: 'bbg',type: 'array' }
+// Question {name: 'min stack',learned: true,level: '',source: 'bbg',type: 'stack' }
+// Question {name: 'add nums of 2 linked list',learned: true,level: '',source: 'bbg',type: 'LL' }
+
+const moveZeros = arr => {
+  let count = 0;
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] !== 0) {
+      arr[count] = arr[i];
+      count += 1;
+    }
+  }
+  while (count < arr.length) {
+    arr[count] = 0;
+    count++;
+  }
+  return arr;
+};
+
+// console.log(moveZeros([11, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1]));
+
+class MinStack2 {
+  cosntructor() {
+    this._stack = [];
+  }
+  add(val) {
+    let min = this.min();
+    this._stack.push({
+      value: val,
+      min: Math.min(min === undefined ? Infinity : min, val)
+    });
+  }
+
+  pop() {
+    if (this._stack.length > 0) {
+      let item = this._stack.pop();
+      return item.value;
+    }
+  }
+  min() {
+    return this._stack[this._stack.length - 1].min;
+  }
+}
+
+const waysForChange = (n, denominations) => {
+  let ways = new Array(n + 1).fill(0);
+  ways[0] = 1;
+  for (let i = 0; i < denominations.length; i++) {
+    let denom = denominations[i];
+    console.log(denom);
+    for (let j = 1; j <= n; j++) {
+      if (denom <= j) {
+        ways[j] += ways[j - denom];
+      }
+    }
+  }
+  return ways[n];
+};
+
+// console.log(waysForChange(10, [1, 5, 10, 25]));
+
+const addTwoNumsInLL = (list1, list2) => {
+  let digits1 = [];
+  while (list1) {
+    digits1.push(list1.value);
+    list1 = list1.next;
+  }
+  let digits2 = [];
+  while (list2) {
+    digits2.push(list2.value);
+    list2 = list2.next;
+  }
+  let lastDigit1 = digits1.length;
+  let lastDigit2 = digits2.length;
+  let carry = 0;
+  let total = "";
+  for (let i = Math.max(lastDigit1, lastDigit2); i >= 0; i--) {
+    let a = digits1[lastDigit1--] || 0;
+    let b = digits2[lastDigit2--] || 0;
+    let sum = a + b + carry;
+    if (sum > 9) {
+      sum -= 10;
+      carry = 1;
+    } else {
+      carry = 0;
+    }
+    total = sum + total;
+  }
+  return total;
+};
