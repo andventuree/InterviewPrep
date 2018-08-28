@@ -555,6 +555,7 @@ const trapWater = landscape => {
 // Question {name: 'min stack',learned: true,level: '',source: 'bbg',type: 'stack' }
 // Question {name: 'add nums of 2 linked list',learned: true,level: '',source: 'bbg',type: 'LL' }
 
+//time: O(n) only need one pass
 const moveZeros = arr => {
   let count = 0;
   for (let i = 0; i < arr.length; i++) {
@@ -572,6 +573,8 @@ const moveZeros = arr => {
 
 // console.log(moveZeros([11, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1]));
 
+//time: O(1) look up time for min value;
+//space: O(n) - depends how many values you put in
 class MinStack2 {
   cosntructor() {
     this._stack = [];
@@ -595,6 +598,8 @@ class MinStack2 {
   }
 }
 
+//time: O(n * m) - trying out each denomination for each number
+//space: O(n) - n being the target sum, we needed array as a tracker
 const waysForChange = (n, denominations) => {
   let ways = new Array(n + 1).fill(0);
   ways[0] = 1;
@@ -612,6 +617,8 @@ const waysForChange = (n, denominations) => {
 
 // console.log(waysForChange(10, [1, 5, 10, 25]));
 
+//time: O(n or m) whichever is longer, it doesn't compound, max is the longest number
+//space: O(n) - depends how long the number is, we needed an iteration for each
 const addTwoNumsInLL = (list1, list2) => {
   let digits1 = [];
   while (list1) {
@@ -641,3 +648,67 @@ const addTwoNumsInLL = (list1, list2) => {
   }
   return total;
 };
+
+// **************** Homework for Tue Aug 28 2018 ****************
+// Question {name: 'linked list cycle',learned: true,level: '',source: 'bbg',type: 'LL' }
+// Question {name: 'getNumberOfIslands',learned: true,level: 'hard',source: 'pramp',type: 'graphs' }
+// Question {name: 'flatten dictionary',learned: true,level: 'medium',source: 'pramp',type: 'object' }
+
+//time: O(n) - going through entire linked list
+const findLinkedListCycle = list => {
+  let fast = list;
+  let slow = list;
+  while (slow.next && fast.next && fast.next.next) {
+    slow = slow.next;
+    fast = fast.next.next;
+    if (slow === fast) {
+      break;
+    }
+  }
+  return fast;
+};
+
+const isOutOfBounds = (queue, rows, cols, x, y) => {
+  if (x >= 0 && x < rows && y >= 0 && y < cols) queue.push([x, y]);
+};
+
+const findLand = (matrix, rows, cols, x, y) => {
+  let queue = [[x, y]];
+  while (queue.length) {
+    let item = queue.shift();
+    let originalX = item[0];
+    let originalY = item[1];
+    if (matrix[originalX][originalY] === 1) {
+      matrix[originalX][originalY] = -1;
+      isOutOfBounds(queue, rows, cols, originalX - 1, originalY);
+      isOutOfBounds(queue, rows, cols, originalX + 1, originalY);
+      isOutOfBounds(queue, rows, cols, originalX, originalY - 1);
+      isOutOfBounds(queue, rows, cols, originalX, originalY + 1);
+    }
+  }
+};
+
+const getNumIsland = matrix => {
+  let counter = 0;
+  let x = matrix.length - 1;
+  let y = matrix[0].length - 1;
+  for (let i = 0; i < x; i++) {
+    for (let j = 0; j < y; j++) {
+      if (matrix[i][j] === 1) {
+        findLand(matrix, x, y, i, j);
+        counter++;
+      }
+    }
+  }
+  return counter;
+};
+
+console.log(
+  getNumIsland([
+    [0, 1, 0, 1, 0],
+    [0, 0, 1, 1, 1],
+    [1, 0, 0, 1, 0],
+    [0, 1, 1, 0, 0],
+    [1, 0, 1, 0, 1]
+  ])
+);
