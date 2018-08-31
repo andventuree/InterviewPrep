@@ -668,47 +668,47 @@ const findLinkedListCycle = list => {
   return fast;
 };
 
-const isOutOfBounds = (queue, rows, cols, x, y) => {
-  if (x >= 0 && x < rows && y >= 0 && y < cols) queue.push([x, y]);
-};
+// const isOutOfBounds = (queue, rows, cols, x, y) => {
+//   if (x >= 0 && x < rows && y >= 0 && y < cols) queue.push([x, y]);
+// };
 
-const findLand = (matrix, rows, cols, x, y) => {
-  let queue = [[x, y]];
-  while (queue.length) {
-    let item = queue.shift();
-    let originalX = item[0];
-    let originalY = item[1];
-    if (matrix[originalX][originalY] === 1) {
-      matrix[originalX][originalY] = -1;
-      isOutOfBounds(queue, rows, cols, originalX - 1, originalY);
-      isOutOfBounds(queue, rows, cols, originalX + 1, originalY);
-      isOutOfBounds(queue, rows, cols, originalX, originalY - 1);
-      isOutOfBounds(queue, rows, cols, originalX, originalY + 1);
-    }
-  }
-};
+// const findLand = (matrix, rows, cols, x, y) => {
+//   let queue = [[x, y]];
+//   while (queue.length) {
+//     let item = queue.shift();
+//     let originalX = item[0];
+//     let originalY = item[1];
+//     if (matrix[originalX][originalY] === 1) {
+//       matrix[originalX][originalY] = -1;
+//       isOutOfBounds(queue, rows, cols, originalX - 1, originalY);
+//       isOutOfBounds(queue, rows, cols, originalX + 1, originalY);
+//       isOutOfBounds(queue, rows, cols, originalX, originalY - 1);
+//       isOutOfBounds(queue, rows, cols, originalX, originalY + 1);
+//     }
+//   }
+// };
 
-const getNumIsland = matrix => {
-  let counter = 0;
-  let x = matrix.length - 1;
-  let y = matrix[0].length - 1;
-  for (let i = 0; i < x; i++) {
-    for (let j = 0; j < y; j++) {
-      if (matrix[i][j] === 1) {
-        findLand(matrix, x, y, i, j);
-        counter++;
-      }
-    }
-  }
-  return counter;
-};
+// const getNumIsland = matrix => {
+//   let counter = 0;
+//   let x = matrix.length - 1;
+//   let y = matrix[0].length - 1;
+//   for (let i = 0; i < x; i++) {
+//     for (let j = 0; j < y; j++) {
+//       if (matrix[i][j] === 1) {
+//         findLand(matrix, x, y, i, j);
+//         counter++;
+//       }
+//     }
+//   }
+//   return counter;
+// };
 
-console.log(
-  getNumIsland([
-    [0, 1, 0, 1, 0],
-    [0, 0, 1, 1, 1],
-    [1, 0, 0, 1, 0],
-    [0, 1, 1, 0, 0],
-    [1, 0, 1, 0, 1]
-  ])
-);
+// console.log(
+//   getNumIsland([
+//     [0, 1, 0, 1, 0],
+//     [0, 0, 1, 1, 1],
+//     [1, 0, 0, 1, 0],
+//     [0, 1, 1, 0, 0],
+//     [1, 0, 1, 0, 1]
+//   ])
+// );

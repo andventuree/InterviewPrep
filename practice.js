@@ -41,3 +41,36 @@ const stringCompression = str => {
 };
 
 // console.log(stringCompression("aaabbbccdddd"));
+
+
+//time: O(n or m) whichever is longer, it doesn't compound, max is the longest number
+//space: O(n) - depends how long the number is, we needed an iteration for each
+const addTwoNumsInLL = (list1, list2) => {
+  let digits1 = [];
+  while (list1) {
+    digits1.push(list1.value);
+    list1 = list1.next;
+  }
+  let digits2 = [];
+  while (list2) {
+    digits2.push(list2.value);
+    list2 = list2.next;
+  }
+  let lastDigit1 = digits1.length;
+  let lastDigit2 = digits2.length;
+  let carry = 0;
+  let total = "";
+  for (let i = Math.max(lastDigit1, lastDigit2); i >= 0; i--) {
+    let a = digits1[lastDigit1--] || 0;
+    let b = digits2[lastDigit2--] || 0;
+    let sum = a + b + carry;
+    if (sum > 9) {
+      sum -= 10;
+      carry = 1;
+    } else {
+      carry = 0;
+    }
+    total = sum + total;
+  }
+  return total;
+};
