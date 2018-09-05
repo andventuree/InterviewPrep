@@ -27,3 +27,24 @@ Steps:
 3. Solve problems, is basically showing how your step 2 assumptions work out.
 
 */
+
+
+/*
+
+RFK Scale: applied to systems + databases
+Graph indicating course of action to take depending on bottleneck limitation
+
+Systems
+x axis - Add more resources to handle general requests
+y axis - Add a resource to handle specific requests
+z axis - separate systems geographically (add an CDN closer to users)
+
+Databases
+x axis - Sharding - Make a copy of the data so if one DB is overwhelmed, other can help
+y axis - Add a specific DB (e.g., Redis, MemcacheD, NoSQL, SQL)
+z axis - separate database geographically (have specific DB for USA, China, Europe)
+
+When adding additional resources, either copied or separated, there needs to be a load balancer type of mechanism to determine how a request makes it to the right resource to get the right information.
+
+*/
+
