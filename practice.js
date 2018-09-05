@@ -174,3 +174,27 @@ class LinkedList{
   }
 }
 
+
+class BST{
+  constructor(val){
+    this.value = val;
+    this.left = null;
+    this.right = null;
+  }
+
+  insert(val){
+    let direction = this.value > val ? 'left' : 'right';
+    if (this[direction]) this[direction].insert(val);
+    else this[direction] = new BST(val);
+  }
+}
+
+
+function BFS(node){
+  const queue = [node];
+  while (queue.length){
+    const current = queue.shift();
+    if (current.left) queue.push(current.left);
+    if (current.right) queue.push(current.right);
+  }
+}
