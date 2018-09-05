@@ -113,3 +113,64 @@ let testQueue = new Queue()
   .remove();
 
 testQueue.print(); //[3,4,5]
+
+class Node{
+  constructor(val){
+    this.value = val;
+    this.next = null;
+    this.prev = null;
+  }
+}
+
+class LinkedList{
+  constructor(){
+    this.head = null;
+    this.tail = null;
+  }
+
+  addToHead(val){
+    let formerHead = this.head;
+    let newNode = new Node(val);
+    this.head = newNode;
+    if (formerHead){
+      this.head.next = formerHead;
+      formerHead.prev = this.head;
+    }
+    if (!this.tail) this.tail = this.head;
+  }
+  removeHead(){
+    let formerHead = this.head;
+    if (!formerHead) return;
+    if (this.head.next){
+      this.head = formerHead.next;
+      this.head.prev = null;
+    } else {
+      this.head = null;
+      this.tail = null;
+    }
+    return formerHead.value;
+  }
+  addToTail(val){
+    let formerTail = this.tail;
+    let newNode = new Node(val);
+    this.tail = newNode;
+    if (formerTail){
+      this.tail.prev = formerTail;
+      formerTail.next = this.tail;
+    }
+    if (!this.head) this.head = this.tail;
+  }
+  removeTail(){
+    let formerTail = this.tail;
+    if (!formerTail) return;
+    if (this.tail.prev){
+      this.tail = formerTail.prev;
+      this.tail.next = null;
+    } else {
+      this.tail = null;
+      this.head = null;
+    }
+    return formerTail.value;
+  }
+}
+
