@@ -712,3 +712,97 @@ const findLinkedListCycle = list => {
 //     [1, 0, 1, 0, 1]
 //   ])
 // );
+
+
+// **************** Homework for Thu Sep 06 2018 ****************
+// Question {name: 'selection sort',learned: true,level: '',source: null,type: null }
+// Question {name: 'binary search',learned: true,level: '',source: null,type: null }
+// Question {name: 'bubble sort',learned: true,level: '',source: null,type: null }
+// Question {name: 'delete linked list pointer',learned: true,level: '',source: null,type: null }
+// Question {name: 'reverse linked list',learned: true,level: '',source: null,type: null }
+
+
+// const selectionSort = arr => {
+
+// }
+
+function selectionSort( arr) {
+  let currentIdx = 0;
+  for (let i = currentIdx + 1; i < arr.length; i++){
+    let smallestIdx = currentIdx;
+    let j = i;
+    while (j < arr.length){
+      if (arr[j] < arr[smallestIdx] ) {
+        smallestIdx = j;
+      }
+      j++
+    }
+    let temp = arr[currentIdx];
+    arr[currentIdx] = arr[smallestIdx];
+    arr[smallestIdx] = temp;
+  }
+  return arr;
+}
+
+// console.log(selectionSort([3,2,1]))
+
+function binarySearch(arr, target){
+  let left = 0;
+  let right = arr.length - 1;
+  while (left <= right){
+    let mid = Math.floor((left + right)/2);
+    if (arr[mid] === target) return mid;
+    else if (arr[mid] > target) right = mid - 1;
+    else if (arr[mid] < target) left = mid + 1;
+  }
+  return -1;
+}
+
+// console.log(binarySearch([1,2,3,4,5], 2));
+
+
+function bubbleSort(arr){
+  let isSorted = false;
+  while (!isSorted){
+    isSorted = true;
+    for (let i = 0; i < arr.length; i++){
+      if (arr[i] > arr[i + 1]){
+        let temp = arr[i];
+        arr[i] = arr[i + 1];
+        arr[i + 1] = temp;
+        isSorted = false;
+      }
+    }
+  }
+  return arr;
+}
+
+// console.log(bubbleSort([3,2,1]))
+
+function deleteLL(node){
+  if (!node) return;
+  node.value = node.next.value;
+  node.next = node.next.next;
+}
+
+
+function reverseLL(head){
+  let prevValue = head;
+  while (head){
+    let tempNext = head.next;
+    head.next = prevValue;
+    prevValue = head;
+    head = tempNext;
+  }
+  return prevValue;
+}
+
+
+function reverseLLRecursive(head){
+  if (head === null || head.next === null) return head;
+  let temp = reverseLLRecursive(head.next);
+  head.next.next = head;
+  head.next = null;
+  return head;
+}
+
