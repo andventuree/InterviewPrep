@@ -3,6 +3,10 @@
   head -> next -> next -> tail
 */
 
+//cycle =/= loop
+// 1 - 2 - 3 - 4 - 5 - 3 - 4 - 5 loop - starts off then hits a point that cycles in the middle
+// 1 - 2 - 3 - 4 - 1 - 2 - 3 - 4 cycle - goes round and round
+
 class SingleNode {
   constructor(v) {
     this.value = v;
@@ -168,6 +172,26 @@ class LinkedList {
   print() {
     console.log("Doubly linked list: ", this);
   }
+
+  search(comparator) {
+    let currentNode = this.head;
+
+    //edge case: if given a string instead of a callback
+    if (typeof comparator === "string") {
+      const comparatorString = comparator;
+      comparator = function(elementValue) {
+        return comparatorString === elementValue;
+      };
+    }
+
+    //if given a callback, go straight into finding node
+    while (currentNode !== null) {
+      if (comparator(currentNode.value)) return currentNode.value;
+      currentNode = currentNode.next;
+    }
+
+    return null;
+  }
 }
 
 let list = new LinkedList();
@@ -207,3 +231,50 @@ let reversed = reverseList(list.head);
 console.log("reversed: ", reversed);
 
 //Linked list is all about holding onto references, even if its temporarily.
+
+//Triple Stack //leetcode
+class TripleStack {
+  constructor() {
+    this.stacks = [];
+    this.length = [0, 0, 0];
+  }
+  getLength(stack) {
+    return this.length[stack - 1];
+  }
+  push(stack, val) {
+    let length = this.getLength(stack);
+    let idx = length * 3 + stack - 1;
+    this.stacks[idx] = val;
+    this.length[stack - 1] += 1;
+  }
+
+  pop(stack) {
+    let length = this.getLength(stack);
+    if (length > 0) {
+      let idx = length * 3 + stack - 1;
+      let value = this.stack[idx];
+      this.stack[idx] = undefined;
+      this.length[stack - 1] -= 1;
+      return value;
+    }
+  }
+}
+
+//LinkedList with duplicates
+function removeLLDuplicates(head) {
+  let set = {};
+  while (head) {
+    if (!set[head.value]) set[head.value] = true;
+    else {
+      //deletes reference to duplicate nodes
+      head.value = head.next.value;
+      head.next = head.next.next;
+    }
+    head = head.next;
+  }
+}
+
+// 1 - 2 - |2| - 3 - 4
+//head.value 3 = head.next.value;
+//head.next 4 = head.next.next
+//head.previous // dont need to rewire b/c its already good

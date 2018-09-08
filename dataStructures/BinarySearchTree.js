@@ -90,3 +90,65 @@ class BinarySearchTree {
     }
   }
 }
+
+//time: O(n) - need to visit each node
+//space: O(n) - all the children will generally be on the queue
+function invertBST(tree) {
+  const queue = [tree];
+  while (queue.length) {
+    let current = queue.shift();
+    if (current !== null) {
+      swapLeftAndRight(current);
+      queue.push(current.left);
+      queue.push(current.right);
+    }
+  }
+}
+
+function swapLeftAndRight(tree) {
+  let tempLeft = tree.left;
+  tree.left = tree.right;
+  tree.right = tempLeft;
+}
+
+//want to visit each tree, add the children, then dive into the children and add their children after, Order matters!
+//need a queue DS
+function BFS(tree) {
+  let values = [];
+  let queue = [tree]; //to start off
+  while (queue.length) {
+    let current = queue.shift(); //takes off the first elem
+    //add the values to array
+    //then add the children to the queue
+    values.push(current.value);
+    if (current !== null) {
+      values.push(current.left);
+      values.push(current.right);
+    }
+  }
+  return values;
+}
+
+// When order matters, use a LL, Stack, Queue
+
+function invertTree(tree) {
+  //use a queue
+  //add children to queue,
+  //use a while loop
+  //take off children from queue
+  let queue = [tree];
+  while (queue.length) {
+    let current = queue.shift();
+    if (current !== null) {
+      swapLeftAndRight(current);
+      queue.push(current.left);
+      queue.push(current.right);
+    }
+  }
+}
+
+function swapLeftAndRight(tree) {
+  let left = tree.left;
+  tree.left = tree.right;
+  tree.right = left;
+}

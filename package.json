@@ -4,8 +4,7 @@
   "description": "Interview Prep Solutions",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js",
-    "ds": "nodemon dataStructures/LinkedList.js"
+    "start": "nodemon index.js"
   },
   "author": "Andrew wong",
   "license": "ISC",
@@ -13,7 +12,6 @@
     "type": "git",
     "url": "git+https://github.com/andventuree/InterviewPrep"
   },
-
   "homepage": "https://github.com/andventuree/InterviewPrep#readme",
   "dependencies": {}
 }

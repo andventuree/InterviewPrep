@@ -27,26 +27,42 @@ function sumTwoNums(arr, desiredSum) {
 //1b. Using hash table
 //time: O(n) -> goes thru array once and stores all values
 //space: O(n) -> will have differences for every value
+// function sumTwoNums2(arr, desiredSum) {
+//   let store = {}; //use as a hash table
+//   for (let i = 0; i < arr.length; i++) {
+//     console.log("current store", store);
+//     let difference = desiredSum - arr[i];
+//     if (store[difference]) {
+//       return [difference, arr[i]].sort((a, b) => {
+//         return a - b;
+//       });
+//     } else {
+//       store[arr[i]] = true;
+//     }
+//   }
+//   return [];
+// }
+
 function sumTwoNums2(arr, desiredSum) {
-  let store = {}; //use as a hash table
+  let store = {};
   for (let i = 0; i < arr.length; i++) {
-    console.log("current store", store);
-    let difference = desiredSum - arr[i];
-    if (store[difference]) {
-      return [difference, arr[i]].sort((a, b) => {
-        return a - b;
-      });
-    } else {
-      store[arr[i]] = true;
+    let diff = desiredSum - arr[i];
+    if (!store[diff]) store[arr[i]] = true;
+    else {
+      return [arr[i], diff];
     }
   }
   return [];
 }
 
 // sumTwoNums2([1, 2, 3, 4, 5], 8); //[3,5]
+console.log(
+  "sumTwoNums2([1, 2, 3, 4, 5], 8): ",
+  sumTwoNums2([1, 2, 3, 4, 5], 8)
+);
 
 //1c. Using better left and right pointers
-//time: O(n) -> worst case is going through entire array
+//time: O(n log n) -> b/c of sorting
 //space: O(1)
 function sumTwoNums3(arr, desiredSum) {
   arr.sort((a, b) => {
@@ -103,7 +119,8 @@ function findClosestValueInBst(tree, target) {
 // }
 
 //2b. Iterative
-
+//time:
+//space:
 function findClosestHelper(tree, target, closest) {
   let currentNode = tree;
   while (currentNode !== null) {
@@ -196,19 +213,19 @@ class Node {
 
 /* --------------------------------------------------------------------- */
 
-//3a. recursive
+//3a. recursive - STILL NEEDS WORK!
 //time:
 //space:
-function getNthFib(n, memo = { 1: 0, 2: 1 }) {
-  if (memo[n]) {
-    console.log(`have in memo[${n}]: `, memo[n]);
-    return memo[n];
-  } else {
-    memo[n] = getNthFib(n - 1, memo) + getNthFib(n, memo);
-    console.log(`memo[${n}]: `, memo[n]);
-    return memo[n];
-  }
-}
+// function getNthFib(n, memo = { 1: 0, 2: 1 }) {
+//   if (memo[n]) {
+//     console.log(`have in memo[${n}]: `, memo[n]);
+//     return memo[n];
+//   } else {
+//     memo[n] = getNthFib(n - 1, memo) + getNthFib(n, memo);
+//     console.log(`memo[${n}]: `, memo[n]);
+//     return memo[n];
+//   }
+// }
 
 //3b. iterative
 //time: O(n) - will need to go through every num at least once to calculate
@@ -232,4 +249,294 @@ function getNthFib(n, memo = { 1: 0, 2: 1 }) {
 //   return n > 1 ? prevTwo[1] : prevTwo[0];
 // }
 
-getNthFib(6);
+// getNthFib(6);
+
+/* --------------------------------------------------------------------- */
+
+//4. iteratively
+//time: O(log n) - never have to go through all of n
+//space: O(1) - only thing we're storing is 3 pointers which takes up 3 space
+function binarySearchIterative(array, target) {
+  let left = 0;
+  let right = array.length - 1;
+  while (left <= right) {
+    let midpoint = Math.floor((left + right) / 2);
+    let potentialMatch = array[midpoint];
+    console.log("potentialMatch: ", potentialMatch);
+    if (potentialMatch === target) {
+      console.log("correct match: ", potentialMatch);
+      return midpoint;
+    }
+    if (target < potentialMatch) {
+      right = midpoint - 1;
+    } else if (target > potentialMatch) {
+      left = midpoint + 1;
+    }
+  }
+  return -1;
+}
+
+//4b. recursive
+//time: O(log n) - never have to go through all of n
+//space: O(log n) - recursive takes more space b/c it add mores frame onto call stack
+function binarySearchRecursive(array, target) {
+  //Pro tip: if you need more parameters, make a helper function
+  return bsHelper(array, target, 0, array.length - 1);
+}
+
+function bsHelper(array, target, left, right) {
+  if (left > right) return -1; //left pointer passing right means you've gone too far
+  let midpoint = Math.floor((left + right) / 2);
+  let potentialMatch = array[midpoint];
+  console.log("potentialMatch: ", potentialMatch);
+  if (target === potentialMatch) {
+    console.log("correct match: ", potentialMatch);
+    return midpoint;
+  } else if (target < potentialMatch) {
+    return bsHelper(array, target, left, midpoint - 1);
+  } else {
+    return bsHelper(array, target, midpoint + 1, right);
+  }
+}
+
+// binarySearchIterative([1, 2, 3, 4, 5, 34, 63, 66, 79, 90, 495, 590, 678], 2);
+// binarySearchRecursive([1, 5, 23, 111], 111);
+
+/* --------------------------------------------------------------------- */
+//Pro tip: If you have an unsorted array, sorting on average will be O(n^2) to sort
+
+//5.
+//time: O(n^2)
+//space: O(1) - b/c you're not storing anymore than 2 things at a time
+function bubbleSort(array) {
+  let isSorted = false;
+  while (!isSorted) {
+    isSorted = true;
+    for (let i = 0; i < array.length - 1; i++) {
+      //unlike insertion sort, this algo focuses on going forward
+      //hence accting for the length - 1
+      if (array[i] > array[i + 1]) {
+        swap(i, i + 1, array);
+        console.log("array: ", array);
+        isSorted = false;
+      }
+    }
+  }
+  console.log("final array: ", array);
+  return array;
+}
+
+function swap(i, j, array) {
+  let larger = array[i];
+  let smaller = array[j];
+  array[i] = smaller;
+  array[j] = larger;
+  return array;
+}
+
+// bubbleSort([9, 8, 2, 4, 1, 4, 5, 2, 1]); //[ 1, 1, 2, 2, 4, 4, 5, 8, 9 ]
+
+/* --------------------------------------------------------------------- */
+
+//6.
+//Insertion sort - moving 1 number at a time, so its always sorted up til a point.
+
+//time: O(n^2)
+//space: O(1) - b/c you're not storing anymore than 2 things at a time
+// function insertionSort(array) {
+//   //loop through array once
+//   for (let i = 1; i < array.length; i++) {
+//     // this will keep moving array up so you dont repeat operations
+//     // i also means it is sorted up until that point
+//     // Unlike bubble sort, this algo focus on going backwards
+//     // hence accting for the let i = 1
+//     let j = i;
+//     console.log(i, array);
+//     // looking at each number and swapping them as necessary
+//     while (j > 0 && array[j - 1] > array[j]) {
+//       insertSwap(j, j - 1, array);
+//       console.log("need to swap ", array[j], array[j - 1], array);
+//       j -= 1;
+//     }
+//   }
+//   console.log("final array", array);
+//   return array;
+// }
+
+function insertionSort(array) {
+  for (let i = 1; i < array.length; i++) {
+    for (let j = i; j > 0; j -= 1) {
+      if (array[j] < array[j - 1]) insertSwap(j - 1, j, array);
+    }
+  }
+  console.log("sorted array:", array);
+  return array;
+}
+
+// insertionSort([9, 8, 2, 4, 1, 4, 5, 2, 1]); //[ 1, 1, 2, 2, 4, 4, 5, 8, 9 ]
+
+function insertSwap(i, j, array) {
+  let larger = array[i];
+  let smaller = array[j];
+  array[i] = smaller;
+  array[j] = larger;
+  return array;
+}
+
+// insertionSort([9, 8, 2, 4, 1, 4, 5, 2, 1]); //[ 1, 1, 2, 2, 4, 4, 5, 8, 9 ]
+
+/* --------------------------------------------------------------------- */
+
+// 7.
+//time: O(n^2) - b/c you must go thru arr 1 times, and multiple times for comparing
+//space: O(1) - not storing too much
+function selectionSort(array) {
+  let currentIdx = 0;
+  while (currentIdx < array.length - 1) {
+    //- 1 b/c you dont need to swap the last num
+    let smallestIdx = currentIdx;
+    for (let i = currentIdx + 1; i < array.length; i++) {
+      if (array[smallestIdx] > array[i]) {
+        smallestIdx = i;
+      }
+    }
+    //use currentIdx b/c its sorted up until that point
+    swapHelper(currentIdx, smallestIdx, array);
+    currentIdx++;
+  }
+  console.log("sorted", array);
+  return array;
+}
+
+//shorter and more consistent with insertion sort
+function selectionSort(array) {
+  for (let currentIdx = 0; currentIdx < array.length - 1; currentIdx++) {
+    let smallestIdx = currentIdx;
+    for (let i = currentIdx + 1; i < array.length; i++) {
+      if (array[smallestIdx] > array[i]) smallestIdx = i;
+    }
+    swapHelper(currentIdx, smallestIdx, array);
+  }
+  console.log("final sorted array", array);
+  return array;
+}
+
+function swapHelper(i, j, array) {
+  let largerNum = array[i];
+  let smallerNum = array[j];
+  array[i] = smallerNum;
+  array[j] = largerNum;
+}
+
+// selectionSort([9, 8, 2, 4, 1, 4, 5, 2, 1]); //[ 1, 1, 2, 2, 4, 4, 5, 8, 9 ]
+
+/* --------------------------------------------------------------------- */
+
+//8a.
+//time: O(n)
+//space: O(n) or O(m) if your alphabet has more chars
+// function caesarCipherEncryptor(str, key) {
+//   let newLetters = [];
+//    //why not make this a string?
+//    ////because concatentation is actually an O(n) operation for each +=,
+//    //so that bloats the time complexity without you knowing it
+//   let newKey = key % 26;
+//   for (let letter in str) {
+//     newLetters.push(getNewLetter(str[letter], newKey));
+//     console.log(newLetters);
+//   }
+//   return newLetters.join(","); //return final string
+// }
+
+// function getNewLetter(letter, key) {
+//   let newLetterCode = letter.charCodeAt(0) + key;
+//   if (newLetterCode <= 122) return String.fromCharCode(newLetterCode);
+//   else return String.fromCharCode(96 + (newLetterCode % 122));
+// }
+
+//8b. if given an alphabet, this solution works in terminal but doesn't work on algo expert atm.
+//time: same
+//space: same
+// function caesarCipherEncryptor(str, key) {
+//   let newLetters = [];
+//   //why not make this a string?
+//   //because concatentation is actually an O(n) operation for each +=,
+//   //so that bloats the time complexity without you knowing it
+//   let newKey = key % 26;
+//   let alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
+//   for (let letter in str) {
+//     newLetters.push(getNewLetter(str[letter], newKey, alphabet)); //then add to string
+//     console.log(newLetters);
+//   }
+//   return newLetters.join(","); //return final string
+// }
+
+// function getNewLetter(letter, key, alphabet) {
+//   let newLetterCode = alphabet.indexOf(letter) + key;
+//   if (newLetterCode <= 25) return alphabet[newLetterCode];
+//   else return alphabet[-1 + (newLetterCode % 25)];
+// }
+
+// // caesarCipherEncryptor("booger", 0);
+// // caesarCipherEncryptor("abc", 3);
+// // caesarCipherEncryptor("xyz", 2);
+// // caesarCipherEncryptor("xyz", 5);
+
+// /* --------------------------------------------------------------------- */
+
+// //9a. + 9b. are naive iterative examples
+
+// //9c. recursive
+// function isPalindrome(string) {}
+
+// //9d. iterative
+// //time: O(n) - need to go through entire string at least half
+// //space: O(1) - only storing pointers
+// // function isPalindrome(string) {
+// //   let left = 0;
+// //   let right = string.length - 1;
+// //   while (left <= right) {
+// //     if (string[left] !== string[right]) {
+// //       return false;
+// //     }
+// //     left += 1;
+// //     right -= 1;
+// //   }
+// //   console.log(true);
+// //   return true;
+// // }
+
+// isPalindrome("absba");
+
+// /* --------------------------------------------------------------------- */
+
+// 10. three largest nums
+//time: O(n) - goes through nums arr
+//shifting of threeLargest is O(1) time b/c its constant, you know ther's only 3 nums
+//space: O(1) - FYI, this is not recursion b/c none of these fn invocations compound on each other
+function findThreeLargestNumbers(arr) {
+  const threeLargest = [null, null, null];
+  for (const num of arr) {
+    updateLargest(threeLargest, num);
+  }
+  console.log("threeLargest: ", threeLargest);
+}
+
+function updateLargest(threeLargest, num) {
+  if (threeLargest[2] === null || num > threeLargest[2]) {
+    shiftAndUpdate(threeLargest, num, 2);
+  } else if (threeLargest[1] === null || num > threeLargest[1]) {
+    shiftAndUpdate(threeLargest, num, 1);
+  } else if (threeLargest[0] === null || num > threeLargest[0]) {
+    shiftAndUpdate(threeLargest, num, 0);
+  }
+}
+
+function shiftAndUpdate(arr, num, idx) {
+  for (let i = 0; i <= idx; i++) {
+    if (i === idx) arr[i] = num;
+    else arr[i] = arr[i + 1];
+  }
+}
+
+findThreeLargestNumbers([141, 1, 17, -7, -17, -27, 18, 541, 8, 7, 7]); // [18,141,541]
