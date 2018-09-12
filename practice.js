@@ -228,3 +228,21 @@ class Queue {
     );
   }
 }
+
+
+function validParentheses(brackets) {
+  let stack = [];
+  for (let i = 0; i < brackets.length; i++) {
+    let bracket = brackets[i];
+    if (bracket === "}") {
+      if (stack.pop() !== "{") return false;
+    } else if (bracket === "]") {
+      if (stack.pop() !== "[") return false;
+    } else if (bracket === ")") {
+      if (stack.pop() !== "(") return false;
+    } else {
+      stack.push(bracket);
+    }
+  }
+  return stack.length === 0;
+}
