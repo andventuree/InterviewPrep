@@ -338,3 +338,32 @@ function sumTwoNums(arr, desiredSum) {
   return []; //pairs dont work, return empty arr
 }
 // sumTwoNums([1, 2, 3, 4, 5], 8); //[3,5]
+
+
+const BSTsearch = (tree, target) => {
+  let node = tree;
+  while (node){
+    if (node.value === target) return true;
+    else if (node.value > target) node = node.left;
+    else if (node.velue < target) node = node.right;
+  }
+  return false;
+}
+
+
+
+//Basic BST
+
+class BST {
+  constructor(val) {
+    this.value = val;
+    this.left = null;
+    this.right = null;
+  }
+
+  insert(val) {
+    const direction = this.value > val ? "left" : "right";
+    if (this[direction]) this[direction].insert(val);
+    else this[direction] = new BST(val);
+  }
+}

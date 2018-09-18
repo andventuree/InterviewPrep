@@ -806,3 +806,29 @@ function reverseLLRecursive(head){
   return head;
 }
 
+
+// **************** Homework for Mon Sep 17 2018 ****************
+// Question {name: 'first unique character in a string',learned: true,level: '',source: 'bbg',type: 'string' }
+// Question {name: 'merging 2 packages',learned: true,level: 'easy',source: 'pramp',type: 'array' }
+// Question {name: 'Smallest Difference',learned: true,level: 'medium',source: 'AE',type: 'array' }
+// Question {name: 'reverse integer',learned: true,level: '',source: 'bbg',type: '' }
+// Question {name: 'BST Traversal',learned: true,level: 'medium',source: 'AE',type: 'BST' }
+
+const firstUniqueChar = str => {
+  let hasSeen = {};
+  for (let i = 0; i < str.length; i++){
+    let char = str[i];
+    if (hasSeen[char]) hasSeen[char]++;
+    else hasSeen[char] = 1;
+  }
+
+  for (let j = 0; j < str.length; j++){
+    let char2 = str[j];
+    if (hasSeen[char2] === 1) return char2;
+  }
+  return false;
+}
+
+
+
+
