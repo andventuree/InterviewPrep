@@ -281,6 +281,35 @@ function findLinkedListIntersection(list1, list2) {
 }
 ```
 
+12. Splitting numbers
+    If given the constraint that you cannot turn your number into a string but you still need it split in some way, then use the following:
+
+```
+function splitInteger(int){
+  let integers = []; //this snippet reverses an integer
+  while (int > 0) {
+    let onesPlace = int % 10;
+    int = Math.floor(int / 10);
+    integers.push(onesPlace);
+  }
+  integers = integers.reverse(); //if order mattered
+  //not an issue if you're testing for a palindrome like below:
+
+  let left = 0;
+  let right = integers.length - 1;
+  while (left <= right) {
+    console.log(integers[left], integers[right]);
+    if (integers[left] !== integers[right]) {
+      return false;
+    } else {
+      left++;
+      right--;
+    }
+  }
+  return true;
+}
+```
+
 </details>
 
 ### Hints

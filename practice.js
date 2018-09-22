@@ -42,7 +42,6 @@ const stringCompression = str => {
 
 // console.log(stringCompression("aaabbbccdddd"));
 
-
 //time: O(n or m) whichever is longer, it doesn't compound, max is the longest number
 //space: O(n) - depends how long the number is, we needed an iteration for each
 const addTwoNumsInLL = (list1, list2) => {
@@ -74,7 +73,6 @@ const addTwoNumsInLL = (list1, list2) => {
   }
   return total;
 };
-
 
 class Queue {
   constructor() {
@@ -114,34 +112,34 @@ let testQueue = new Queue()
 
 testQueue.print(); //[3,4,5]
 
-class Node{
-  constructor(val){
+class Node {
+  constructor(val) {
     this.value = val;
     this.next = null;
     this.prev = null;
   }
 }
 
-class LinkedList{
-  constructor(){
+class LinkedList {
+  constructor() {
     this.head = null;
     this.tail = null;
   }
 
-  addToHead(val){
+  addToHead(val) {
     let formerHead = this.head;
     let newNode = new Node(val);
     this.head = newNode;
-    if (formerHead){
+    if (formerHead) {
       this.head.next = formerHead;
       formerHead.prev = this.head;
     }
     if (!this.tail) this.tail = this.head;
   }
-  removeHead(){
+  removeHead() {
     let formerHead = this.head;
     if (!formerHead) return;
-    if (this.head.next){
+    if (this.head.next) {
       this.head = formerHead.next;
       this.head.prev = null;
     } else {
@@ -150,20 +148,20 @@ class LinkedList{
     }
     return formerHead.value;
   }
-  addToTail(val){
+  addToTail(val) {
     let formerTail = this.tail;
     let newNode = new Node(val);
     this.tail = newNode;
-    if (formerTail){
+    if (formerTail) {
       this.tail.prev = formerTail;
       formerTail.next = this.tail;
     }
     if (!this.head) this.head = this.tail;
   }
-  removeTail(){
+  removeTail() {
     let formerTail = this.tail;
     if (!formerTail) return;
-    if (this.tail.prev){
+    if (this.tail.prev) {
       this.tail = formerTail.prev;
       this.tail.next = null;
     } else {
@@ -174,33 +172,28 @@ class LinkedList{
   }
 }
 
-
-class BST{
-  constructor(val){
+class BST {
+  constructor(val) {
     this.value = val;
     this.left = null;
     this.right = null;
   }
 
-  insert(val){
-    let direction = this.value > val ? 'left' : 'right';
+  insert(val) {
+    let direction = this.value > val ? "left" : "right";
     if (this[direction]) this[direction].insert(val);
     else this[direction] = new BST(val);
   }
 }
 
-
-function BFS(node){
+function BFS(node) {
   const queue = [node];
-  while (queue.length){
+  while (queue.length) {
     const current = queue.shift();
     if (current.left) queue.push(current.left);
     if (current.right) queue.push(current.right);
   }
 }
-
-
-
 
 class Queue {
   constructor() {
@@ -229,7 +222,6 @@ class Queue {
   }
 }
 
-
 function validParentheses(brackets) {
   let stack = [];
   for (let i = 0; i < brackets.length; i++) {
@@ -246,7 +238,6 @@ function validParentheses(brackets) {
   }
   return stack.length === 0;
 }
-
 
 const mergeSort = function(array) {
   if (array.length < 2) return array; // base case
@@ -278,7 +269,6 @@ const merge = function(left, right) {
   for (; rightIdx < right.length; rightIdx++) merged.push(right[rightIdx]);
   return merged;
 };
-
 
 //Quick sort
 
@@ -319,7 +309,6 @@ function swap(i, j, arr) {
 
 quickSort([12, 31, 23, 12, 31, 231, 2012, 30, 453254, 2]);
 
-
 function sumTwoNums(arr, desiredSum) {
   for (let left = 0; left < arr.length; left++) {
     let currentSum;
@@ -339,18 +328,15 @@ function sumTwoNums(arr, desiredSum) {
 }
 // sumTwoNums([1, 2, 3, 4, 5], 8); //[3,5]
 
-
 const BSTsearch = (tree, target) => {
   let node = tree;
-  while (node){
+  while (node) {
     if (node.value === target) return true;
     else if (node.value > target) node = node.left;
     else if (node.velue < target) node = node.right;
   }
   return false;
-}
-
-
+};
 
 //Basic BST
 
@@ -367,3 +353,51 @@ class BST {
     else this[direction] = new BST(val);
   }
 }
+
+//instead of turning a number into a string, divide it out
+
+//make array to store numbers
+//have a while loop that keeps checking to see if the number is below 10; then its already the last number
+
+// keep dividing out and putting into the array
+
+function spaceOutNumber(int) {
+  let integers = [];
+  while (int > 0) {
+    let onesPlace = int % 10;
+    integers.push(onesPlace);
+    int = Math.floor(int / 10);
+    console.log(integers);
+  }
+  return integers;
+}
+
+// spaceOutNumber(121);
+// spaceOutNumber(123);
+
+function palindromeNumber(int) {
+  let integers = [];
+  while (int > 0) {
+    let onesPlace = int % 10;
+    integers.push(onesPlace);
+    int = Math.floor(int / 10);
+    console.log(integers);
+  }
+  // return integers;
+  let left = 0;
+  let right = integers.length - 1;
+  while (left <= right) {
+    console.log(integers[left], integers[right]);
+    if (integers[left] !== integers[right]) {
+      return false;
+    } else {
+      left++;
+      right--;
+    }
+  }
+  return true;
+}
+
+// palindromeNumber(121);
+// palindromeNumber(123);
+palindromeNumber(123421);
