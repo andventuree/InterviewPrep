@@ -286,6 +286,7 @@ function findLinkedListIntersection(list1, list2) {
 
 ```
 function splitInteger(int){
+  if (int < 0) return false; //Can't be a palindrome if negative
   let integers = []; //this snippet reverses an integer
   while (int > 0) {
     let onesPlace = int % 10;
@@ -307,6 +308,24 @@ function splitInteger(int){
     }
   }
   return true;
+}
+```
+
+13. Address edge cases
+    Address them as they appear AND at the end. And generally if appropriate, place them at the start of the function to handle unusual input.
+
+```
+const deleteLinkedListNode = node => {
+  if (node.value === null) return node; //edge case where node is invalid
+  node.value = node.next.value;
+  node.next = node.next.next;
+};
+
+
+function numberPalindrome(int){
+  if (int < 0) return false; //Can't be a palindrome if negative
+  /* rest of code... */
+  return true //if true palindrome
 }
 ```
 

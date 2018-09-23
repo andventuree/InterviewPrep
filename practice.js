@@ -25,7 +25,7 @@ const threeNumberSum = (arr, targetSum) => {
   return combinations;
 };
 
-console.log(threeNumberSum([12, 3, 1, 2, -6, 5, -8, 6], 0)); //[ [ -8, 2, 6 ], [ -8, 3, 5 ], [ -6, 1, 5 ] ]
+// console.log(threeNumberSum([12, 3, 1, 2, -6, 5, -8, 6], 0)); //[ [ -8, 2, 6 ], [ -8, 3, 5 ], [ -6, 1, 5 ] ]
 
 const stringCompression = str => {
   let compressed = "";
@@ -110,7 +110,7 @@ let testQueue = new Queue()
   .add(5)
   .remove();
 
-testQueue.print(); //[3,4,5]
+// testQueue.print(); //[3,4,5]
 
 class Node {
   constructor(val) {
@@ -172,53 +172,12 @@ class LinkedList {
   }
 }
 
-class BST {
-  constructor(val) {
-    this.value = val;
-    this.left = null;
-    this.right = null;
-  }
-
-  insert(val) {
-    let direction = this.value > val ? "left" : "right";
-    if (this[direction]) this[direction].insert(val);
-    else this[direction] = new BST(val);
-  }
-}
-
 function BFS(node) {
   const queue = [node];
   while (queue.length) {
     const current = queue.shift();
     if (current.left) queue.push(current.left);
     if (current.right) queue.push(current.right);
-  }
-}
-
-class Queue {
-  constructor() {
-    this.line = [];
-    this.frontPointer = 0;
-    this.backPointer = 0;
-  }
-
-  add(val) {
-    this.line[this.backPointer] = val;
-    this.backPointer++;
-    return this; //need to return otherwise you can't chain
-  }
-
-  remove() {
-    this.frontPointer++;
-    return this;
-  }
-
-  print() {
-    console.log("full queue: ", this.line);
-    console.log(
-      "current queue",
-      this.line.slice(this.frontPointer, this.backPointer)
-    );
   }
 }
 
@@ -307,7 +266,7 @@ function swap(i, j, arr) {
   arr[j] = temp;
 }
 
-quickSort([12, 31, 23, 12, 31, 231, 2012, 30, 453254, 2]);
+// quickSort([12, 31, 23, 12, 31, 231, 2012, 30, 453254, 2]);
 
 function sumTwoNums(arr, desiredSum) {
   for (let left = 0; left < arr.length; left++) {
@@ -400,4 +359,20 @@ function palindromeNumber(int) {
 
 // palindromeNumber(121);
 // palindromeNumber(123);
-palindromeNumber(123421);
+// palindromeNumber(123421);
+
+// const stringCompress = str => {
+//   let cString = "";
+//   for (let i = 0; i < str.length; i++) {
+//     let char = str[i];
+//     let start = i;
+//     while (i < str.length && str[i] === str[i + 1]) {
+//       i++;
+//     }
+//     cString += i - start + 1 + char;
+//   }
+//   return cString;
+// };
+
+// // stringCompress("aaaabbbbcccccccccc");
+// console.log(stringCompress("aaaabbbbcccccccccc"));
