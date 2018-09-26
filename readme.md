@@ -329,6 +329,29 @@ function numberPalindrome(int){
 }
 ```
 
+14. Reversing Numbers
+    To "pop" and "push" digits without the help of some auxiliary stack/array, we can use math.
+
+```
+//pop operation:
+pop = x % 10;
+x /= 10;
+
+//push operation:
+temp = rev * 10 + pop;
+rev = temp;
+
+const reverse = int => {
+  let rev = 0;
+  while (int) {
+    let onesPlace = int % 10;
+    int = Math.floor(int / 10);
+    rev = rev * 10 + onesPlace;
+  }
+  return rev;
+};
+```
+
 </details>
 
 ### Hints

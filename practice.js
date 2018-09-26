@@ -376,3 +376,15 @@ function palindromeNumber(int) {
 
 // // stringCompress("aaaabbbbcccccccccc");
 // console.log(stringCompress("aaaabbbbcccccccccc"));
+
+const reverse = int => {
+  let rev = 0;
+  while (int) {
+    let onesPlace = int % 10;
+    int = Math.floor(int / 10);
+    rev = rev * 10 + onesPlace;
+  }
+  return rev;
+};
+
+console.log(reverse(123));
