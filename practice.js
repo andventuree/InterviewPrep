@@ -387,4 +387,4 @@ const reverse = int => {
   return rev;
 };
 
-console.log(reverse(123));
+// console.log(reverse(123));
