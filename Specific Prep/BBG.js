@@ -8,7 +8,7 @@ let subscribers = 325000; //professional subscribers
 let CostOfTerminal = 24000;
 //https://qz.com/84961/this-is-how-much-a-bloomberg-terminal-costs/
 //Bloomberg’s revenue was $7.9 billion 2012
-// console.log(subscribers * CostOfTerminal * 0.65);
+// console.log(subscribers * CostOfTerminal * 0.65); //pay taxes
 // console.log((subscribers * CostOfTerminal) / employee);
 
 // 7, 800, 000, 000;

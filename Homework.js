@@ -713,7 +713,6 @@ const findLinkedListCycle = list => {
 //   ])
 // );
 
-
 // **************** Homework for Thu Sep 06 2018 ****************
 // Question {name: 'selection sort',learned: true,level: '',source: null,type: null }
 // Question {name: 'binary search',learned: true,level: '',source: null,type: null }
@@ -721,21 +720,20 @@ const findLinkedListCycle = list => {
 // Question {name: 'delete linked list pointer',learned: true,level: '',source: null,type: null }
 // Question {name: 'reverse linked list',learned: true,level: '',source: null,type: null }
 
-
 // const selectionSort = arr => {
 
 // }
 
-function selectionSort( arr) {
+function selectionSort(arr) {
   let currentIdx = 0;
-  for (let i = currentIdx + 1; i < arr.length; i++){
+  for (let i = currentIdx + 1; i < arr.length; i++) {
     let smallestIdx = currentIdx;
     let j = i;
-    while (j < arr.length){
-      if (arr[j] < arr[smallestIdx] ) {
+    while (j < arr.length) {
+      if (arr[j] < arr[smallestIdx]) {
         smallestIdx = j;
       }
-      j++
+      j++;
     }
     let temp = arr[currentIdx];
     arr[currentIdx] = arr[smallestIdx];
@@ -746,11 +744,11 @@ function selectionSort( arr) {
 
 // console.log(selectionSort([3,2,1]))
 
-function binarySearch(arr, target){
+function binarySearch(arr, target) {
   let left = 0;
   let right = arr.length - 1;
-  while (left <= right){
-    let mid = Math.floor((left + right)/2);
+  while (left <= right) {
+    let mid = Math.floor((left + right) / 2);
     if (arr[mid] === target) return mid;
     else if (arr[mid] > target) right = mid - 1;
     else if (arr[mid] < target) left = mid + 1;
@@ -760,13 +758,12 @@ function binarySearch(arr, target){
 
 // console.log(binarySearch([1,2,3,4,5], 2));
 
-
-function bubbleSort(arr){
+function bubbleSort(arr) {
   let isSorted = false;
-  while (!isSorted){
+  while (!isSorted) {
     isSorted = true;
-    for (let i = 0; i < arr.length; i++){
-      if (arr[i] > arr[i + 1]){
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i] > arr[i + 1]) {
         let temp = arr[i];
         arr[i] = arr[i + 1];
         arr[i + 1] = temp;
@@ -779,16 +776,15 @@ function bubbleSort(arr){
 
 // console.log(bubbleSort([3,2,1]))
 
-function deleteLL(node){
+function deleteLL(node) {
   if (!node) return;
   node.value = node.next.value;
   node.next = node.next.next;
 }
 
-
-function reverseLL(head){
+function reverseLL(head) {
   let prevValue = head;
-  while (head){
+  while (head) {
     let tempNext = head.next;
     head.next = prevValue;
     prevValue = head;
@@ -797,15 +793,13 @@ function reverseLL(head){
   return prevValue;
 }
 
-
-function reverseLLRecursive(head){
+function reverseLLRecursive(head) {
   if (head === null || head.next === null) return head;
   let temp = reverseLLRecursive(head.next);
   head.next.next = head;
   head.next = null;
   return head;
 }
-
 
 // **************** Homework for Mon Sep 17 2018 ****************
 // Question {name: 'first unique character in a string',learned: true,level: '',source: 'bbg',type: 'string' }
@@ -816,19 +810,15 @@ function reverseLLRecursive(head){
 
 const firstUniqueChar = str => {
   let hasSeen = {};
-  for (let i = 0; i < str.length; i++){
+  for (let i = 0; i < str.length; i++) {
     let char = str[i];
     if (hasSeen[char]) hasSeen[char]++;
     else hasSeen[char] = 1;
   }
 
-  for (let j = 0; j < str.length; j++){
+  for (let j = 0; j < str.length; j++) {
     let char2 = str[j];
     if (hasSeen[char2] === 1) return char2;
   }
   return false;
-}
-
-
-
-
+};
