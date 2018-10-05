@@ -388,3 +388,40 @@ const reverse = int => {
 };
 
 // console.log(reverse(123));
+
+// **************** Homework for Mon Oct 01 2018 ****************
+// Question {name: 'Insert Sort',learned: true,level: 'easy',source: 'AE',type: 'sorting' }
+// Question {name: 'shiftedArray',learned: true,level: 'medium',source: 'pramp',type: 'array' }
+// Question {name: 'reverseLinkedList',learned: true,level: '',source: 'bbg',type: 'LL' }
+// Question {name: 'validate BST',learned: true,level: '',source: 'bbg',type: 'BST' }
+// Question {name: 'Kadanes Algo - Max Sum',learned: true,level: 'medium',source: 'AE',type: null }
+
+function insertSort(arr) {
+  let currentIdx = 0;
+  for (let i = currentIdx + 1; i < arr.length; i++) {
+    let j = i;
+    while (j > -1 && arr[j] < arr[j - 1]) {
+      let temp = arr[j - 1];
+      arr[j - 1] = arr[j];
+      arr[j] = temp;
+      j--;
+    }
+  }
+  return arr;
+}
+
+// console.log(insertSort([3, 2, 1]));
+
+// function shiftArr(arr) {
+//   let count = 0;
+//   for (let i = 0; i < arr.length; i++) {
+//     if (arr[i] !== 0) {
+//       arr[count++] = arr[i];
+//     }
+//   }
+//   while (count < arr.length) {
+//     arr[count++] = 0;
+//   }
+//   console.log(arr);
+// }
+// shiftArr([0, 0, 0, 0, 0, 1, 2, 3]);
