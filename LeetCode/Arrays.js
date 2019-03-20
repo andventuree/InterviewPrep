@@ -16,13 +16,13 @@ var removeDuplicates = function(nums) {
   return uniqueLength + 1; //add 1 b/c uniqueLength was zero indexed
 };
 
-// function swap(i, j, arr) {
-//   let temp = arr[i];
-//   arr[i] = arr[j];
-//   arr[j] = temp;
-// }
+function swap(i, j, arr) {
+  let temp = arr[i];
+  arr[i] = arr[j];
+  arr[j] = temp;
+}
 
-// removeDuplicates([0, 0, 1, 1, 1, 2, 2, 3, 3, 4]);
+removeDuplicates([0, 0, 1, 1, 1, 2, 2, 3, 3, 4]);
 // removeDuplicates([1, 1, 2]);
 
 // // https://leetcode.com/explore/interview/card/top-interview-questions-easy/92/array/564/
