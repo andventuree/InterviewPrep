@@ -22,7 +22,7 @@ function swap(i, j, arr) {
   arr[j] = temp;
 }
 
-removeDuplicates([0, 0, 1, 1, 1, 2, 2, 3, 3, 4]);
+// removeDuplicates([0, 0, 1, 1, 1, 2, 2, 3, 3, 4]);
 // removeDuplicates([1, 1, 2]);
 
 // // https://leetcode.com/explore/interview/card/top-interview-questions-easy/92/array/564/

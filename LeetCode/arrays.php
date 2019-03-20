@@ -27,7 +27,19 @@ function swap($i, $j, &$arr) { //notice the &. Need to imply pass by reference
   $arr[$j] = $temp;
 }
 
-echo removeDuplicates([0, 0, 1, 1, 1, 2, 2, 3, 3, 4]);
+// echo removeDuplicates([0, 0, 1, 1, 1, 2, 2, 3, 3, 4]);
+
+function rotate($nums, $k) {
+  while ($k > 0) {
+    $lastVal = array_pop($nums);
+    array_unshift($nums, $lastVal);
+    $k--;
+  }
+  print_r($nums);
+}
+
+echo rotate([1, 2, 3, 4, 5, 6, 7], 3); // [5,6,7,1,2,3,4]
+
 
 ?>
 
