@@ -83,7 +83,8 @@ var rotate = function(nums, k) {
 //space: O(1)
 var maxProfit = function(prices) {
   let profit = 0;
-  for (let i = 0; i < prices.length; i++) {
+  console.log(prices[-1])
+  for (let i = 1; i < prices.length; i++) {
     if (prices[i] > prices[i - 1]) {
       //this problem doesnt mean you have to buy a stock the day before you sell.
       //simply, you add up hypothetical profits
@@ -94,7 +95,7 @@ var maxProfit = function(prices) {
   console.log("profit: ", profit);
 };
 
-// maxProfit([7, 1, 5, 3, 6, 4]); //7
+maxProfit([7, 1, 5, 3, 6, 4]); //7
 // maxProfit([1, 2, 3, 4, 5]); //4
 // maxProfit([7, 6, 4, 3, 1]); //0
 
