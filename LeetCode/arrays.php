@@ -57,7 +57,28 @@ function maxProfit(array $prices) : string {
   return 'profit ' . $profit;
 }
 
-echo maxProfit([7, 1, 5, 3, 6, 4]); //7
+// echo maxProfit([7, 1, 5, 3, 6, 4]); //7
+
+function containsDuplicates(array $nums) {
+  $tracker = array();
+  for ($i = 0; $i < count($nums); $i++){
+    // if ($tracker[$nums[$i]]) return 'true';
+    if ($tracker[$nums[$i]]) return TRUE; //terminal will show 1
+    else $tracker[$nums[$i]] = true;
+    // echo $i;
+  }
+  print_r($tracker); //prints only length of each index
+  // var_dump($tracker); //shows you values of index
+  // return 'false';
+  return FALSE; //terminal will show nothing b/c false is falsy value. basically empty
+}
+
+echo containsDuplicates([1,1,1,1,1]);
+// echo containsDuplicates([1,2,3,4,5]);
+
+// Learning: 
+// 1) Assignment of associative object
+// 2) echo true => 1 and false is a empty value!
 
 ?>
 
