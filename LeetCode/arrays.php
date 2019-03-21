@@ -97,7 +97,23 @@ function intersect(array $nums1, array $nums2) : array {
   return $intersection;
 }
 
-echo print_r(intersect([1, 2, 2, 1], [2, 2])); //[2,2]
+// echo print_r(intersect([1, 2, 2, 1], [2, 2])); //[2,2]
+
+function moveZeroes(array $nums) : array {
+  $moves = 0;
+  echo count($nums);
+  for ($i = 0; $i < count($nums); $i++) {
+    $j = $i;
+    while ($nums[$i] === 0 && $j < count($nums)) {
+      swap($j, $i, $nums); //& PBR implied
+      $j++;
+      $moves++;
+    }
+  }
+  return $nums;
+}
+
+echo print_r(moveZeroes([0, 0, 0, 0, 1, 2, 34, 5, 5, 12]));
 
 ?>
 
