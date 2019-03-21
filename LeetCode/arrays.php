@@ -80,7 +80,7 @@ function containsDuplicates(array $nums) {
 // 1) Assignment of associative object
 // 2) echo true => 1 and false is a empty value!
 
-function intersect(array $nums1, array $nums2) {
+function intersect(array $nums1, array $nums2) : array {
   $tracker = array();
   $intersection = array();
 
@@ -98,5 +98,6 @@ function intersect(array $nums1, array $nums2) {
 }
 
 echo print_r(intersect([1, 2, 2, 1], [2, 2])); //[2,2]
+
 ?>
 
