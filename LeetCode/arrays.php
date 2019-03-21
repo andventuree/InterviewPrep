@@ -73,12 +73,30 @@ function containsDuplicates(array $nums) {
   return FALSE; //terminal will show nothing b/c false is falsy value. basically empty
 }
 
-echo containsDuplicates([1,1,1,1,1]);
+// echo containsDuplicates([1,1,1,1,1]);
 // echo containsDuplicates([1,2,3,4,5]);
 
 // Learning: 
 // 1) Assignment of associative object
 // 2) echo true => 1 and false is a empty value!
 
+function intersect(array $nums1, array $nums2) {
+  $tracker = array();
+  $intersection = array();
+
+  foreach ($nums1 as $numa) {
+    if ($tracker[$numa]) $tracker[$numa]++;
+    else $tracker[$numa] = 1;
+  }
+  foreach($nums2 as $numb) {
+    if ($tracker[$numb]) {
+      $tracker[$numb]--;
+      array_push($intersection, $numb);
+    }
+  }
+  return $intersection;
+}
+
+echo print_r(intersect([1, 2, 2, 1], [2, 2])); //[2,2]
 ?>
 
