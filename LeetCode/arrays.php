@@ -115,5 +115,18 @@ function moveZeroes(array $nums) : array {
 
 echo print_r(moveZeroes([0, 0, 0, 0, 1, 2, 34, 5, 5, 12]));
 
+function moveZeros(array $nums) : array {
+  $moves = 0;
+  for ($i = 0; $i < count($nums); $i++){
+    $j = $i;
+    while ($nums[$i] === 0 && $j < count($nums)) {
+      swap($j, $i, $nums);
+      $j++;
+      $moves++;
+    }
+  }
+  return $nums;
+}
+
 ?>
 
