@@ -113,20 +113,25 @@ function moveZeroes(array $nums) : array {
   return $nums;
 }
 
-echo print_r(moveZeroes([0, 0, 0, 0, 1, 2, 34, 5, 5, 12]));
+// echo print_r(moveZeroes([0, 0, 0, 0, 1, 2, 34, 5, 5, 12]));
 
-function moveZeros(array $nums) : array {
-  $moves = 0;
+function twoSum(array $nums, int $target) : array {
+  $seen = array();
   for ($i = 0; $i < count($nums); $i++){
-    $j = $i;
-    while ($nums[$i] === 0 && $j < count($nums)) {
-      swap($j, $i, $nums);
-      $j++;
-      $moves++;
+    $diff = $target - $nums[$i];
+    print_r($seen);
+    if (isset($seen[$diff])) { //checks if we've $seen the $diff, if so, return in new arr
+      return [$seen[$diff], $i];
+    } else {
+      $seen[$nums[$i]] = $i;
     }
   }
-  return $nums;
+  return array();
 }
+
+//returns index of values from $nums that would be the $target
+print_r(twoSum([2, 7, 11, 15], 9));
+print_r(twoSum([ 11, 15, 2, 7], 9));
 
 ?>
 
