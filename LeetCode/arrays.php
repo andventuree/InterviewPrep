@@ -120,18 +120,75 @@ function twoSum(array $nums, int $target) : array {
   for ($i = 0; $i < count($nums); $i++){
     $diff = $target - $nums[$i];
     print_r($seen);
-    if (isset($seen[$diff])) { //checks if we've $seen the $diff, if so, return in new arr
-      return [$seen[$diff], $i];
+    if(isset($seen[$diff])) { //checks if we've $seen the $diff, if so, return in new arr
+      return [$diff, $nums[$i]];
     } else {
-      $seen[$nums[$i]] = $i;
+      $seen[$nums[$i]] = $i; //can assign values this way
     }
   }
   return array();
 }
 
 //returns index of values from $nums that would be the $target
-print_r(twoSum([2, 7, 11, 15], 9));
-print_r(twoSum([ 11, 15, 2, 7], 9));
+// print_r(twoSum([2, 7, 11, 15], 9));
+// print_r(twoSum([ 11, 15, 2, 7], 9));
+
+
+//Still broken, need to convert number to string correctly
+// Warning: A non-numeric value encountered in ...
+function plusOne(array $digits) : array {
+  $total = "";
+  $carry = 0;
+  $lastIdx = count($digits) - 1;
+  for ($i = $lastIdx; i >= 0; $i--){
+    $num = $digits[$i];
+    $num += $carry;
+    if ($i === $lastIdx) $num += 1;
+    if ($num > 9){
+      $carry = 1;
+      $num -= 10;
+    } else {
+      $carry = 0;
+    }
+    $total = strval($num) + $total; //string concatenation actually
+  }
+  //handles last carry over beyond original count/num of digits
+  if ($carry !== 0) $total = $carry + $total;
+  $finalStrTotal = str_split($total);
+  $finalIntArr = array_map('intConverter', $finalStrTotal);
+  return $finalIntArr;
+}
+
+print_r(plusOne([1,1,1,1]));
+
+function intConverter(string $strNum) {
+  return (int)$strNum;
+}
+
+function dominantIdx(array $nums) : int {
+  $largestTwo = array(null, null);
+  $seen = array();
+  foreach ($nums as $key => $value) {
+    helper($largestTwo, $key, $value, $seen);
+  };
+  // without an unset($value), $value is still a reference to the last item: $arr[3]
+  unset($value); //must destroy reference like this
+}
+
+function helper(array &$largestTwo, int $key, int $value, array &$seen) {
+  if ($largestTwo[1] === null || $largestTwo[1] < $value) {
+    $seen[$value] = $key;
+    shiftRest($largestTwo, 1, $value);
+  } else if ($largestTwo[0] === null || $largestTwo[0] < $value) {
+    shiftRest($largestTwo, 0, $value);
+  }
+}
+
+function shiftRest(array &$arr, int $i, int $val) {
+  for( $i = 0; $i <= $idx; $i++) {
+    if ($i === $idx) $arr[$i] = $val;
+    else $arr[$i] = $arr[$i + 1];
+  }
+}
 
 ?>
-
